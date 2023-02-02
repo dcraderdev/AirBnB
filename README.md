@@ -2,7 +2,6 @@
 
 ## Database Schema Design
 
-![SCHEMA](/Users/donovancrader/Documents/github/AirBnB/AirbnbSchema.png)
 ![SCHEMA](AirbnbSchema.png)
 
 
