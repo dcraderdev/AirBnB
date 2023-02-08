@@ -40,7 +40,26 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    }, options);
+    }, options)
+
+
+    .then(() => {
+      return queryInterface.addIndex("Users", {
+        fields: ["username"],
+        unique: true,
+        name: "username_unique_index",
+      });
+    })
+    .then(() => {
+      return queryInterface.addIndex("Users", {
+        fields: ["email"],
+        unique: true,
+        name: "email_unique_index",
+      });
+    });
+    
+    
+    
   },
   down: async (queryInterface, Sequelize) => {
     return queryInterface.dropTable("Users", options);
