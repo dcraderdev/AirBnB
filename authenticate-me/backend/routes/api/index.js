@@ -1,23 +1,34 @@
 // backend/routes/api/index.js
 const router = require('express').Router();
+const { setTokenCookie } = require('../../utils/auth.js');
+const { User } = require('../../db/models');
+// GET /api/restore-user
+const { restoreUser } = require('../../utils/auth.js');
+const { requireAuth } = require('../../utils/auth.js');
 
-router.post('/test', function(req, res) {
-  res.json({ requestBody: req.body });
+router.use(restoreUser);
+
+router.get('/require-auth',requireAuth,(req, res) => { 
+   return res.json(req.user);
+  }
+);
+
+
+router.get('/restore-user',(req, res) => {  
+  return res.json(req.user);
+}
+);
+
+router.get('/set-token-cookie', async (_req, res) => {
+  const user = await User.findOne({
+      where: {
+        username: 'Demo-lition'
+      }
+    });
+  setTokenCookie(res, user);
+  return res.json({ user });
 });
 
-router.get('/test', function(req, res) {
-  res.json({ requestBody: 'req.body' });
-});
-
-
-// fetch('/api/test', {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//     "XSRF-TOKEN": `<value of XSRF-TOKEN cookie>`
-//   },
-//   body: JSON.stringify({ hello: 'world' })
-// }).then(res => res.json()).then(data => console.log(data));
 
 module.exports = router;
 
