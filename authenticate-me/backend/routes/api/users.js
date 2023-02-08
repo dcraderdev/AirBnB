@@ -26,10 +26,29 @@ const validateSignup = [
 const router = express.Router();
 
 
+
+// fetch('/api/users', {
+//   method: 'POST',
+//   headers: {
+//     "Content-Type": "application/json",
+//     "XSRF-TOKEN": `<value of XSRF-TOKEN cookie>`
+//   },
+//   body: JSON.stringify({
+//     email: 'firesssstar@spider.man',
+//     username: 'Firssssestar',
+//     password: 'asdasfasf',
+//     firstName: 'Don',
+//     lastName: 'Crader'
+
+//   })
+// }).then(res => res.json()).then(data => console.log(data));
+
+
+
 // Sign up
 router.post('/', validateSignup, async (req, res) => {
-  // const { email, password, username, firstName, lastName } = req.body;
-  const { email, password, username } = req.body;
+  const { email, password, username, firstName, lastName } = req.body;
+  // const { email, password, username } = req.body;
   const user = await User.signup({
     email,
     username,
