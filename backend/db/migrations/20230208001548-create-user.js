@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    
     return queryInterface.createTable("Users", {
       id: {
         allowNull: false,
@@ -49,22 +50,14 @@ module.exports = {
     }, options)
 
 
-    // .then(() => {
-    //   return queryInterface.addIndex("Users", {
-    //     fields: ["username"],
-    //     unique: true,
-    //     name: "username_unique_index",
-    //   });
-    // })
-    // .then(() => {
-    //   return queryInterface.addIndex("Users", {
-    //     fields: ["email"],
-    //     unique: true,
-    //     name: "email_unique_index",
-    //   });
-    // });
-    
-    
+    .then(() => {
+      queryInterface.addIndex("Users", {
+        fields: ["username", "email"],
+        unique: true,
+        name: "username_email_index",
+      });
+    })
+
     
   },
   down: async (queryInterface, Sequelize) => {
