@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "install": "cd backend npm --prefix backend install backend",
-    "sequelize": "cd backend npm run --prefix backend sequelize",
-    "sequelize-cli": "cd backend npm run --prefix backend sequelize-cli",
-    "start": "cd backend npm start --prefix backend",
-    "build": "cd backend npm run --prefix backend build"
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
   },
   "keywords": [],
   "author": "",
