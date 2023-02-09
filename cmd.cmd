@@ -8,3 +8,6 @@ git checkout main
 git pull origin main
 git merge dev
 git push origin main
+
+
+http://localhost:8000/api/csrf/restore
