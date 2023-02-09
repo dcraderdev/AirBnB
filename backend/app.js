@@ -50,6 +50,13 @@ app.use(
 
 app.use(routes)
 
+
+app.get('/', async(req,res,next)=>{
+  res.json({home:'page'})
+})
+
+
+
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
