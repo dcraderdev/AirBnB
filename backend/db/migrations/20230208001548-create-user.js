@@ -49,20 +49,20 @@ module.exports = {
     }, options)
 
 
-    .then(() => {
-      return queryInterface.addIndex("Users", {
-        fields: ["username"],
-        unique: true,
-        name: "username_unique_index",
-      });
-    })
-    .then(() => {
-      return queryInterface.addIndex("Users", {
-        fields: ["email"],
-        unique: true,
-        name: "email_unique_index",
-      });
-    });
+    // .then(() => {
+    //   return queryInterface.addIndex("Users", {
+    //     fields: ["username"],
+    //     unique: true,
+    //     name: "username_unique_index",
+    //   });
+    // })
+    // .then(() => {
+    //   return queryInterface.addIndex("Users", {
+    //     fields: ["email"],
+    //     unique: true,
+    //     name: "email_unique_index",
+    //   });
+    // });
     
     
     
