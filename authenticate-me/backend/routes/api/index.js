@@ -5,11 +5,11 @@ const usersRouter = require('./users.js');
 
 
 
-const { setTokenCookie } = require('../../utils/auth.js.js');
+const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
 // GET /api/restore-user
-const { restoreUser } = require('../../utils/auth.js.js');
-const { requireAuth } = require('../../utils/auth.js.js');
+const { restoreUser } = require('../../utils/auth.js');
+const { requireAuth } = require('../../utils/auth.js');
 
 router.use(restoreUser);
 
