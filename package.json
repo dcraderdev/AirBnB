@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cd": "cd backend",
     "install": "npm --prefix backend install backend",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
