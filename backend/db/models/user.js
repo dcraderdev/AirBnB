@@ -34,6 +34,13 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     static async signup({ firstName, lastName, username, email, password }) {
+
+      try{
+
+      } catch(err){
+
+      }
+
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         firstName,
@@ -43,13 +50,20 @@ module.exports = (sequelize, DataTypes) => {
         hashedPassword
       });
       return await User.scope('currentUser').findByPk(user.id);
+
+
+
+
+
+
     }
 
 
 
 
     static associate(models) {
-      // define association here
+      User.hasMany(models.Spot,{foreignKey:'ownerId'})
+      User.belongsToMany(models.Spot,{through:models.Booking})
     }
   };
 

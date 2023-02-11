@@ -1,5 +1,5 @@
 // app.js
-// 
+
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
@@ -13,16 +13,15 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-const routes = require('./routes');
-
 const { ValidationError } = require('sequelize');
 
+const routes = require('./routes');
 
 app.use(morgan('dev'));
-
 app.use(cookieParser());
 app.use(express.json());
 
+app.use(routes)
 
 // Security Middleware
 if (!isProduction) {
@@ -48,7 +47,13 @@ app.use(
   })
 );
 
-app.use(routes)
+
+// const usersRouter = express.Router();
+
+// /* ------------------------- API Endpoints -------------------------- */
+// app.use('/api/users', usersRouter);
+// app.use('/api/tweets', tweetsRouter);
+// app.use('/api/session', sessionRouter);
 
 
 app.get('/', async(req,res,next)=>{
