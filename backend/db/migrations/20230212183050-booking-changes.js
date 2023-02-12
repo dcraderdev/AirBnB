@@ -12,7 +12,7 @@ module.exports = {
       onDelete: 'cascade'
     });
 
-    await queryInterface.addColumn('Users','userId', { 
+    await queryInterface.addColumn('Bookings','userId', { 
       type: Sequelize.INTEGER,
       allowNull: true,
       references:{
