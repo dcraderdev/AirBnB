@@ -1,18 +1,18 @@
-// 'use strict';
+'use strict';
 
-// /** @type {import('sequelize-cli').Migration} */
-
-
-// let options = {};
-// if (process.env.NODE_ENV === 'production') {
-//   options.schema = process.env.SCHEMA;  // define your schema in options object
-// }
+/** @type {import('sequelize-cli').Migration} */
 
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 
-// module.exports = {
-//   async up (queryInterface, Sequelize) {
+
+
+module.exports = {
+  async up (queryInterface, Sequelize) {
 //     options.tableName = 'Spots';
 //     return queryInterface.bulkInsert(options, [
 //       {
@@ -52,13 +52,15 @@
 //         price: 370,
 //       },
 //     ], {});
-//   },
+  },
 
-//   async down (queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
+
 //     options.tableName = 'Spots';
 //     const Op = Sequelize.Op;
 //     return queryInterface.bulkDelete(options, {
 //       ownerId: { [Op.in]: ['1'] }
 //     }, {});
-//   }
-// };
+  }
+
+};
