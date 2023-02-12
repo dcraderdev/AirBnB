@@ -50,13 +50,13 @@ module.exports = {
     }, options)
 
 
-    .then(() => {
-      queryInterface.addIndex("Users", {
-        fields: ["username", "email"],
-        unique: true,
-        name: "username_email_index",
-      });
-    })
+    // .then(() => {
+    //   queryInterface.addIndex("Users", {
+    //     fields: ["username", "email"],
+    //     unique: true,
+    //     name: "username_email_index",
+    //   });
+    // })
 
     
   },
