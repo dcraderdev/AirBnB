@@ -1,9 +1,14 @@
 // npx sequelize-cli init
-// npx sequelize-cli model:generate --name Image --attributes url:string,imageableId:integer,imageableType:enum
+// npx sequelize-cli model:generate --name Spot --attributes id:integer
+
+
+npx sequelize-cli migration:generate --name booking-changes 
+
 
 // - Generate a new seed file
 // npx sequelize-cli seed:generate --name <descriptiveName>
-// npx sequelize-cli seed:generate --name base-Colors
+// npx sequelize-cli seed:generate --name base-spots
+// npx sequelize-cli seed:generate --name base-bookings
 
 // - Run pending migrations
 // npx dotenv sequelize-cli db:migrate

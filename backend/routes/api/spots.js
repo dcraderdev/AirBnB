@@ -37,19 +37,20 @@ router.post('/', async (req, res, next) => {
 
   } catch (err) {
 
+    return res.status(400).json({message: "User already exists"})
 
     // err.errors.forEach((err)=>{
     //     console.log(err.path);  
     //     console.log(err.message);
     // })
 
-    next({
-      message: "User already exists",
-      status: 403,
-      errors: err.errors
-        ? err.errors.map((item) => item.message).join(', ')
-        : err.message,
-    });
+    // next({
+    //   message: "User already exists",
+    //   status: 403,
+    //   errors: err.errors
+    //     ? err.errors.map((item) => item.message).join(', ')
+    //     : err.message,
+    // });
 
     // return res.status(403).json({
     //     thing: err
