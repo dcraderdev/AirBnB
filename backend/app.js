@@ -17,6 +17,9 @@ const { ValidationError } = require('sequelize');
 
 const routes = require('./routes');
 
+const {Booking, Spot, User, SpotImage } = require('./db/models')
+
+
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
@@ -57,7 +60,32 @@ app.use(
 
 
 app.get('/', async(req,res,next)=>{
-  res.json({home:'page'})
+
+
+  const allBookings = await Booking.findAll() 
+  console.log(allBookings);
+
+  const allSpots = await Spot.findAll() 
+  console.log(allSpots);
+ 
+
+
+
+
+  const allUsers = await User.findAll() 
+  if(allBookings){
+    res.status(200).json(allBookings)
+  }else{
+    res.status(400).json({"message":"allUsers not found"})
+  }
+
+
+  // res.json({home:'page'})
+
+
+
+
+
 })
 
 
