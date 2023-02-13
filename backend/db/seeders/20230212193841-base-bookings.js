@@ -18,8 +18,6 @@ module.exports = {
         userId: 2,
         startDate: '2023-02-10',
         endDate: '2023-02-12'
-        // startDate: new Date('2022-01-08'),
-        // endDate: new Date('2022-01-09')
       },
     ], {});
   },
