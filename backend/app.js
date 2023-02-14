@@ -65,7 +65,17 @@ app.use(
 
 
 app.get('/', async(req,res,next)=>{
-  res.json({home:'page'})
+
+  const allSpots = await Spot.findAll() 
+  console.log(allSpots);
+
+  if(allSpots){
+    return res.status(200).json(allSpots)
+  }
+
+  res.status(400).json({"message":"allSpots not found"})
+
+  // res.json({home:'page'})
 })
 
 
@@ -74,16 +84,8 @@ app.get('/api', async(req,res,next)=>{
   // const allBookings = await Booking.findAll() 
   // // console.log(allBookings);
 
-  // const allSpots = await Spot.findAll() 
-  // console.log(allSpots);
- 
   // const allUsers = await User.findAll() 
 
-  // if(allBookings){
-  //   res.status(200).json(allSpots)
-  // }else{
-  //   res.status(400).json({"message":"allUsers not found"})
-  // }
   res.json({home:'paaage'})
 })
 
