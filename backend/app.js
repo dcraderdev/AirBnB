@@ -17,6 +17,9 @@ const { ValidationError } = require('sequelize');
 
 const routes = require('./routes');
 
+
+
+
 const {Booking, Spot, User, SpotImage } = require('./db/models')
 
 
@@ -24,7 +27,6 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
-app.use(routes)
 
 // Security Middleware
 if (!isProduction) {
@@ -37,55 +39,52 @@ app.use(
   helmet.crossOriginResourcePolicy({
     policy: "cross-origin"
   })
-);
+  );
+  
+  // Set the _csrf token and create req.csrfToken method
+  app.use(
+    csurf({
+      cookie: {
+        secure: isProduction,
+        sameSite: isProduction && "Lax",
+        httpOnly: true
+      }
+    })
+    );
+    
+ app.use(routes)   
+ app.use('/spots', require('./routes/api/spots'));
+ app.use('/users', require('./routes/api/users'));
 
-// Set the _csrf token and create req.csrfToken method
-app.use(
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: true
-    }
-  })
-);
 
-
-// const usersRouter = express.Router();
 
 // /* ------------------------- API Endpoints -------------------------- */
-// app.use('/api/users', usersRouter);
-// app.use('/api/tweets', tweetsRouter);
-// app.use('/api/session', sessionRouter);
+
+
+
 
 
 app.get('/', async(req,res,next)=>{
+  res.json({home:'page'})
+})
 
 
-  const allBookings = await Booking.findAll() 
-  console.log(allBookings);
+app.get('/api', async(req,res,next)=>{
 
-  const allSpots = await Spot.findAll() 
-  console.log(allSpots);
+  // const allBookings = await Booking.findAll() 
+  // // console.log(allBookings);
+
+  // const allSpots = await Spot.findAll() 
+  // console.log(allSpots);
  
+  // const allUsers = await User.findAll() 
 
-
-
-
-  const allUsers = await User.findAll() 
-  if(allBookings){
-    res.status(200).json(allBookings)
-  }else{
-    res.status(400).json({"message":"allUsers not found"})
-  }
-
-
-  // res.json({home:'page'})
-
-
-
-
-
+  // if(allBookings){
+  //   res.status(200).json(allSpots)
+  // }else{
+  //   res.status(400).json({"message":"allUsers not found"})
+  // }
+  res.json({home:'paaage'})
 })
 
 
@@ -118,5 +117,6 @@ app.use((err, _req, res, _next) => {
     stack: isProduction ? null : err.stack
   });
 });
+
 
 module.exports = app;

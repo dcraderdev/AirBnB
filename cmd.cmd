@@ -25,10 +25,42 @@ http://localhost:8000/api/csrf/restore
 npx sequelize-cli model:generate --name SpotImage --attributes spotId:integer,url:string,preview:boolean
 
 
+
+
+# build command - enter all in one line
 npm install &&
 npm run build &&
 npm run sequelize --prefix backend db:migrate &&
 npm run sequelize --prefix backend db:seed:all
+
+
+
+
+npm install &&
+npm run build &&
+npm run sequelize --prefix backend db:migrate &&
+npm run sequelize --prefix backend db:seed:all
+
+
+npm install &&
+npm run build &&
+npm run sequelize --prefix backend db:migrate:undo:all &&
+npm run sequelize --prefix backend db:migrate &&
+npm run sequelize --prefix backend db:migrate:undo:all 
+
+
+
+
+
+npm install &&
+npm run build &&
+npm run sequelize --prefix backend db:migrate &&
+npm run sequelize --prefix backend db:seed:undo:all &&
+npm run sequelize --prefix backend db:migrate:undo:all 
+
+
+
+
 
 npm start
 

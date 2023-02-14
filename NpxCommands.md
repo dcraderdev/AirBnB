@@ -6,6 +6,7 @@ npx sequelize-cli model:generate --name Spot --attributes id:integer
 
 npx sequelize-cli model:generate --name Review --attributes userId:integer,spotId:integer,review:string,stars:integer
 
+npx sequelize-cli model:generate --name ReviewImage --attributes reviewId:integer,url:string
 
 
 npx sequelize-cli migration:generate --name booking-changes 
