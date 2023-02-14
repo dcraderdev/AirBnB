@@ -21,12 +21,12 @@ module.exports = {
       },
 
       spotId: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references:{
-        model: 'Spots'
-      },
-      onDelete: 'cascade'
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references:{
+          model: 'Spots'
+        },
+        onDelete: 'cascade'
       },
 
       userId: { 
