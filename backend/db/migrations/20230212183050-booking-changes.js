@@ -27,12 +27,12 @@ module.exports = {
         model: 'Users',
       },
       onDelete: 'cascade' 
-    });
+    }, options);
 
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeColumn('Bookings', 'spotId');
-    await queryInterface.removeColumn('Bookings', 'userId');
+    await queryInterface.removeColumn('Bookings', 'spotId', options);
+    await queryInterface.removeColumn('Bookings', 'userId', options);
   }
 };

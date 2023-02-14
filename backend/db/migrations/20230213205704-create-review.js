@@ -18,6 +18,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+
+
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -26,6 +28,8 @@ module.exports = {
         },
         onDelete: 'cascade'
       },
+
+
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -34,6 +38,10 @@ module.exports = {
         },
         onDelete: 'cascade'
       },
+
+
+
+
       review: {
         type: Sequelize.STRING
       },
@@ -48,9 +56,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reviews');
+    await queryInterface.dropTable('Reviews', options);
   }
 };
