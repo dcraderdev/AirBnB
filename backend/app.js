@@ -53,8 +53,8 @@ app.use(
     );
     
  app.use(routes)   
- app.use('/spots', require('./routes/api/spots'));
- app.use('/users', require('./routes/api/users'));
+ app.use('/api/spots', require('./routes/api/spots'));
+ app.use('/api/users', require('./routes/api/users'));
 
 
 

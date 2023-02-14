@@ -10,8 +10,45 @@ const router = express.Router();
 
 // test spots route
 router.get('/', async (req, res, next) => {
-  return res.json({ hey: 'hello' });
+
+  const allSpots = await Spot.findAll() 
+
+  if(allSpots){
+    return res.status(200).json(allSpots)
+  }
+
+  res.status(400).json({"message":"allSpots not found"})
+
+
 });
+
+router.post('/', async (req, res, next) => {
+
+  const allSpots = await Spot.findAll() 
+  
+  const {address,city,state,country,lat,lng,name,description,price} = req.body
+
+  if(allSpots){
+
+    //get owner id from current user
+
+    const ownerId = 1
+    await Spot.create({ownerId,address,city,state,country,lat,lng,name,description,price})
+
+    return res.status(200).json(allSpots)
+  }
+
+  res.status(400).json({"message":"allSpots not found"})
+
+
+});
+
+
+
+
+
+
+
 
 
 
