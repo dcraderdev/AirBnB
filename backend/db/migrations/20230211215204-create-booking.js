@@ -19,7 +19,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -28,7 +27,6 @@ module.exports = {
         },
         onDelete: 'cascade'
       },
-
       userId: { 
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -37,7 +35,6 @@ module.exports = {
         },
         onDelete: 'cascade' 
       },
-
       startDate: {
         type: Sequelize.DATE
       },
