@@ -50,14 +50,11 @@ npm run sequelize --prefix backend db:migrate:undo:all
 
 
 
-
-
 npm install &&
 npm run build &&
 npm run sequelize --prefix backend db:migrate &&
 npm run sequelize --prefix backend db:seed:undo:all &&
 npm run sequelize --prefix backend db:migrate:undo:all 
-
 
 
 
@@ -70,3 +67,7 @@ NODE_ENV - production
 SCHEMA -
 DATABASE_URL - copy value from Internal Database URL field
 
+
+
+
+npx sequelize-cli seed:generate --name booking-seed

@@ -11,17 +11,14 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = 'Bookings';
-    return queryInterface.bulkInsert(
-      options,
-      [
+    return queryInterface.bulkInsert(options,[
         {
           spotId: 1,
           userId: 2,
           startDate: new Date('2023-02-10'),
           endDate: new Date('2023-02-12'),
         },
-      ],
-      {}
+      ],{}
     );
   },
 
