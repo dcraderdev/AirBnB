@@ -10,17 +10,17 @@ const router = express.Router();
 
 // test spots route
 router.get('/', async (req, res, next) => {
-
   const allSpots = await Spot.findAll() 
-
   if(allSpots){
     return res.status(200).json(allSpots)
   }
-
   res.status(400).json({"message":"allSpots not found"})
-
-
 });
+
+
+
+
+
 
 router.post('/', async (req, res, next) => {
 

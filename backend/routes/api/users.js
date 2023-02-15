@@ -42,6 +42,7 @@ const router = express.Router();
 //   })
 // }).then(res => res.json()).then(data => console.log(data));
 
+
 // test users route
 router.get('/', async (req, res, next) => {
   return res.json({ hey: 'hello' });
@@ -96,5 +97,41 @@ router.post('/', validateSignup, async (req, res, next) => {
 
   }
 });
+
+
+// Login
+// need to make sure that the correct CSRF token
+// is being sent with each request that requires protection
+router.post('/', async (req, res, next) => {
+  try {
+    const { credential, password } = req.body;
+
+    const user = await User.findOne({
+      where: {
+        [Op.or]: {
+          username: credential,
+          email: credential,
+        },
+      },
+    })
+
+    if(user.login(credential, password)){
+      const token = await setTokenCookie(res, user);
+
+      return res.status(200).json({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+        token: token,
+      });
+    }
+  } catch (err) {
+    return res.status(401).json({message: "Invalid credentials"})
+  }
+});
+
+
 
 module.exports = router;

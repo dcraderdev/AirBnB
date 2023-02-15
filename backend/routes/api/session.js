@@ -1,9 +1,10 @@
 // backend/routes/api/session.js
 const express = require('express');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+
 
 const router = express.Router();
 
@@ -20,6 +21,21 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors,
 ];
+
+
+// // Get the Current User
+// router.get('/', requireAuth, async (req, res, next) => {
+
+//   if(requireAuth())
+
+
+//   return res.json({user});
+
+
+// });
+
+
+
 
 
 // Log in

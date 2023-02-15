@@ -13,6 +13,9 @@ const isProduction = environment === 'production';
 
 const app = express();
 
+
+const { Pool } = require('pg');
+
 const { ValidationError } = require('sequelize');
 
 const routes = require('./routes');
@@ -62,18 +65,16 @@ app.use(
 
 
 
-
-
 app.get('/', async(req,res,next)=>{
 
-  const allSpots = await Spot.findAll() 
-  console.log(allSpots);
+  const allBookings = await Booking.findAll() 
+  // console.log(allBookings);
 
-  if(allSpots){
-    return res.status(200).json(allSpots)
+  if(allBookings){
+    return res.status(200).json(allBookings)
   }
 
-  res.status(400).json({"message":"allSpots not found"})
+  res.status(400).json({"message":"allBookings not found"})
 
   // res.json({home:'page'})
 })
@@ -84,9 +85,11 @@ app.get('/api', async(req,res,next)=>{
   // const allBookings = await Booking.findAll() 
   // // console.log(allBookings);
 
-  // const allUsers = await User.findAll() 
+  // const allUsers = await Booking.findAll() 
+  // res.json({allUsers})
 
-  res.json({home:'paaage'})
+
+  // res.json({home:'paaage'})
 })
 
 
