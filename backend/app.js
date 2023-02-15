@@ -55,7 +55,10 @@ app.use(
     })
     );
     
+
+
  app.use(routes)   
+
  app.use('/api/spots', require('./routes/api/spots'));
  app.use('/api/users', require('./routes/api/users'));
 
@@ -67,14 +70,14 @@ app.use(
 
 app.get('/', async(req,res,next)=>{
 
-  const allBookings = await Booking.findAll() 
+  const allSpots = await Spot.findAll() 
   // console.log(allBookings);
 
-  if(allBookings){
-    return res.status(200).json(allBookings)
+  if(allSpots){
+    return res.status(200).json(allSpots)
   }
 
-  res.status(400).json({"message":"allBookings not found"})
+  res.status(400).json({"message":"allSpots not found"})
 
   // res.json({home:'page'})
 })
