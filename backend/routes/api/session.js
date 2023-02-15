@@ -23,18 +23,12 @@ const validateLogin = [
 ];
 
 
+
 // // Get the Current User
 // router.get('/', requireAuth, async (req, res, next) => {
-
 //   if(requireAuth())
-
-
 //   return res.json({user});
-
-
 // });
-
-
 
 
 
@@ -60,10 +54,6 @@ router.post('/', validateLogin, async (req, res, next) => {
 });
 
 
-
-
-
-
 // Log out
 router.delete('/', (_req, res) => {
   // res.clearCookie('XSRF-TOKEN');
@@ -71,12 +61,13 @@ router.delete('/', (_req, res) => {
   return res.json({ message: 'success' });
 });
 
+
 // Restore session user
 router.get('/', restoreUser, (req, res) => {
   const { user } = req;
   if (user) {
     return res.json({
-      user: user.toSafeObject(),
+      user: user.toSafeObject()
     });
   } else return res.json({});
 });
