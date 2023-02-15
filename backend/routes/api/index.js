@@ -20,8 +20,14 @@ router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
 
 
-router.post('/test', (req, res) => {
 
+router.get('/', (req, res) => {
+  res.json({ hey: "index" });
+});
+
+
+
+router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
 
@@ -34,6 +40,7 @@ router.get('/require-auth',requireAuth,(req, res) => {
 
 
 router.get('/restore-user',(req, res) => {  
+
   return res.json(req.user);
 }
 );

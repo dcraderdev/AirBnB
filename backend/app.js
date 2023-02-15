@@ -59,8 +59,8 @@ app.use(
 
  app.use(routes)   
 
- app.use('/api/spots', require('./routes/api/spots'));
- app.use('/api/users', require('./routes/api/users'));
+//  app.use('/api/spots', require('./routes/api/spots'));
+//  app.use('/api/users', require('./routes/api/users'));
 
 
 
@@ -83,19 +83,6 @@ app.get('/', async(req,res,next)=>{
 })
 
 
-app.get('/api', async(req,res,next)=>{
-
-  // const allBookings = await Booking.findAll() 
-  // // console.log(allBookings);
-
-  // const allUsers = await Booking.findAll() 
-  // res.json({allUsers})
-
-
-  // res.json({home:'paaage'})
-})
-
-
 
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
@@ -106,6 +93,7 @@ app.use((err, _req, _res, next) => {
   }
   next(err);
 });
+
 
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
