@@ -16,14 +16,8 @@ router.use(restoreUser);
 
 
 router.use('/session', sessionRouter);
-
 router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
-
-
-app.use('/spots', require('./routes/api/spots'));
-
-
 
 
 router.post('/test', (req, res) => {
