@@ -39,9 +39,6 @@ module.exports = {
         onDelete: 'cascade'
       },
 
-
-
-
       review: {
         type: Sequelize.STRING
       },
