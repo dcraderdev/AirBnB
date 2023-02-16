@@ -9,13 +9,30 @@ npx sequelize-cli model:generate --name Review --attributes userId:integer,spotI
 npx sequelize-cli model:generate --name ReviewImage --attributes reviewId:integer,url:string
 
 
-npx sequelize-cli migration:generate --name booking-changes 
+npx sequelize-cli migration:generate --name review-image-updated-created-changes 
 
 
 // - Generate a new seed file
 // npx sequelize-cli seed:generate --name <descriptiveName>
 // npx sequelize-cli seed:generate --name base-spots
 // npx sequelize-cli seed:generate --name base-bookings
+
+// npx sequelize-cli seed:generate --name base-reviews
+// npx sequelize-cli seed:generate --name base-spotImages
+// npx sequelize-cli seed:generate --name base-reviewImages
+
+npx sequelize-cli migration:generate --name review-image-changes
+
+
+
+
+
+
+
+
+
+
+
 
 // - Run pending migrations
 // npx dotenv sequelize-cli db:migrate

@@ -38,7 +38,6 @@ const restoreUser = (req, res, next) => {
     if (err) {
       return next();
     }
-
     try {
       const { id } = jwtPayload.data;
       req.user = await User.scope('currentUser').findByPk(id);
@@ -46,9 +45,7 @@ const restoreUser = (req, res, next) => {
       res.clearCookie('token');
       return next();
     }
-
     if (!req.user) res.clearCookie('token');
-
     return next();
   });
 };
@@ -57,7 +54,8 @@ const restoreUser = (req, res, next) => {
 const requireAuth = function (req, _res, next) {
   if (req.user) return next();
 
-  const err = new Error('Unauthorized');
+  const err = new Error("Authentication required");
+  // const err = new Error('Unauthorized');
   err.title = 'Unauthorized';
   err.errors = ['Unauthorized'];
   err.status = 401;

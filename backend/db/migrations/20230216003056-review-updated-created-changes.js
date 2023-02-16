@@ -10,28 +10,28 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up(queryInterface, Sequelize) {
 
-    await queryInterface.changeColumn('Reviews','createdAt',{
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-      },options),
+  //   await queryInterface.changeColumn('Reviews','createdAt',{
+  //       allowNull: false,
+  //       type: Sequelize.DATE,
+  //       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+  //     },options),
 
-    await queryInterface.changeColumn('Reviews','updatedAt',{
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-      },options);
+  //   await queryInterface.changeColumn('Reviews','updatedAt',{
+  //       allowNull: false,
+  //       type: Sequelize.DATE,
+  //       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+  //     },options);
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.changeColumn('Reviews','createdAt',{
-        allowNull: false,
-        type: Sequelize.DATE,
-      },options),
+  //   await queryInterface.changeColumn('Reviews','createdAt',{
+  //       allowNull: false,
+  //       type: Sequelize.DATE,
+  //     },options),
 
-    await queryInterface.changeColumn('Reviews','updatedAt',{
-        allowNull: false,
-        type: Sequelize.DATE,
-      },options);
+  //   await queryInterface.changeColumn('Reviews','updatedAt',{
+  //       allowNull: false,
+  //       type: Sequelize.DATE,
+  //     },options);
   },
 };

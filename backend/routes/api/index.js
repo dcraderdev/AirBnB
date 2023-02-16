@@ -34,6 +34,9 @@ router.post('/test', (req, res) => {
 
 
 router.get('/require-auth',requireAuth,(req, res) => { 
+  if(!req.user){
+    
+  }
    return res.json(req.user);
   }
 );
