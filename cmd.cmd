@@ -70,4 +70,4 @@ DATABASE_URL - copy value from Internal Database URL field
 
 
 
-npx sequelize-cli seed:generate --name booking-seed
+npx sequelize-cli seed:generate --name user-seeds
