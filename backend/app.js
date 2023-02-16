@@ -23,7 +23,7 @@ const routes = require('./routes');
 
 
 
-const {Booking, Spot, User, SpotImage } = require('./db/models')
+const {User, Spot, Booking, SpotImage, Review, ReviewImage } = require('./db/models')
 
 
 app.use(morgan('dev'));
