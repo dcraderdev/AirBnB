@@ -70,12 +70,15 @@ app.use(
 
 app.get('/', async(req,res,next)=>{
 
-  const allSpots = await Spot.findAll() 
+  const allSpots = await Review.findAll() 
   // console.log(allBookings);
 
   if(allSpots){
     return res.status(200).json(allSpots)
   }
+
+
+
 
   res.status(400).json({"message":"allSpots not found"})
 
