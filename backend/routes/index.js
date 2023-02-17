@@ -11,6 +11,10 @@ router.use('/api', apiRouter);
 // });
 
 
+
+
+
+
 router.get("/api/csrf/restore", (req, res) => {
   const csrfToken = req.csrfToken();
   res.cookie("XSRF-TOKEN", csrfToken);
@@ -18,6 +22,24 @@ router.get("/api/csrf/restore", (req, res) => {
     'XSRF-Token': csrfToken
   });
 });
+
+
+// // all encompassing no user.req error handling middleware functionality code
+// router.use((req, res, next) => {;
+
+//   if(!req.user){
+//     const err = new Error("Forbidden")
+//     err.message = "Forbidden"
+//     err.status = 403
+//     next(err)
+//   }
+// });
+
+
+
+
+
+
 
 
 module.exports = router;
