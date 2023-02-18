@@ -35,31 +35,64 @@ const validateLogin = [
 
 
 
-// Log in
-router.post('/', validateLogin, async (req, res, next) => {
+// // Log in
+// router.post('/', validateLogin, async (req, res, next) => {
+//   const { credential, password } = req.body;
+//   const user = await User.login({ credential, password });
+
+//   try{
+//     if (!user) {
+//       const err = new Error('Login failed');
+//       err.status = 401;
+//       err.title = 'Login failed';
+//       err.errors = ['Invalid credentials'];
+//       return next(err);
+//     }
+
+//     await setTokenCookie(res, user);
+
+//     return res.json({
+//       user,
+//     });
+
+//   }
+//   catch{
+//   }
+
+// });
+
+
+
+
+
+// Login
+// need to make sure that the correct CSRF token
+// is being sent with each request that requires protection
+router.post('/',validateLogin, async (req, res, next) => {
+
   const { credential, password } = req.body;
   const user = await User.login({ credential, password });
-
-  try{
-    if (!user) {
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ['Invalid credentials'];
-      return next(err);
-    }
-
-    await setTokenCookie(res, user);
-
-    return res.json({
-      user,
-    });
-
-  }
-  catch{
+  
+  if(user){
+    const token = await setTokenCookie(res, user);
+    return res.status(200).json({
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              username: user.username,
+              token: token,
+            });
   }
 
+  const err = new Error("Invalid credentials") 
+  err.statusCode = 401
+  next(err)
+  
 });
+
+
+
 
 
 // Log out

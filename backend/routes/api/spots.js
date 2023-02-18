@@ -4,7 +4,7 @@ const express = require('express');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { json } = require('sequelize');
-const { User, Spot } = require('../../db/models');
+const { User, Spot, Booking, SpotImage, Review, ReviewImage } = require('../../db/models');
 const app = require('../../app');
 
 
@@ -21,12 +21,14 @@ router.get('/', async (req, res, next) => {
 });
 
 
+
+
 // Get all Spots owned by the Current User
 router.get('/current',requireAuth, async (req, res, next) => {
 
   const userSpots = await Spot.findAll({
     where:{ownerId:req.user.id}
-  }) 
+  })
   if(userSpots){
     return res.status(200).json(userSpots)
   }
@@ -34,29 +36,78 @@ router.get('/current',requireAuth, async (req, res, next) => {
 });
 
 
-// Get details of a Spot from an id
-router.get('/:spotId', async (req, res, next) => {
-  console.log(req.query.spotId);
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images',requireAuth, async (req, res, next) => {
+
+  const { url, preview } = req.body;
 
   const spot = await Spot.findAll({
-    where:{id:req.query.spotId}
-  }) 
-
+    where:{id:req.params.spotId}
+  })
   if(spot){
-    return res.status(200).json(spot)
+
+    newImage = await SpotImage.create({
+      spotId: req.params.spotId,
+      url,
+      preview
+    })
+    if(newImage)return res.status(200).json(newImage)
+    return res.status(200).json(newImage)
+
   }
-  res.status(400).json({"message":"spot not found"})
+  res.status(400).json({"message":"newImage not saved"})
+});
+
+
+// // Get details of a Spot from an id
+router.get('/:spotId', requireAuth, async (req, res, next) => {
+
+  const spot = await Spot.findOne({
+      where: { id: req.params.spotId },
+      include: [
+        {
+          model: SpotImage,
+          attributes: ['id', 'url', 'preview']
+        },
+        {
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
+        }
+      ]
+  })
+
+  if (spot) {
+    return res.status(200).json({
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat: spot.lat,
+      lng: spot.lng,
+      name: spot.name,
+      description: spot.description,
+      price: spot.price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt,
+      SpotImages: spot.SpotImages,
+      Owner: spot.User,
+    })
+  }
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found")
+    err.statusCode = 404
+    next(err)
+  }
 });
 
 
 
-
-
 // Create a Spot
-router.post('/', async (req, res, next) => {
+router.post('/', requireAuth, async (req, res, next) => {
 
-  if(req.user){
-    const allSpots = await Spot.findAll() 
     const {address,city,state,country,lat,lng,name,description,price} = req.body
     if(allSpots){
       //get owner id from current user
@@ -64,15 +115,6 @@ router.post('/', async (req, res, next) => {
       newSpot = await Spot.create({ownerId,address,city,state,country,lat,lng,name,description,price})
       if(newSpot)return res.status(200).json(newSpot)
     }
-  }
-  
-  // if(!req.user){
-  //   const err = new Error("Forbidden")
-  //   err.message = 'Forbidden'
-  //   err.status = 403
-  //   next(err)
-  // }
-
 
 });
 
