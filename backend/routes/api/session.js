@@ -3,7 +3,8 @@ const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin } = require('../../utils/validation');
+
 
 
 const router = express.Router();
@@ -11,16 +12,16 @@ const router = express.Router();
 
 
 
-const validateLogin = [
-  check('credential')
-    .exists({ checkFalsy: true })
-    .notEmpty()
-    .withMessage('Email or username is required'),
-  check('password')
-    .exists({ checkFalsy: true })
-    .withMessage('Password is required.'),
-  handleValidationErrors,
-];
+// const validateLogin = [
+//   check('credential')
+//     .exists({ checkFalsy: true })
+//     .notEmpty()
+//     .withMessage('Email or username is required'),
+//   check('password')
+//     .exists({ checkFalsy: true })
+//     .withMessage('Password is required.'),
+//   handleValidationErrors,
+// ];
 
 
 

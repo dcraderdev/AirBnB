@@ -1,3 +1,5 @@
+
+
 // backend/routes/api/spots.js
 const express = require('express');
 
@@ -5,50 +7,11 @@ const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth')
 const { check } = require('express-validator');
 const { json } = require('sequelize');
 const { User, Spot, Booking, SpotImage, Review, ReviewImage } = require('../../db/models');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, validateSpotEdit, validateReview } = require('../../utils/validation');
 const app = require('../../app');
 
 
 const router = express.Router();
-
-
-
-const validateSpotEdit = [
-  check('address')
-    .exists({ checkFalsy: true })
-    .withMessage('Street address is required'), 
-  check('city') 
-    .exists({ checkFalsy: true })
-    .withMessage('City is required'),
-  check('state') 
-    .exists({ checkFalsy: true })
-    .withMessage('State is required'),
-  check('country')
-    .exists({ checkFalsy: true })
-    .withMessage('Country is required'),
-  check('lat') 
-    .exists({ checkFalsy: true })
-    .withMessage('Latitude is not valid'),
-  check('lng') 
-    .exists({ checkFalsy: true })
-    .withMessage('Longitude is not valid'),
-  check('name')
-    .isLength({ max: 50 })
-    .withMessage('Name must be less than 50 characters'),
-  check('description')
-    .exists({ checkFalsy: true })
-    .withMessage('Description is required'),
-  check('price')
-    .exists({ checkFalsy: true })
-    .withMessage('Price per day is required')
-    .isInt()
-    .withMessage('Price per day is required')
-    ,
-  handleValidationErrors
-];
-
-
-
 
 
 // Get all Spots
@@ -207,6 +170,45 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 })
 
 
+
+
+// Create a Review for a Spot based on the Spot's id
+// /api/spots/:spotId/reviews
+router.post('/:spotId/reviews',requireAuth,validateReview, async (req, res, next) => {
+  
+  const spot = await Spot.findByPk(req.params.spotId)
+  const {review, stars} = req.body
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found")
+    err.statusCode = 404
+    next(err)
+  }
+
+  if(spot,{userId:req.user.id}){
+    const err = new Error("User already has a review for this spot")
+    err.statusCode = 403
+    next(err)
+  }
+
+  if(spot){
+    const newReview = await Review.create({
+      userId: req.user.id,
+      spotId: req.params.spotId,
+      review: review,
+      stars: stars
+    })
+
+    if (!newReview) {
+      const err = new Error("Review not created")
+      err.statusCode = 404
+      next(err)
+    }
+
+    return res.status(200).json(newReview)
+  }
+
+});
 
 
 
