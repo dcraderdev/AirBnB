@@ -119,8 +119,8 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       'price', 
       'createdAt', 
       'updatedAt',
-      [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),'id'), 'numReviews'],
-      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),'id'), 'avgStarRating'],
+      [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
+      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
     ],
     include: [
         {
@@ -136,7 +136,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
             attributes: []
         },
     ],
-    group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
+    // group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
   })
   
   if (spot.id) {
