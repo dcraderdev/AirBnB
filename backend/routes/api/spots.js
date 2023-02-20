@@ -137,7 +137,9 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
           attributes: []
         },
       ],
-      group: ['Spot.id','SpotImages.id','Owner.id'],
+      group: ['Reviews.spotId'],
+      // group: ['Spot.id','SpotImages.id','Owner.id'],
+      
     })
 
     if (!spot) {
@@ -147,7 +149,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       })
     }
 
-    const spotData = {
+    const data = {
       id: spot.id,
       ownerId: spot.ownerId,
       address: spot.address,
@@ -167,10 +169,10 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       Owner: spot.Owner,
     }
 
-    return res.status(200).json(spotData)
+    return res.status(200).json(data)
 
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
   }
 })
 
