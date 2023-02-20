@@ -34,8 +34,8 @@ router.get('/', async (req, res, next) => {
         'price', 
         'createdAt', 
         'updatedAt',  
-        // [Sequelize.literal('(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)'),'avgRating'],
-        // [Sequelize.literal('(SELECT url FROM SpotImages WHERE SpotImages.spotId = Spot.id ORDER BY `createdAt` LIMIT 1)'),'previewImage']
+        [Sequelize.literal('(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)'),'avgRating'],
+        [Sequelize.literal('(SELECT url FROM SpotImages WHERE SpotImages.spotId = Spot.id ORDER BY `createdAt` LIMIT 1)'),'previewImage']
       ],
       include: {
         model: Review,
