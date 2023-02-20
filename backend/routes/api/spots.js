@@ -137,7 +137,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
         },
     ],
     raw:true,
-    group: ['Spot.id','SpotImages.id'] 
+    group: ['Spot.id','SpotImages.id','User.id'] 
   })
   
   if (spot.id) {
