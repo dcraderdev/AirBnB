@@ -136,7 +136,8 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
             attributes: []
         },
     ],
-    // group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
+    raw:true,
+    group: ['Spot.id'] // 
   })
   
   if (spot.id) {
