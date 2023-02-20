@@ -8,48 +8,11 @@ const { check } = require('express-validator');
 const { json } = require('sequelize');
 const { User, Spot, Booking, SpotImage, Review, ReviewImage } = require('../../db/models');
 const { handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin } = require('../../utils/validation');
-
+const sequelize = require('sequelize')
 const app = require('../../app');
-
+const review = require('../../db/models/review');
 
 const router = express.Router();
-
-
-
-// const validateReview = [
-//   check('address')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Street address is required'), 
-//   check('city') 
-//     .exists({ checkFalsy: true })
-//     .withMessage('City is required'),
-//   check('state') 
-//     .exists({ checkFalsy: true })
-//     .withMessage('State is required'),
-//   check('country')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Country is required'),
-//   check('lat') 
-//     .exists({ checkFalsy: true })
-//     .withMessage('Latitude is not valid'),
-//   check('lng') 
-//     .exists({ checkFalsy: true })
-//     .withMessage('Longitude is not valid'),
-//   check('name')
-//     .isLength({ max: 50 })
-//     .withMessage('Name must be less than 50 characters'),
-//   check('description')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Description is required'),
-//   check('price')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Price per day is required')
-//     .isInt()
-//     .withMessage('Price per day is required')
-//     ,
-//   handleValidationErrors
-// ];
-
 
 
 
@@ -60,19 +23,165 @@ router.get('/', async (req, res, next) => {
 });
 
 
-// Get all Reviews of the Current User
-router.get('/current',requireAuth, async (req, res, next) => {
 
-  console.log(req.user.id);
+// Add an Image to a Review based on the Review's id
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+  const {image} = req.body
+  
+  const review = await Review.findByPk(req.params.reviewId)
 
-  const userSpots = await Review.findAll({
-    where:{userId:req.user.id}
-  })
-  if(userSpots){
-    return res.status(200).json(userSpots)
+  if(review){
+    return res.status(200).json(review)
   }
-  res.status(400).json({"message":"userSpots not found"})
+
+
+})
+
+
+
+
+// Get all Reviews of the Current User
+router.get('/current', requireAuth, async (req, res, next) => {
+  const userReviews = await Review.findAll({
+    where: {
+      userId: req.user.id
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      },
+      {
+        model: Spot,
+        attributes: [
+          'id',
+          'ownerId',
+          'address',
+          'city',
+          'state',
+          'country',
+          'lat',
+          'lng',
+          'name',
+          'price',
+          [sequelize.literal('(SELECT `url` FROM `SpotImages` WHERE `SpotImages`.`spotId` = `Spot`.`id` ORDER BY `createdAt` DESC LIMIT 1)'), 'previewImage']
+        ],
+        include: [
+          {
+            model: SpotImage,
+            attributes: []
+          }
+        ]
+      },
+      {
+        model: ReviewImage,
+        attributes: ['id', 'url']
+      }
+    ]
+  });
+  if (userReviews) {
+    return res.status(200).json({
+      Reviews: userReviews
+    })
+  }
+
+  res.status(400).json({
+    "message": "userSpots not found"
+  });
+
 });
+
+
+// Get all Reviews of the Current User
+router.get('/current', requireAuth, async (req, res, next) => {
+  try {
+    const userReviews = await Review.findAll({
+      where: {
+        userId: req.user.id
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
+        },
+        {
+          model: Spot,
+          include: [
+            {
+              model: SpotImage,
+              attributes: ['url'],
+              limit: 1
+            }
+          ]
+        }
+      ]
+    });
+
+    if (userReviews.length) {
+      const reviews = userReviews.map(review => {
+        const { id, userId, spotId, review: reviewText, stars, createdAt, updatedAt, User, Spot } = review.toJSON();
+        const previewImage = Spot.SpotImages[0]?.url || null;
+        return {
+          id,
+          userId,
+          spotId,
+          review: reviewText,
+          stars,
+          createdAt,
+          updatedAt,
+          User,
+          Spot: { ...Spot.toJSON(), previewImage }
+        }
+      });
+      return res.status(200).json({ Reviews: reviews });
+    }
+
+    return res.status(404).json({ message: 'User reviews not found' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+
+
+
+
+// router.get('/current',requireAuth, async (req, res, next) => {
+
+//   console.log(req.user.id);
+
+//   const userReviews = await Review.findAll({
+
+//     where: {
+//       userId: req.user.id
+//     },
+//     include: 
+//       {
+//         model: User,
+//         attributes: ['id', 'firstName', 'lastName']
+//       },
+//       include:
+//        { 
+//         model: Spot,
+//         attributes: [],
+
+//          include:{
+//           model: SpotImage,
+//           attributes: ['url'],
+// }
+//        }
+
+//   })
+
+//   if(userReviews){
+//     return res.status(200).json({
+//       Reviews:userReviews
+//     })
+//   }
+//   res.status(400).json({"message":"userSpots not found"})
+// });
 
 
 
