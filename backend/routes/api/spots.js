@@ -103,55 +103,104 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
-const spot = await Spot.findOne({
-  where: { id: req.params.spotId },
-  attributes:[
-    'id', 
-    'ownerId', 
-    'address', 
-    'city', 
-    'state', 
-    'country', 
-    'lat', 
-    'lng', 
-    'name', 
-    'description', 
-    'price', 
-    'createdAt', 
-    'updatedAt',
-    [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-    [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
-  ],
-  include: [
-      {
-          model: SpotImage,
-          attributes: ['id', 'url', 'preview']
-      },
-      {
-          model: User,
-          attributes: ['id', 'firstName', 'lastName']
-      },
-      {
-          model: Review,
-          attributes: []
-
-      },
-  ],
-  group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
-})
-})
-
-if (spot.id) {
-  return res.status(200).json(spot)
-}
-
-if (!spot.id) {
-  return res.status(404).json({
-      message: "Spot couldn't be found",
-      statusCode: 404
+  const spot = await Spot.findOne({
+    where: { id: req.params.spotId },
+    attributes:[
+      'id', 
+      'ownerId', 
+      'address', 
+      'city', 
+      'state', 
+      'country', 
+      'lat', 
+      'lng', 
+      'name', 
+      'description', 
+      'price', 
+      'createdAt', 
+      'updatedAt',
+      [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
+      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
+    ],
+    include: [
+        {
+            model: SpotImage,
+            attributes: ['id', 'url', 'preview']
+        },
+        {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        },
+        {
+            model: Review,
+            attributes: []
+        },
+    ],
+    group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
   })
-}
-})
+  
+  if (spot.id) {
+    return res.status(200).json(spot)
+  }
+  
+  if (!spot.id) {
+    return res.status(404).json({
+        message: "Spot couldn't be found",
+        statusCode: 404
+    })
+  }
+  })
+  
+// router.get('/:spotId', requireAuth, async (req, res, next) => {
+// const spot = await Spot.findOne({
+//   where: { id: req.params.spotId },
+//   attributes:[
+//     'id', 
+//     'ownerId', 
+//     'address', 
+//     'city', 
+//     'state', 
+//     'country', 
+//     'lat', 
+//     'lng', 
+//     'name', 
+//     'description', 
+//     'price', 
+//     'createdAt', 
+//     'updatedAt',
+//     [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
+//     [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
+//   ],
+//   include: [
+//       {
+//           model: SpotImage,
+//           attributes: ['id', 'url', 'preview']
+//       },
+//       {
+//           model: User,
+//           attributes: ['id', 'firstName', 'lastName']
+//       },
+//       {
+//           model: Review,
+//           attributes: []
+
+//       },
+//   ],
+//   group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
+// })
+// })
+
+// if (spot.id) {
+//   return res.status(200).json(spot)
+// }
+
+// if (!spot.id) {
+//   return res.status(404).json({
+//       message: "Spot couldn't be found",
+//       statusCode: 404
+//   })
+// }
+// })
 
 
 
