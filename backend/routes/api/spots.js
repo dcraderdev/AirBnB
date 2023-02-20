@@ -149,27 +149,28 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       })
     }
 
-    const data = {
-      id: spot.id,
-      ownerId: spot.ownerId,
-      address: spot.address,
-      city: spot.city,
-      state: spot.state,
-      country: spot.country,
-      lat: spot.lat,
-      lng: spot.lng,
-      name: spot.name,
-      description: spot.description,
-      price: spot.price,
-      createdAt: spot.createdAt,
-      updatedAt: spot.updatedAt,
-      numReviews: spot.numReviews,
-      avgStarRating: spot.avgStarRating,
-      SpotImages: spot.SpotImages,
-      Owner: spot.Owner,
-    }
+    // const data = {
+    //   id: spot.id,
+    //   ownerId: spot.ownerId,
+    //   address: spot.address,
+    //   city: spot.city,
+    //   state: spot.state,
+    //   country: spot.country,
+    //   lat: spot.lat,
+    //   lng: spot.lng,
+    //   name: spot.name,
+    //   description: spot.description,
+    //   price: spot.price,
+    //   createdAt: spot.createdAt,
+    //   updatedAt: spot.updatedAt,
+    //   numReviews: spot.numReviews,
+    //   avgStarRating: spot.avgStarRating,
+    //   SpotImages: spot.SpotImages,
+    //   Owner: spot.Owner,
+    // }
 
-    return res.status(200).json(data)
+    // return res.status(200).json(data)
+    return res.status(200).json(spot)
 
   } catch (err) {
     next(err)
