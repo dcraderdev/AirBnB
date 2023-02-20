@@ -103,55 +103,132 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
-  const spot = await Spot.findOne({
-    where: { id: req.params.spotId },
-    attributes:[
-      'id', 
-      'ownerId', 
-      'address', 
-      'city', 
-      'state', 
-      'country', 
-      'lat', 
-      'lng', 
-      'name', 
-      'description', 
-      'price', 
-      'createdAt', 
-      'updatedAt',
-      [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
-      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
+  try {
+    const spot = await Spot.findByPk(req.params.spotId,{
+      attributes:[
+        'id', 
+        'ownerId', 
+        'address', 
+        'city', 
+        'state', 
+        'country', 
+        'lat', 
+        'lng', 
+        'name', 
+        'description', 
+        'price', 
+        'createdAt', 
+        'updatedAt',
+        [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
+        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
+      ],
+      include: [
+        {
+          model: SpotImage,
+          attributes: ['id', 'url', 'preview']
+        },
+        {
+          model: User,
+          as: 'Owner',
+          attributes: ['id', 'firstName', 'lastName']
+        },
+        {
+          model: Review,
+          attributes: []
+        },
+      ],
+      group: ['Spot.id','SpotImages.id','Owner.id'],
+    })
 
-    ],
-    include: [
-        {
-            model: SpotImage,
-            attributes: ['id', 'url', 'preview']
-        },
-        {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName']
-        },
-        {
-            model: Review,
-            attributes: []
-        },
-    ],
-    raw:true,
-    group: ['Spot.id','SpotImages.id','User.id'] 
-  })
-  
-  if (spot.id) {
-    return res.status(200).json(spot)
-  }
-  
-  if (!spot.id) {
-    return res.status(404).json({
+    if (!spot) {
+      return res.status(404).json({
         message: "Spot couldn't be found",
         statusCode: 404
-    })
+      })
+    }
+
+    const spotData = {
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat: spot.lat,
+      lng: spot.lng,
+      name: spot.name,
+      description: spot.description,
+      price: spot.price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt,
+      numReviews: spot.numReviews,
+      avgStarRating: spot.avgStarRating,
+      SpotImages: spot.SpotImages,
+      Owner: spot.Owner,
+    }
+
+    return res.status(200).json(spotData)
+
+  } catch (error) {
+    next(error)
   }
-  })
+})
+
+
+
+
+
+
+// router.get('/:spotId', requireAuth, async (req, res, next) => {
+//   const spot = await Spot.findOne({
+//     where: { id: req.params.spotId },
+//     attributes:[
+//       'id', 
+//       'ownerId', 
+//       'address', 
+//       'city', 
+//       'state', 
+//       'country', 
+//       'lat', 
+//       'lng', 
+//       'name', 
+//       'description', 
+//       'price', 
+//       'createdAt', 
+//       'updatedAt',
+//       [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
+//       [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
+
+//     ],
+//     include: [
+//         {
+//             model: SpotImage,
+//             attributes: ['id', 'url', 'preview']
+//         },
+//         {
+//             model: User,
+//             attributes: ['id', 'firstName', 'lastName']
+//         },
+//         {
+//             model: Review,
+//             attributes: []
+//         },
+//     ],
+//     raw:true,
+//     group: ['Spot.id','SpotImages.id','User.id'] 
+//   })
+  
+//   if (spot.id) {
+//     return res.status(200).json(spot)
+//   }
+  
+//   if (!spot.id || spot.id === null) {
+//     return res.status(404).json({
+//         message: "Spot couldn't be found",
+//         statusCode: 404
+//     })
+//   }
+//   })
   
 // router.get('/:spotId', requireAuth, async (req, res, next) => {
 // const spot = await Spot.findOne({
