@@ -34,8 +34,8 @@ router.get('/', async (req, res, next) => {
         'price', 
         'createdAt', 
         'updatedAt',  
-        // [Sequelize.literal('(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)'),'avgRating'],
-        // [Sequelize.literal('(SELECT url FROM SpotImages WHERE SpotImages.spotId = Spot.id ORDER BY `createdAt` LIMIT 1)'),'previewImage']
+        [Sequelize.literal('(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)'),'avgRating'],
+        [Sequelize.literal('(SELECT url FROM SpotImages WHERE SpotImages.spotId = Spot.id ORDER BY `createdAt` LIMIT 1)'),'previewImage']
       ],
       include: {
         model: Review,
@@ -136,7 +136,9 @@ const spot = await Spot.findOne({
           attributes: []
 
       },
-  ]
+  ],
+  group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
+})
 })
 
 if (spot.id) {
