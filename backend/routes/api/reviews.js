@@ -17,9 +17,24 @@ const router = express.Router();
 
 
 
-// Reviews Landing Page
-router.get('/', async (req, res, next) => {
-  res.status(400).json({"Reviews":"landing page"})
+// Get all Reviews of the Current User
+router.get('/current', async (req, res, next) => {
+
+  const allReviews = await Review.findAll({
+    where: { userId: req.user.id },
+    include:[{ model: Spot }, { model: ReviewImage }]
+  })
+
+  if (!allReviews) {
+    const err = new Error("All reviews not found")
+    err.statusCode = 404
+    next(err)
+  }
+
+  if (allReviews) {
+    res.status(200).json(allReviews)
+  }
+
 });
 
 
@@ -29,11 +44,8 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
   
   const { url } = req.body
   const review = await Review.findByPk(req.params.reviewId,{
-      where: { id: req.params.reviewId },
-      include:{
-              model: ReviewImage,
-              as: 'ReviewImages'
-              }
+    where: { id: req.params.reviewId },
+    include:{ model: ReviewImage }
   })
 
   if (!review) {
@@ -41,17 +53,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     err.statusCode = 404
     next(err)
   }
-
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
-console.log(review.ReviewImages.length);
 
   if (review.ReviewImages.length >= 10) {
     const err = new Error("Maximum number of images for this resource was reached")
@@ -64,7 +65,10 @@ console.log(review.ReviewImages.length);
       url
   })
   if (newReviewImage) {
-    res.status(200).json(newReviewImage)
+    res.status(200).json({
+      id:newReviewImage.id,
+      url:newReviewImage.url
+    })
   }
 
 })
