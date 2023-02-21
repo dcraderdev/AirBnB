@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   
   Spot.init({
+    
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -33,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     state: {
       type: DataTypes.STRING,
       allowNull: false
+
     },
     country: {
       type: DataTypes.STRING,

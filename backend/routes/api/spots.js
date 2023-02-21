@@ -138,7 +138,7 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
-  try {
+  // try {
     const spot = await Spot.findByPk(req.params.spotId,{
       attributes:[
         'id', 
@@ -185,9 +185,9 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
 
     return res.status(200).json(spot)
 
-  } catch (err) {
-    next(err)
-  }
+  // } catch (err) {
+  //   next(err)
+  // }
 })
 
 
