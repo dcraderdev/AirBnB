@@ -117,7 +117,11 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
       preview
     })
     if(newImage){
-      return res.status(200).json(newImage)
+      return res.status(200).json({
+        id:newImage.id,
+        url: newImage.url,
+        preview: newImage.preview
+      })
     }
     if (!newImage) {
       const err = new Error("Image couldn't be added")
@@ -138,7 +142,6 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
-  // try {
     const spot = await Spot.findByPk(req.params.spotId,{
       attributes:[
         'id', 
@@ -188,255 +191,8 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
 
     return res.status(200).json(spot)
 
-  // } catch (err) {
-  //   next(err)
-  // }
 })
 
-
-
-
-
-
-// router.get('/:spotId', requireAuth, async (req, res, next) => {
-//   const spot = await Spot.findOne({
-//     where: { id: req.params.spotId },
-//     attributes:[
-//       'id', 
-//       'ownerId', 
-//       'address', 
-//       'city', 
-//       'state', 
-//       'country', 
-//       'lat', 
-//       'lng', 
-//       'name', 
-//       'description', 
-//       'price', 
-//       'createdAt', 
-//       'updatedAt',
-//       [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
-//       [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
-
-//     ],
-//     include: [
-//         {
-//             model: SpotImage,
-//             attributes: ['id', 'url', 'preview']
-//         },
-//         {
-//             model: User,
-//             attributes: ['id', 'firstName', 'lastName']
-//         },
-//         {
-//             model: Review,
-//             attributes: []
-//         },
-//     ],
-//     raw:true,
-//     group: ['Spot.id','SpotImages.id','User.id'] 
-//   })
-  
-//   if (spot.id) {
-//     return res.status(200).json(spot)
-//   }
-  
-//   if (!spot.id || spot.id === null) {
-//     return res.status(404).json({
-//         message: "Spot couldn't be found",
-//         statusCode: 404
-//     })
-//   }
-//   })
-  
-// router.get('/:spotId', requireAuth, async (req, res, next) => {
-// const spot = await Spot.findOne({
-//   where: { id: req.params.spotId },
-//   attributes:[
-//     'id', 
-//     'ownerId', 
-//     'address', 
-//     'city', 
-//     'state', 
-//     'country', 
-//     'lat', 
-//     'lng', 
-//     'name', 
-//     'description', 
-//     'price', 
-//     'createdAt', 
-//     'updatedAt',
-//     [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-//     [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
-//   ],
-//   include: [
-//       {
-//           model: SpotImage,
-//           attributes: ['id', 'url', 'preview']
-//       },
-//       {
-//           model: User,
-//           attributes: ['id', 'firstName', 'lastName']
-//       },
-//       {
-//           model: Review,
-//           attributes: []
-
-//       },
-//   ],
-//   group: ['Spot.id'] // add this line to include the id column in the GROUP BY clause
-// })
-// })
-
-// if (spot.id) {
-//   return res.status(200).json(spot)
-// }
-
-// if (!spot.id) {
-//   return res.status(404).json({
-//       message: "Spot couldn't be found",
-//       statusCode: 404
-//   })
-// }
-// })
-
-
-
-
-
-
-// router.get('/:spotId', requireAuth, async (req, res, next) => {
-
-//   const spot = await Spot.findByPk(req.params.spotId,{
-//     attributes:[
-//       [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-//       [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
-//     ],
-//     include: [
-//       {
-//         model: Review,
-//         attributes: []
-//       },
-//       {
-//         model: SpotImage,
-//         attributes: ['id', 'url', 'preview']
-//       },
-//       {
-//         model: User,
-//         as: 'Owner',
-//         attributes: ['id', 'firstName', 'lastName']
-//       },
-//     ]
-//   })
-
-//   if (spot) {
-
-//     console.log(spot);
-
-
-
-//     // Map the SpotImage model objects to a new array of objects
-//     const spotImages = spot.SpotImages.map((image) => ({
-//       id: image.id,
-//       url: image.url,
-//       preview: image.preview,
-//     }));
-
-//     return res.status(200).json(
-//       // spot
-//       {
-//       id: spot.id,
-//       ownerId: spot.ownerId,
-//       address: spot.address,
-//       city: spot.city,
-//       state: spot.state,
-//       country: spot.country,
-//       lat: spot.lat,
-//       lng: spot.lng,
-//       name: spot.name,
-//       description: spot.description,
-//       price: spot.price,
-//       createdAt: spot.createdAt,
-//       updatedAt: spot.updatedAt,
-//       numReviews: spot.numReviews,
-//       avgStarRating: spot.avgRating, // change to avgRating
-//       SpotImages: spotImages, // use the new array of objects
-//       Owner: spot.Owner, // use the alias
-//     }
-//     );
-//   }
-
-//   if (!spot) {
-//     const err = new Error("Spot couldn't be found")
-//     err.statusCode = 404
-//     next(err)
-//   }
-// });
-
-
-
-
-
-
-
-
-
-// router.get('/:spotId', requireAuth, async (req, res, next) => {
-
-//   const spot = await Spot.findByPk(req.params.spotId,{
-//     attributes:[
-//       [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-//       [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
-//     ],
-//     include: [
-//       {
-//         model: Review,
-//         attributes: []
-//       },
-//       {
-//         model: SpotImage,
-//         attributes: ['id', 'url', 'preview']
-//       },
-//       {
-//         model: User,
-//         as: 'Owner',
-//         attributes: ['id', 'firstName', 'lastName']
-//       },
-//     ]
-//   })
-
-//     // return res.status(200).json('spot')
-
-
-//   if (req.params.spotId) {
-    
-//     // return res.status(200).json(spot)
-//     return res.status(200).json({
-//       id: spot.id,
-//       ownerId: spot.ownerId,
-//       address: spot.address,
-//       city: spot.city,
-//       state: spot.state,
-//       country: spot.country,
-//       lat: spot.lat,
-//       lng: spot.lng,
-//       name: spot.name,
-//       description: spot.description,
-//       price: spot.price,
-//       createdAt: spot.createdAt,
-//       updatedAt: spot.updatedAt,
-//       SpotImages: spot.SpotImages,
-//       Owner: spot.User,
-//     })
-    
-//   }
-
-//   if (!spot) {
-//     const err = new Error("Spot couldn't be found")
-//     err.statusCode = 404
-//     next(err)
-//   }
-// });
 
 
 
