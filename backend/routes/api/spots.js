@@ -40,7 +40,9 @@ router.get('/', async (req, res, next) => {
       include: {
         model: Review,
         attributes: [], // include only the 'stars' attribute
-      }
+      },
+      group: ['Spot.id','SpotImages.id','Owner.id','Reviews.spotId'],
+
     }); 
 
     if (allSpots) {
