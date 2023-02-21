@@ -107,7 +107,6 @@ router.get('/current',requireAuth, async (req, res, next) => {
 router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
   const { url, preview } = req.body;
-
   const spot = await Spot.findByPk(req.params.spotId)
 
   if(spot){
@@ -134,9 +133,6 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
     err.statusCode = 404
     next(err)
   }
-
-
-
 });
 
 
@@ -182,11 +178,10 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       
     })
 
-    if (!spot) {
-      return res.status(404).json({
-        message: "Spot couldn't be found",
-        statusCode: 404
-      })
+    if (!spot || spot === null) {
+      const err = new Error("Spot couldn't be found")
+      err.statusCode = 404
+      next(err)
     }
 
     return res.status(200).json(spot)
@@ -253,10 +248,10 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 // Create a Review for a Spot based on the Spot's id
 // /api/spots/:spotId/reviews
-router.post('/:spotId/reviews',requireAuth,validateReview, async (req, res, next) => {
-  
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
+
+  const { review, stars } = req.body
   const spot = await Spot.findByPk(req.params.spotId)
-  const {review, stars} = req.body
 
   if (!spot) {
     const err = new Error("Spot couldn't be found")
@@ -264,30 +259,86 @@ router.post('/:spotId/reviews',requireAuth,validateReview, async (req, res, next
     next(err)
   }
 
-  if(spot,{userId:req.user.id}){
+
+  const existingReview = await Review.findOne({ where: { 
+    userId: req.user.id,
+    spotId: req.params.spotId
+  } })
+
+  if (existingReview) {
     const err = new Error("User already has a review for this spot")
     err.statusCode = 403
     next(err)
   }
 
-  if(spot){
-    const newReview = await Review.create({
-      userId: req.user.id,
-      spotId: req.params.spotId,
-      review: review,
-      stars: stars
-    })
 
-    if (!newReview) {
-      const err = new Error("Review not created")
-      err.statusCode = 404
-      next(err)
-    }
+     if(spot){
+        const newReview = await Review.create({
+          userId: req.user.id,
+          spotId: req.params.spotId,
+          review: review,
+          stars: stars
+        })
+        if (!newReview) {
+          const err = new Error("Review not created.")
+          err.statusCode = 403
+          next(err)
+        }
 
-    return res.status(200).json(newReview)
-  }
+        if (newReview) {
+            return res.status(200).json({
+                id: newReview.id,
+                userId: newReview.userId,
+                spotId: newReview.spotId,
+                review: newReview.review,
+                stars: newReview.stars,
+            })
+        }
+     }
+    
+  })
 
-});
+
+
+
+
+
+
+// router.post('/:spotId/reviews',requireAuth,validateReview, async (req, res, next) => {
+  
+//   const spot = await Spot.findByPk(req.params.spotId)
+//   const {review, stars} = req.body
+
+//   if (!spot) {
+//     const err = new Error("Spot couldn't be found")
+//     err.statusCode = 404
+//     next(err)
+//   }
+
+//   if(spot,{userId:req.user.id}){
+//     const err = new Error("User already has a review for this spot")
+//     err.statusCode = 403
+//     next(err)
+//   }
+
+//   if(spot){
+//     const newReview = await Review.create({
+//       userId: req.user.id,
+//       spotId: req.params.spotId,
+//       review: review,
+//       stars: stars
+//     })
+
+//     if (!newReview) {
+//       const err = new Error("Review not created")
+//       err.statusCode = 404
+//       next(err)
+//     }
+
+//     return res.status(200).json(newReview)
+//   }
+
+// });
 
 
 
