@@ -22,7 +22,15 @@ router.get('/current', async (req, res, next) => {
 
   const allReviews = await Review.findAll({
     where: { userId: req.user.id },
-    include:[{ model: Spot }, { model: ReviewImage }]
+    include:[
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      
+      { model: Spot, 
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price', [sequelize.literal('(SELECT url FROM SpotImages WHERE Spot.id = SpotImages.spotId LIMIT 1)'), 'previewImage']],
+      },
+      { model: ReviewImage, attributes: ['id', 'url'] }
+    ],
+    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
   })
 
   if (!allReviews) {
@@ -32,10 +40,84 @@ router.get('/current', async (req, res, next) => {
   }
 
   if (allReviews) {
-    res.status(200).json(allReviews)
+    res.status(200).json({"Reviews":allReviews})
   }
-
 });
+
+
+
+
+
+// router.get('/current', async (req, res, next) => {
+
+//   const allReviews = await Review.findAll({
+//     where: { userId: req.user.id },
+//     include:[
+//       { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      
+//       { model: Spot, 
+//         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price', [sequelize.fn('MAX', sequelize.col('SpotImages.url')), 'previewImage']],
+//         include: [
+//           { model: SpotImage, attributes: [] }
+//         ],
+//       },
+//       { model: ReviewImage, attributes: ['id', 'url'] }
+//     ],
+//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+//   })
+
+//   if (!allReviews) {
+//     const err = new Error("All reviews not found")
+//     err.statusCode = 404
+//     next(err)
+//   }
+
+//   if (allReviews) {
+//     res.status(200).json({"Reviews":allReviews})
+//   }
+// });
+
+
+
+
+
+
+// router.get('/current', async (req, res, next) => {
+
+//   const allReviews = await Review.findAll({
+//     where: { userId: req.user.id },
+//     include:[
+//       { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      
+//       { model: Spot, 
+//         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',],
+//         // attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',[sequelize.fn('MAX', sequelize.col('SpotImages.url')), 'previewImage']],
+//         include: [
+//           { model: SpotImage, attributes: ['id', 'url', 'preview'],limit: 1 }
+//           // { model: SpotImage, attributes: [] }
+
+          
+
+//         ],
+//       },
+//       { model: ReviewImage, attributes: ['id', 'url'] }
+//     ],
+//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+//   })
+
+
+
+//   if (!allReviews) {
+//     const err = new Error("All reviews not found")
+//     err.statusCode = 404
+//     next(err)
+//   }
+
+//   if (allReviews) {
+//     res.status(200).json({"Reviews":allReviews})
+//   }
+
+// });
 
 
 
