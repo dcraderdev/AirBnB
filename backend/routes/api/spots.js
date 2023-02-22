@@ -132,9 +132,9 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 router.get('/:spotId', requireAuth, async (req, res, next) => {
 
   const spot = await Spot.scope({method:['withPreviewAndRating']}).findByPk(req.params.spotId,{
-    attributes:{
-      exclude: ['previewImage']
-    },
+    // attributes:{
+    //   exclude: ['previewImage']
+    // },
       include: [
         {
           model: SpotImage,
@@ -151,6 +151,8 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
         },
       ],
     })
+
+    console.log(spot);
 
     if (!spot || spot === null) {
       const err = new Error("Spot couldn't be found")

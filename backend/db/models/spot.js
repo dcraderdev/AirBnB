@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Spot',
       scopes: {
         withPreview() {
-          // const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
+          const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
 
           return {
             attributes: [
@@ -93,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
         },
 
         withPreviewAndRating() {
-          // const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
+          const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
           return {
             attributes: [
               'id',
