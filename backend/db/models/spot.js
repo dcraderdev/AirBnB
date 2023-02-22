@@ -109,9 +109,9 @@ module.exports = (sequelize, DataTypes) => {
               'price',
               'createdAt',
               'updatedAt',
-              [
-                Sequelize.literal(`(SELECT ROUND(AVG(stars), 1) FROM Reviews WHERE Reviews.spotId = Spot.id)`),  'avgRating'
-              ],
+              // [
+              //   Sequelize.literal(`(SELECT ROUND(AVG(stars), 1) FROM Reviews WHERE Reviews.spotId = Spot.id)`), 'avgRating'
+              // ],
               [
                 Sequelize.literal(
                   `(SELECT url FROM ${
