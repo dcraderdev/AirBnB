@@ -147,7 +147,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
         'createdAt',
         'updatedAt',
         [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
-        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
+        [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('Reviews.stars')),1), 'avgStarRating'],
     ],
     include: [
         {
