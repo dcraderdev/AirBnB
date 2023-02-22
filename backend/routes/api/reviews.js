@@ -33,110 +33,132 @@ const review = require('../../db/models/review');
 
 const router = express.Router();
 
+
+let schema
+ if (process.env.NODE_ENV === 'production') {
+  schema = process.env.SCHEMA;  // define your schema in options object
+}
+
+
+// [
+//   Sequelize.literal(
+//     `(SELECT url FROM ${
+//       schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+//     } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+//   ),
+//   'previewImage',
+// ],
+
 // Get all Reviews of the Current User - works only locally due to literal
-// router.get('/current', async (req, res, next) => {
+router.get('/current', async (req, res, next) => {
 
-//   const allReviews = await Review.findAll({
-//     where: { userId: req.user.id },
-//     include:[
-//       { model: User, attributes: ['id', 'firstName', 'lastName'] },
-
-//       { model: Spot,
-//         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
-//           [sequelize.literal('(SELECT url FROM SpotImages WHERE Spot.id = SpotImages.spotId LIMIT 1)'), 'previewImage']],
-//       },
-//       { model: ReviewImage, attributes: ['id', 'url'] }
-//     ],
-//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
-//   })
-
-//   if (!allReviews) {
-//     const err = new Error("All reviews not found")
-//     err.statusCode = 404
-//     next(err)
-//   }
-
-//   if (allReviews) {
-//     res.status(200).json({"Reviews":allReviews})
-//   }
-// });
-
-// Get all Reviews of the Current User
-router.get('/current', requireAuth, async (req, res, next) => {
-  const currentUsersReviews = await Review.findAll({
+  const allReviews = await Review.findAll({
     where: { userId: req.user.id },
-    include: [
-      {
-        model: User,
-        attributes: ['id', 'firstName', 'lastName'],
+    include:[
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
+
+      { model: Spot,
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
+        [
+          Sequelize.literal(
+            `(SELECT url FROM ${
+              schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+            } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+          ),
+          'previewImage',
+        ]],
       },
-      {
-        model: Spot,
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-        include: [
-          {
-            model: SpotImage,
-            attributes: ['url'],
-            where: { preview: true },
-            required: false,
-          },
-        ],
-      },
-      { model: ReviewImage, attributes: ['id', 'url'] },
+      { model: ReviewImage, attributes: ['id', 'url'] }
     ],
-    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
-  });
+    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+  })
 
-  if (currentUsersReviews) {
-    const reviewsData = currentUsersReviews.map((review) => {
-      const {
-        id,
-        userId,
-        spotId,
-        review: reviewText,
-        stars,
-        createdAt,
-        updatedAt,
-        User,
-        Spot,
-        ReviewImages,
-      } = review.toJSON();
-
-      const previewImage = Spot.SpotImages.length > 0 ? Spot.SpotImages[0].url : null;
-
-      return {
-        id,
-        userId,
-        spotId,
-        review: reviewText,
-        stars,
-        createdAt,
-        updatedAt,
-        User,
-        Spot: {
-          id: Spot.id,
-          ownerId: Spot.ownerId,
-          address: Spot.address,
-          city: Spot.city,
-          state: Spot.state,
-          country: Spot.country,
-          lat: Spot.lat,
-          lng: Spot.lng,
-          name: Spot.name,
-          price: Spot.price,
-          previewImage,
-        },
-        ReviewImages,
-      };
-    });
-
-    return res.status(200).json({ Reviews: reviewsData });
+  if (!allReviews) {
+    const err = new Error("All reviews not found")
+    err.statusCode = 404
+    next(err)
   }
 
-  const err = new Error("Reviews couldn't be found");
-  err.statusCode = 404;
-  return next(err);
+  if (allReviews) {
+    res.status(200).json({"Reviews":allReviews})
+  }
 });
+
+// Get all Reviews of the Current User
+// router.get('/current', requireAuth, async (req, res, next) => {
+//   const currentUsersReviews = await Review.findAll({
+//     where: { userId: req.user.id },
+//     include: [
+//       {
+//         model: User,
+//         attributes: ['id', 'firstName', 'lastName'],
+//       },
+//       {
+//         model: Spot,
+//         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+//         include: [
+//           {
+//             model: SpotImage,
+//             attributes: ['url'],
+//             where: { preview: true },
+//             required: false,
+//           },
+//         ],
+//       },
+//       { model: ReviewImage, attributes: ['id', 'url'] },
+//     ],
+//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+//   });
+
+//   if (currentUsersReviews) {
+//     const reviewsData = currentUsersReviews.map((review) => {
+//       const {
+//         id,
+//         userId,
+//         spotId,
+//         review: reviewText,
+//         stars,
+//         createdAt,
+//         updatedAt,
+//         User,
+//         Spot,
+//         ReviewImages,
+//       } = review.toJSON();
+
+//       const previewImage = Spot.SpotImages.length > 0 ? Spot.SpotImages[0].url : null;
+//       return {
+//         id,
+//         userId,
+//         spotId,
+//         review: reviewText,
+//         stars,
+//         createdAt,
+//         updatedAt,
+//         User,
+//         Spot: {
+//           id: Spot.id,
+//           ownerId: Spot.ownerId,
+//           address: Spot.address,
+//           city: Spot.city,
+//           state: Spot.state,
+//           country: Spot.country,
+//           lat: Spot.lat,
+//           lng: Spot.lng,
+//           name: Spot.name,
+//           price: Spot.price,
+//           previewImage,
+//         },
+//         ReviewImages,
+//       };
+//     });
+
+//     return res.status(200).json({ Reviews: reviewsData });
+//   }
+
+//   const err = new Error("Reviews couldn't be found");
+//   err.statusCode = 404;
+//   return next(err);
+// });
 
 
 
