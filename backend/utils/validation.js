@@ -139,8 +139,48 @@ const validateLogin = [
 
 
 
+const validateBooking= [ 
+  check('startDate')
+  .exists({ checkFalsy: true })
+  .withMessage(''),
+check('endDate')
+  .exists({ checkFalsy: true })
+  .custom((endDate, { req }) => {
+      const startDate = req.body.startDate;
+      if (endDate && startDate) {
+          if (new Date(endDate) <= new Date(startDate)) {
+              throw new Error("endDate cannot be on or before startDate")
+          }
+      }
+      return true
+  })
+  .withMessage(''),
+handleValidationErrors
+]
+
+const validateEditBooking= [ 
+  check('startDate')
+  .exists({ checkFalsy: true })
+  .withMessage(''),
+check('endDate')
+  .exists({ checkFalsy: true })
+  .custom((endDate, { req }) => {
+      const startDate = req.body.startDate;
+      if (endDate && startDate) {
+          if (new Date(endDate) <= new Date(startDate)) {
+              throw new Error("endDate cannot come before startDate")
+          }
+      }
+      return true
+  })
+  .withMessage(''),
+handleValidationErrors
+]
+
+
+
 module.exports = {
-  handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin
+  handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin, validateBooking, validateEditBooking
 };
 
 

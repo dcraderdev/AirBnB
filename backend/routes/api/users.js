@@ -4,7 +4,7 @@ const express = require('express');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
-const { handleValidationErrors, validateSpotEdit, validateReview, validateSignup } = require('../../utils/validation');
+const { handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateBooking } = require('../../utils/validation');
 const { json } = require('sequelize');
 const db = require('../../db/models');
 
