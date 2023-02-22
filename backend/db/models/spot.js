@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Spot',
       scopes: {
         withPreview() {
-          const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
+          // const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
 
           return {
             attributes: [
@@ -91,8 +91,45 @@ module.exports = (sequelize, DataTypes) => {
             ],
           };
         },
+
+        withPreviewAndRating() {
+          // const {User,Spot,Booking,SpotImage,Review,ReviewImage,} = require('../models');
+          return {
+            attributes: [
+              'id',
+              'ownerId',
+              'address',
+              'city',
+              'state',
+              'country',
+              'lat',
+              'lng',
+              'name',
+              'description',
+              'price',
+              'createdAt',
+              'updatedAt',
+              [
+                Sequelize.literal(`(SELECT ROUND(AVG(stars), 1) FROM Reviews WHERE Reviews.spotId = Spot.id)`),  'avgRating'
+              ],
+              [
+                Sequelize.literal(
+                  `(SELECT url FROM ${
+                    schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+                  } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+                ),
+                'previewImage',
+              ],
+            ],
+          };
+        },
+
+
       },
-    }
+      
+      
+    },
+    
   );
   return Spot;
 };
