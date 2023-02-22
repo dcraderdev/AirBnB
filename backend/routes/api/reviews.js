@@ -50,30 +50,106 @@ let schema
 //   'previewImage',
 // ],
 
+// *************
+// *************
+// *************
+// *************
+// *************
+// *************
+// *************
+// *************
+// *************
+
+
+// // Get all Reviews of the Current User - works 
+// router.get('/current', async (req, res, next) => {
+
+//   const allReviews = await Review.findAll({
+//     where: { userId: req.user.id },
+//     include:[
+//       { model: User, attributes: ['id', 'firstName', 'lastName'] },
+
+//       { model: Spot,
+//         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
+//         [
+//           Sequelize.literal(
+//             `(SELECT url FROM ${
+//               schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+//             } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+//           ),
+//           'previewImage',
+//         ]],
+//       },
+//       { model: ReviewImage, attributes: ['id', 'url'] }
+//     ],
+//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+//   })
+
+//   if (!allReviews) {
+//     const err = new Error("All reviews not found")
+//     err.statusCode = 404
+//     next(err)
+//   }
+
+//   if (allReviews) {
+//     res.status(200).json({"Reviews":allReviews})
+//   }
+// });
+
+
+
+
+// // Get all Reviews of the Current User - works only thru reviews
+// router.get('/current', async (req, res, next) => {
+
+  // const allReviews = await Review.scope({method: ["allSpots", req.user.id]}).findAll()
+  
+//   if (!allReviews) {
+//     const err = new Error("All reviews not found")
+//     err.statusCode = 404
+//     next(err)
+//   }
+
+//   if (allReviews) {
+//     res.status(200).json({"Reviews":allReviews})
+//   }
+// });
+
+
+
+// *************
+// *************
+// *************
+// *************
+// *************
+// *************
+// *************
+
+
 // Get all Reviews of the Current User - works only locally due to literal
 router.get('/current', async (req, res, next) => {
 
+  // const allReviews = await Review.scope({method: ["allSpots", req.user.id]}).findAll()
+
+  // const allReviews = await Spot.scope('withUserReviews').findAll({
+  //   where: { ownerId: req.user.id },
+  // });
+
+  // const allSpots = await Spot.scope({method: ["withPreview", req.user.id]}).findAll()
+
+
   const allReviews = await Review.findAll({
     where: { userId: req.user.id },
-    include:[
+    include: [
       { model: User, attributes: ['id', 'firstName', 'lastName'] },
-
-      { model: Spot,
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
-        [
-          Sequelize.literal(
-            `(SELECT url FROM ${
-              schema ? `"${schema}"."SpotImages"` : 'SpotImages'
-            } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
-          ),
-          'previewImage',
-        ]],
+      {
+        model: Spot.scope({ method: ['withPreview', req.user.id] }),
       },
       { model: ReviewImage, attributes: ['id', 'url'] }
     ],
-    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
-  })
-
+    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+  });
+  
   if (!allReviews) {
     const err = new Error("All reviews not found")
     err.statusCode = 404
@@ -81,201 +157,50 @@ router.get('/current', async (req, res, next) => {
   }
 
   if (allReviews) {
-    res.status(200).json({"Reviews":allReviews})
+    res.status(200).json({
+      "Reviews":allReviews,
+      // allSpots,
+      // "Reviews":allReviews
+    })
   }
 });
 
 
-// Get all Reviews of the Current User
-// router.get('/current', requireAuth, async (req, res, next) => {
-//   const currentUsersReviews = await Review.findAll({
-//     where: { userId: req.user.id },
-//     include: [
-//       {
-//         model: User,
-//         attributes: ['id', 'firstName', 'lastName'],
-//       },
-//       {
-//         model: Spot,
-//         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-//         include: [
-//           {
-//             model: SpotImage,
-//             attributes: ['url'],
-//             where: { preview: true },
-//             required: false,
-//           },
-//         ],
-//       },
-//       { model: ReviewImage, attributes: ['id', 'url'] },
-//     ],
-//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
-//   });
-
-//   if (currentUsersReviews) {
-//     const reviewsData = currentUsersReviews.map((review) => {
-//       const {
-//         id,
-//         userId,
-//         spotId,
-//         review: reviewText,
-//         stars,
-//         createdAt,
-//         updatedAt,
-//         User,
-//         Spot,
-//         ReviewImages,
-//       } = review.toJSON();
-
-//       const previewImage = Spot.SpotImages.length > 0 ? Spot.SpotImages[0].url : null;
-//       return {
-//         id,
-//         userId,
-//         spotId,
-//         review: reviewText,
-//         stars,
-//         createdAt,
-//         updatedAt,
-//         User,
-//         Spot: {
-//           id: Spot.id,
-//           ownerId: Spot.ownerId,
-//           address: Spot.address,
-//           city: Spot.city,
-//           state: Spot.state,
-//           country: Spot.country,
-//           lat: Spot.lat,
-//           lng: Spot.lng,
-//           name: Spot.name,
-//           price: Spot.price,
-//           previewImage,
-//         },
-//         ReviewImages,
-//       };
-//     });
-
-//     return res.status(200).json({ Reviews: reviewsData });
-//   }
-
-//   const err = new Error("Reviews couldn't be found");
-//   err.statusCode = 404;
-//   return next(err);
-// });
-
-
-
-
-
-
-
-
-
-// router.get('/current', async (req, res, next) => {
-//   const currentUsersReviews = await Review.findAll({
-//     where: { userId: req.user.id },
-//     include: [
-//       {
-//         model: User,
-//         attributes: ['id', 'firstName', 'lastName'],
-//       },
-//       {
-//         model: Spot,
-//         attributes: ['id','ownerId','address','city','state','country','lat','lng','name','price',],
-//         include: [
-//           {
-//               model: SpotImage,
-//               attributes: ['url'],
-//               where: { preview: true },
-//               required: false
-//           }
-//       ]
-//       },
-//       {
-//         model: ReviewImage,
-//         attributes: ['id', 'url'],
-//       },
-//     ],
-//     attributes: ['id','userId','spotId','review','stars','createdAt','updatedAt',],
-//   });
-
-//   if (!currentUsersReviews) {
-//     const err = new Error('All reviews not found');
-//     err.statusCode = 404;
-//     return next(err);
-//   }
-
-//   // const reviewsData = await Promise.all(
-//   //   allReviews.map(async (review) => {
-//   //     const spotImages = await SpotImage.findAll({
-//   //       where: { spotId: review.spotId },
-//   //       attributes: ['url'],
-//   //       limit: 1
-//   //     });
-
-//   //     const spot = review.Spot.toJSON();
-//   //     spot.previewImage = spotImages[0]?.url;
-//   //     delete review.Spot;
-
-//   //     return {
-//   //       ...review.toJSON(),
-//   //       User: review.User.toJSON(),
-//   //       Spot,
-//   //       ReviewImages: review.ReviewImages.map((image) => image.toJSON())
-//   //     };
-//   //   })
-//   // );
-
-//   // res.status(200).json({ Reviews: reviewsData });
-//   res.status(200).json({ Reviews: currentUsersReviews });
-// });
-
-// router.get('/current', async (req, res, next) => {
-
 //   const allReviews = await Review.findAll({
 //     where: { userId: req.user.id },
-//     include: [
+//     include:[
 //       { model: User, attributes: ['id', 'firstName', 'lastName'] },
-//       {
-//         model: Spot,
-//         attributes: [
-//           'id',
-//           'ownerId',
-//           'address',
-//           'city',
-//           'state',
-//           'country',
-//           'lat',
-//           'lng',
-//           'name',
-//           'price',
-//           // [Sequelize.fn('MAX', Sequelize.col('SpotImages.url')), 'previewImage']
-//           [sequelize.literal('(SELECT url FROM SpotImages WHERE Spot.id = SpotImages.spotId LIMIT 1)'), 'previewImage']
-//         ],
 
-//         include:
-//           {
-//             model: SpotImage,
-//             attributes: [],
-//           },
-
-//         group: ['Spot.id', 'SpotImages.id', 'Reviews.spotId'],
-//       },
-//       { model: ReviewImage, attributes: ['id', 'url'] },
+//       { model: Spot.scope({method: ["allSpots", req.user.id]}).findAll()}
+//   //       attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',
+//   //       [
+//   //         Sequelize.literal(
+//   //           `(SELECT url FROM ${
+//   //             schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+//   //           } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+//   //         ),
+//   //         'previewImage',
+//   //       ]],
+//   //     },
+//   //     { model: ReviewImage, attributes: ['id', 'url'] }
 //     ],
+//   //   attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+//   })
 
-//     attributes: ['id','userId','spotId','review','stars','createdAt','updatedAt',],
-//   });
 
-//   if (!allReviews) {
-//     const err = new Error('All reviews not found');
-//     err.statusCode = 404;
-//     next(err);
-//   }
+//   // const allReviews = await Review.scope({method: ["allSpots", req.user.id]}).findAll()
+    
+  
 
-//   if (allReviews) {
-//     res.status(200).json({ Reviews: allReviews });
-//   }
-// });
+
+
+
+
+
+
+
+
+
 
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
