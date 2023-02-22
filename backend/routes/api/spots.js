@@ -131,28 +131,42 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
 
-  const spot = await Spot.scope({method:['withPreviewAndRating']}).findByPk(req.params.spotId,{
-    // attributes:{
-    //   exclude: ['previewImage']
-    // },
-      include: [
+  const spot = await Spot.findByPk(req.params.spotId, {
+    attributes: [
+        'id',
+        'ownerId',
+        'address',
+        'city',
+        'state',
+        'country',
+        'lat',
+        'lng',
+        'name',
+        'description',
+        'price',
+        'createdAt',
+        'updatedAt',
+        [Sequelize.fn('COUNT', Sequelize.col('Reviews.id'),), 'numReviews'],
+        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars'),), 'avgStarRating'],
+    ],
+    include: [
         {
-          model: SpotImage,
-          attributes: ['id', 'url', 'preview']
+            model: SpotImage,
+            attributes: ['id', 'url', 'preview']
         },
         {
-          model: User,
-          as: 'Owner',
-          attributes: ['id', 'firstName', 'lastName']
+            model: User,
+            as: 'Owner',
+            attributes: ['id', 'firstName', 'lastName']
         },
         {
-          model: Review,
-          attributes: []
+            model: Review,
+            attributes: []
         },
-      ],
-    })
+    ],
 
-    console.log(spot);
+})
+
 
     if (!spot || spot === null) {
       const err = new Error("Spot couldn't be found")
