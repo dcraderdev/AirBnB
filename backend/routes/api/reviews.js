@@ -30,6 +30,7 @@ const sequelize = require('sequelize');
 const Sequelize = require('sequelize');
 const app = require('../../app');
 const review = require('../../db/models/review');
+const spot = require('../../db/models/spot');
 
 const router = express.Router();
 
@@ -83,6 +84,7 @@ router.get('/current', async (req, res, next) => {
     res.status(200).json({"Reviews":allReviews})
   }
 });
+
 
 // Get all Reviews of the Current User
 // router.get('/current', requireAuth, async (req, res, next) => {
