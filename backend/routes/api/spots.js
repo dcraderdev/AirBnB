@@ -21,7 +21,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   const allSpots = await Spot.scope({method:['withPreviewAndRating']}).findAll()
 
-  if (!userSpots) {
+  if (!allSpots) {
     const err = new Error("Spots not found")
     err.statusCode = 404
     next(err)
