@@ -27,12 +27,15 @@ const {
   validateSignup,
   validateLogin,
   validateBooking,
+  validateBookingEdit
 } = require('../../utils/validation');
 const router = express.Router();
 
+
+
+
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res, next) => {
-  // ----------------------------------
   const currentUsersBookings = await Booking.findAll({
     where: {
       userId: req.user.id,
@@ -101,6 +104,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   next(err);
 });
 
+
 // Delete a Booking
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
   const booking = await Booking.findByPk(req.params.bookingId);
@@ -119,5 +123,41 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     });
   }
 });
+
+
+
+// Edit a Booking
+router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, next) => {
+
+    const { startDate, endDate } = req.body;
+
+    const booking = await Booking.findByPk(req.params.bookingId)
+    if (!booking) {
+      const err = new Error("Booking couldn't be found")
+      err.statusCode = 404
+      next(err)
+    }
+
+    //check if enddate is past current date
+    const currentDate = new Date();
+    if(currentDate > booking.endDate){
+      const err = new Error("Past bookings can't be modified")
+      err.statusCode = 403
+      next(err)
+    }
+
+    const update = await booking.update( { startDate, endDate } )
+    if(update) return res.status(200).json(booking)
+    else {
+      const err = new Error("Booking not updated")
+      err.statusCode = 403
+      next(err)
+    }
+    
+  })
+
+
+
+
 
 module.exports = router;

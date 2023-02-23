@@ -158,7 +158,7 @@ check('endDate')
 handleValidationErrors
 ]
 
-const validateEditBooking= [ 
+const validateBookingEdit= [ 
   check('startDate')
   .exists({ checkFalsy: true })
   .withMessage(''),
@@ -180,7 +180,7 @@ handleValidationErrors
 
 
 module.exports = {
-  handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin, validateBooking, validateEditBooking
+  handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin, validateBooking, validateBookingEdit
 };
 
 

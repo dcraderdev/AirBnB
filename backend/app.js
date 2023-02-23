@@ -61,20 +61,6 @@ app.use(
 
 
 
- app.use(routes) 
-
-
-
-
-
-//  app.use('/api/spots', require('./routes/api/spots'));
-//  app.use('/api/users', require('./routes/api/users'));
-
-
-
-// /* ------------------------- API Endpoints -------------------------- */
-
-
 
 app.get('/', async(req,res,next)=>{
 
@@ -85,7 +71,7 @@ app.get('/', async(req,res,next)=>{
   }
   res.status(400).json({"message":"allSpots not found"})
 
-  // res.json({home:'page'})
+
 })
 
 

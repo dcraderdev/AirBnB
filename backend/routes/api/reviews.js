@@ -142,7 +142,7 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
 // Delete a Review
 // Delete an existing review.
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
-  
+
   const review = await Review.findByPk(req.params.reviewId)
 
    if (!review) {
@@ -158,6 +158,11 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
       statusCode: 200
   })
 })
+
+
+
+
+
 
 
 

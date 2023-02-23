@@ -1,3 +1,10 @@
+
+edit a booking
+delete spot SpotImage
+delete reviewimage
+delte booking
+
+
 git checkout dev
 git pull origin dev
 git merge logout
