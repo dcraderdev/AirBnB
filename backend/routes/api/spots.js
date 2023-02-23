@@ -16,10 +16,17 @@ const spot = require('../../db/models/spot');
 const router = express.Router();
 
 
-
 // Get all Spots
 router.get('/', async (req, res, next) => {
-  const allSpots = await Spot.scope({method:['withPreviewAndRating']}).findAll()
+  const page = parseInt(req.query.page) || 1; // get the page number from the query parameter or set it to 1
+  const limit = 5; // set the number of spots per page
+  const offset = (page - 1) * limit; // calculate the number of records to skip
+  
+
+  const allSpots = await Spot.scope({method:['withPreviewAndRating']}).findAll({
+    limit: limit,
+    offset: offset,
+  })
 
   if (!allSpots) {
     const err = new Error("Spots not found")
@@ -32,6 +39,25 @@ router.get('/', async (req, res, next) => {
   }
 
 });
+
+
+
+
+// // Get all Spots
+// router.get('/', async (req, res, next) => {
+//   const allSpots = await Spot.scope({method:['withPreviewAndRating']}).findAll()
+
+//   if (!allSpots) {
+//     const err = new Error("Spots not found")
+//     err.statusCode = 404
+//     next(err)
+//   }
+
+//   if(allSpots){
+//     return res.status(200).json({Spots:allSpots})
+//   }
+
+// });
 
 
 // Get all Spots owned by the Current User
@@ -165,10 +191,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
         },
     ],
     group: ['Spot.id', 'SpotImages.id', 'Owner.id', 'Reviews.spotId'],
-
 })
-
-
     if (!spot || spot === null) {
       const err = new Error("Spot couldn't be found")
       err.statusCode = 404
@@ -215,15 +238,6 @@ router.put('/:spotId', requireAuth, validateSpotEdit, async (req, res, next) => 
 
 // Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
-
-  console.log('=-=-=-=-');
-  console.log('=-=-=-=-');
-  console.log('=-=-=-=-');
-  console.log('=-=-=-=-');
-  console.log('=-=-=-=-');
-  console.log('=-=-=-=-');
-  console.log('=-=-=-=-');
-
 
   const spot = await Spot.findByPk(req.params.spotId)
 
@@ -298,6 +312,26 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
   })
 
 
+  // Get all Reviews by a Spot's id
+  router.get('/:spotId/reviews', requireAuth, async (req, res, next) => {
+
+    const reviews = await Review.findAll({
+  
+        where: { spotId: req.params.spotId },
+        include: [
+            {
+              model: User,
+              attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+              model: ReviewImage,
+              attributes: ['id', 'url']
+            }
+        ]
+    });
+    return res.status(200).json({"Reviews":reviews})
+  })
+    
 
 
 
