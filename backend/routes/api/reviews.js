@@ -1,4 +1,4 @@
-// backend/routes/api/spots.js
+// backend/routes/api/reviews.js
 
 // REVIEWS
 const express = require('express');
@@ -117,7 +117,47 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 });
 
 
+// Edit a Review
+// Update and return an existing review.
+router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => {
 
+  const { review, stars } = req.body
+
+  const currReview = await Review.findByPk(req.params.reviewId)
+
+  if (!currReview) {
+    const err = new Error("Review couldn't be found");
+    err.statusCode = 404;
+    next(err);
+  }
+
+  await currReview.update({
+    review, stars
+  })
+  return res.status(200).json(currReview)
+})
+
+
+
+// Delete a Review
+// Delete an existing review.
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+  
+  const review = await Review.findByPk(req.params.reviewId)
+
+   if (!review) {
+    const err = new Error("Review couldn't be found");
+    err.statusCode = 404;
+    next(err);
+  }
+  
+  await review.destroy()
+
+  res.status(200).json({
+      message: "Successfully deleted",
+      statusCode: 200
+  })
+})
 
 
 

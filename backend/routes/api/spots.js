@@ -284,7 +284,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     next(err)
   }
 
-
      if(spot){
         const newReview = await Review.create({
           userId: req.user.id,
@@ -308,15 +307,20 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
             })
         }
      }
-    
   })
 
 
   // Get all Reviews by a Spot's id
   router.get('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
+    const spot = await Spot.findOne({ where: { id: req.params.spotId } })
+    if (!spot) {
+      const err = new Error("Spot couldn't be found")
+      err.statusCode = 404
+      next(err)
+    }
+
     const reviews = await Review.findAll({
-  
         where: { spotId: req.params.spotId },
         include: [
             {
@@ -332,7 +336,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     return res.status(200).json({"Reviews":reviews})
   })
     
-
 
 
 // ***************
