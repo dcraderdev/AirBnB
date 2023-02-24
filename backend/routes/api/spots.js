@@ -8,7 +8,7 @@ const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth')
 const { check } = require('express-validator');
 const { json } = require('sequelize');
 const { User, Spot, Booking, SpotImage, Review, ReviewImage } = require('../../db/models');
-const { handleValidationErrors, validateSpotEdit, validateReview, validateBooking } = require('../../utils/validation');
+const { handleValidationErrors, validateSpotEdit, validateReview, validateBooking, validateQueryParameters } = require('../../utils/validation');
 const app = require('../../app');
 const spot = require('../../db/models/spot');
 
@@ -20,17 +20,54 @@ const router = express.Router();
 
 
 // Get all Spots
-router.get('/', async (req, res, next) => {
+router.get('/', validateQueryParameters, async (req, res, next) => {
+
+  let where = {}
 
   const page = req.query.page
   const size = req.query.size
   let limit = size || 5
   let offset = (limit * (page - 1) || 0)
 
-  const allSpots = await Spot.scope({method:['withPreviewAndRating']}).findAll({
+  const minLat = req.query.minLat
+  const maxLat = req.query.maxLat
+  const minPrice = req.query.minPrice
+  const maxPrice = req.query.maxPrice
+
+  if (req.query.minLat) {
+    where.lat = { [Op.gte]: req.query.minLat }
+  }
+  
+  if (req.query.maxLat) {
+    where.lat = { [Op.lte]: req.query.maxLat }
+  }
+
+  if (req.query.minLat && req.query.maxLat) {
+    where.price = { [Op.between]: [req.query.minLat, req.query.maxLat] }
+  }
+  
+  if (req.query.minPrice) {
+    where.price = { [Op.gte]: req.query.minPrice }
+  }
+  
+  if (req.query.maxPrice) {
+    where.price = { [Op.lte]: req.query.maxPrice }
+  }
+
+  if (req.query.minPrice && req.query.maxPrice) {
+    where.price = { [Op.between]: [req.query.minPrice, req.query.maxPrice] }
+  }
+
+
+  let options = {
+    where,
     limit: limit,
     offset: offset,
-  })
+  }
+
+
+  const allSpots = await Spot.scope({method:['withPreviewAndRating']}).findAll(options)
+
 
   if (!allSpots) {
     const err = new Error("Spots not found")

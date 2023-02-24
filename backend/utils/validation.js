@@ -1,6 +1,7 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
 const { check } = require('express-validator');
+const { INTEGER } = require('sequelize');
 
 
 // middleware for formatting errors from express-validator middleware
@@ -177,10 +178,137 @@ check('endDate')
 handleValidationErrors
 ]
 
+// * Query Parameters
+// * page: integer, minimum: 1, maximum: 10, default: 1
+// * size: integer, minimum: 1, maximum: 20, default: 20
+// * minLat: decimal, optional
+// * maxLat: decimal, optional
+// * minLng: decimal, optional
+// * maxLng: decimal, optional
+// * minPrice: decimal, optional, minimum: 0
+// * maxPrice: decimal, optional, minimum: 0
+
+
+
+
+
+
+
+
+
+
+
+const validateQueryParameters= [ 
+
+  check('page')
+  .optional()
+  .isInt({ min: 1, max: 10 })
+  .withMessage('Value must be an integer from 1 to 10')
+  .exists({ checkFalsy: false })
+  .withMessage(''),
+  
+  check('size')
+  .optional()
+  .isInt({ min: 1, max: 20 })
+  .withMessage('Value must be an integer from 1 to 20')
+  .exists({ checkFalsy: false })
+  .withMessage(''),
+  
+  check('minLat')
+  .optional()
+  .isInt()
+  .withMessage('Minimum latitude is invalid'),
+
+  check('maxLat')
+  .optional()
+  .isInt()
+  .withMessage('Maximum latitude is invalid'),
+  
+  check('minLng')
+  .optional()
+  .isInt()
+  .withMessage('Minimum longitude is invalid'),
+  
+  check('maxLng')
+  .optional()
+  .isInt()
+  .withMessage('Maximum longitude is invalid'),
+  
+  check('minPrice')
+  .optional()
+  .isInt({ min: 0})
+  .withMessage('Minimum price must be greater than or equal to 0'),
+  
+  check('maxPrice')
+  .optional()
+  .isInt({ min: 0})
+  .withMessage('Maximum price must be greater than or equal to 0'),
+handleValidationErrors
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const validateQueryParameters= [ 
+//   // check('page')
+//   // .isInt({ min: 1, max: 10 })
+//   // .withMessage('Value must be an integer from 1 to 10')
+//   //
+//   // .withMessage(''),
+  
+//   // check('size')
+//   // .isInt({ min: 1, max: 20 })
+//   // .withMessage('Value must be an integer from 1 to 20')
+//   // .exists({ checkFalsy: false })
+//   // .withMessage(''),
+  
+//   // check('minLat')
+//   // .custom((num) => {
+
+//   //   if (!Number.isInteger(num) && typeof num !== 'number') {
+//   //     throw new Error("num needs to be integer or float")
+//   //   }
+//   // })
+//   // .withMessage('Maximum latitude is invalid'),
+  
+//   // check('maxLat')
+//   // .exists({ checkFalsy: false })
+//   // .withMessage(''),
+  
+//   // check('minLng')
+//   // .exists({ checkFalsy: false })
+//   // .withMessage(''),
+  
+//   // check('maxLng')
+//   // .exists({ checkFalsy: false })
+//   // .withMessage(''),
+  
+//   // check('minPrice')
+//   // .exists({ checkFalsy: true })
+//   // .withMessage(''),
+  
+//   // check('maxPrice')
+//   // .exists({ checkFalsy: true })
+//   // .withMessage(''),
+// handleValidationErrors
+// ]
+
+
+
 
 
 module.exports = {
-  handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateLogin, validateBooking, validateBookingEdit
+  handleValidationErrors, validateSpotEdit, validateReview, 
+  validateSignup, validateLogin, validateBooking, validateBookingEdit, validateQueryParameters
 };
 
 
