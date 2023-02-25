@@ -39,11 +39,11 @@ const router = express.Router();
 router.get('/current', requireAuth, async (req, res, next) => {
 
 
-    const allBookings = await Booking.findAll({})
+    // const allBookings = await Booking.findAll({})
 
-    allBookings.forEach(element => {
-        element.destroy()
-    });
+    // allBookings.forEach(element => {
+    //     element.destroy()
+    // });
 
   const currentUsersBookings = await Booking.findAll({
     where: {
@@ -232,7 +232,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
       err.statusCode = 403;
       return next(err);
     }
-    
+
   }
 
     const update = await booking.update( { startDate, endDate } )

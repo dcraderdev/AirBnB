@@ -7,18 +7,11 @@ const { check } = require('express-validator');
 const { handleValidationErrors, validateSpotEdit, validateReview, validateSignup, validateBooking } = require('../../utils/validation');
 const { json } = require('sequelize');
 const db = require('../../db/models');
-
-
-
-
 const router = express.Router();
 
 
 
-// test users route
-router.get('/', async (req, res, next) => {
-  return res.json({ hey: 'hello' });
-});
+
 
 
 // Sign up

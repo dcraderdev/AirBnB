@@ -87,18 +87,6 @@ const validateSignup = [
     .isEmail()
     .withMessage('Invalid email'),
 
-
-
-    // .custom(value => {
-    //     return User.findOne({where:{email:value}})
-    //     .then( user => {
-    //       if(user){
-    //         return Promise.reject("User with that email already exists")
-    //       }
-    //   })
-    // })
-    
-    
   check('username')
     .isLength({ min: 4 })
     .withMessage('Please provide a username with at least 4 characters.')
@@ -111,7 +99,6 @@ const validateSignup = [
   check('firstName') 
     .exists({ checkFalsy: true })
     .withMessage('First Name is required'),
-
 
   check('lastName') 
     .exists({ checkFalsy: true })
