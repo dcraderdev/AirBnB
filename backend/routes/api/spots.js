@@ -77,6 +77,11 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
 
   if(allSpots){
     return res.status(200).json({Spots:allSpots})
+
+
+
+
+    
   }
 
 });
