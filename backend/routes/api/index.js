@@ -42,7 +42,7 @@ router.delete('/spot-images/:imageId', requireAuth, async (req, res, next) => {
 
   res.status(200).json({
       message: "Successfully deleted",
-      statusCode: 200
+      statusCode: 2001
   })
 })
 

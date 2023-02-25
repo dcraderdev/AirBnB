@@ -178,18 +178,6 @@ check('endDate')
 handleValidationErrors
 ]
 
-// * Query Parameters
-// * page: integer, minimum: 1, maximum: 10, default: 1
-// * size: integer, minimum: 1, maximum: 20, default: 20
-// * minLat: decimal, optional
-// * maxLat: decimal, optional
-// * minLng: decimal, optional
-// * maxLng: decimal, optional
-// * minPrice: decimal, optional, minimum: 0
-// * maxPrice: decimal, optional, minimum: 0
-
-
-
 
 
 
@@ -203,16 +191,14 @@ const validateQueryParameters= [
   check('page')
   .optional()
   .isInt({ min: 1, max: 10 })
-  .withMessage('Value must be an integer from 1 to 10')
-  .exists({ checkFalsy: false })
-  .withMessage(''),
+  .withMessage('Value must be an integer from 1 to 10'),
+
   
   check('size')
   .optional()
   .isInt({ min: 1, max: 20 })
-  .withMessage('Value must be an integer from 1 to 20')
-  .exists({ checkFalsy: false })
-  .withMessage(''),
+  .withMessage('Value must be an integer from 1 to 20'),
+
   
   check('minLat')
   .optional()
@@ -245,62 +231,6 @@ const validateQueryParameters= [
   .withMessage('Maximum price must be greater than or equal to 0'),
 handleValidationErrors
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const validateQueryParameters= [ 
-//   // check('page')
-//   // .isInt({ min: 1, max: 10 })
-//   // .withMessage('Value must be an integer from 1 to 10')
-//   //
-//   // .withMessage(''),
-  
-//   // check('size')
-//   // .isInt({ min: 1, max: 20 })
-//   // .withMessage('Value must be an integer from 1 to 20')
-//   // .exists({ checkFalsy: false })
-//   // .withMessage(''),
-  
-//   // check('minLat')
-//   // .custom((num) => {
-
-//   //   if (!Number.isInteger(num) && typeof num !== 'number') {
-//   //     throw new Error("num needs to be integer or float")
-//   //   }
-//   // })
-//   // .withMessage('Maximum latitude is invalid'),
-  
-//   // check('maxLat')
-//   // .exists({ checkFalsy: false })
-//   // .withMessage(''),
-  
-//   // check('minLng')
-//   // .exists({ checkFalsy: false })
-//   // .withMessage(''),
-  
-//   // check('maxLng')
-//   // .exists({ checkFalsy: false })
-//   // .withMessage(''),
-  
-//   // check('minPrice')
-//   // .exists({ checkFalsy: true })
-//   // .withMessage(''),
-  
-//   // check('maxPrice')
-//   // .exists({ checkFalsy: true })
-//   // .withMessage(''),
-// handleValidationErrors
-// ]
 
 
 

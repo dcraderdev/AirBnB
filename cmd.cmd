@@ -1,8 +1,4 @@
 
-edit a booking
-delete spot SpotImage
-delete reviewimage
-delte booking
 
 
 git checkout dev
