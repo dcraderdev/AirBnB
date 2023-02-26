@@ -160,6 +160,13 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     return next(err);
   }
 
+  // Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    return next(err);
+  }
+
   if (spot) {
 
     if(preview){
@@ -333,6 +340,16 @@ router.put(
       return next(err);
     }
 
+
+  // Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    return next(err);
+  }
+
+
+
     const {
       address,
       city,
@@ -369,6 +386,14 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     err.statusCode = 404;
     return next(err);
   }
+
+  // Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    return next(err);
+  }
+
 
   if (spot) {
     await spot.destroy({});

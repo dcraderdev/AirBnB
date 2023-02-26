@@ -36,8 +36,6 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     static async signup({ firstName, lastName, username, email, password }) {
-      try {
-      } catch (err) {}
 
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
@@ -47,17 +45,15 @@ module.exports = (sequelize, DataTypes) => {
         email,
         hashedPassword,
       });
-      return await User.scope('currentUser').findByPk(user.id);
+      if(user)return await User.scope('currentUser').findByPk(user.id);
+      if(!user) return {huh:'whaaatt'}
     }
 
     static associate(models) {
       User.hasMany(models.Review,{foreignKey:'userId'})
-
       User.hasMany(models.Spot, { foreignKey: 'ownerId' });
-
-
       User.hasMany(models.Booking,{ foreignKey: 'userId' })
-      // User.belongsToMany(models.Spot,{through:models.Booking})
+ 
     }
 
 

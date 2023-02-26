@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 
 let schema;
 if (process.env.NODE_ENV === 'production') {
-  schema = process.env.SCHEMA; // define your schema in options object
+  schema = process.env.SCHEMA; 
 }
 
 module.exports = (sequelize, DataTypes) => {

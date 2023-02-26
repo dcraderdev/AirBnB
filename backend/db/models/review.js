@@ -6,7 +6,7 @@ const {
 const Sequelize = require('sequelize');
 let schema
  if (process.env.NODE_ENV === 'production') {
-  schema = process.env.SCHEMA;  // define your schema in options object
+  schema = process.env.SCHEMA;  
 }
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         } = require('../models');
         return {
           
-            where: { userId: userId }, //req.user.id
+            where: { userId: userId }, 
             include:[
               { model: User, attributes: ['id', 'firstName', 'lastName'] },
         
