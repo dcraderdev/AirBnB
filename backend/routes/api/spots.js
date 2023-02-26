@@ -82,7 +82,7 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
 
   if (allSpots) {
     const spots = allSpots.map(spot => {
-      spot = spot.TOJSON()
+      spot = spot.toJSON()
 
 
       const lat = parseFloat(spot.lat);
