@@ -75,9 +75,9 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
     next(err);
   }
 
-
+let spots
   if (allSpots) {
-    const spots = allSpots.map(spot => {
+     spots = allSpots.map(spot => {
       spot = spot.toJSON()
       const lat = parseFloat(spot.lat);
       const lng = parseFloat(spot.lng);
@@ -101,8 +101,8 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
         previewImage: spot.previewImage,
       };
     });
-    return res.status(200).json({ Spots: spots,page,size });
   }
+  return res.status(200).json({ Spots: spots,page,size });
 
 
 });
