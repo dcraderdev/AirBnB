@@ -29,7 +29,7 @@ const {
   validateBooking,
   validateBookingEdit
 } = require('../../utils/validation');
-const { down } = require('../../db/migrations/20230211215204-create-booking');
+// const { down } = require('../../db/migrations/20230211215204-create-booking');
 const router = express.Router();
 
 
