@@ -78,10 +78,17 @@ router.get('/current',requireAuth, async (req, res, next) => {
 // Create and return a new image for a review specified by id.
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
   const { url } = req.body;
+
   const review = await Review.findByPk(req.params.reviewId, {
     where: { id: req.params.reviewId },
     include: { model: ReviewImage },
   });
+
+  if (!review) {
+    const err = new Error('Review not found');
+    err.statusCode = 404;
+    return next(err);
+  }
 
 // Require proper authorization: Review must belong to the current user
   if(parseInt(req.user.id) !== parseInt(review.userId) ){
@@ -91,11 +98,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
   }
 
 
-  if (!review) {
-    const err = new Error('Review not found');
-    err.statusCode = 404;
-    return next(err);
-  }
 
   if (review.ReviewImages.length >= 10) {
     const err = new Error(
@@ -110,7 +112,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     url,
   });
   if (newReviewImage) {
-    res.status(200).json({
+    return res.status(200).json({
       id: newReviewImage.id,
       url: newReviewImage.url,
     });
@@ -125,6 +127,13 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
   const { review, stars } = req.body
 
   const currReview = await Review.findByPk(req.params.reviewId)
+
+  if (!currReview) {
+    const err = new Error("Review couldn't be found");
+    err.statusCode = 404;
+    return next(err);
+  }
+
 // Require proper authorization: Review must belong to the current user
   if(parseInt(req.user.id) !== parseInt(currReview.userId) ){
     const err = new Error('Forbidden');
@@ -132,11 +141,6 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
     return next(err);
   }
 
-  if (!currReview) {
-    const err = new Error("Review couldn't be found");
-    err.statusCode = 404;
-    next(err);
-  }
 
   await currReview.update({
     review, stars
@@ -152,6 +156,11 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
 
   const review = await Review.findByPk(req.params.reviewId)
 
+  if (!review) {
+    const err = new Error("Review couldn't be found");
+    err.statusCode = 404;
+    return next(err);
+  }
   // Require proper authorization: Review must belong to the current user
   if(parseInt(req.user.id) !== parseInt(review.userId) ){
     const err = new Error('Forbidden');
@@ -159,11 +168,6 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-   if (!review) {
-    const err = new Error("Review couldn't be found");
-    err.statusCode = 404;
-    return next(err);
-  }
   
   await review.destroy()
 
