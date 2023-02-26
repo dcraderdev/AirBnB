@@ -422,13 +422,7 @@ router.post(
       }
 
       if (newReview) {
-        return res.status(200).json({
-          id: newReview.id,
-          userId: newReview.userId,
-          spotId: newReview.spotId,
-          review: newReview.review,
-          stars: newReview.stars,
-        });
+        return res.status(200).json(newReview);
       }
     }
   }

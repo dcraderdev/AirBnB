@@ -90,7 +90,7 @@ module.exports = (sequelize, DataTypes) => {
           };
         },
  
-        
+
         withPreviewAndRating() {
           return {
             attributes: [
@@ -137,4 +137,4 @@ module.exports = (sequelize, DataTypes) => {
   return Spot;
 };
 
-//Spot.scope({method: ["allSpot"]}).findAll()
+
