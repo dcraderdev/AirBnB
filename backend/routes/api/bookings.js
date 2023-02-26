@@ -212,9 +212,8 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     const endTime = new Date(endDate)
 
     let thisBooking = parseInt(booking.id) === parseInt(req.params.bookingId)
-    console.log(thisBooking);
+
     if(thisBooking){
-        console.log('continuing');
         continue
     }
 
@@ -240,7 +239,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     else {
       const err = new Error("Booking not updated")
       err.statusCode = 403
-      next(err)
+      return next(err)
     }
     
   })
