@@ -89,7 +89,8 @@ module.exports = (sequelize, DataTypes) => {
             ],
           };
         },
-
+ 
+        
         withPreviewAndRating() {
           return {
             attributes: [
