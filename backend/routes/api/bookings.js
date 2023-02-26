@@ -29,7 +29,6 @@ const {
   validateBooking,
   validateBookingEdit
 } = require('../../utils/validation');
-// const { down } = require('../../db/migrations/20230211215204-create-booking');
 const router = express.Router();
 
 
@@ -38,12 +37,6 @@ const router = express.Router();
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res, next) => {
 
-
-    // const allBookings = await Booking.findAll({})
-
-    // allBookings.forEach(element => {
-    //     element.destroy()
-    // });
 
   const currentUsersBookings = await Booking.findAll({
     where: {
@@ -110,7 +103,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
   const err = new Error("Bookings couldn't be found");
   err.statusCode = 404;
-  next(err);
+  return next(err);
 });
 
 

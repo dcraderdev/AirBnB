@@ -28,9 +28,7 @@ const {
 } = require('../../utils/validation');
 const sequelize = require('sequelize');
 const Sequelize = require('sequelize');
-const app = require('../../app');
-const review = require('../../db/models/review');
-const spot = require('../../db/models/spot');
+
 
 const router = express.Router();
 
@@ -66,7 +64,7 @@ router.get('/current',requireAuth, async (req, res, next) => {
   }
 
   if (allReviews) {
-    res.status(200).json({
+    return res.status(200).json({
       "Reviews":allReviews,
     })
   }

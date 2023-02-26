@@ -72,7 +72,7 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
   if (!allSpots) {
     const err = new Error('Spots not found');
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
 let spots
@@ -118,7 +118,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   if (!userSpots) {
     const err = new Error('Spots not found');
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
   if (userSpots) {
@@ -157,7 +157,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
   if (spot) {
@@ -184,7 +184,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     if (!newImage) {
       const err = new Error("Image couldn't be added");
       err.statusCode = 400;
-      next(err);
+      return next(err);
     }
   }
 });
@@ -237,7 +237,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
   if (!spot || spot === null) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
 if(spot){
@@ -330,7 +330,7 @@ router.put(
     if (!spot) {
       const err = new Error("Spot couldn't be found");
       err.statusCode = 404;
-      next(err);
+      return next(err);
     }
 
     const {
@@ -367,7 +367,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
   if (spot) {
@@ -392,7 +392,7 @@ router.post(
     if (!spot) {
       const err = new Error("Spot couldn't be found");
       err.statusCode = 404;
-      next(err);
+      return next(err);
     }
 
     const existingReview = await Review.findOne({
@@ -405,7 +405,7 @@ router.post(
     if (existingReview) {
       const err = new Error('User already has a review for this spot');
       err.statusCode = 403;
-      next(err);
+      return next(err);
     }
 
     if (spot) {
@@ -418,7 +418,7 @@ router.post(
       if (!newReview) {
         const err = new Error('Review not created.');
         err.statusCode = 403;
-        next(err);
+        return next(err);
       }
 
       if (newReview) {
@@ -434,7 +434,7 @@ router.get('/:spotId/reviews', requireAuth, async (req, res, next) => {
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
   const reviews = await Review.findAll({
@@ -566,7 +566,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     };
   });
 
-  res.status(200).json({ Bookings: filteredBookings });
+  return res.status(200).json({ Bookings: filteredBookings });
 });
 
 module.exports = router;

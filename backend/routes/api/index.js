@@ -35,12 +35,12 @@ router.delete('/spot-images/:imageId', requireAuth, async (req, res, next) => {
    if (!spotImage) {
     const err = new Error("SpotImage couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
   
   await spotImage.destroy()
 
-  res.status(200).json({
+  return res.status(200).json({
       message: "Successfully deleted",
       statusCode: 2001
   })
@@ -56,46 +56,17 @@ router.delete('/review-images/:imageId', requireAuth, async (req, res, next) => 
    if (!reviewImage) {
     const err = new Error("ReviewImage couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
   
   await reviewImage.destroy()
 
-  res.status(200).json({
+  return res.status(200).json({
       message: "Successfully deleted",
       statusCode: 200
   })
 })
 
-
-
-
-// // Get the Current User
-// router.get('/require-auth',requireAuth,(req, res) => { 
-//   return res.json({
-//     user: {
-//       id:req.user.id,
-//       firstName: req.user.firstName,
-//       lastName: req.user.lastName,
-//       email: req.user.email,
-//       username: req.user.username
-//     } 
-//   });
-// })
-
-
-// router.get('/restore-user',(req, res) => { return res.json(req.user);});
-
-
-// router.get('/set-token-cookie', async (_req, res) => {
-//   const user = await User.findOne({
-//       where: {
-//         username: 'Demo-lition'
-//       }
-//     });
-//   setTokenCookie(res, user);
-//   return res.json({ user });
-// });
 
 
 module.exports = router;
