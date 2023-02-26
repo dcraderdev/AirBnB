@@ -62,7 +62,7 @@ router.get('/current',requireAuth, async (req, res, next) => {
   if (!allReviews) {
     const err = new Error("All reviews not found")
     err.statusCode = 404
-    next(err)
+    return next(err)
   }
 
   if (allReviews) {
@@ -75,6 +75,7 @@ router.get('/current',requireAuth, async (req, res, next) => {
 
 
 // Add an Image to a Review based on the Review's id
+// Create and return a new image for a review specified by id.
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
   const { url } = req.body;
   const review = await Review.findByPk(req.params.reviewId, {
@@ -82,10 +83,18 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     include: { model: ReviewImage },
   });
 
+// Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(review.userId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    return next(err);
+  }
+
+
   if (!review) {
     const err = new Error('Review not found');
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
 
   if (review.ReviewImages.length >= 10) {
@@ -93,7 +102,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
       'Maximum number of images for this resource was reached'
     );
     err.statusCode = 403;
-    next(err);
+    return next(err);
   }
 
   const newReviewImage = await ReviewImage.create({
@@ -116,6 +125,12 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
   const { review, stars } = req.body
 
   const currReview = await Review.findByPk(req.params.reviewId)
+// Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(currReview.userId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    return next(err);
+  }
 
   if (!currReview) {
     const err = new Error("Review couldn't be found");
@@ -137,15 +152,22 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
 
   const review = await Review.findByPk(req.params.reviewId)
 
+  // Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(review.userId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    return next(err);
+  }
+
    if (!review) {
     const err = new Error("Review couldn't be found");
     err.statusCode = 404;
-    next(err);
+    return next(err);
   }
   
   await review.destroy()
 
-  res.status(200).json({
+  return res.status(200).json({
       message: "Successfully deleted",
       statusCode: 200
   })
