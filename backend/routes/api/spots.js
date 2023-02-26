@@ -161,6 +161,13 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   }
 
   if (spot) {
+
+    if(preview){
+      await SpotImage.update({ preview: false }, {
+        where: { spotId: req.params.spotId }
+      });
+    }
+
     let newImage = await SpotImage.create({
       spotId: req.params.spotId,
       url,
@@ -185,7 +192,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
 
-  const spot = await Spot.findByPk(req.params.spotId, {
+  let spot = await Spot.findByPk(req.params.spotId, {
     attributes: [
       'id',
       'ownerId',
@@ -233,7 +240,37 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
     next(err);
   }
 
-  return res.status(200).json(spot);
+if(spot){
+  spot = spot.toJSON()
+  const lat = parseFloat(spot.lat);
+  const lng = parseFloat(spot.lng);
+  const price = parseFloat(spot.price);
+  const numReviews = parseFloat(spot.numReviews);
+  const avgStarRating = parseFloat(spot.avgStarRating);
+  return res.status(200).json({ 
+    id: spot.id,
+    ownerId: spot.ownerId,
+    address: spot.address,
+    city: spot.city,
+    state: spot.state,
+    country: spot.country,
+    lat,
+    lng,
+    name: spot.name,
+    description: spot.description,
+    price,
+    createdAt: spot.createdAt,
+    updatedAt: spot.updatedAt,
+    numReviews,
+    avgStarRating,
+    previewImage: spot.previewImage,
+    SpotImages: spot.SpotImages,
+    Owner: spot.Owner,
+  });
+}
+
+
+
 });
 
 // Create a Spot
@@ -253,7 +290,33 @@ router.post('/', requireAuth, async (req, res, next) => {
     description,
     price,
   });
-  if (newSpot) return res.status(201).json(newSpot);
+
+
+  if (newSpot){
+    let spot = newSpot.toJSON()
+    const lat = parseFloat(spot.lat);
+    const lng = parseFloat(spot.lng);
+    const price = parseFloat(spot.price);
+    return res.status(200).json({ 
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat,
+      lng,
+      name: spot.name,
+      description: spot.description,
+      price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt,
+    });
+  } 
+
+
+
+
 });
 
 // Edit a Spot
