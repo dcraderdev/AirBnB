@@ -108,20 +108,12 @@ module.exports = (sequelize, DataTypes) => {
               'updatedAt',
               [
                 Sequelize.literal(
-                  `(SELECT CAST(ROUND(AVG(stars), 1) AS DECIMAL(3,1)) FROM ${
+                  `(SELECT ROUND(AVG(stars), 1) FROM ${
                     schema ? `"${schema}"."Reviews"` : 'Reviews'
                   } WHERE "Reviews"."spotId" = "Spot"."id")`
                 ),
                 'avgRating',
               ],
-              // [
-              //   Sequelize.literal(
-              //     `(SELECT ROUND(AVG(stars), 1) FROM ${
-              //       schema ? `"${schema}"."Reviews"` : 'Reviews'
-              //     } WHERE "Reviews"."spotId" = "Spot"."id")`
-              //   ),
-              //   'avgRating',
-              // ],
               [
                 Sequelize.literal(
                   `(SELECT url FROM ${
