@@ -134,20 +134,6 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 // // // Get details of a Spot from an id
 router.get('/:spotId', requireAuth, async (req, res, next) => {
 
-
-  const allSpots = await Spot.findAll()
-
-
-  allSpots.forEach((s)=>{
-    console.log(s);
-    if(s.id > 3){
-      s.destroy()
-    }
-  })
-
-
-
-
   const spot = await Spot.findByPk(req.params.spotId, {
     attributes: [
       'id',
