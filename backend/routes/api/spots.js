@@ -78,33 +78,37 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
   if (allSpots) {
     return res.status(200).json({ Spots: allSpots });
   }
-  // if (allSpots) {
-  //   const spots = allSpots.map(spot => {
-  //     const lat = parseFloat(spot.lat);
-  //     const lng = parseFloat(spot.lng);
-  //     const price = parseFloat(spot.price);
-  //     const avgRating = parseFloat(spot.avgRating);
-  //     // const avgRating = spot.avgRating;
-  //     return { 
-  //       id: spot.id,
-  //       ownerId: spot.ownerId,
-  //       address: spot.address,
-  //       city: spot.city,
-  //       state: spot.state,
-  //       country: spot.country,
-  //       lat,
-  //       lng,
-  //       name: spot.name,
-  //       description: spot.description,
-  //       price,
-  //       createdAt: spot.createdAt,
-  //       updatedAt: spot.updatedAt,
-  //       avgRating,
-  //       previewImage: spot.previewImage,
-  //     };
-  //   });
-  //   return res.status(200).json({ Spots: spots });
-  // }
+
+
+  if (allSpots) {
+    const spots = allSpots.map(spot => {
+      spot = spot.TOJSON()
+
+
+      const lat = parseFloat(spot.lat);
+      const lng = parseFloat(spot.lng);
+      const price = parseFloat(spot.price);
+      const avgRating = parseFloat(spot.avgRating);
+      return { 
+        id: spot.id,
+        ownerId: spot.ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat,
+        lng,
+        name: spot.name,
+        description: spot.description,
+        price,
+        createdAt: spot.createdAt,
+        updatedAt: spot.updatedAt,
+        avgRating,
+        previewImage: spot.previewImage,
+      };
+    });
+    return res.status(200).json({ Spots: spots });
+  }
 
 
 });
