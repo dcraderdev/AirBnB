@@ -294,7 +294,7 @@ if(spot){
 });
 
 // Create a Spot
-router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   const ownerId = req.user.id;
