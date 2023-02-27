@@ -144,11 +144,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     const err = new Error("Forbidden")
     err.statusCode = 403
     return next(err)
-
-  
   }
-
-
 });
 
 
@@ -226,15 +222,6 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     }
     
 })
-
-
-
-
-
-
-
-
-
 
 
 
