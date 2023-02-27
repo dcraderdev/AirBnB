@@ -25,7 +25,6 @@ router.use('/bookings', bookingsRouter);
 
 
 
-
 // Delete a Spot Image
 // Delete an existing image for a Spot.
 router.delete('/spot-images/:imageId', requireAuth, async (req, res, next) => {

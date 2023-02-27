@@ -35,11 +35,8 @@ const router = express.Router();
 
 let schema
  if (process.env.NODE_ENV === 'production') {
-  schema = process.env.SCHEMA;  // define your schema in options object
+  schema = process.env.SCHEMA;  
 }
-
-
-
 
 
 // Get all Reviews of the Current User
@@ -69,7 +66,6 @@ router.get('/current',requireAuth, async (req, res, next) => {
     })
   }
 });
-
 
 
 // Add an Image to a Review based on the Review's id
@@ -139,13 +135,11 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
     return next(err);
   }
 
-
   await currReview.update({
     review, stars
   })
   return res.status(200).json(currReview)
 })
-
 
 
 // Delete a Review
@@ -159,6 +153,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     err.statusCode = 404;
     return next(err);
   }
+
   // Require proper authorization: Review must belong to the current user
   if(parseInt(req.user.id) !== parseInt(review.userId) ){
     const err = new Error('Forbidden');
@@ -166,7 +161,6 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  
   await review.destroy()
 
   return res.status(200).json({

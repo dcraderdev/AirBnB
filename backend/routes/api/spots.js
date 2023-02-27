@@ -65,9 +65,7 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
     offset: offset,
   };
 
-  const allSpots = await Spot.scope({
-    method: ['withPreviewAndRating'],
-  }).findAll(options);
+  const allSpots = await Spot.scope({method: ['withPreviewAndRating'],}).findAll(options);
 
   if (!allSpots) {
     const err = new Error('Spots not found');
@@ -327,11 +325,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 });
 
 // Edit a Spot
-router.put(
-  '/:spotId',
-  requireAuth,
-  validateSpotEdit,
-  async (req, res, next) => {
+router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {

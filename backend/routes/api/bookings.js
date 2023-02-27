@@ -179,10 +179,6 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     return next(err)
     }
 
-
-   
-
-
     //check if endDate is past current date
     const currentDate = new Date();
     if(currentDate > booking.endDate){
@@ -190,7 +186,6 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
       err.statusCode = 403
       return next(err)
     }
-
 
   // Check for conflicting bookings
   const allBookings = await Booking.findAll({where: {spotId: booking.spotId}});

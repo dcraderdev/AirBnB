@@ -180,13 +180,11 @@ const validateQueryParameters= [
   .isInt({ min: 1, max: 10 })
   .withMessage('Value must be an integer from 1 to 10'),
 
-  
   check('size')
   .optional()
   .isInt({ min: 1, max: 20 })
   .withMessage('Value must be an integer from 1 to 20'),
 
-  
   check('minLat')
   .optional()
   .isInt()
