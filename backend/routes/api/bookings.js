@@ -77,7 +77,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   
       
       // const previewImage = Spot.SpotImages.length > 0 ? Spot.SpotImages[0].url : null;
-        const previewImage = Spot.SpotImages.filter(image => image.preview)[0]?.url || null;
+        const previewImage = Spot.SpotImages.filter(image => image.preview).url || null;
       return {
         id,
         spotId,
