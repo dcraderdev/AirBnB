@@ -33,7 +33,7 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
 
   const page = req.query.page;
   const size = req.query.size;
-  let limit = size || 5;
+  let limit = size || 20;
   let offset = limit * (page - 1) || 0;
 
   if (req.query.minLat) {
