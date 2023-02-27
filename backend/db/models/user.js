@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         hashedPassword,
       });
       if(user)return await User.scope('currentUser').findByPk(user.id);
-      if(!user) return {huh:'whaaatt'}
+      if(!user) return {I:'am a teapot'}
     }
 
     static associate(models) {
