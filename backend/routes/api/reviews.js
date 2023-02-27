@@ -39,6 +39,37 @@ let schema
 }
 
 
+// // Get all Reviews of the Current User
+// router.get('/current',requireAuth, async (req, res, next) => {
+
+//   const allReviews = await Review.findAll({
+//     where: { userId: req.user.id },
+//     include: [
+//       { model: User, attributes: ['id', 'firstName', 'lastName'] },
+//       {
+//         model: Spot.scope({ method: ['withPreview', req.user.id] }),
+//       },
+//       { model: ReviewImage, attributes: ['id', 'url'] }
+//     ],
+//     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+//   });
+  
+//   if (!allReviews) {
+//     const err = new Error("All reviews not found")
+//     err.statusCode = 404
+//     err.status = 404;
+//     return next(err)
+//   }
+
+//   if (allReviews) {
+//     return res.status(200).json({
+//       "Reviews":allReviews,
+//     })
+//   }
+// });
+
+
+
 // Get all Reviews of the Current User
 router.get('/current',requireAuth, async (req, res, next) => {
 
@@ -54,19 +85,34 @@ router.get('/current',requireAuth, async (req, res, next) => {
     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
   });
   
-  if (!allReviews) {
-    const err = new Error("All reviews not found")
-    err.statusCode = 404
-    err.status = 404;
-    return next(err)
-  }
-
   if (allReviews) {
+    const reviews = allReviews.map(review => {
+      review = review.toJSON();
+      const lat = parseFloat(review.Spot.lat);
+      const lng = parseFloat(review.Spot.lng);
+      const price = parseFloat(review.Spot.price);
+  
+      return {
+        ...review,
+        Spot: {
+          ...review.Spot,
+          lat,
+          lng,
+          price
+        }
+      }
+    });
+  
     return res.status(200).json({
-      "Reviews":allReviews,
-    })
+      "Reviews": reviews,
+    });
   }
-});
+})
+
+
+
+
+
 
 
 // Add an Image to a Review based on the Review's id
