@@ -8,35 +8,35 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = { 
   up: async (queryInterface, Sequelize) => {
-    options.tableName = 'Users';
-    return queryInterface.bulkInsert(options, [
-      {
-        firstName: 'Doug',
-        firstName: 'Lasfirr',
-        email: 'demo2@user.io',
-        username: 'Demo-lition2',
-        hashedPassword: bcrypt.hashSync('password')
-      },
-      {
-        firstName: 'Trina',
-        firstName: 'Pine',
-        email: 'user12@user.io',
-        username: 'FakeUser12',
-        hashedPassword: bcrypt.hashSync('password2')
-      },
-      {
-        firstName: 'Hazel',
-        firstName: 'Forest',
-        email: 'user22@user.io',
-        username: 'FakeUser22',
-        hashedPassword: bcrypt.hashSync('password3')
-      }
-    ], {});
+    // options.tableName = 'Users';
+    // return queryInterface.bulkInsert(options, [
+    //   {
+    //     firstName: 'Doug',
+    //     firstName: 'Lasfirr',
+    //     email: 'demo2@user.io',
+    //     username: 'Demo-lition2',
+    //     hashedPassword: bcrypt.hashSync('password')
+    //   },
+    //   {
+    //     firstName: 'Trina',
+    //     firstName: 'Pine',
+    //     email: 'user12@user.io',
+    //     username: 'FakeUser12',
+    //     hashedPassword: bcrypt.hashSync('password2')
+    //   },
+    //   {
+    //     firstName: 'Hazel',
+    //     firstName: 'Forest',
+    //     email: 'user22@user.io',
+    //     username: 'FakeUser22',
+    //     hashedPassword: bcrypt.hashSync('password3')
+    //   }
+    // ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    options.tableName = 'Users';
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {});
+    // options.tableName = 'Users';
+    // const Op = Sequelize.Op;
+    // return queryInterface.bulkDelete(options, {});
   }
 };
