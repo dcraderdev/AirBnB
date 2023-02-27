@@ -57,6 +57,7 @@ router.get('/current',requireAuth, async (req, res, next) => {
   if (!allReviews) {
     const err = new Error("All reviews not found")
     err.statusCode = 404
+    err.status = 404;
     return next(err)
   }
 
@@ -81,6 +82,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
   if (!review) {
     const err = new Error('Review not found');
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
 
@@ -88,6 +90,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
   if(parseInt(req.user.id) !== parseInt(review.userId) ){
     const err = new Error('Forbidden');
     err.statusCode = 403;
+    err.status = 403;
     return next(err);
   }
 
@@ -98,6 +101,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
       'Maximum number of images for this resource was reached'
     );
     err.statusCode = 403;
+    err.status = 403;
     return next(err);
   }
 
@@ -125,6 +129,8 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
   if (!currReview) {
     const err = new Error("Review couldn't be found");
     err.statusCode = 404;
+    err.status = 404;
+
     return next(err);
   }
 
@@ -132,6 +138,7 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
   if(parseInt(req.user.id) !== parseInt(currReview.userId) ){
     const err = new Error('Forbidden');
     err.statusCode = 403;
+    err.status = 403;
     return next(err);
   }
 
@@ -151,6 +158,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
   if (!review) {
     const err = new Error("Review couldn't be found");
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
 
@@ -158,6 +166,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
   if(parseInt(req.user.id) !== parseInt(review.userId) ){
     const err = new Error('Forbidden');
     err.statusCode = 403;
+    err.status = 403;
     return next(err);
   }
 

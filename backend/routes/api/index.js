@@ -33,6 +33,7 @@ router.delete('/spot-images/:imageId', requireAuth, async (req, res, next) => {
 
    if (!spotImage) {
     const err = new Error("SpotImage couldn't be found");
+    err.status = 404;
     err.statusCode = 404;
     return next(err);
   }
@@ -41,7 +42,7 @@ router.delete('/spot-images/:imageId', requireAuth, async (req, res, next) => {
 
   return res.status(200).json({
       message: "Successfully deleted",
-      statusCode: 2001
+      statusCode: 200
   })
 })
 
@@ -55,6 +56,7 @@ router.delete('/review-images/:imageId', requireAuth, async (req, res, next) => 
    if (!reviewImage) {
     const err = new Error("ReviewImage couldn't be found");
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
   

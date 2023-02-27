@@ -323,8 +323,6 @@ Returns all the spots owned (created) by the current user.
 
 
 
-    So the readings said querying data is cheaper than running functions in js. so would ideally would I want to keep it stored and update it every time a new update is added, in the 
-
 ### Get details of a Spot from an id
 
 Returns the details of a spot specified by its id.

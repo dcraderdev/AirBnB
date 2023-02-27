@@ -85,6 +85,7 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
   if (!allSpots) {
     const err = new Error('Spots not found');
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
 
@@ -131,6 +132,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   if (!userSpots) {
     const err = new Error('Spots not found');
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
 
@@ -170,6 +172,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
 
@@ -177,6 +180,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
     const err = new Error('Forbidden');
     err.statusCode = 403;
+    err.status = 403;
     return next(err);
   }
 
@@ -204,6 +208,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     if (!newImage) {
       const err = new Error("Image couldn't be added");
       err.statusCode = 400;
+      err.status = 400;
       return next(err);
     }
   }
@@ -257,6 +262,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
   if (!spot || spot === null) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
+    err.status = 404;
     return next(err);
   }
 
@@ -334,7 +340,12 @@ router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
     });
   } 
 
-
+  if (!newSpot) {
+    const err = new Error("Spot couldn't be created");
+    err.statusCode = 400;
+    err.status = 400;
+    return next(err);
+  }
 
 
 });
@@ -346,6 +357,7 @@ router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
     if (!spot) {
       const err = new Error("Spot couldn't be found");
       err.statusCode = 404;
+      err.status = 404;
       return next(err);
     }
 
@@ -354,6 +366,7 @@ router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
   if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
     const err = new Error('Forbidden');
     err.statusCode = 403;
+    err.status = 403;
     return next(err);
   }
 
@@ -392,6 +405,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
   if (!spot) {
     const err = new Error("Spot couldn't be found");
+    err.status = 404;
     err.statusCode = 404;
     return next(err);
   }
@@ -399,6 +413,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
   // Require proper authorization: Review must belong to the current user
   if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
     const err = new Error('Forbidden');
+    err.status = 403;
     err.statusCode = 403;
     return next(err);
   }
@@ -425,6 +440,7 @@ router.post(
 
     if (!spot) {
       const err = new Error("Spot couldn't be found");
+      err.status = 404;
       err.statusCode = 404;
       return next(err);
     }
@@ -438,6 +454,7 @@ router.post(
 
     if (existingReview) {
       const err = new Error('User already has a review for this spot');
+      err.status = 403;
       err.statusCode = 403;
       return next(err);
     }
@@ -451,6 +468,7 @@ router.post(
       });
       if (!newReview) {
         const err = new Error('Review not created.');
+        err.status = 403;
         err.statusCode = 403;
         return next(err);
       }
@@ -467,6 +485,7 @@ router.get('/:spotId/reviews', requireAuth, async (req, res, next) => {
   const spot = await Spot.findOne({ where: { id: req.params.spotId } });
   if (!spot) {
     const err = new Error("Spot couldn't be found");
+    err.status = 404;
     err.statusCode = 404;
     return next(err);
   }
@@ -503,6 +522,7 @@ router.post(
 
     if (!spot) {
       const err = new Error("Spot couldn't be found");
+      err.status = 404;
       err.statusCode = 404;
       return next(err);
     }
@@ -510,6 +530,7 @@ router.post(
     //Spot must NOT belong to the current user
     if (parseInt(spot.ownerId) == parseInt(req.user.id)) {
       const err = new Error('Forbidden');
+      err.status = 403;
       err.statusCode = 403;
       return next(err);
     }
@@ -543,6 +564,7 @@ router.post(
           'Sorry, this spot is already booked for the specified dates'
         );
         err.errors = errors;
+        err.status = 403;
         err.statusCode = 403;
         return next(err);
       }
@@ -576,6 +598,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
   if (!spot) {
     const err = new Error("Spot couldn't be found");
+    err.status = 404;
     err.statusCode = 404;
     return next(err);
   }

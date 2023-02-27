@@ -102,6 +102,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   }
 
   const err = new Error("Bookings couldn't be found");
+  err.status = 404;
   err.statusCode = 404;
   return next(err);
 });
@@ -115,6 +116,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
 
   if (!booking) {
     const err = new Error("Booking couldn't be found");
+    err.status = 404;
     err.statusCode = 404;
     return next(err);
   }
@@ -142,6 +144,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     }
 
     const err = new Error("Forbidden")
+    err.status = 403;
     err.statusCode = 403
     return next(err)
   }
@@ -158,6 +161,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
 
     if (!booking) {
         const err = new Error("Booking couldn't be found")
+        err.status = 404
         err.statusCode = 404
         return next(err)
     }
@@ -166,7 +170,9 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     let currUser = (parseInt(booking.userId) === parseInt(req.user.id))
     if (!currUser) {
     const err = new Error("Forbidden")
+    err.status = 403;
     err.statusCode = 403
+
     return next(err)
     }
 
@@ -174,6 +180,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     const currentDate = new Date();
     if(currentDate > booking.endDate){
       const err = new Error("Past bookings can't be modified")
+      err.status = 403;
       err.statusCode = 403
       return next(err)
     }
@@ -207,6 +214,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     if(errors.startDate || errors.endDate){
       const err = new Error("Sorry, this spot is already booked for the specified dates");
       err.errors = errors
+      err.status = 403;
       err.statusCode = 403;
       return next(err);
     }
@@ -218,6 +226,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
     else {
       const err = new Error("Booking not updated")
       err.statusCode = 403
+      err.status = 403;
       return next(err)
     }
     
