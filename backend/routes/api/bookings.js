@@ -107,9 +107,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 });
 
 
-
-
-
 // Delete a Booking
 // Require proper authorization: Booking must belong to the current user or the Spot must belong to the current user
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
@@ -230,7 +227,7 @@ router.put('/:bookingId', requireAuth, validateBookingEdit, async (req, res, nex
       return next(err)
     }
     
-  })
+})
 
 
 

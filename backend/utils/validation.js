@@ -187,22 +187,22 @@ const validateQueryParameters= [
 
   check('minLat')
   .optional()
-  .isInt()
+  .isFloat()
   .withMessage('Minimum latitude is invalid'),
 
   check('maxLat')
   .optional()
-  .isInt()
+  .isFloat()
   .withMessage('Maximum latitude is invalid'),
   
   check('minLng')
   .optional()
-  .isInt()
+  .isFloat()
   .withMessage('Minimum longitude is invalid'),
   
   check('maxLng')
   .optional()
-  .isInt()
+  .isFloat()
   .withMessage('Maximum longitude is invalid'),
   
   check('minPrice')
