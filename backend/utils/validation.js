@@ -178,12 +178,12 @@ const validateQueryParameters= [
   check('page')
   .optional()
   .isInt({ min: 1, max: 10 })
-  .withMessage('Value must be an integer from 1 to 10'),
+  .withMessage('Page must be greater than or equal to 1'),
 
   check('size')
   .optional()
   .isInt({ min: 1, max: 20 })
-  .withMessage('Value must be an integer from 1 to 20'),
+  .withMessage('Size must be greater than or equal to 1'),
 
   check('minLat')
   .optional()
