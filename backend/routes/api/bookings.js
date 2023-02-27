@@ -126,7 +126,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     // Booking must belong to the current user or the Spot must belong to the current user
     let currUser = (parseInt(booking.userId) === parseInt(req.user.id))
     let owner = (parseInt(spot.ownerId) === parseInt(req.user.id))
-    if (!currUser && !owner) {
+    if (!currUser || !owner) {
         const err = new Error("Forbidden")
         err.statusCode = 403
         return next(err)
