@@ -70,6 +70,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
         updatedAt,
         Spot,
       } = booking;
+  
+      const lat = parseFloat(Spot.lat);
+      const lng = parseFloat(Spot.lng);
+      const price = parseFloat(Spot.price);
+  
       const previewImage =
         Spot.SpotImages.length > 0 ? Spot.SpotImages[0].url : null;
       return {
@@ -82,10 +87,10 @@ router.get('/current', requireAuth, async (req, res, next) => {
           city: Spot.city,
           state: Spot.state,
           country: Spot.country,
-          lat: Spot.lat,
-          lng: Spot.lng,
+          lat,
+          lng,
           name: Spot.name,
-          price: Spot.price,
+          price,
           previewImage,
         },
         userId,
@@ -95,11 +100,12 @@ router.get('/current', requireAuth, async (req, res, next) => {
         updatedAt,
       };
     });
-
+  
     return res.status(200).json({
       Bookings: bookings,
     });
   }
+  
 
   const err = new Error("Bookings couldn't be found");
   err.status = 404;
