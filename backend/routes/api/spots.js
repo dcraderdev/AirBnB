@@ -28,6 +28,7 @@ const router = express.Router();
 
 // Get all Spots
 router.get('/', validateQueryParameters, async (req, res, next) => {
+
   let where = {};
 
   const page = req.query.page;
@@ -48,7 +49,6 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
   }
 
 
-
   if (req.query.minLng) {
     where.lng = { [Op.gte]: req.query.minLng };
   }
@@ -60,8 +60,6 @@ router.get('/', validateQueryParameters, async (req, res, next) => {
   if (req.query.minLng && req.query.maxLng) {
     where.lng = { [Op.between]: [req.query.minLng, req.query.maxLng] };
   }
-
-
 
 
   if (req.query.minPrice) {
