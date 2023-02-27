@@ -216,7 +216,7 @@ const validateQueryParameters= [
   .withMessage('Maximum price must be greater than or equal to 0'),
 handleValidationErrors
 ]
-
+ 
 
 
 
