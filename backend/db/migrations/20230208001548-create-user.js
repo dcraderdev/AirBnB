@@ -50,8 +50,8 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     }, options)
+  
  
-
     // .then(() => {
     //   queryInterface.addIndex("Users", {
     //     fields: ["username", "email"],
