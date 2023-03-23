@@ -26,6 +26,7 @@ http://localhost:8000/api/csrf/restore
 
 
 npx sequelize-cli model:generate --name SpotImage --attributes spotId:integer,url:string,preview:boolean
+npx sequelize-cli model:generate --name Game --attributes gameType:string,gameId:integer,deckId:integer,active:boolean,playerCount:integer
 
 
 

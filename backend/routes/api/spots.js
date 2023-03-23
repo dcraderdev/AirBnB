@@ -26,6 +26,15 @@ const {
 } = require('../../utils/validation');
 const router = express.Router();
 
+
+
+router.get("/test", (req, res) => {
+  res.status(200).json({ 'XSRF-Token': 'csrfToken'  });   
+});
+
+
+
+
 // Get all Spots
 router.get('/', validateQueryParameters, async (req, res, next) => {
 
@@ -294,8 +303,6 @@ if(spot){
     Owner: spot.Owner,
   });
 }
-
-
 
 });
 
