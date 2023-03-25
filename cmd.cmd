@@ -29,6 +29,14 @@ npx sequelize-cli model:generate --name SpotImage --attributes spotId:integer,ur
 npx sequelize-cli model:generate --name Game --attributes gameType:string,gameId:integer,deckId:integer,active:boolean,playerCount:integer
 
 
+******** NEW Build Script ********
+npm install &&
+npm run render-postbuild &&
+npm run build &&
+npm run sequelize --prefix backend db:migrate &&
+npm run sequelize --prefix backend db:seed:all
+
+
 
 
 # build command - enter all in one line
