@@ -10,5 +10,6 @@ li {
   border: black solid 1px;
   display: flex;
   justify-content: space-between;
+  height: 40px;
 
 }

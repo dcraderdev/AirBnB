@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import * as sessionActions from '../../store/session';
 import './Navigation.css';
+import Logo from "./logo";
+
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -15,29 +17,13 @@ function Navigation({ isLoaded }){
     dispatch(sessionActions.logout());
   };
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
-    );
-  } else {
-    sessionLinks = (
-      <li>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </li>
-    );
-  }
+
 
   return (
-    <ul>
-      {/* <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li> */}
-      {isLoaded && sessionLinks}
-    </ul>
+    <nav className="navBar">
+      <Logo />
+      <ProfileButton user={sessionUser}/>
+    </nav>
   );
 }
 
