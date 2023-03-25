@@ -1,0 +1,14 @@
+.hidden {
+  display: none;
+}
+
+li {
+  list-style: none;
+}
+
+.navBar{
+  border: black solid 1px;
+  display: flex;
+  justify-content: space-between;
+
+}
