@@ -17,7 +17,10 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  console.log(user);
+
+
+
+
 
   const ulClassName = showMenu ? 'profileMenu' : ' hidden';
 
@@ -44,10 +47,16 @@ function ProfileButton({ user }) {
             </>
           ) : (
             <>
-              <div className="div-link" onClick={()=>history.push("/login")}>
+              <div className="div-link" onClick={()=>{
+                setShowMenu(false)
+                history.push("/login")
+            }}>
               Sign In
               </div>
-              <div className="div-link" onClick={()=>history.push("/signup")}>
+              <div className="div-link" onClick={()=>{
+                setShowMenu(false)
+                history.push("/signup")
+            }}>
               Sign Up
               </div>
 
