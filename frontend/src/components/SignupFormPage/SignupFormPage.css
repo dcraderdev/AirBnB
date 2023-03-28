@@ -1,20 +1,21 @@
-*{
+* {
   user-select: none;
 }
 
-.login-form-page {
+.signup-form-page {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-form-page-container {
+.signup-form-page-container {
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   padding: 20px;
@@ -23,21 +24,10 @@
   width: 450px;
 }
 
-.user{
-  position: relative;
-  top: -15px;
-  transform: scale(1.3);
-}
-.pass{
-  position: relative;
-  top: 0px;
-  transform: scale(1.3);
-}
-
 .close-button {
   position: relative;
-  top: -15px;
-  left: -15px;
+  top: -20px;
+  left: -10px;
   background-color: transparent;
   border: none;
   font-size: 20px;
@@ -46,15 +36,17 @@
 
 }
 
-.logInDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+
+
+
+.signupDiv label {
+  display: relative;
+  left: 100px;
+  margin-bottom: 10px;
 }
 
-
-
-.logInDiv input {
+.signupDiv input {
   width: 95%;
   padding: 9px;
   margin-top: 5px;
@@ -64,18 +56,18 @@
   font-size: 14px;
   cursor: pointer;
   border: 1px solid rgb(106, 106, 106);
+
+}
+.signupDiv input:hover {
+  border: 1px solid rgb(0, 0, 0);
 }
 
-.logInDiv input:focus {
+.signupDiv input:focus {
   outline: none;
   border: 1px solid cornflowerblue;
 }
 
-.logInDiv input:hover {
-  border: 1px solid rgb(0, 0, 0);
-}
-
-.logInDiv button {
+.signupDiv-button {
   width: 100%;
   padding: 10px;
   background-color: cornflowerblue;
@@ -87,24 +79,17 @@
   transition: .1s background-color;
 }
 
-.logInDiv button:hover {
+.signupDiv-button:hover {
   background-color: #3b75e2;
 }
 
-.forgot-password-link {
-  display: block;
-  margin-top: 20px;
-  color: #007bff;
-  cursor: pointer;
-  text-decoration: none;
+.signupDiv-button:focus {
+  outline: none;
 }
 
-.forgot-password-link:hover {
-  color: #005ec2;
-}
-
-.signinHeader{
+.signupHeader{
   position: relative;
   left: 65%;
   transform: scale(1.5);
 }
+

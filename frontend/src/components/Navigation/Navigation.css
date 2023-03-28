@@ -2,14 +2,83 @@
   display: none;
 }
 
-li {
-  list-style: none;
-}
 
 .navBar{
+  position: absolute;
   border: black solid 1px;
   display: flex;
   justify-content: space-between;
-  height: 40px;
+  top: 0%;
+  left: 0%;
+  height: 75px;
+  width: 100%;
+}
 
+
+
+
+
+
+.profileButton{
+  border: solid black .5px;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  transform: scale(1.5);
+  border-radius: 15px;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.profileButton:hover{
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+
+.profileMenu {
+  cursor: pointer;
+  position: absolute;
+  top: 45px;
+  right: 25px;
+  transform: scale(1);
+
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 170px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fa-user{
+  position: relative;
+  left: 8px;
+  background-color: transparent;
+}
+
+.fa-bars{
+  position: relative;
+  left: -2px;
+  background-color: transparent;
+}
+
+.div-link {
+  position: relative;
+  transition: background-color 0.3s ease;
+  padding: 3px;
+  left: -40px;
+  width: 230px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+
+}
+
+
+.div-link:hover {
+  background-color: lightgrey;
 }
