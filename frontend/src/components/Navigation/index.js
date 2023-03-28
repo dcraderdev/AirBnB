@@ -44,15 +44,18 @@ function Navigation({ isLoaded }){
 
   return (
     <nav className="navBar">
+      <div className='navLine'></div>
       <Logo />
-      <ProfileButton user={sessionUser} onClick={handleProfileButtonClick} />
-      {showProfileDiv && (
-        <ProfileDiv
-          user={sessionUser}
-          onAction={handleProfileDivAction}
-          logout={logout}
-        />
-      )}
+      <div className='profileButtonContainer'>
+        <ProfileButton user={sessionUser} onClick={handleProfileButtonClick} />
+      </div>
+        {showProfileDiv && (
+          <ProfileDiv
+            user={sessionUser}
+            onAction={handleProfileDivAction}
+            logout={logout}
+          />
+        )}
     </nav>
   );
 }

@@ -8,7 +8,9 @@ const SpotTile = ({ spot }) => {
 
   return (
     <div className="spot-tile">
-      <img src={previewImage} alt="Spot preview" className="spot-image" />
+      <div className='imageContainer'>
+        <img src={previewImage} alt="Spot preview" className="spot-image" />
+      </div>
       <div className="spot-info">
         <div className="location">
           {city}, {state}

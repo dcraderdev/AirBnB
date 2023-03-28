@@ -1,6 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import {useHistory} from 'react-router-dom'
+import logo from "./logo.png";
+import "./logo.css";
+
 
 export const Logo = () => {
   const history = useHistory();
@@ -8,7 +11,9 @@ export const Logo = () => {
     history.push('/');
   };
   return (
-    <div onClick={handleLogoClick}>Logo</div>
+    <>
+    <img className='logo' src={logo} alt="Logo" onClick={handleLogoClick}/>
+    </>
   )
 }
 

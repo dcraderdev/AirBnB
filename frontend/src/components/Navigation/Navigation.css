@@ -1,35 +1,46 @@
-.hidden {
+/* .hidden {
   display: none;
 }
 
 
 .navBar{
   position: absolute;
-  border: black solid 1px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between
+;
+  border-bottom: solid black 1px;
+  display: flex;
   top: 0%;
   left: 0%;
   height: 75px;
-  width: 100%;
+  width: 120%;
 }
 
-
-
-
+.logo{
+  position: relative;
+  transform: scale(.6);
+  left: -20px;
+  cursor: pointer;
+}
 
 
 .profileButton{
   border: solid black .5px;
-  position: absolute;
-  top: 20px;
-  right: 40px;
+  position: relative;
+  top: 25px;
+  right: 20px;
   transform: scale(1.5);
   border-radius: 15px;
   width: 60px;
-  height: 30px;
+  height: 25px;
   cursor: pointer;
   background-color: transparent;
+}
+
+@media (max-width: 750px) {
+  .profileButton{
+    top: 25px;
+  }
 }
 
 .profileButton:hover{
@@ -41,7 +52,7 @@
   cursor: pointer;
   position: absolute;
   top: 45px;
-  right: 25px;
+  right: 250px;
   transform: scale(1);
 
   border: 1px solid rgb(0, 0, 0);
@@ -81,4 +92,107 @@
 
 .div-link:hover {
   background-color: lightgrey;
+} */
+
+
+
+.hidden {
+  display: none;
 }
+
+.navBar {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 0%;
+  left: 0%;
+  height: 75px;
+  width: 100%;
+}
+
+.navLine{
+  position: absolute;
+  border-bottom: solid black 1px;
+  top: 0%;
+  left: 0%;
+  height: 75px;
+  width: 10000%;
+}
+
+.logo {
+  position: relative;
+  transform: scale(.6);
+  cursor: pointer;
+}
+
+
+.profileButtonContainer {
+  position: relative;
+  top: 22px;
+  transform: scale(1.2);
+  right: 20px;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.profileButton {
+  border: solid black .5px;
+  position: relative;
+  transform: scale(1.);
+  border-radius: 15px;
+  width: 70px;
+  height: 35px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+
+.profileButton:hover {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.profileMenu {
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 0px;
+  transform: scale(1);
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 170px;
+  height: 141px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fa-user {
+  position: relative;
+  left: 8px;
+  background-color: transparent;
+}
+
+.fa-bars {
+  position: relative;
+  left: -2px;
+  background-color: transparent;
+}
+
+.div-link {
+  position: relative;
+  transition: background-color 0.3s ease;
+  padding: 5px;
+  left: -40px;
+  width: 230px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.div-link:hover {
+  background-color: lightgrey;
+}
+
