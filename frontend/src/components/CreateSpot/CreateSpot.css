@@ -22,6 +22,7 @@
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 450px;
+  height: 100%;
 }
 
 .close-button {
@@ -40,13 +41,13 @@
 
 
 
-.signupDiv label {
+.hostDiv label {
   display: relative;
   left: 100px;
   margin-bottom: 10px;
 }
 
-.signupDiv input {
+.hostDiv input {
   width: 95%;
   padding: 9px;
   margin-top: 5px;
@@ -58,16 +59,16 @@
   border: 1px solid rgb(106, 106, 106);
 
 }
-.signupDiv input:hover {
+.hostDiv input:hover {
   border: 1px solid rgb(0, 0, 0);
 }
 
-.signupDiv input:focus {
+.hostDiv input:focus {
   outline: none;
   border: 1px solid cornflowerblue;
 }
 
-.signupDiv-button {
+.hostDiv-button {
   width: 100%;
   padding: 10px;
   background-color: cornflowerblue;
@@ -79,11 +80,11 @@
   transition: .1s background-color;
 }
 
-.signupDiv-button:hover {
+.hostDiv-button:hover {
   background-color: #3b75e2;
 }
 
-.signupDiv-button:focus {
+.hostDiv-button:focus {
   outline: none;
 }
 

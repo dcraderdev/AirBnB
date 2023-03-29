@@ -308,8 +308,20 @@ if(spot){
 
 // Create a Spot
 router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
-  const { address, city, state, country, lat, lng, name, description, price } =
-    req.body;
+  
+  console.log('hitting route');
+  console.log('hitting route');
+  console.log('hitting route');
+  console.log('hitting route');
+
+  console.log(req.body);
+
+  
+  const { address, city, state, country, lat, lng, name, description, price } =  req.body;
+  console.log(address, city, state, country, lat, lng, name, description, price);
+    
+  
+
   const ownerId = req.user.id;
   newSpot = await Spot.create({
     ownerId,
