@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpotsThunk } from '../../store/spots';
 import SpotTile from '../SpotTile';
 import * as spotActions from '../../store/spots';
 
@@ -46,20 +45,3 @@ if(!loading){
 
 export default Spots;
 
-
-// const body ={
-//   "address": "1804 garnet ave box 711",
-//   "body": "United States",
-//   "city": "san diego",
-//   "description": "14",
-//   "lat": "14",
-//   "lng": "14",
-//   "spotPreviewImage": "14.jpg",
-//   "spotPrice": "14",
-//   "spotTitle": "14",
-//   "state": "CA"
-// }
-
-// "country": "Country is required",
-// "name": "Name is required",
-// "price": "Price per day is required"

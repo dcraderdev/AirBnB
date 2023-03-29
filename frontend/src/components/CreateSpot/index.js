@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import './CreateSpot.css';
 import * as spotActions from '../../store/spots';
+import ImageTile from '../ImageTile'
 
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
 
@@ -18,6 +19,7 @@ const CreateSpot = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
+  const [spotImages, setSpotImages] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const [errors, setErrors] = useState([]);
@@ -47,12 +49,62 @@ const CreateSpot = () => {
     });
   };
   
-  console.log(errors)
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      console.log('Selected file:', file);
+      setSpotPreviewImage(file.name)
+      setSpotImages(()=>[...spotImages,file.name])
+      // Process the file as needed (e.g., upload to a server or display a preview)
+    }
+  }
+
+  console.log(spotImages);
+
   return (
 
 
 
     <div className="host-form-page">
+
+
+
+<div className='image-container'>
+
+  <div className='image-main-container'>
+    <div className='image-main'>Image goes here</div>
+  </div>
+
+  <input
+  type="file"
+  id="fileInput"
+  style={{ display: 'none' }}
+  accept="image/*"
+  onChange={handleFileSelect}
+/>
+
+  <div className='image-main-buttons'>
+    <button 
+    className='image-main-button-add'
+    onClick={() => document.getElementById('fileInput').click()}
+    >
+      Add Image
+    </button>
+    <button className='image-main-button-crop'>Crop Image</button>
+    <button className='image-main-button-delete'>Delete Image</button>
+  </div>
+
+
+  <div className='image-thumbnail-container'>
+  {spotImages.map((image,index) => (
+    <div key={index} className='image-thumbnail'>
+      <ImageTile image={image} />
+    </div>
+  ))}
+</div>
+
+</div>
+
       <div className="host-form-page-container">
         <div className="hostHeader">Host an Airbnb</div>
 
@@ -76,7 +128,7 @@ const CreateSpot = () => {
             </label>
 
             <label className="address">
-              Address
+              Street Address
               <input
                 className="addressField"
                 type="text"
@@ -129,6 +181,18 @@ const CreateSpot = () => {
                 required
               />
             </label>
+
+
+
+
+
+
+
+
+
+
+
+
             <label className="description">
               Description
               <input

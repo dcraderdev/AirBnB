@@ -23,9 +23,6 @@ const createSpot = (spot) => {
 };
 
 
-
-
-
 export const getAllSpotsThunk = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots', {
     method: 'GET',

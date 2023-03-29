@@ -4,26 +4,93 @@
 
 .host-form-page {
   position: fixed;
-  top: 0;
+  top: 75px;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
+  right: 0;
+  left: 0;
 }
 
+
 .host-form-page-container {
+  position: absolute;
+  right: 5%;
+  top: 1%;
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 450px;
-  height: 100%;
+  width: 40%;
+  height: 90%;
+
 }
+
+.image-container {
+  position: absolute;
+  left: 5%;
+  top: 1%;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 40%;
+
+  height: 90%;
+}
+
+.image-main-container{
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  position: relative;
+  left: 5%;
+  width: 80%;
+  height: 55%;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-thumbnail-container{
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  position: relative;
+  top: 8%;
+  left: 5%;
+  width: 80%;
+  height: 20%;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-main-buttons{
+  transform: scale(1.2);
+  position: relative;
+  top: 3%;
+  left: 15%;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.image-thumbnail{
+  position: relative;
+  background-color: #3b75e2;
+  border: 1px solid rgb(0, 0, 0);
+  width: 30px;
+  height: 30px;
+}
+
 
 .close-button {
   position: relative;
@@ -34,22 +101,25 @@
   font-size: 20px;
   cursor: pointer;
   transform: scale(.8);
-
 }
-
-
-
-
+.country{
+  color: black;
+}
 
 .hostDiv label {
-  display: relative;
-  left: 100px;
+  width: 95%;
+  padding: 3px;
+  margin-top: 5px;
   margin-bottom: 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
 }
+
 
 .hostDiv input {
   width: 95%;
-  padding: 9px;
+  padding: 3px;
   margin-top: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -57,8 +127,8 @@
   font-size: 14px;
   cursor: pointer;
   border: 1px solid rgb(106, 106, 106);
-
 }
+
 .hostDiv input:hover {
   border: 1px solid rgb(0, 0, 0);
 }
@@ -88,9 +158,10 @@
   outline: none;
 }
 
-.signupHeader{
+.hostHeader{
   position: relative;
-  left: 65%;
+  top: 0%;
+  left: 60%;
   transform: scale(1.5);
 }
 
