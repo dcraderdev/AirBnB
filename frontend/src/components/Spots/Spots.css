@@ -10,3 +10,7 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.spots-wrapper {
+  margin-top: 65px; 
+}

@@ -11,6 +11,7 @@ const Home = ({isLoaded}) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
 
+
   return (
     <div>
       <Spots/>

@@ -9,6 +9,16 @@ const getSpots = (spots) => {
   };
 };
 
+const CREATE_SPOTS = 'spots/all';
+
+const createSpots = (spots) => {
+  return {
+    type: GET_SPOTS,
+    payload: spots,
+  };
+};
+
+
 
 
 

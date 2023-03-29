@@ -10,10 +10,8 @@ const Spots = () => {
 
   const [loading, setLoading] = useState(true);
 
-const dispatch = useDispatch()
-const spots = useSelector(state=>{
-  console.log('********');
-    console.log(state.spots.spots.Spots);
+  const dispatch = useDispatch()
+  const spots = useSelector(state=>{
     return state.spots.spots.Spots
   })
 
@@ -34,10 +32,13 @@ const spots = useSelector(state=>{
 if(!loading){
   return (
     <>
+          <div className="spots-wrapper">
+
       <div className="spots-grid">
         {spots.map((spot) => (
           <SpotTile key={spot.id} spot={spot} />
         ))}
+      </div>
       </div>
     </>
   )}

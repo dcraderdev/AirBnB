@@ -31,12 +31,13 @@
 .profileButtonContainer {
   position: relative;
   top: 22px;
-  transform: scale(1.2);
+  transform: scale(1.);
   right: 20px;
   width: fit-content;
   height: fit-content;
   cursor: pointer;
   background-color: transparent;
+  z-index: 11;
 }
 
 .profileButton {

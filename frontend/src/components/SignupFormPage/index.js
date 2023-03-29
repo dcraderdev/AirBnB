@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import "./SignupFormPage.css";
 
 
-function SignupFormPage() {
+function SignupFormPage({setShowSignupPage}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -38,17 +38,22 @@ function SignupFormPage() {
 
   const handleClickOutside = (event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
+      setSigningUp(false)
+      setShowSignupPage(false)
       history.goBack();
     }
   };
  
   return (
+    <>
+    {signingUp && (
     <div className="signup-form-page" onClick={handleClickOutside}>
       <div className="signup-form-page-container" ref={formRef}>
         <div className="signupHeader">Sign Up</div>
       <button className="close-button" onClick={() => {
         setSigningUp(false)
-        history.push('/');
+        setShowSignupPage(false)
+        history.goBack();
         }}>
         X
       </button>
@@ -124,6 +129,8 @@ function SignupFormPage() {
         </form>
       </div>
     </div>
+          )}
+          </>
   );
 }
 

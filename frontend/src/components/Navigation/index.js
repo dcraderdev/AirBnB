@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { useState , useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import ProfileDiv from './ProfileDiv';
 import * as sessionActions from '../../store/session';
 import './Navigation.css';
 import Logo from "./logo";
@@ -49,13 +48,6 @@ function Navigation({ isLoaded }){
       <div className='profileButtonContainer'>
         <ProfileButton user={sessionUser} onClick={handleProfileButtonClick} />
       </div>
-        {showProfileDiv && (
-          <ProfileDiv
-            user={sessionUser}
-            onAction={handleProfileDivAction}
-            logout={logout}
-          />
-        )}
     </nav>
   );
 }

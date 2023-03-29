@@ -14,24 +14,12 @@ function ProfileButtonDiv({ user }) {
 
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [showSignupPage, setShowSignupPage] = useState(false);
-  const formRef = useRef(null);
 
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
-
-
-
-
-  const handleClickOutside = (event) => {
-    if (formRef.current && !formRef.current.contains(event.target)) {
-      history.goBack();
-    }
-  };
-
-
 
   return (
     <>

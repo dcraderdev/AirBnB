@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import './LoginForm.css';
 
-function LoginFormPage() {
+function LoginFormPage({ setShowLoginPage }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState('');
@@ -43,7 +43,11 @@ function LoginFormPage() {
 
   const handleClickOutside = (event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
+      setLoggingIn(false)
+      setShowLoginPage(false)
       history.goBack();
+
+
     }
   };
 
@@ -58,7 +62,9 @@ function LoginFormPage() {
 
             <button className="close-button" onClick={() => {
               setLoggingIn(false)
-              history.push('/');
+              setShowLoginPage(false)
+
+              history.goBack();
               }}>
               X
             </button>

@@ -3,6 +3,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import './CreateSpot.css';
+import * as spotActions from '../../store/spots';
 
 
 
@@ -24,7 +25,7 @@ const CreateSpot = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password }))
+    return dispatch(spotActions.login({ country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

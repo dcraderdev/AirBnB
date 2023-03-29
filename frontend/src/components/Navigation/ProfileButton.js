@@ -6,15 +6,16 @@ import * as sessionActions from '../../store/session';
 import './Navigation.css';
 import Logo from './logo';
 import { useSelector } from 'react-dom';
+import LoginFormPage from '../LoginFormPage';
+import SignupFormPage from '../SignupFormPage';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
-  const menuRef = useRef();
-  const buttonRef = useRef();
+  const [showLoginPage, setShowLoginPage] = useState(false);
+  const [showSignupPage, setShowSignupPage] = useState(false);
 
-  const [hideTimeout, setHideTimeout] = useState(null);
 
   const logout = (e) => {
     e.preventDefault();
@@ -22,35 +23,40 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (buttonRef.current && !buttonRef.current.contains(event.target))
+    if (showMenu) {
+      const handleClick = (event) => {
         setShowMenu(false);
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowMenu(false);
-        document.removeEventListener('mousedown', handleClickOutside);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [menuRef]);
+      };
+
+      document.addEventListener('click', handleClick);
+
+      return () => {
+        document.removeEventListener('click', handleClick);
+      };
+    }
+  }, [showMenu]);
+
+
+
+
+
+
+
+
 
   const ulClassName = showMenu ? 'profileMenu' : ' hidden';
 
   return (
     <div>
       <button
-        ref={buttonRef}
         className="profileButton"
         onClick={() => setShowMenu(!showMenu)}
       >
-        {/* <i className="fas fa-user-circle" /> */}
         <i className="fa-solid fa-bars" />
         <i className="fa-solid fa-user" />
       </button>
 
-      <div ref={menuRef}>
+      <div>
         <ul className={ulClassName}>
           {user ? (
             <>
@@ -69,6 +75,8 @@ function ProfileButton({ user }) {
                 className="div-link"
                 onClick={() => {
                   setShowMenu(false);
+                  setShowLoginPage(true)
+
                   history.push('/login');
                 }}
               >
@@ -78,6 +86,8 @@ function ProfileButton({ user }) {
                 className="div-link"
                 onClick={() => {
                   setShowMenu(false);
+                  setShowSignupPage(true)
+
                   history.push('/signup');
                 }}
               >
@@ -117,6 +127,17 @@ function ProfileButton({ user }) {
           )}
         </ul>
       </div>
+
+      {showLoginPage && 
+  <div className="login-form-container">
+    <LoginFormPage setShowLoginPage={setShowLoginPage}/>
+  </div>}
+
+
+{showSignupPage && <SignupFormPage setShowSignupPage={setShowSignupPage}/>}
+
+
+
     </div>
   );
 }
