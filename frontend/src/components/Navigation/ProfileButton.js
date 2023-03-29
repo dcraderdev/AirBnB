@@ -38,12 +38,6 @@ function ProfileButton({ user }) {
 
 
 
-
-
-
-
-
-
   const ulClassName = showMenu ? 'profileMenu' : ' hidden';
 
   return (
@@ -77,7 +71,6 @@ function ProfileButton({ user }) {
                   setShowMenu(false);
                   setShowLoginPage(true)
 
-                  history.push('/login');
                 }}
               >
                 Sign In
@@ -88,7 +81,6 @@ function ProfileButton({ user }) {
                   setShowMenu(false);
                   setShowSignupPage(true)
 
-                  history.push('/signup');
                 }}
               >
                 Sign Up

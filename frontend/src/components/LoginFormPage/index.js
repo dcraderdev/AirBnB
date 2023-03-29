@@ -45,9 +45,6 @@ function LoginFormPage({ setShowLoginPage }) {
     if (formRef.current && !formRef.current.contains(event.target)) {
       setLoggingIn(false)
       setShowLoginPage(false)
-      history.goBack();
-
-
     }
   };
 

@@ -9,20 +9,6 @@ import './Navigation.css';
 import Logo from "./logo";
 
 
-
-// store states
-// store islcicked prolfile button
-// store state is loginbutton clicked
-// turn state off if signin happens
-// store state is signup button clikced
-// turn state off if signup happens
-
-
-// signup is comp
-// signin  is comp
-// loginbutton is comp
-
-
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -53,4 +39,3 @@ function Navigation({ isLoaded }){
 }
 
 export default Navigation;
-// onCLick={setSignInClick(!signInClick)}

@@ -40,7 +40,6 @@ function SignupFormPage({setShowSignupPage}) {
     if (formRef.current && !formRef.current.contains(event.target)) {
       setSigningUp(false)
       setShowSignupPage(false)
-      history.goBack();
     }
   };
  
@@ -53,7 +52,6 @@ function SignupFormPage({setShowSignupPage}) {
       <button className="close-button" onClick={() => {
         setSigningUp(false)
         setShowSignupPage(false)
-        history.goBack();
         }}>
         X
       </button>
