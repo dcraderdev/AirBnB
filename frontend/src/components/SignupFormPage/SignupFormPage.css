@@ -15,14 +15,12 @@
 }
 
 .signup-form-page-container {
-  position: absolute;
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 450px;
-  left: 0%;
 }
 
 .close-button {
