@@ -99,3 +99,20 @@
   background-color: lightgrey;
 }
 
+
+.page{
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle{
+  width: 300px;
+  height: 200px;
+  background-color: rgb(18, 67, 157);
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+}
