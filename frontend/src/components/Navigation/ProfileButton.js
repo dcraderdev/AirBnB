@@ -15,7 +15,8 @@ function ProfileButton({ user }) {
   const history = useHistory();
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [showSignupPage, setShowSignupPage] = useState(false);
-
+  const loginFormRef = useRef(null);
+  const signupFormRef = useRef(null);
 
   const logout = (e) => {
     e.preventDefault();
@@ -36,16 +37,11 @@ function ProfileButton({ user }) {
     }
   }, [showMenu]);
 
-
-
   const ulClassName = showMenu ? 'profileMenu' : ' hidden';
 
   return (
     <div>
-      <button
-        className="profileButton"
-        onClick={() => setShowMenu(!showMenu)}
-      >
+      <button className="profileButton" onClick={() => setShowMenu(!showMenu)}>
         <i className="fa-solid fa-bars" />
         <i className="fa-solid fa-user" />
       </button>
@@ -69,8 +65,7 @@ function ProfileButton({ user }) {
                 className="div-link"
                 onClick={() => {
                   setShowMenu(false);
-                  setShowLoginPage(true)
-
+                  setShowLoginPage(true);
                 }}
               >
                 Sign In
@@ -79,8 +74,7 @@ function ProfileButton({ user }) {
                 className="div-link"
                 onClick={() => {
                   setShowMenu(false);
-                  setShowSignupPage(true)
-
+                  setShowSignupPage(true);
                 }}
               >
                 Sign Up
@@ -120,16 +114,20 @@ function ProfileButton({ user }) {
         </ul>
       </div>
 
-      {showLoginPage && 
-  <div className="login-form-container">
-    <LoginFormPage setShowLoginPage={setShowLoginPage}/>
-  </div>}
+      {showLoginPage && (
+        <div className="login-form-page">
+          <div className="form-container" ref={loginFormRef}>
+            <LoginFormPage setShowLoginPage={setShowLoginPage} />
+          </div>
+        </div>
+      )}
 
-
-{showSignupPage && <SignupFormPage setShowSignupPage={setShowSignupPage}/>}
-
-
-
+      {showSignupPage && (
+        <SignupFormPage
+          setShowSignupPage={setShowSignupPage}
+          ref={signupFormRef}
+        />
+      )}
     </div>
   );
 }

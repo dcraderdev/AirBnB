@@ -53,8 +53,7 @@ function LoginFormPage({ setShowLoginPage }) {
   return (
     <>
       {loggingIn && (
-        <div className="login-form-page" onClick={handleClickOutside}>
-        <div className="login-form-page-container" ref={formRef}>
+        <div className="login-form-page-container">
         <div className="signinHeader">Sign In</div>
 
             <button className="close-button" onClick={() => {
@@ -102,7 +101,7 @@ function LoginFormPage({ setShowLoginPage }) {
               </a>
             </div>
           </div>
-        </div>
+
       )}
     </>
   );
