@@ -43,8 +43,9 @@ const setFav = () =>{
     <div className="avg-rating">{rating} ⭐️</div>
   </div>
   <div className="price">${price} / night</div>
-  <p className="spot-short-description">{shortDescription}</p>
 </div>
+  <div className="spot-description-line"></div>
+  <p className="spot-short-description">{shortDescription}</p>
       </div>
     </Link>
   );

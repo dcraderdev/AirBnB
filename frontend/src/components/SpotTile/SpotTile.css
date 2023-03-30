@@ -20,7 +20,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  height: 210px;
+  height: 200%;
   overflow: hidden;
 }
 
@@ -39,11 +39,12 @@
 }
 
 .spot-info {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  margin-top: 8px;
+  top: 10px;
 }
 
 .location-rating {
@@ -58,6 +59,10 @@
 }
 
 .price {
+  position: relative;
+  height: 100%;
+  top: 10px;
+  bottom: 40%;
   color: #222;
 }
 
@@ -68,10 +73,16 @@
 
 .spot-short-description {
   position: relative;
-  border-top: solid black 1px;
   font-size: 15px;
   height: 80%;
-  top: 12px;
+  bottom: -15px;
   padding-top: 12px;
   padding: 5px;
+}
+
+.spot-description-line {
+  position: relative;
+  bottom: -25px;
+
+  border-top: solid black 1px;
 }
