@@ -116,7 +116,9 @@ function ProfileButton({ user }) {
 
       {showLoginPage && (
         <div className='page'>
-          <div className='middle'></div>
+          <div className='middle'>
+            <LoginFormPage setShowLoginPage={setShowLoginPage} />
+          </div>
         </div>
         
       )}
@@ -125,7 +127,6 @@ function ProfileButton({ user }) {
       {/* {showLoginPage && (
         <div className="login-form-page">
           <div className="form-container" ref={loginFormRef}>
-            <LoginFormPage setShowLoginPage={setShowLoginPage} />
           </div>
         </div>
       )} */}
