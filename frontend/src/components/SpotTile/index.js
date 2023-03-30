@@ -15,8 +15,22 @@ const SpotTile = ({ spot }) => {
 
   return (
     
-    <Link key={spot.id} to={`/spots/${spot.id}`}>
-    <div className="spot-tile">
+    <Link key={spot.id} to={`/spots/${spot.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <div className="spot-tile">
+    <div className="imageContainer">
+      <img src={previewImage} alt="Spot preview" className="spot-image" />
+    </div>
+    <div className="spot-info">
+      <div className="location">
+        <div>
+          {city}, {state}
+        </div>
+        <div className="price">${price} / night</div>
+      </div>
+      <div className="avg-rating">{rating} ⭐️</div>
+    </div>
+  </div>
+    {/* <div className="spot-tile">
 
 
 
@@ -46,7 +60,7 @@ const SpotTile = ({ spot }) => {
 
 
 
-    </div>
+    </div> */}
     </Link>
 
   );

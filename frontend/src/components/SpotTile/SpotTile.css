@@ -1,77 +1,58 @@
 .spot-tile {
-
-  width: 300px;
-  height: 270px;
-  min-height: 270px;
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  overflow: hidden;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  background-color: #fff;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  margin-bottom: 16px;
   font-family: Arial, sans-serif;
+  height: 270px;
 }
 
-.spot-tile:hover {
 
-  box-shadow: rgba(60, 64, 67, 0.6) 0px 1px 2px 1px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  cursor: pointer;
-  z-index: 10;
+
+.spot-tile:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .imageContainer {
-  border: rgb(0, 140, 255) solid 1px;
-  background-color: rgb(102, 102, 190);
-  height: 150px;
   width: 100%;
-  object-fit: cover;
+  height: 210px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
+}
 
 .spot-image {
   width: 100%;
-  object-fit: cover;
+  height: 100%;
 }
 
 .spot-info {
-  padding: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
 }
 
 .location {
-  position: relative;
-  left: 1%;
-  top: 1px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
 }
+
+.price,
+.avg-rating {
+  font-weight: bold;
+  margin-top: 4px;
+}
+
 .price {
-  font-size: 18px;
-  font-weight: bold;
-  left: -50px;
-  top: 1px;
+  color: #222;
 }
 
-.avg-rating{
-  position: relative;
-  font-size: 18px;
-  font-weight: bold;
-  right: 0px;
-  top: 1px;
+.avg-rating {
+  color: #f5a623;
 }
-
-.country {
-  font-size: 14px;
-  color: gray;
-  margin-bottom: 10px;
-}
-
-.coordinates {
-  font-size: 12px;
-  color: darkgray;
-  margin-bottom: 10px;
-}
-
