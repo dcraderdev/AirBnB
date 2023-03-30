@@ -9,7 +9,6 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +21,7 @@
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 450px;
+  left: 50%;
 }
 
 .close-button {
