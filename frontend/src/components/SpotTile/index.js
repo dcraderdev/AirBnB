@@ -51,4 +51,4 @@ const setFav = () =>{
   );
 };
 
-export default SpotTile;
+export default SpotTile; 
