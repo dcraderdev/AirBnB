@@ -8,6 +8,7 @@ import './Spots.css';
 const Spots = () => {
 
   const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState([]);
 
   const dispatch = useDispatch()
   const spots = useSelector(state=>{
@@ -35,7 +36,7 @@ if(!loading){
 
       <div className="spots-grid">
         {spots.map((spot) => (
-          <SpotTile key={spot.id} spot={spot} />
+          <SpotTile key={spot.id} spot={spot} setFavorites={setFavorites} />
         ))}
       </div>
       </div>

@@ -13,17 +13,15 @@
   height: 270px;
 }
 
-
-
 .spot-tile:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .imageContainer {
+  position: relative;
   width: 100%;
   height: 210px;
   overflow: hidden;
-
 }
 
 .spot-image {
@@ -31,22 +29,32 @@
   height: 100%;
 }
 
+.heart-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 24px;
+  color: #040402e1;
+  cursor: pointer;
+}
+
 .spot-info {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  height: 100%;
   margin-top: 8px;
 }
 
-.location {
+.location-rating {
+  
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.price,
-.avg-rating {
-  font-weight: bold;
-  margin-top: 4px;
+.location {
+  width: 80%;
 }
 
 .price {
@@ -54,5 +62,16 @@
 }
 
 .avg-rating {
+  font-weight: bold;
   color: #f5a623;
+}
+
+.spot-short-description {
+  position: relative;
+  border-top: solid black 1px;
+  font-size: 15px;
+  height: 80%;
+  top: 12px;
+  padding-top: 12px;
+  padding: 5px;
 }
