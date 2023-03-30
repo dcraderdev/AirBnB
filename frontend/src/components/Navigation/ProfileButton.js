@@ -114,20 +114,16 @@ function ProfileButton({ user }) {
         </ul>
       </div>
 
-      {/* {showLoginPage && (
-        <div className='page'>
-          <div className='middle'>
-        <LoginFormPage setShowLoginPage={setShowLoginPage} />
 
-          </div>
-        </div>
-        
-      )} */}
 
 
       {showLoginPage && (
         <div className="login-form-page">
           <div className="form-container" ref={loginFormRef}>
+          <LoginFormPage
+                    setShowLoginPage={setShowLoginPage}
+                    ref={loginFormRef}
+          />
           </div>
         </div>
       )}
