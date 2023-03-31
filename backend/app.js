@@ -12,23 +12,20 @@ const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
-
-
 const { Pool } = require('pg');
-
 const { ValidationError } = require('sequelize');
-
 const routes = require('./routes');
-
-
-
-
 const {User, Spot, Booking, SpotImage, Review, ReviewImage } = require('./db/models')
 
 
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+
+
+
+
+
 
 
 // Security Middleware
