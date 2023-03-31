@@ -15,8 +15,7 @@ function ProfileButton({ user }) {
   const history = useHistory();
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [showSignupPage, setShowSignupPage] = useState(false);
-  const loginFormRef = useRef(null);
-  const signupFormRef = useRef(null);
+  const formRef = useRef(null);
 
   const logout = (e) => {
     e.preventDefault();
@@ -118,21 +117,20 @@ function ProfileButton({ user }) {
 
 
       {showLoginPage && (
-        <div className="login-form-page">
-          <div className="form-container" ref={loginFormRef}>
-          <LoginFormPage
-                    setShowLoginPage={setShowLoginPage}
-                    ref={loginFormRef}
-          />
+        <div className="modal-background">
+          <div className="form-container" ref={formRef}>
+            <LoginFormPage setShowLoginPage={setShowLoginPage}/>
           </div>
         </div>
       )}
 
       {showSignupPage && (
-        <SignupFormPage
-          setShowSignupPage={setShowSignupPage}
-          ref={signupFormRef}
-        />
+        <div className="modal-background">
+          <div className="form-container" ref={formRef}>
+            <SignupFormPage setShowSignupPage={setShowSignupPage} />
+          </div>
+        </div>
+
       )}
     </div>
   );

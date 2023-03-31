@@ -53,7 +53,6 @@ function LoginFormPage({ setShowLoginPage }) {
   return (
     <>
       {loggingIn && (
-        <div className="login-form-page">
         <div className="login-form-page-container">
         <div className="signinHeader">Sign In</div>
 
@@ -102,7 +101,6 @@ function LoginFormPage({ setShowLoginPage }) {
               </a>
             </div>
           </div>
-        </div>
       )}
     </>
   );
