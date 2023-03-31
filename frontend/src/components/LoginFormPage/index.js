@@ -1,4 +1,4 @@
-import React, { useEffect,useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
@@ -22,7 +22,6 @@ function LoginFormPage({ setShowLoginPage }) {
     setLoggingIn(true)
   },[])
 
-
   if (sessionUser) return (
     <Redirect to="/" />
   );
@@ -37,10 +36,6 @@ function LoginFormPage({ setShowLoginPage }) {
       });
   }
 
-  
-
-
-
   const handleClickOutside = (event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
       setLoggingIn(false)
@@ -48,59 +43,54 @@ function LoginFormPage({ setShowLoginPage }) {
     }
   };
 
-
-
   return (
     <>
       {loggingIn && (
-        <div className="login-form-page-container">
-        <div className="signinHeader">Sign In</div>
-
+        <div className="signin-form-page" onClick={handleClickOutside}>
+          <div className="signin-form-page-container" ref={formRef}>
+            <div className="signinHeader">Sign In</div>
             <button className="close-button" onClick={() => {
               setLoggingIn(false)
               setShowLoginPage(false)
-
-              history.goBack();
               }}>
               X
             </button>
-            <div className="logInDiv">
-              <form onSubmit={handleSubmit}>
-                <ul>
-                  {errors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
-                  ))}
-                </ul>
-                <label className='user' >
-                  Username
-                  <input
-                    className='userField'
-                    type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
-                    required
-                  />
-                </label>
-                <label className='pass'>
-                  Password
-                  <input
+            <form onSubmit={handleSubmit} className="signinDiv">
+              <ul>
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
+              <label className='user'>
+                Username
+                <input
+                  className='userField'
+                  type="text"
+                  value={credential}
+                  onChange={(e) => setCredential(e.target.value)}
+                  required
+                />
+              </label>
+              <label className='pass'>
+                Password
+                <input
                   className='passwordField'
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </label>
-                <button type="submit">Log In</button>
-              </form>
-              <a
-                className="forgot-password-link"
-                onClick={handleForgotPassword}
-              >
-                Forgot password?
-              </a>
-            </div>
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+              <button type="submit" className="signinDiv-button">Log In</button>
+            </form>
+            <a
+              className="forgot-password-link"
+              onClick={handleForgotPassword}
+            >
+              Forgot password?
+            </a>
           </div>
+        </div>
       )}
     </>
   );

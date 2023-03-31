@@ -1,50 +1,52 @@
-*{
+* {
   user-select: none;
 }
 
+.signin-form-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.login-form-page-container {
+.signin-form-page-container {
+  position: absolute;
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin: auto;
-}
-
-.user{
-  position: relative;
-  top: -15px;
-  transform: scale(1.3);
-}
-.pass{
-  position: relative;
-  top: 0px;
-  transform: scale(1.3);
+  width: 450px;
 }
 
 .close-button {
   position: relative;
-  top: -15px;
-  left: -15px;
+  top: -20px;
+  left: -10px;
   background-color: transparent;
   border: none;
   font-size: 20px;
   cursor: pointer;
   transform: scale(.8);
-
 }
 
-.logInDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.signinHeader {
+  position: relative;
+  left: 65%;
+  transform: scale(1.5);
 }
 
+.signinDiv label {
+  display: block;
+  margin-bottom: 10px;
+}
 
-
-.logInDiv input {
+.signinDiv input {
   width: 95%;
   padding: 9px;
   margin-top: 5px;
@@ -56,16 +58,16 @@
   border: 1px solid rgb(106, 106, 106);
 }
 
-.logInDiv input:focus {
+.signinDiv input:hover {
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.signinDiv input:focus {
   outline: none;
   border: 1px solid cornflowerblue;
 }
 
-.logInDiv input:hover {
-  border: 1px solid rgb(0, 0, 0);
-}
-
-.logInDiv button {
+.signinDiv-button {
   width: 100%;
   padding: 10px;
   background-color: cornflowerblue;
@@ -77,24 +79,28 @@
   transition: .1s background-color;
 }
 
-.logInDiv button:hover {
+.signinDiv-button:hover {
   background-color: #3b75e2;
 }
 
+.signinDiv-button:focus {
+  outline: none;
+}
+
 .forgot-password-link {
+  width: fit-content;
   display: block;
-  margin-top: 20px;
-  color: #007bff;
+  text-align: center;
+  margin-top: 10px;
   cursor: pointer;
+  color: cornflowerblue;
   text-decoration: none;
+  position: relative;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -10%);
 }
 
 .forgot-password-link:hover {
-  color: #005ec2;
-}
-
-.signinHeader{
-  position: relative;
-  left: 65%;
-  transform: scale(1.5);
+  text-decoration: underline;
 }
