@@ -46,7 +46,7 @@ function SignupFormPage({setShowSignupPage}) {
   return (
     <>
     {signingUp && (
-    <div className="signup-form-page" onClick={handleClickOutside}>
+    <div className="modal-background" onClick={handleClickOutside}>
       <div className="signup-form-page-container" ref={formRef}>
         <div className="signupHeader">Sign Up</div>
       <button className="close-button" onClick={() => {

@@ -23,6 +23,8 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
+    if (!showMenu) return;
+
     if (showMenu) {
       const handleClick = (event) => {
         setShowMenu(false);
@@ -35,6 +37,27 @@ function ProfileButton({ user }) {
       };
     }
   }, [showMenu]);
+
+
+  useEffect(() => {
+    if (!showLoginPage) return;
+
+    const closeMenu = (e) => {
+      if (!formRef.current.contains(e.target)) {
+        setShowLoginPage(false);
+      }
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showLoginPage]);
+
+
+
+
+
+
 
   const ulClassName = showMenu ? 'profileMenu' : ' hidden';
 
@@ -114,11 +137,7 @@ function ProfileButton({ user }) {
       </div>
 
       {showLoginPage && (
-
-          <LoginFormPage setShowLoginPage={setShowLoginPage}/>
-
-          
-
+          <LoginFormPage setShowLoginPage={setShowLoginPage} ref={formRef}/>
       )}
 
 
@@ -131,10 +150,7 @@ function ProfileButton({ user }) {
       )} */}
 
       {showSignupPage && (
-        <div className="modal-background">
             <SignupFormPage setShowSignupPage={setShowSignupPage} />
-        </div>
-
       )}
     </div>
   );
