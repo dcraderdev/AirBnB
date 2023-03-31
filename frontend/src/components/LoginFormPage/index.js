@@ -46,7 +46,7 @@ function LoginFormPage({ setShowLoginPage }) {
   return (
     <>
       {loggingIn && (
-        <div className="signin-form-page" onClick={handleClickOutside}>
+        <div className="" onClick={handleClickOutside}>
           <div className="signin-form-page-container" ref={formRef}>
             <div className="signinHeader">Sign In</div>
             <button className="close-button" onClick={() => {

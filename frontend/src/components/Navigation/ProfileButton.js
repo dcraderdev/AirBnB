@@ -115,9 +115,7 @@ function ProfileButton({ user }) {
 
       {showLoginPage && (
 
-        <div className="modal-background">
           <LoginFormPage setShowLoginPage={setShowLoginPage}/>
-        </div>
 
           
 
