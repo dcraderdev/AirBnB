@@ -116,13 +116,11 @@ function ProfileButton({ user }) {
       {showLoginPage && (
         <div className="modal-background">
           
-          <div className="middle" >
-            middleeeee
-          {/* <div className="form-container" ref={formRef}>
-            <LoginFormPage setShowLoginPage={setShowLoginPage}/>
-          </div> */}
 
+          <div className="form-container" ref={formRef}>
+            <LoginFormPage setShowLoginPage={setShowLoginPage}/>
           </div>
+
 
         </div>
       )}
