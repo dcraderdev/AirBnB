@@ -127,3 +127,12 @@
   width: 450px;
   margin: auto;
 }
+
+.middle {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%;
+  height: 50%;
+}
