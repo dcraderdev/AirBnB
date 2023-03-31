@@ -41,19 +41,3 @@ ReactDOM.render(
 );
 
 
-
-// window.store.dispatch(window.sessionActions.login({
-//   credential: 'Demo-lition2',
-//   password: 'password'
-// }));
-
-
-// window.csrfFetch('http://localhost:8000/api/test', {
-//   method: 'POST',
-//   body: JSON.stringify({ credential: 'Demo-lition2', password: 'password' })
-// }).then(res => res.json()).then(data => console.log(data));
-
-// window.csrfFetch('/api/test', {
-//   method: 'POST',
-//   body: JSON.stringify({ credential: 'Demo-lition2', password: 'password' })
-// }).then(res => res.json()).then(data => console.log(data));
