@@ -76,13 +76,11 @@
 .fa-user {
   position: relative;
   left: 8px;
-  background-color: transparent;
 }
 
 .fa-bars {
   position: relative;
   left: -2px;
-  background-color: transparent;
 }
 
 .div-link {
@@ -105,9 +103,10 @@
 
 
 .modal-background{
+  position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(135, 114, 114, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,14 +114,20 @@
   height: 100%; 
 }
 
+
+
+
 .form-container {
+  position: absolute;
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 4500px;
+  width: 450px;
   margin: auto;
+  right: 100px;
+  translate: (-50%, -50%);
 }
 
 .middle {
