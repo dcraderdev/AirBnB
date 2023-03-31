@@ -40,6 +40,10 @@ function ProfileButton({ user }) {
 
 
   useEffect(() => {
+
+    console.log(showLoginPage);
+    console.log(showLoginPage);
+
     if (!showLoginPage) return;
 
     const closeMenu = (e) => {
@@ -137,7 +141,9 @@ function ProfileButton({ user }) {
       </div>
 
       {showLoginPage && (
-          <LoginFormPage setShowLoginPage={setShowLoginPage} ref={formRef}/>
+        <div ref={formRef}>
+          <LoginFormPage setShowLoginPage={setShowLoginPage} />
+        </div>
       )}
 
 

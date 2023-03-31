@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 const SpotTile = ({ spot, setFavorites }) => {
   let rating
-  console.log(spot);
   
   const { previewImage, city, state, country, lat, lng, price, avgRating, description } = spot;
 

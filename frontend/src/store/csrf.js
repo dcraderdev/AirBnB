@@ -17,8 +17,7 @@ export async function csrfFetch(url, options = {}) {
   }
   // call the default window's fetch with the url and the options passed in
   
-  console.log(url);
-  console.log(options);
+
   
   const res = await window.fetch(url, options);
 
