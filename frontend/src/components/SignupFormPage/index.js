@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-import "./SignupFormPage.css";
+import "./SignupForm.css";
 
 
 function SignupFormPage({setShowSignupPage}) {
@@ -42,12 +42,14 @@ function SignupFormPage({setShowSignupPage}) {
       setShowSignupPage(false)
     }
   };
+
+
+
  
   return (
     <>
     {signingUp && (
-    <div className="modal-background" onClick={handleClickOutside}>
-      <div className="signup-form-page-container" ref={formRef}>
+      <div className="signup-form-page-container">
         <div className="signupHeader">Sign Up</div>
       <button className="close-button" onClick={() => {
         setSigningUp(false)
@@ -126,7 +128,6 @@ function SignupFormPage({setShowSignupPage}) {
           </button>
         </form>
       </div>
-    </div>
           )}
           </>
   );

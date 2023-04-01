@@ -8,6 +8,7 @@ import Logo from './logo';
 import { useSelector } from 'react-dom';
 import LoginFormPage from '../LoginFormPage';
 import SignupFormPage from '../SignupFormPage';
+import Modal from '../Modal';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,23 +40,24 @@ function ProfileButton({ user }) {
   }, [showMenu]);
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(showLoginPage);
-    console.log(showLoginPage);
+  //   console.log(showLoginPage);
+  //   console.log(showLoginPage);
 
-    if (!showLoginPage) return;
+  //   if (!showLoginPage) return;
 
-    const closeMenu = (e) => {
-      if (!formRef.current.contains(e.target)) {
-        setShowLoginPage(false);
-      }
-    };
+  //   const closeMenu = (e) => {
+  //     if(formRef){
+  //     if (!formRef.current.contains(e.target)) {
+  //       setShowLoginPage(false);
+  //     }
+  //   }}
 
-    document.addEventListener('click', closeMenu);
+  //   document.addEventListener('click', closeMenu);
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showLoginPage]);
+  //   return () => document.removeEventListener("click", closeMenu);
+  // }, [showLoginPage]);
 
 
 
@@ -66,7 +68,9 @@ function ProfileButton({ user }) {
   const ulClassName = showMenu ? 'profileMenu' : ' hidden';
 
   return (
+    
     <div>
+
       <button className="profileButton" onClick={() => setShowMenu(!showMenu)}>
         <i className="fa-solid fa-bars" />
         <i className="fa-solid fa-user" />
@@ -75,7 +79,7 @@ function ProfileButton({ user }) {
       <div>
         <ul className={ulClassName}>
           {user ? (
-            <>
+            <div>
               <li>{user.username}</li>
               <li>
                 {user.firstName} {user.lastName}
@@ -84,9 +88,9 @@ function ProfileButton({ user }) {
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
-            </>
+            </div>
           ) : (
-            <>
+            <div>
               <div
                 className="div-link"
                 onClick={() => {
@@ -135,31 +139,137 @@ function ProfileButton({ user }) {
               >
                 Help
               </div>
-            </>
+            </div>
           )}
         </ul>
       </div>
 
-      {showLoginPage && (
+      {/* {showLoginPage && (
         <div ref={formRef}>
           <LoginFormPage setShowLoginPage={setShowLoginPage} />
         </div>
       )}
 
 
-      {/* {showLoginPage && (
-        <div className="modal-background">
-          <div className="form-container" ref={formRef}>
-            <LoginFormPage setShowLoginPage={setShowLoginPage}/>
-          </div>
+      {showSignupPage && (
+        <div ref={formRef}>
+          <SignupFormPage setShowSignupPage={setShowSignupPage} />
         </div>
+      
       )} */}
 
-      {showSignupPage && (
-            <SignupFormPage setShowSignupPage={setShowSignupPage} />
-      )}
-    </div>
+      <Modal isOpen={showLoginPage} onClose={() => setShowLoginPage(false)}>
+        <LoginFormPage setShowLoginPage={setShowLoginPage} />
+      </Modal>
+
+      <Modal isOpen={showSignupPage} onClose={() => setShowSignupPage(false)}>
+        <SignupFormPage setShowSignupPage={setShowSignupPage} />
+      </Modal>  
+
+
+
+
+      </div>
+    
   );
 }
 
 export default ProfileButton;
+
+
+
+// function ProfileButton({ user }) {
+//   const dispatch = useDispatch();
+//   const [showMenu, setShowMenu] = useState(false);
+//   const history = useHistory();
+//   const [showLoginPage, setShowLoginPage] = useState(false);
+//   const [showSignupPage, setShowSignupPage] = useState(false);
+
+//   const logout = (e) => {
+//     e.preventDefault();
+//     dispatch(sessionActions.logout());
+//   };
+
+//   const ulClassName = showMenu ? 'profileMenu' : 'hidden';
+
+//   return (
+//     <div>
+//       <button className="profileButton" onClick={() => setShowMenu(!showMenu)}>
+//         <i className="fa-solid fa-bars" />
+//         <i className="fa-solid fa-user" />
+//       </button>
+
+//       <div>
+//         <ul className={ulClassName}>
+//           {user ? (
+//             <div>
+//               <li>{user.username}</li>
+//               <li>
+//                 {user.firstName} {user.lastName}
+//               </li>
+//               <li>{user.email}</li>
+//               <li>
+//                 <button onClick={logout}>Log Out</button>
+//               </li>
+//             </div>
+//           ) : (
+//             <div>
+//               <li
+//                 onClick={() => {
+//                   setShowMenu(false);
+//                   setShowLoginPage(true);
+//                 }}
+//               >
+//                 Sign In
+//               </li>
+//               <li
+//                 onClick={() => {
+//                   setShowMenu(false);
+//                   setShowSignupPage(true);
+//                 }}
+//               >
+//                 Sign Up
+//               </li>
+//               <li
+//                 onClick={() => {
+//                   setShowMenu(false);
+//                   history.push('/host');
+//                 }}
+//               >
+//                 Airbnb your home
+//               </li>
+
+//               <li
+//                 onClick={() => {
+//                   setShowMenu(false);
+//                   history.push('/host');
+//                 }}
+//               >
+//                 Host an experience
+//               </li>
+
+//               <li
+//                 onClick={() => {
+//                   setShowMenu(false);
+//                   history.push('/help');
+//                 }}
+//               >
+//                 Help
+//               </li>
+//             </div>
+//           )}
+//         </ul>
+//       </div>
+
+//       <Modal isOpen={showLoginPage} onClose={() => setShowLoginPage(false)}>
+//         <LoginFormPage setShowLoginPage={setShowLoginPage} />
+//       </Modal>
+
+//       <Modal isOpen={showSignupPage} onClose={() => setShowSignupPage(false)}>
+//         <SignupFormPage setShowSignupPage={setShowSignupPage} />
+//       </Modal>
+//     </div>
+//   );
+// }
+
+// export default ProfileButton;

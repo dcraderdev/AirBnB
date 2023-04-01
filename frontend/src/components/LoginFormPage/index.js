@@ -44,9 +44,8 @@ function LoginFormPage({ setShowLoginPage }) {
   };
 
   return (
-    <>
+    <div>
       {loggingIn && (
-        <div className="" >
           <div className="signin-form-page-container">
             <div className="signinHeader">Sign In</div>
             <button className="close-button" onClick={() => {
@@ -90,9 +89,8 @@ function LoginFormPage({ setShowLoginPage }) {
               Forgot password?
             </a>
           </div>
-        </div>
       )}
-    </>
+    </div>
   );
 }
 
