@@ -6,9 +6,10 @@ import * as sessionActions from '../../store/session';
 import './Navigation.css';
 import Logo from './logo';
 import { useSelector } from 'react-dom';
-import LoginFormPage from '../LoginFormPage';
-import SignupFormPage from '../SignupFormPage';
-import Modal from '../Modal';
+
+import { useModal } from '../../Context/ModalContext';
+
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function ProfileButton({ user }) {
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [showSignupPage, setShowSignupPage] = useState(false);
   const formRef = useRef(null);
+  const { openModal } = useModal();
 
   const logout = (e) => {
     e.preventDefault();
@@ -95,20 +97,28 @@ function ProfileButton({ user }) {
                 className="div-link"
                 onClick={() => {
                   setShowMenu(false);
-                  setShowLoginPage(true);
+                  openModal('login');
                 }}
               >
                 Sign In
               </div>
+
+
+
               <div
                 className="div-link"
                 onClick={() => {
                   setShowMenu(false);
-                  setShowSignupPage(true);
+                  openModal('signup');
                 }}
               >
                 Sign Up
               </div>
+
+
+
+
+
 
               <div
                 className="div-link"
@@ -158,13 +168,9 @@ function ProfileButton({ user }) {
       
       )} */}
 
-      <Modal isOpen={showLoginPage} onClose={() => setShowLoginPage(false)}>
-        <LoginFormPage setShowLoginPage={setShowLoginPage} />
-      </Modal>
 
-      <Modal isOpen={showSignupPage} onClose={() => setShowSignupPage(false)}>
-        <SignupFormPage setShowSignupPage={setShowSignupPage} />
-      </Modal>  
+
+
 
 
 
