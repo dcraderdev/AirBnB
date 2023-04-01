@@ -7,11 +7,7 @@ import Spots from '../Spots';
 
 
 const Home = ({isLoaded}) => {
-  const history = useHistory();
-  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-
-
   return (
     <div>
       <Spots/>

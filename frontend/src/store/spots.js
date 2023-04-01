@@ -8,13 +8,17 @@ const getSpots = (spots) => {
   };
 };
 
+const GET_SPOT = 'spot/get';
+const getSpot = (spot) => {
+  return {
+    type: GET_SPOT,
+    payload: spot,
+  };
+};
 
 
 const CREATE_SPOT = 'spots/create';
 const createSpot = (spot) => {
-
-  console.log(spot);
-
 
   return {
     type: CREATE_SPOT,
@@ -31,6 +35,25 @@ export const getAllSpotsThunk = () => async (dispatch) => {
   dispatch(getSpots(data));
   return response;
 };
+
+
+export const getSpotThunk = (spotId) => async (dispatch) => {
+
+  console.log(spotId);
+
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'GET',
+  });
+  const data = await response.json();
+
+  console.log(data);
+
+
+  dispatch(getSpot(data));
+  return response;
+};
+
+
 
 export const createSpotThunk = (       
   country,
@@ -78,7 +101,16 @@ const spotsReducer = (state = initialState, action) => {
         ...newState,
         spots: action.payload,
       };
-
+    case GET_SPOT:
+      return {
+        ...newState,
+        currentSpot: action.payload,
+      };
+    case CREATE_SPOT:
+      return {
+        ...newState,
+        spots: [...newState.spots, action.payload],
+      };
 
     default:
       return newState;

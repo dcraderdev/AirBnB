@@ -29,7 +29,6 @@
 
 
 .profileButtonContainer {
-  border: solid rgb(8, 0, 255) 1px;
   position: relative;
   top: 22px;
   transform: scale(1);
@@ -57,21 +56,10 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
-.profileMenu {
-  cursor: pointer;
-  position: absolute;
-  top: 30px;
-  right: 0px;
-  transform: scale(1);
-  border: 1px solid rgb(0, 0, 0);
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 170px;
-  height: 141px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+.profileButton:active {
+ background-color: rgb(254, 254, 254);
+ box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
 }
 
 .fa-user {
@@ -82,19 +70,5 @@
 .fa-bars {
   position: relative;
   left: -2px;
-}
-
-.div-link {
-  position: relative;
-  transition: background-color 0.3s ease;
-  padding: 5px;
-  left: -40px;
-  width: 230px;
-  border-bottom-left-radius: 1px;
-  border-bottom-right-radius: 1px;
-}
-
-.div-link:hover {
-  background-color: lightgrey;
 }
 

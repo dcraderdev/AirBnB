@@ -4,7 +4,8 @@
 
 
 
-.signup-form-page-container {
+.signin-form-page-container {
+  z-index: 1000;
   position: absolute;
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
@@ -15,28 +16,28 @@
 }
 
 .close-button {
-  position: relative;
+  /* position: relative;
   top: -20px;
   left: -10px;
   background-color: transparent;
   border: none;
   font-size: 20px;
   cursor: pointer;
-  transform: scale(.8);
-
+  transform: scale(.8); */
 }
 
+.signinHeader {
+  position: relative;
+  left: 65%;
+  transform: scale(1.5);
+}
 
-
-
-
-.signupDiv label {
-  display: relative;
-  left: 100px;
+.signinDiv label {
+  display: block;
   margin-bottom: 10px;
 }
 
-.signupDiv input {
+.signinDiv input {
   width: 95%;
   padding: 9px;
   margin-top: 5px;
@@ -46,18 +47,18 @@
   font-size: 14px;
   cursor: pointer;
   border: 1px solid rgb(106, 106, 106);
-
 }
-.signupDiv input:hover {
+
+.signinDiv input:hover {
   border: 1px solid rgb(0, 0, 0);
 }
 
-.signupDiv input:focus {
+.signinDiv input:focus {
   outline: none;
   border: 1px solid cornflowerblue;
 }
 
-.signupDiv-button {
+.signinDiv-button {
   width: 100%;
   padding: 10px;
   background-color: cornflowerblue;
@@ -69,17 +70,28 @@
   transition: .1s background-color;
 }
 
-.signupDiv-button:hover {
+.signinDiv-button:hover {
   background-color: #3b75e2;
 }
 
-.signupDiv-button:focus {
+.signinDiv-button:focus {
   outline: none;
 }
 
-.signupHeader{
+.forgot-password-link {
+  width: fit-content;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  color: cornflowerblue;
+  text-decoration: none;
   position: relative;
-  left: 65%;
-  transform: scale(1.5);
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -10%);
 }
 
+.forgot-password-link:hover {
+  text-decoration: underline;
+}

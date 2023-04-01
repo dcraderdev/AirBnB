@@ -1,0 +1,45 @@
+.profileMenu {
+  cursor: pointer;
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  transform: scale(1);
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 170px;
+  height: 175px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.div-link {
+  position: relative;
+  transition: background-color 0.3s ease;
+  padding: 5px;
+  left: -40px;
+  width: 230px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.div-link:hover {
+  background-color: lightgrey;
+}
+
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+}
