@@ -59,35 +59,28 @@ function ProfileButtonModal({ closeModal }) {
           <div>
 
 
+
+
             <div className='profile-user-welcome'>
-              <div className='profile-icon'>
-                <i className="fa-solid fa-user" />
-              </div>
+              <div className='profile-icon'> <i className="fa-solid fa-user" /></div>
+              <div className='profile-hello'>Hello, </div>
               
-              <div className='profile-user'>
-                {/* Hello, {user.firstName}! */}
-                Hello, user.firstName!
+              <div className='profile-user'>{user.firstName}!</div>
 
-              </div>
-
-              <div className='profile-email'>
-              {user.email}
-              </div>
-
+              <div className='profile-email'>{user.email}</div>
             </div>
 
 
 
 
-
+            <div className='profile-messages'>
+            Messages
+            </div>
 
             <div className='profile-reservations'>
             Reservations
             </div>
 
-            <div className=''>
-              {user.email}
-            </div>
 
             <div className='profile-menu-logout' onClick={logout}>
               Logout

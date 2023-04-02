@@ -8,12 +8,12 @@ import './Navigation.css';
 function ProfileButton({ user }) {
   const { modal, openModal, closeModal } = useContext(ModalContext);
 
-
+  const buttonClass = `profileButton${modal === 'profileMenu' ? ' profileButtonActive' : ''}`;
 
   return (
     <div>
       <button
-        className="profileButton"
+        className={buttonClass}
         onClick={() => {openModal('profileMenu')}}
       >
         <i className="fa-solid fa-bars" />

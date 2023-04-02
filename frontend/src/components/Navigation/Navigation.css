@@ -30,16 +30,17 @@
 
 
 .profileButton {
-  border: solid black .5px;
+  border: solid black .01px;
   position: relative;
   transform: scale(1.);
   border-radius: 15px;
   width: 70px;
   height: 35px;
-  top: 22px;
-  right: 20px;
+  top: 17px;
+  right: 40px;
   cursor: pointer;
   background-color: transparent;
+  transform: scale(1.3);
 }
 
 
@@ -48,10 +49,14 @@
 }
 
 .profileButton:active {
- background-color: rgb(226, 226, 226);
+ background-color: rgb(254, 254, 254);
  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-
 }
+
+.profileButtonActive {
+  background-color: rgb(254, 254, 254);
+  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+ }
 
 .fa-user {
   position: relative;

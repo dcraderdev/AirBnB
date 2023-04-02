@@ -27,7 +27,7 @@
 }
 
 .div-link:hover {
-  background-color: lightgrey;
+  background-color: rgba(228, 228, 228, 0.2508);
 }
 
 .div-link:active {
@@ -38,39 +38,49 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 20px;
   background-color: #f0f0f0;
   border-bottom: 1px solid #dcdcdc;
   padding: 15px;
   left: -40px;
   width: 230px;
+  height: 30px;
 }
 
 .profile-icon {
-  position: relative;
-  margin-right: 6px;
-  left: -5%;
-  transform: scale(2);
+  position: absolute;
+  left: 150px;
+  top: 21px;
+  transform: scale(2.7);
+}
 
+.profile-hello {
+  position: absolute;
+  font-weight: 600;
+  margin-bottom: 4px;
+  left: 5px;
+  top: 2px;
+  font-size: 20px;
 }
 
 .profile-user {
   position: absolute;
   font-weight: 600;
   margin-bottom: 4px;
-  left: 50px;
-  top: 10px;
+  left: 20px;
+  top: 22px;
   font-size: 20px;
 }
 
 .profile-email {
+  position: absolute;
+  width: fit-content;
+  left: 5px;
+  top: 45px;
   font-size: 14px;
-  color: #777;
-  position: relative;
+  color: rgb(119, 119, 119);
   font-weight: 600;
   margin-bottom: 4px;
-  left: 10%;
-  top: -10px;
 }
 
 .profile-reservations {
@@ -82,9 +92,19 @@
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
 }
+.profile-messages {
+  position: relative;
+  transition: background-color 0.2s ease;
+  padding: 5px;
+  left: -40px;
+  width: 230px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
 
+.profile-messages:hover,
 .profile-reservations:hover {
-  background-color: lightgrey;
+  background-color: rgba(228, 228, 228, 0.2508);
 }
 
 .profile-menu-logout{
@@ -113,7 +133,8 @@
 
 
 .profile-user-welcome:hover{
-background-color: rgb(226, 226, 226);
+  background-color: rgba(228, 228, 228, 0.2508);
+
 }
 
 
