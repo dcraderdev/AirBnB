@@ -34,18 +34,105 @@
   background-color: rgb(226, 226, 226);
 }
 
+.profile-user-welcome {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 15px;
+  left: -40px;
+  width: 230px;
+}
+
+.profile-icon {
+  position: relative;
+  margin-right: 6px;
+  left: -5%;
+  transform: scale(2);
+
+}
+
+.profile-user {
+  position: absolute;
+  font-weight: 600;
+  margin-bottom: 4px;
+  left: 50px;
+  top: 10px;
+  font-size: 20px;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: #777;
+  position: relative;
+  font-weight: 600;
+  margin-bottom: 4px;
+  left: 10%;
+  top: -10px;
+}
+
+.profile-reservations {
+  position: relative;
+  transition: background-color 0.2s ease;
+  padding: 5px;
+  left: -40px;
+  width: 230px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.profile-reservations:hover {
+  background-color: lightgrey;
+}
+
+.profile-menu-logout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 80%;
+  height: 15%;
+  bottom: 10%;
+  left: 10%;
+  background-color: rgb(74, 113, 186);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .1s background-color;
+  font-size: 13px;
+}
 
 
+.profile-menu-logout:hover {
+  background-color: #3b75e2;
+}
+
+
+.profile-user-welcome:hover{
+background-color: rgb(226, 226, 226);
+}
+
+
+
+
+
+
+
+/* 
 
 .profile-user-welcome{
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  width: 100%;
+  position: absolute;
+  width: 98%;
+  left: 1%;
   height: 50%;
-  top: 10%;
-  left: -10%;
+  top: 1%;
   background-color: rgb(74, 113, 186);
   color: white;
   font-weight: bold;
@@ -55,24 +142,47 @@
   transition: .1s background-color;
 }
 
-.profile-email-welcome{
+
+.profile-icon{
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  left: 15%;
+  transform: scale(2.5);
+}
+
+
+
+
+.profile-user{
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  width: 100%;
-  height: 50%;
-  top: 30%;
-  left: -10%;
-  background-color: rgb(74, 113, 186);
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 20%;
+  left: 40%;
   color: white;
   font-weight: bold;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: .1s background-color;
+  transform: scale(1.8);
+
 }
 
+.profile-email{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  bottom: 10%;
+  left: 5%;
+  color: white;
+  font-weight: bold;
+  transform: scale(.8);
+
+}
 
 
 
@@ -87,7 +197,6 @@
   height: 15%;
   bottom: 10%;
   left: 10%;
-
   background-color: rgb(74, 113, 186);
   color: white;
   font-weight: bold;
@@ -98,7 +207,8 @@
   font-size: 13px;
 }
 
+.profile-user-welcome:hover,
 .profile-menu-logout:hover {
   background-color: #3b75e2;
 }
-
+ */

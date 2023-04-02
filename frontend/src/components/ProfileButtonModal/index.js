@@ -60,10 +60,29 @@ function ProfileButtonModal({ closeModal }) {
 
 
             <div className='profile-user-welcome'>
-            Hello, {user.firstName}!
+              <div className='profile-icon'>
+                <i className="fa-solid fa-user" />
+              </div>
+              
+              <div className='profile-user'>
+                {/* Hello, {user.firstName}! */}
+                Hello, user.firstName!
+
+              </div>
+
+              <div className='profile-email'>
+              {user.email}
+              </div>
+
             </div>
-            <div className='profile-email-welcome'>
-            Hello, {user.email}!
+
+
+
+
+
+
+            <div className='profile-reservations'>
+            Reservations
             </div>
 
             <div className=''>
