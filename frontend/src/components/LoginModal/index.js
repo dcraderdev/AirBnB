@@ -86,10 +86,8 @@ function LoginModal({ closeModal }) {
       sessionActions.login({ credential:'Demo-lition2', password:'password' })
     );
     if (response.ok) closeModal();
-   
   };
   
-
 
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import './Home.css'
 import Spots from '../Spots';
 
 
-const Home = ({isLoaded}) => {
+const Home = () => {
   const sessionUser = useSelector(state => state.session.user);
   return (
     <div>

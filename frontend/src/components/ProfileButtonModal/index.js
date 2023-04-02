@@ -57,10 +57,6 @@ function ProfileButtonModal({ closeModal }) {
       <ul className='profileMenu' ref={formRef}>
         {user ? (
           <div>
-
-
-
-
             <div className='profile-user-welcome'>
               <div className='profile-icon'> <i className="fa-solid fa-user" /></div>
               <div className='profile-hello'>Hello, </div>
@@ -70,8 +66,9 @@ function ProfileButtonModal({ closeModal }) {
               <div className='profile-email'>{user.email}</div>
             </div>
 
-
-
+            <div className='div-link' onClick={navHistory}>
+              Host an experience/Manage Spots
+            </div>
 
             <div className='profile-messages'>
             Messages
@@ -81,12 +78,9 @@ function ProfileButtonModal({ closeModal }) {
             Reservations
             </div>
 
-
             <div className='profile-menu-logout' onClick={logout}>
               Logout
             </div>
-
-
 
           </div>
 
@@ -106,9 +100,6 @@ function ProfileButtonModal({ closeModal }) {
             </div>
             <div className='div-link' onClick={navHelp}>
               Help
-            </div>
-            <div className='div-link' onClick={logout}>
-              Logout
             </div>
           </div>
         )}

@@ -32,15 +32,12 @@ function App() {
 
       {modal && (
         <div className={
-          modal === 'profileMenu'
-            ? 'modal-container-transparent'
-            : 'modal-container'
-        }>
+          modal === 'profileMenu'? 'modal-container-transparent': 'modal-container' }>
+             
           {modal === 'login' && <LoginModal closeModal={closeModal} />}
           {modal === 'signup' && <SignupModal closeModal={closeModal} />}
           {modal === 'profileMenu' && <ProfileButtonModal closeModal={closeModal} />}
         </div>
-
 
 
       )}

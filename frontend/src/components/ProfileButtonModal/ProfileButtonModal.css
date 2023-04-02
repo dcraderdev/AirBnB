@@ -9,7 +9,7 @@
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 170px;
-  height: 175px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -111,11 +111,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: relative;
   width: 80%;
-  height: 15%;
+  height: 30%;
   bottom: 10%;
-  left: 10%;
+  left: 0%;
   background-color: rgb(74, 113, 186);
   color: white;
   font-weight: bold;
@@ -126,110 +126,12 @@
   font-size: 13px;
 }
 
-
 .profile-menu-logout:hover {
   background-color: #3b75e2;
 }
-
 
 .profile-user-welcome:hover{
   background-color: rgba(228, 228, 228, 0.2508);
 
 }
 
-
-
-
-
-
-
-/* 
-
-.profile-user-welcome{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 98%;
-  left: 1%;
-  height: 50%;
-  top: 1%;
-  background-color: rgb(74, 113, 186);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: .1s background-color;
-}
-
-
-.profile-icon{
-  position: absolute;
-  width: 30%;
-  height: 30%;
-  left: 15%;
-  transform: scale(2.5);
-}
-
-
-
-
-.profile-user{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: fit-content;
-  height: fit-content;
-  top: 20%;
-  left: 40%;
-  color: white;
-  font-weight: bold;
-  transform: scale(1.8);
-
-}
-
-.profile-email{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: fit-content;
-  height: fit-content;
-  bottom: 10%;
-  left: 5%;
-  color: white;
-  font-weight: bold;
-  transform: scale(.8);
-
-}
-
-
-
-
-
-.profile-menu-logout{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 80%;
-  height: 15%;
-  bottom: 10%;
-  left: 10%;
-  background-color: rgb(74, 113, 186);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: .1s background-color;
-  font-size: 13px;
-}
-
-.profile-user-welcome:hover,
-.profile-menu-logout:hover {
-  background-color: #3b75e2;
-}
- */
