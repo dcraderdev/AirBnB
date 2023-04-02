@@ -18,9 +18,7 @@ function Navigation({ isLoaded }){
     <nav className="navBar">
       <div className='navLine'></div>
       <Logo />
-      <div className='profileButtonContainer'>
-        <ProfileButton />
-      </div>
+      <ProfileButton />
     </nav>
   );
 }

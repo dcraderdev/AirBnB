@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import CreateSpot from './components/CreateSpot';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
+import ProfileButtonModal from './components/ProfileButtonModal';
 import SpotView from './components/SpotView';
 import Home from './components/Home';
 import * as sessionActions from './store/session';
@@ -14,40 +15,34 @@ import { ModalContext } from './context/ModalContext';
 
 function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
   const { modal, closeModal } = useContext(ModalContext);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser());
-    dispatch(spotActions.getAllSpotsThunk());
     setIsLoaded(true);
   }, [dispatch]);
-
-
-  useEffect(() => {
-    if (location.pathname === '/login') {
-      setShowModal(true);
-    } else {
-      setShowModal(false);
-    }
-  }, [location]);
 
 
 
   return (
     <>
-
-
       <Navigation isLoaded={isLoaded} />
 
       {modal && (
-        <div className="modal-container">
+        <div className={
+          modal === 'profileMenu'
+            ? 'modal-container-transparent'
+            : 'modal-container'
+        }>
           {modal === 'login' && <LoginModal closeModal={closeModal} />}
           {modal === 'signup' && <SignupModal closeModal={closeModal} />}
+          {modal === 'profileMenu' && <ProfileButtonModal closeModal={closeModal} />}
         </div>
+
+
+
       )}
 
 

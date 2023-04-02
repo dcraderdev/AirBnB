@@ -1,44 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import ProfileButtonModal from '../ProfileButtonModal';
+import { ModalContext } from '../../context/ModalContext';
 
 import './Navigation.css';
 
 function ProfileButton({ user }) {
-  const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
+  const { modal, openModal, closeModal } = useContext(ModalContext);
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
-
-
-  useEffect(() => {
-    if (!showModal) return;
-
-    const handleNextClick = () => {
-      setShowModal(false);
-    };
-
-    document.addEventListener('click', handleNextClick);
-
-    return () => {
-      document.removeEventListener('click', handleNextClick);
-    };
-  }, [showModal]);
 
 
   return (
     <div>
-      <button className='profileButton' onClick={toggleModal}>
-        <i className='fa-solid fa-bars' />
-        <i className='fa-solid fa-user' />
+      <button
+        className="profileButton"
+        onClick={() => {openModal('profileMenu')}}
+      >
+        <i className="fa-solid fa-bars" />
+        <i className="fa-solid fa-user" />
       </button>
-      {showModal && <ProfileButtonModal />}
     </div>
   );
 }
 
 export default ProfileButton;
-
