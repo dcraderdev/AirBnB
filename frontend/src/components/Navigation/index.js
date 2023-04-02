@@ -10,7 +10,7 @@ import Logo from "./logo";
 
 
 function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+
   const dispatch = useDispatch();
 
 
@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
       <div className='navLine'></div>
       <Logo />
       <div className='profileButtonContainer'>
-        <ProfileButton user={sessionUser}  />
+        <ProfileButton />
       </div>
     </nav>
   );

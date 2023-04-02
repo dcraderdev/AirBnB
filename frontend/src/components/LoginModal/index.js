@@ -79,6 +79,19 @@ function LoginModal({ closeModal }) {
     }
   };
 
+
+  const demoUser = async (e) => {
+    e.preventDefault();
+    const { response } = await dispatch(
+      sessionActions.login({ credential:'Demo-lition2', password:'password' })
+    );
+    if (response.ok) closeModal();
+   
+  };
+  
+
+
+
   useEffect(() => {
     if (Object.keys(signInErrors).length > 0) {
       setButtonClass('signinDiv-button-disabled');
@@ -103,7 +116,6 @@ function LoginModal({ closeModal }) {
     };
   }, []);
 
-console.log(Object.keys(signInErrors).length);
 
   return (
     <div className="signin-form-page-container" ref={formRef}>
@@ -149,11 +161,14 @@ console.log(Object.keys(signInErrors).length);
         </button>
       </form>
       <div className="altLinks">
-        <div className="sign-up-link" onClick={handleSignUp}>
+        <div className="login-forgot-password-link" onClick={handleForgotPassword}>
+          Forgot password?
+        </div>
+        <div className="login-signup-link" onClick={handleSignUp}>
           Sign Up
         </div>
-        <div className="forgot-password-link" onClick={handleForgotPassword}>
-          Forgot password?
+        <div className="demo-user-singin" onClick={demoUser}>
+        Demo User
         </div>
       </div>
     </div>

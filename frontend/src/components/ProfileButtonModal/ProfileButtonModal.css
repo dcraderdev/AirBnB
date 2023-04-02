@@ -31,7 +31,51 @@
 }
 
 
-.modal-container {
+.profile-menu-welcome{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 80%;
+  height: 30%;
+  top: 40%;
+  background-color: rgb(74, 113, 186);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .1s background-color;
+}
+
+
+
+
+
+
+
+.profile-menu-logout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 80%;
+  height: 30%;
+  top: 40%;
+  background-color: rgb(74, 113, 186);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .1s background-color;
+}
+
+.profileMenu-logout:hover {
+  background-color: #3b75e2;
+}
+
+.backdrop{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,5 +85,5 @@
   right: 0;
   bottom: 0;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(107, 20, 20, 0.5);
 }

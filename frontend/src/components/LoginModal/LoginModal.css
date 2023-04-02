@@ -61,7 +61,8 @@
 .signinDiv-button {
   width: 100%;
   padding: 10px;
-  background-color: cornflowerblue;
+  background-color: rgb(74, 113, 186);
+
   color: white;
   font-weight: bold;
   border: none;
@@ -105,16 +106,16 @@
 
 .altLinks{
   position: relative;
-  width: 200px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  left: 30%;
+  justify-content:space-around;
+  left: 0%;
 }
 
 
 
 
-.sign-up-link {
+.login-signup-link {
   width: fit-content;
   display: block;
   text-align: center;
@@ -123,10 +124,12 @@
   color: cornflowerblue;
   text-decoration: none;
   position: relative;
+  right: 16px;
+
 }
 
 
-.forgot-password-link {
+.login-forgot-password-link {
   width: fit-content;
   display: block;
   text-align: center;
@@ -135,10 +138,24 @@
   color: cornflowerblue;
   text-decoration: none;
   position: relative;
+  right: 16px;
+
 
 }
 
-.forgot-password-link:hover,
-.sign-up-link:hover {
+.login-forgot-password-link:hover,
+.demo-user-singin:hover,
+.signup-link:hover {
   text-decoration: underline;
+}
+
+.demo-user-singin{
+  width: fit-content;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  color: cornflowerblue;
+  text-decoration: none;
+  position: relative;
 }

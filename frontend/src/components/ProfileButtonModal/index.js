@@ -7,20 +7,25 @@ import LoginModal from '../LoginModal';
 import SignupModal from '../SignupModal';
 import { ModalContext } from '../../context/ModalContext';
 
-function ProfileButtonModal({ user }) {
+function ProfileButtonModal() {
   const history = useHistory();
   const modalRef = useRef();
   const dispatch = useDispatch();
   const { modal, openModal, closeModal } = useContext(ModalContext);
+  const formRef = useRef(null);
+
+   const user = useSelector((state) => state.session.user);
+   
 
   const logout = (e) => {
     dispatch(sessionActions.logout());
     history.push('/');
+    closeModal();
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (formRef.current && !formRef.current.contains(event.target)) {
         closeModal();
       }
     };
@@ -32,20 +37,34 @@ function ProfileButtonModal({ user }) {
     };
   }, []);
 
+
+
   return (
     <>
       <ul className='profileMenu'>
         {user ? (
           <div>
-            <li>{user.username}</li>
-            <li>
-              {user.firstName} {user.lastName}
-            </li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+
+
+            <div className='profile-menu-welcome'>
+            Hello, {user.firstName}!
+            </div>
+            <div className=''>
+            Hello, {user.email}!
+            </div>
+
+            <div className=''>
+              {user.email}
+            </div>
+
+            <div className='profile-menu-logout' onClick={() => logout()}>
+              Logout
+            </div>
+
+
+
           </div>
+
         ) : (
           <div>
             <div className='div-link' onClick={() => openModal('login')}>
