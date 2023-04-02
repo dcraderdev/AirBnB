@@ -78,6 +78,54 @@
   outline: none;
 }
 
+.signinDiv-button-disabled {
+  width: 100%;
+  padding: 10px;
+  background-color: #0f131a;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .2s border;
+  border: solid rgb(0, 0, 0) 1px;
+
+}
+
+.signinDiv-button-disabled:hover {
+  border: solid red 1px;
+}
+
+.signinDiv-button-disabled:focus {
+  outline: none;
+}
+
+
+
+
+.altLinks{
+  position: relative;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  left: 30%;
+}
+
+
+
+
+.sign-up-link {
+  width: fit-content;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  color: cornflowerblue;
+  text-decoration: none;
+  position: relative;
+}
+
+
 .forgot-password-link {
   width: fit-content;
   display: block;
@@ -87,11 +135,10 @@
   color: cornflowerblue;
   text-decoration: none;
   position: relative;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -10%);
+
 }
 
-.forgot-password-link:hover {
+.forgot-password-link:hover,
+.sign-up-link:hover {
   text-decoration: underline;
 }

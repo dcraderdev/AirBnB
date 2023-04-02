@@ -38,6 +38,7 @@
   font-size: 24px;
   color: #040402e1;
   cursor: pointer;
+  z-index: 1;
 }
 
 .spot-info {
