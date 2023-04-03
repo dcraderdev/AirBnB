@@ -70,9 +70,10 @@ npm run sequelize --prefix backend db:migrate:undo:all
 
 
 
-
+******** start command ********
 npm start
 
+******** env varibales ********
 JWT_SECRET - click "Generate"
 JWT_EXPIRES_IN - copy value from local .env file
 NODE_ENV - production

@@ -86,7 +86,7 @@ const SpotTile = ({ spot, setFavorites }) => {
             <div className="location">
               {city}, {state}
             </div>
-            <div className="avg-rating">{rating} ⭐️</div>
+            <div className="avg-rating">⭐️ {rating}</div>
           </div>
           <div className="price">${price} / night</div>
         </div>

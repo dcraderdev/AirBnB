@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState  } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotActions from '../../store/spots';
@@ -8,13 +8,19 @@ function SpotView() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(spotActions.getSpotThunk(spotId));
-  }, [dispatch, spotId]);
+  const user = useSelector((state) => state.session.user); 
+  const currentSpot = useSelector((state) => state.spots.currentSpot);
 
-  const currentSpot = useSelector(state => {
-    return state.spots.currentSpot;
-  });
+  useEffect(() => {
+    if(user) dispatch(spotActions.getSpotThunk(spotId));
+  }, [dispatch, spotId, user]);
+
+
+
+
+
+
+
 
   return (
     <div>

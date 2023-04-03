@@ -25,26 +25,29 @@
 .spot-tile-image-container {
   position: relative;
   width: 100%;
-  height: 200%;
+  height: 850px;
   overflow: hidden;
 }
 
 .spot-image {
+  bottom: -10px;
+  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 120%;
+  object-fit: cover;
 }
 
 /* git revert 273d557 */
 
 .heart-icon {
-  border: solid black 1px;
+  /* border: solid black 1px;
   position: relative;
   top: 8px;
   right: 8px;
   font-size: 24px;
   color: #040402e1;
   cursor: pointer;
-  z-index: 1;
+  z-index: 1; */
 }
 
 .spot-info {

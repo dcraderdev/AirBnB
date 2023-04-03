@@ -1,4 +1,6 @@
 import { csrfFetch } from './csrf';
+import {REMOVE_USER } from './session'
+
 
 const GET_SPOTS = 'spots/all';
 const getSpots = (spots) => {
@@ -40,6 +42,9 @@ export const getAllSpotsThunk = () => async (dispatch) => {
 export const getSpotThunk = (spotId) => async (dispatch) => {
 
   console.log(spotId);
+  if(spotId === null){
+    dispatch(getSpot(null))
+  }
 
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'GET',
@@ -111,6 +116,11 @@ const spotsReducer = (state = initialState, action) => {
         ...newState,
         spots: [...newState.spots, action.payload],
       };
+    case REMOVE_USER:
+      return {
+        ...newState,
+        currentSpot: null
+      }
 
     default:
       return newState;
