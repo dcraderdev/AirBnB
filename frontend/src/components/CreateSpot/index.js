@@ -28,8 +28,6 @@ const CreateSpot = () => {
     e.preventDefault();
     setErrors([]);
 
-    console.log(e);
-
     return dispatch(
       spotActions.createSpotThunk(
         country,
@@ -55,11 +53,9 @@ const CreateSpot = () => {
       console.log('Selected file:', file);
       setSpotPreviewImage(file.name)
       setSpotImages(()=>[...spotImages,file.name])
-      // Process the file as needed (e.g., upload to a server or display a preview)
     }
   }
 
-  console.log(spotImages);
 
   return (
 

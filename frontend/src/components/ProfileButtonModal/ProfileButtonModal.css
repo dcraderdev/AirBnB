@@ -99,7 +99,7 @@
   background-color: rgba(228, 228, 228, 0.2508);
 }
 
-.profile-menu-logout{
+.profile-menu-logout-button{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,12 +115,18 @@
   border-radius: 3px;
   cursor: pointer;
   transition: .1s background-color;
-  font-size: 13px;
+  font-size: 12px;
+  bottom: 1px;
 }
 
-.profile-menu-logout:hover {
+
+.profile-menu-logout-button:hover {
   background-color: #3b75e2;
 }
+.profile-menu-logout-button:active {
+  background-color: rgb(74, 113, 186);
+}
+
 
 .profile-user-welcome:hover{
   background-color: rgba(228, 228, 228, 0.2508);

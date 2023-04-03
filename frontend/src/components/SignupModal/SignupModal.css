@@ -73,6 +73,10 @@
   outline: none;
 }
 
+.signupDiv-button:active {
+  background-color: rgb(74, 113, 186);
+}
+
 .signupDiv-button-disabled {
   width: 100%;
   padding: 10px;
@@ -111,6 +115,10 @@
 
 .signup-login-link:hover {
   text-decoration: underline;
+}
+
+.signup-login-link:active {
+  text-decoration: none;
 }
 
 .usernameField-invalid,

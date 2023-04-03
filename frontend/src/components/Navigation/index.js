@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/index.js
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useState , useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -15,6 +15,12 @@ function Navigation({ isLoaded }){
 
   const user = useSelector(state=>{return state.session.user})
 
+  const history = useHistory()
+
+  const navHost = () => {
+    history.push('/host')
+  }
+
   return (
     <nav className="nav-bar">
       <div className='nav-line'></div>
@@ -22,7 +28,7 @@ function Navigation({ isLoaded }){
 
       <div className='nav-user-buttons'>
         {user && (
-          <div className='nav-host-div'>Create a New Spot</div>
+          <div className='nav-host-div' onClick={navHost}>Create a New Spot</div>
           )}
           <ProfileButton />
       </div>

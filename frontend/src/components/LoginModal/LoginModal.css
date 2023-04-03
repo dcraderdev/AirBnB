@@ -74,6 +74,10 @@
   background-color: #3b75e2;
 }
 
+.signinDiv-button:active {
+  background-color: rgb(74, 113, 186);
+}
+
 .signinDiv-button:focus {
   outline: none;
 }
@@ -147,6 +151,14 @@
 .login-signup-link:hover {
   text-decoration: underline;
 }
+
+.login-forgot-password-link:active,
+.demo-user-singin:active,
+.login-signup-link:active {
+  text-decoration: none;
+}
+
+
 
 .demo-user-singin{
   width: fit-content;

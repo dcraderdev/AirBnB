@@ -70,9 +70,9 @@ function ProfileButtonModal({ closeModal }) {
             Reservations
             </div>
 
-            <div className='profile-menu-logout' onClick={logout}>
+            <button className='profile-menu-logout-button' onClick={logout}>
               Logout
-            </div>
+            </button>
 
           </div>
 
