@@ -35,7 +35,6 @@ function SignupModal({ closeModal }) {
 
   const [usernameText, setUsernameText] = useState('Please enter an username');
   const [usernameClass, setUsernameClass] = useState('usernameField');
-  // if (sessionUser) return <Redirect to="/" />;
 
   const handleSignin = () => {
     closeModal();

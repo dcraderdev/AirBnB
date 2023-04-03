@@ -23,9 +23,6 @@ function LoginModal({ closeModal }) {
   const [buttonText, setButtonText] = useState('Log In');
 
 
-
-  // if (sessionUser) return <Redirect to="/" />;
-
   const handleForgotPassword = () => {
     closeModal();
     history.push('/forgotPassword');
@@ -91,7 +88,7 @@ function LoginModal({ closeModal }) {
 
 
 
-  
+
 
 
 
