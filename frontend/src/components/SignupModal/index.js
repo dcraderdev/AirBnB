@@ -31,8 +31,6 @@ function SignupModal({ closeModal }) {
   const [buttonText, setButtonText] = useState('Sign Up');
   const [emailText, setEmailText] = useState('Please enter an email');
   const [emailClass, setEmailClass] = useState('emailField');
-
-
   const [usernameText, setUsernameText] = useState('Please enter an username');
   const [usernameClass, setUsernameClass] = useState('usernameField');
 
