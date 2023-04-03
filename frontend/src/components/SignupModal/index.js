@@ -38,7 +38,7 @@ function SignupModal({ closeModal }) {
 
   const handleSignin = () => {
     closeModal();
-    openModal('signin');
+    openModal('login');
   };
 
   useEffect(() => {
