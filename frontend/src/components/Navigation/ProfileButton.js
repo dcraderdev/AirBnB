@@ -8,7 +8,7 @@ import './Navigation.css';
 function ProfileButton({ user }) {
   const { modal, openModal, closeModal } = useContext(ModalContext);
 
-  const buttonClass = `profileButton${modal === 'profileMenu' ? ' profileButtonActive' : ''}`;
+  const buttonClass = `nav-profile-button${modal === 'profileMenu' ? ' profile-button-active' : ''}`;
 
   return (
     <div>
@@ -16,8 +16,10 @@ function ProfileButton({ user }) {
         className={buttonClass}
         onClick={() => {openModal('profileMenu')}}
       >
-        <i className="fa-solid fa-bars" />
-        <i className="fa-solid fa-user" />
+        <div className='profile-button-icons'>
+          <i className="fa-solid fa-bars" />
+          <i className="fa-solid fa-user" />
+        </div>
       </button>
     </div>
   );

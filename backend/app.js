@@ -71,6 +71,7 @@ app.get('/', async(req,res,next)=>{
 app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
+
     err.errors = err.errors.map((e) => e.message);
     err.title = 'Validation error';
   }
@@ -89,10 +90,8 @@ app.use((_req, _res, next) => {
 
 // all other errors 
 app.use((err, _req, res, _next) => {
-
-
   res.status(err.status || 500);
-  res.json({
+  return res.json({
     message: err.message,
     statusCode: err.statusCode || 400,
     errors: err.errors,

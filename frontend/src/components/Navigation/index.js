@@ -16,13 +16,13 @@ function Navigation({ isLoaded }){
   const user = useSelector(state=>{return state.session.user})
 
   return (
-    <nav className="navBar">
-      <div className='navLine'></div>
+    <nav className="nav-bar">
+      <div className='nav-line'></div>
       <Logo />
 
-      <div className='user-buttons'>
+      <div className='nav-user-buttons'>
         {user && (
-          <div className='host-div'>Create a New Spot</div>
+          <div className='nav-host-div'>Create a New Spot</div>
           )}
           <ProfileButton />
       </div>

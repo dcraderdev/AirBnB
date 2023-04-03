@@ -13,31 +13,25 @@ function ProfileButtonModal({ closeModal }) {
   const dispatch = useDispatch();
   const { modal, openModal } = useContext(ModalContext);
   const formRef = useRef(null);
-
-   const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
    
-
-  const logout = (e) => {
-    dispatch(sessionActions.logout());
-    history.push('/');
-    closeModal();
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
         closeModal();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
-
+  const logout = (e) => {
+    dispatch(sessionActions.logout());
+    history.push('/');
+    closeModal();
+  };
   const navHistory = () => {
     closeModal();
     history.push('/host')
@@ -59,9 +53,7 @@ function ProfileButtonModal({ closeModal }) {
           <div>
             <div className='profile-user-welcome'>
               <div className='profile-icon'> <i className="fa-solid fa-user" /></div>
-              <div className='profile-hello'>Hello, </div>
-              
-              <div className='profile-user'>{user.firstName}!</div>
+              <div className='profile-hello'>Hello, {user.firstName}!</div>
 
               <div className='profile-email'>{user.email}</div>
             </div>

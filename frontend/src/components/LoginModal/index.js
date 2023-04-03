@@ -6,31 +6,32 @@ import './LoginModal.css';
 import { ModalContext } from '../../context/ModalContext';
 
 function LoginModal({ closeModal }) {
+
+  const { modal, openModal } = useContext(ModalContext);
   const sessionUser = useSelector((state) => state.session.user);
-  const [loggingIn, setLoggingIn] = useState([true]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const formRef = useRef(null);
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
   const [signInErrors, setSignInErrors] = useState({});
-  const [errors, setErrors] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const formRef = useRef(null);
-  const { modal, openModal } = useContext(ModalContext);
+
+
   const [disabledButton, setDisabledButton] = useState(false);
   const [buttonClass, setButtonClass] = useState('signinDiv-button');
   const [buttonText, setButtonText] = useState('Log In');
+
+
+
   // if (sessionUser) return <Redirect to="/" />;
 
   const handleForgotPassword = () => {
-    setLoggingIn(false);
     closeModal();
     history.push('/forgotPassword');
   };
 
   const handleSignUp = () => {
-    setLoggingIn(false);
     closeModal();
     openModal('signup');
   };
@@ -55,9 +56,19 @@ function LoginModal({ closeModal }) {
     setSignInErrors(loginErrors);
   }, [credential, password]);
 
+  
+  useEffect(() => {
+    if (Object.keys(signInErrors).length > 0) {
+      setButtonClass('signinDiv-button-disabled');
+    } else {
+      setButtonClass('signinDiv-button');
+    }
+  }, [signInErrors]);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage([]);
 
     try {
       const { data, response } = await dispatch(
@@ -67,7 +78,6 @@ function LoginModal({ closeModal }) {
       if (response.ok) closeModal();
     } catch (error) {
       console.error(error);
-      setErrorMessage('The provided credentials were invalid');
       setDisabledButton(true);
       setButtonClass('signinDiv-button-disabled');
       setButtonText('The provided credentials were invalid');
@@ -80,6 +90,11 @@ function LoginModal({ closeModal }) {
   };
 
 
+
+  
+
+
+
   const demoUser = async (e) => {
     e.preventDefault();
     const { response } = await dispatch(
@@ -88,17 +103,6 @@ function LoginModal({ closeModal }) {
     if (response.ok) closeModal();
   };
   
-
-
-  useEffect(() => {
-    if (Object.keys(signInErrors).length > 0) {
-      setButtonClass('signinDiv-button-disabled');
-    } else {
-      setButtonClass('signinDiv-button');
-    }
-  }, [signInErrors]);
-
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -118,13 +122,7 @@ function LoginModal({ closeModal }) {
   return (
     <div className="signin-form-page-container" ref={formRef}>
       <div className="signinHeader">Sign In</div>
-      <button
-        className="close-button"
-        onClick={() => {
-          closeModal();
-          setLoggingIn(false);
-        }}
-      >
+      <button className="close-button" onClick={closeModal} >
         X
       </button>
       <form onSubmit={handleSubmit} className="signinDiv">
