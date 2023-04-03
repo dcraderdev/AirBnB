@@ -11,7 +11,7 @@ import SpotView from './components/SpotView';
 import Home from './components/Home';
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
-import { ModalContext } from './store/ModalContext';
+import { ModalContext } from './context/ModalContext';
 
 function App() {
   const dispatch = useDispatch();

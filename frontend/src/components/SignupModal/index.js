@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import { ModalContext } from '../../store/ModalContext';
+import { ModalContext } from '../../context/ModalContext';
 
 import "./SignupModal.css";
 

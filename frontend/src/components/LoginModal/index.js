@@ -3,7 +3,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import './LoginModal.css';
-import { ModalContext } from '../../store/ModalContext';
+import { ModalContext } from '../../context/ModalContext';
 
 function LoginModal({ closeModal }) {
 

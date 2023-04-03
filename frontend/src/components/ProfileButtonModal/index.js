@@ -5,7 +5,7 @@ import * as sessionActions from '../../store/session';
 import './ProfileButtonModal.css';
 import LoginModal from '../LoginModal';
 import SignupModal from '../SignupModal';
-import { ModalContext } from '../../store/ModalContext';
+import { ModalContext } from '../../context/ModalContext';
 
 function ProfileButtonModal({ closeModal }) {
   const history = useHistory();
