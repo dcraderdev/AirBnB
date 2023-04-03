@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import ProfileButtonModal from '../ProfileButtonModal';
-import { ModalContext } from '../../context/ModalContext';
+import { ModalContext } from '../../store/ModalContext';
+
 
 import './Navigation.css';
 
