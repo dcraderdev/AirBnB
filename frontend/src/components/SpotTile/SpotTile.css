@@ -1,3 +1,8 @@
+.spot-tile-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .spot-tile {
   display: flex;
   flex-direction: column;
@@ -32,7 +37,8 @@
 /* git revert 273d557 */
 
 .heart-icon {
-  position: absolute;
+  border: solid black 1px;
+  position: relative;
   top: 8px;
   right: 8px;
   font-size: 24px;

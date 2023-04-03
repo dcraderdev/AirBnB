@@ -24,10 +24,10 @@ export async function csrfFetch(url, options = {}) {
   // if the response status code is 400 or above, then throw an error with the
     // error being the response
   if (res.status >= 400) {
-    const errorData = await res.json(); // parse the error messages
+    const errorData = await res.json(); 
     const error = new Error('Request failed');
     error.status = res.status;
-    error.data = errorData; // attach the error messages to the error object
+    error.data = errorData; 
     throw error;
   }
   // if the response status code is under 400, then return the response to the

@@ -80,6 +80,7 @@ function SignupModal({ closeModal }) {
 
   const handleSubmit = async (e) => {
     setErrors({})
+    setErrorStatus(false)
     e.preventDefault();
 
     try {
@@ -89,7 +90,6 @@ function SignupModal({ closeModal }) {
 
       if (response.ok) closeModal();
     } catch (error) {
-      setErrors(error.data)
       setDisabledButton(true);
       setButtonClass('signinDiv-button-disabled');
       setErrorStatus(true);
@@ -102,25 +102,32 @@ function SignupModal({ closeModal }) {
         }
       }
 
+console.log(error.data);
+console.log(error.data.errors);
+
+console.log(error.data.errors.username);
+console.log(error.data.errors.email);
+
+
       if (error.status === 403) {
-        if (error.data.errors && error.data.errors.username) {
+        if (error.data.errors && error.data.errors.email) {
           setUsername('Username must be unique');
           setUsernameClass('usernameField-invalid');
         }
-        if (error.data.errors && error.data.errors.email) {
+        if (error.data.errors && error.data.errors.username) {
           setEmail('Email must be unique');
           setEmailClass('emailField-invalid');
         }
       }
 
       setTimeout(() => {
+        setErrorStatus(false)
         setDisabledButton(false);
         setButtonClass('signupDiv-button');
         setEmail(emailText)
         setEmailClass('emailField');
         setUsername(usernameText)
         setUsernameClass('usernameField');
-        setErrorStatus(false);
       }, 3000);
     }
   };

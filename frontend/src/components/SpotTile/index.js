@@ -11,6 +11,8 @@ const SpotTile = ({ spot, setFavorites }) => {
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
   const [favorite, setFavorite] = useState([false]);
+  const [heartIcon, setHeartIcon] = useState("heart-icon");
+  const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
 
   const {
     name,
@@ -36,12 +38,21 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
 
-  let heartFill = favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart';
-
+  
   const setFav = () => {
     setFavorite(!favorite);
   };
+  
+  
+  const handleFavHover = (e) => {
 
+    
+    
+
+    
+    let heartFill = favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart';
+
+  };
 
   const handleMouseMove = (e) => {
     setTooltipDisplay(true)
@@ -54,17 +65,20 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
   return (
+    <div>
+
+          <div className={heartIcon} onClick={setFav} onMouseMove={handleFavHover}>
+            <div className={heartFill}></div>
+          </div>
+    
     <Link
       key={spot.id}
       to={`/spots/${spot.id}`}
-      style={{ textDecoration: 'none', color: 'inherit' }}
+      className="spot-tile-link"
     >
       <div className="spot-tile" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
         <div className="spot-tile-image-container">
           <img src={previewImage} alt="Spot preview" className="spot-image" />
-          <div className="heart-icon" onClick={setFav}>
-            <div className={heartFill}></div>
-          </div>
         </div>
 
         <div className="spot-info">
@@ -95,6 +109,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
     </Link>
+    </div>
   );
 };
 
