@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useRef, useContext, useState } from 'react';
+import { useHistory} from 'react-router-dom';
+import { useDispatch, useSelector  } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './ProfileButtonModal.css';
 import LoginModal from '../LoginModal';
@@ -13,8 +13,19 @@ function ProfileButtonModal({ closeModal }) {
   const dispatch = useDispatch();
   const { modal, openModal } = useContext(ModalContext);
   const formRef = useRef(null);
-  const user = useSelector((state) => state.session.user);
-   
+  const [hostText, setHostText] = useState('text')
+
+  const user = useSelector((state) => {
+    console.log(state);
+    return state.session.user
+  });
+
+
+console.log(user);
+
+
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
@@ -43,7 +54,6 @@ function ProfileButtonModal({ closeModal }) {
   const navModal = (type) => {
     closeModal();
     openModal(type)
-
   };
 
   return (
@@ -59,7 +69,7 @@ function ProfileButtonModal({ closeModal }) {
             </div>
 
             <div className='div-link' onClick={navHistory}>
-              Host an experience/Manage Spots
+             {hostText}
             </div>
 
             <div className='profile-messages'>
@@ -68,6 +78,10 @@ function ProfileButtonModal({ closeModal }) {
 
             <div className='profile-reservations'>
             Reservations
+            </div>
+
+            <div className='profile-favorites'>
+            Favorites
             </div>
 
             <button className='profile-menu-logout-button' onClick={logout}>

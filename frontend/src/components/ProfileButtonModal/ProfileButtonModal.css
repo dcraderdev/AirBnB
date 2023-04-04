@@ -74,7 +74,8 @@
   font-weight: 600;
   margin-bottom: 4px;
 }
-
+.profile-favorites,
+.profile-messages,
 .profile-reservations {
   position: relative;
   transition: background-color 0.2s ease;
@@ -84,15 +85,7 @@
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
 }
-.profile-messages {
-  position: relative;
-  transition: background-color 0.2s ease;
-  padding: 5px;
-  left: -40px;
-  width: 230px;
-  border-bottom-left-radius: 1px;
-  border-bottom-right-radius: 1px;
-}
+
 
 .profile-messages:hover,
 .profile-reservations:hover {

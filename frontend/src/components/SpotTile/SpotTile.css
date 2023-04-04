@@ -81,12 +81,14 @@
   position: absolute;
   width: 80%;
   top: 5px;
+  left: 5px;
   font-size: 14px;
 }
 
 .spot-tile-price {
   position: absolute;
   top: 24px;
+  left: 5px;
   color: #222;
   font-size: 13px;
   font-weight: 500;
@@ -95,7 +97,7 @@
 .spot-tile-night {
   position: absolute;
   top: 24px;
-  left: 40px;
+  left: 45px;
   color: #222;
   font-size: 14px;
   font-weight:lighter;

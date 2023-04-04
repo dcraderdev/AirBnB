@@ -1,10 +1,8 @@
 import React, { createContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 const ModalContext = createContext();
 
 const ModalProvider = ({ children }) => {
-  const history = useHistory();
 
   const [modal, setModal] = useState(null);
 
