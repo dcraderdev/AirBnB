@@ -105,7 +105,7 @@ let spots
       const lat = parseFloat(spot.lat);
       const lng = parseFloat(spot.lng);
       const price = parseFloat(spot.price);
-      const avgRating = parseFloat(spot.avgRating);
+      const avgRating = parseFloat(spot.avgRating).toFixed(2);
       return { 
         id: spot.id,
         ownerId: spot.ownerId,
@@ -242,14 +242,8 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       'createdAt',
       'updatedAt',
       [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-      [
-        Sequelize.fn(
-          'ROUND',
-          Sequelize.fn('AVG', Sequelize.col('Reviews.stars')),
-          1
-        ),
-        'avgStarRating',
-      ],
+      // [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('Reviews.stars')),3),'avgStarRating', ],
+      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')),'avgStarRating'],
     ],
     include: [
       {
@@ -281,7 +275,7 @@ if(spot){
   const lng = parseFloat(spot.lng);
   const price = parseFloat(spot.price);
   const numReviews = parseFloat(spot.numReviews);
-  const avgStarRating = parseFloat(spot.avgStarRating);
+  const avgStarRating = parseFloat(spot.avgStarRating).toFixed(2);
   return res.status(200).json({ 
     id: spot.id,
     ownerId: spot.ownerId,

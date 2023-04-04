@@ -122,9 +122,11 @@
 
 .profile-menu-logout-button:hover {
   background-color: #3b75e2;
+
 }
 .profile-menu-logout-button:active {
   background-color: rgb(74, 113, 186);
+
 }
 
 
@@ -133,3 +135,7 @@
 
 }
 
+.button {
+  background-color: #3b75e2;
+
+}

@@ -30,8 +30,8 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
   useEffect(()=>{
-    if(avgRating === null)setRating('New');
-    if (avgRating)setRating(avgRating)
+    if(avgRating !== 'NaN')setRating(avgRating)
+    if(avgRating === 'NaN')setRating('New!');
     setTileDescription((description + ' ' + description).slice(0, 80) + '...')  
   },[])
 
@@ -58,8 +58,8 @@ const SpotTile = ({ spot, setFavorites }) => {
   
 
   const handleMouseMove = (e) => {
-    // setTooltipDisplay(true)
-    setTooltip({ x: e.clientX, y: e.clientY + window.scrollY });
+    setTooltipDisplay(true)
+    setTooltip({ x: e.pageX, y: e.pageY - 110 });
   };
 
   const handleMouseLeave = () => {
@@ -79,14 +79,9 @@ const SpotTile = ({ spot, setFavorites }) => {
     >
       <div className="spot-tile" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
 
-
-
-
-
         <div className={heartIcon} onClick={setFav} onMouseMove={handleFavHover} onMouseLeave={handleFavLeave}>
           <div className={heartFill}></div>
         </div>
-
 
         
         <div className="spot-tile-image-container">
@@ -95,8 +90,12 @@ const SpotTile = ({ spot, setFavorites }) => {
 
         <div className="spot-tile-spot-info">
           <div className="spot-tile-location">{city}, {state}</div>
-          <div className="spot-tile-avg-rating">⭐️ {rating}</div>
-          <div className="spot-tile-price">${price} / night</div>
+          <div className="spot-tile-avg-rating-container">
+            <div className="spot-tile-avg-rating-star"><i className="fa-solid fa-star" /></div>
+            <div className="spot-tile-avg-rating">{rating}</div>
+          </div>
+          <div className="spot-tile-price">${price}</div>
+          <div className="spot-tile-night">night</div>
         </div>
         <div className="spot-tile-description-line"></div>
         <p className="spot-tile-short-description">{tileDescription}</p>
@@ -104,12 +103,10 @@ const SpotTile = ({ spot, setFavorites }) => {
       {tooltipDisplay && (
         <div className="tooltip tooltiptext"
         style={{
-          display: tooltipDisplay ? 'block' : 'none',
           top: tooltip.y + 'px',
-          left: tooltip.x + 'px',
-        }}>
+          left: tooltip.x + 'px'}}>
           {name}
-          </div>
+        </div>
       )}
 
       </div>

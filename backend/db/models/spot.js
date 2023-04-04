@@ -109,7 +109,7 @@ module.exports = (sequelize, DataTypes) => {
               'updatedAt',
               [
                 Sequelize.literal(
-                  `(SELECT ROUND(AVG(stars), 1) FROM ${
+                  `(SELECT AVG(stars) FROM ${
                     schema ? `"${schema}"."Reviews"` : 'Reviews'
                   } WHERE "Reviews"."spotId" = "Spot"."id")`
                 ),

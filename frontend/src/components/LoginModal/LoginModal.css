@@ -121,7 +121,7 @@
   color: cornflowerblue;
   text-decoration: none;
   position: relative;
-  right: 16px;
+  right: 21px;
 
 }
 
@@ -135,10 +135,21 @@
   color: cornflowerblue;
   text-decoration: none;
   position: relative;
-  right: 16px;
-
-
+  right: 21px;
 }
+
+.demo-user-singin{
+  left: 14px;
+  width: fit-content;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  color: cornflowerblue;
+  text-decoration: none;
+  position: relative;
+}
+
 
 .login-forgot-password-link:hover,
 .demo-user-singin:hover,
@@ -154,13 +165,3 @@
 
 
 
-.demo-user-singin{
-  width: fit-content;
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  cursor: pointer;
-  color: cornflowerblue;
-  text-decoration: none;
-  position: relative;
-}

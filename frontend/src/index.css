@@ -27,3 +27,8 @@
 body{
   background-image: linear-gradient(to right, #fcfbf7, #fffefb);
 }
+
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}

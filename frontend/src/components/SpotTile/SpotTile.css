@@ -5,9 +5,7 @@
 
 
 
-*{
-  font-family: 'Merriweather', serif;
-}
+
 
 .spot-tile {
   position: relative;
@@ -20,8 +18,7 @@
   color: inherit;
   cursor: pointer;
   margin-bottom: 16px;
-  font-family: Arial, sans-serif;
-  height: 330px;
+  height: 220px;
   max-width: 420px;
 }
 
@@ -37,7 +34,7 @@
   top: 0%;
   left: 0%;
   width: 100%;
-  height: 70%;
+  height: 80%;
   border-radius: 14px;
   overflow: hidden;
   justify-content: center;
@@ -68,11 +65,12 @@
 }
 
 .spot-tile-spot-info {
+
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 30%;
+  height: 20%;
   width: 100%;
   left: 0%;
   bottom: 0%;
@@ -83,20 +81,49 @@
   position: absolute;
   width: 80%;
   top: 5px;
+  font-size: 14px;
 }
 
 .spot-tile-price {
   position: absolute;
-  top: 30px;
-  bottom: 40%;
+  top: 24px;
   color: #222;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.spot-tile-night {
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  color: #222;
+  font-size: 14px;
+  font-weight:lighter;
+
+}
+
+.spot-tile-avg-rating-container {
+  width: 70px;
+  height: 30px;
+  position: absolute;
+  right: 4px;
+  top: 5px;
+  transform: scale(.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+.spot-tile-avg-rating-star {
+  position: relative;
+  left: 5px;
+  transform: scale(.8);
 }
 
 .spot-tile-avg-rating {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  color: #222;
+  font-size: 14px;
 }
 
 .spot-tile-short-description {
@@ -117,7 +144,7 @@
 
 
 .tooltip {
-  position: absolute;
+  position: relative;
   width: fit-content;
   height: fit-content;
 
@@ -135,7 +162,7 @@
   text-align: center;
   border-radius: 6px;
   padding: 5px;
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   white-space: nowrap;
   opacity: 0;
