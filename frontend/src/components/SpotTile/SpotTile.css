@@ -3,100 +3,116 @@
   color: inherit;
 }
 
+body{
+  background-color: bisque;
+}
+
+*{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .spot-tile {
+  position: relative;
+
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 5px;
   background-color: #fff;
-  text-decoration: none;
   color: inherit;
   cursor: pointer;
   margin-bottom: 16px;
   font-family: Arial, sans-serif;
   height: 270px;
+  max-width: 400px;
 }
 
-.spot-tile:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.spot-tile:hover > .spot-tile-image-container{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.spot-tile:hover{
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .spot-tile-image-container {
-  position: relative;
+  position: absolute;
+  top: 0%;
+  left: 0%;
   width: 100%;
-  height: 850px;
+  height: 70%;
+  border-radius: 14px;
   overflow: hidden;
 }
 
 .spot-image {
-  bottom: -10px;
-  position: absolute;
   width: 100%;
-  height: 120%;
-  object-fit: cover;
+  height: 100%;
+
 }
 
 /* git revert 273d557 */
 
 .heart-icon {
-  /* border: solid black 1px;
-  position: relative;
-  top: 8px;
+  position: absolute;
+  top: 2px;
   right: 8px;
   font-size: 24px;
   color: #040402e1;
   cursor: pointer;
-  z-index: 1; */
+  z-index: 1;
+  width: fit-content;
+}
+
+.large{
+  transform: scale(1.2);
 }
 
 .spot-info {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  top: 10px;
+  height: 30%;
+  width: 100%;
+  left: 0%;
+  bottom: 0%;
 }
 
-.location-rating {
-  
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.location {
+.spot-tile-location {
+  position: absolute;
   width: 80%;
+  top: 5px;
 }
 
-.price {
-  position: relative;
-  height: 100%;
-  top: 10px;
+.spot-tile-price {
+  position: absolute;
+  top: 30px;
   bottom: 40%;
   color: #222;
 }
 
-.avg-rating {
-  font-weight: bold;
-  color: #f5a623;
+.spot-tile-avg-rating {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #222;
 }
 
 .spot-short-description {
-  position: relative;
+  /* position: absolute;
   font-size: 15px;
   height: 80%;
   bottom: -15px;
   padding-top: 12px;
-  padding: 5px;
+  padding: 5px; */
 }
 
 .spot-description-line {
-  position: relative;
+  /* position: relative;
   bottom: -25px;
 
-  border-top: solid black 1px;
+  border-top: solid black 1px; */
 }
 
 
@@ -104,7 +120,6 @@
   position: absolute;
   width: fit-content;
   height: fit-content;
-  pointer-events: none;
 
 }
 

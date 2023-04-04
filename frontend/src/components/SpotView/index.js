@@ -31,7 +31,7 @@ function SpotView() {
       {!currentSpot && <p>Loading...</p>}
 
       {currentSpot && user && (
-        <div>
+        <div className="spot-view-container">
 
           <div className="spot-view-header">
             
@@ -53,7 +53,7 @@ function SpotView() {
             </div>
 
             <div className="spot-view-slide-container">
-              image slide component
+              image slider component
             </div>
           </div>
 
@@ -71,7 +71,7 @@ function SpotView() {
               <div>
                 Price:{currentSpot.price} ⭐️:{rating} Reviews:{currentSpot.numReviews} 
               </div>
-              <button className="spot-view-reservation-button"></button>
+              <button className="spot-view-reservation-button divButton"></button>
             </div>
           </div>
 

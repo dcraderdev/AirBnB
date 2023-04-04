@@ -35,27 +35,29 @@ const SpotTile = ({ spot, setFavorites }) => {
     setTileDescription((description + ' ' + description).slice(0, 80) + '...')  
   },[])
 
-
-
-
   
-  const setFav = () => {
+  const setFav = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    // stop propagation
+    // stop prevent default
     setFavorite(!favorite);
+    setHeartFill(favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart');
+
   };
   
   
   const handleFavHover = (e) => {
-
-    
-    
-
-    
-    let heartFill = favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart';
-
+    setHeartFill(favorite ? 'fa-regular fa-heart large' : 'fa-solid fa-heart large')
   };
 
+  const handleFavLeave = (e) => {
+    setHeartFill(favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart')
+  };
+  
+
   const handleMouseMove = (e) => {
-    setTooltipDisplay(true)
+    // setTooltipDisplay(true)
     setTooltip({ x: e.clientX, y: e.clientY + window.scrollY });
   };
 
@@ -67,9 +69,7 @@ const SpotTile = ({ spot, setFavorites }) => {
   return (
     <div>
 
-          <div className={heartIcon} onClick={setFav} onMouseMove={handleFavHover}>
-            <div className={heartFill}></div>
-          </div>
+      
     
     <Link
       key={spot.id}
@@ -77,18 +77,25 @@ const SpotTile = ({ spot, setFavorites }) => {
       className="spot-tile-link"
     >
       <div className="spot-tile" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+
+
+
+
+
+        <div className={heartIcon} onClick={setFav} onMouseMove={handleFavHover} onMouseLeave={handleFavLeave}>
+          <div className={heartFill}></div>
+        </div>
+
+
+        
         <div className="spot-tile-image-container">
           <img src={previewImage} alt="Spot preview" className="spot-image" />
         </div>
 
         <div className="spot-info">
-          <div className="location-rating">
-            <div className="location">
-              {city}, {state}
-            </div>
-            <div className="avg-rating">⭐️ {rating}</div>
-          </div>
-          <div className="price">${price} / night</div>
+          <div className="spot-tile-location">{city}, {state}</div>
+          <div className="spot-tile-avg-rating">⭐️ {rating}</div>
+          <div className="spot-tile-price">${price} / night</div>
         </div>
         <div className="spot-description-line"></div>
         <p className="spot-short-description">{tileDescription}</p>
