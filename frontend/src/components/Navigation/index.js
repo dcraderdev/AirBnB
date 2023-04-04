@@ -28,7 +28,7 @@ function Navigation({ isLoaded }){
 
       <div className='nav-user-buttons'>
         {user && (
-          <div className='nav-host-div' onClick={navHost}>Create a New Spot</div>
+          <div className='nav-host-div' onClick={navHost}>Airbnb your home</div>
           )}
           <ProfileButton />
       </div>

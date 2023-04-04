@@ -3,12 +3,10 @@
   color: inherit;
 }
 
-body{
-  background-color: bisque;
-}
+
 
 *{
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Merriweather', serif;
 }
 
 .spot-tile {
@@ -23,8 +21,8 @@ body{
   cursor: pointer;
   margin-bottom: 16px;
   font-family: Arial, sans-serif;
-  height: 270px;
-  max-width: 400px;
+  height: 330px;
+  max-width: 420px;
 }
 
 .spot-tile:hover > .spot-tile-image-container{
@@ -42,20 +40,22 @@ body{
   height: 70%;
   border-radius: 14px;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
-.spot-image {
+
+.spot-tile-spot-image {
   width: 100%;
   height: 100%;
-
 }
 
 /* git revert 273d557 */
 
 .heart-icon {
   position: absolute;
-  top: 2px;
-  right: 8px;
+  top: 8px;
+  right: 12px;
   font-size: 24px;
   color: #040402e1;
   cursor: pointer;
@@ -67,7 +67,7 @@ body{
   transform: scale(1.2);
 }
 
-.spot-info {
+.spot-tile-spot-info {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@ body{
   color: #222;
 }
 
-.spot-short-description {
+.spot-tile-short-description {
   /* position: absolute;
   font-size: 15px;
   height: 80%;
@@ -108,7 +108,7 @@ body{
   padding: 5px; */
 }
 
-.spot-description-line {
+.spot-tile-description-line {
   /* position: relative;
   bottom: -25px;
 

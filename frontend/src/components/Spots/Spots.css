@@ -5,19 +5,41 @@
   padding: 16px;
 }
 
-@media screen and (min-width: 1024px) {
+/* Show 1 spot tile when screen width is less than 450px */
+@media screen and (max-width: 600px) {
+  .spots-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Show 2 spot tiles when screen width is between 451px and 970px */
+@media screen and (min-width: 601px) and (max-width: 970px) {
+  .spots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Show 3 spot tiles when screen width is between 971px and 1160px */
+@media screen and (min-width: 971px) and (max-width: 1160px) {
+  .spots-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Show 4 spot tiles when screen width is 1160px or more */
+@media screen and (min-width: 1161px) {
   .spots-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-
-
 .spots-wrapper {
   position: relative;
-  max-width: 1300px;
+  max-width: 1400px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, 0%);
   margin-top: 15px; 
+  display: flex;
+  justify-content: center;
 }

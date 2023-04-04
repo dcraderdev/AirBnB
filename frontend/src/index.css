@@ -23,3 +23,7 @@
   z-index: 100;
   background-color: transparent;
 }
+
+body{
+  background-image: linear-gradient(to right, #fcfbf7, #fffefb);
+}

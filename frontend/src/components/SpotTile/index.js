@@ -30,7 +30,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
   useEffect(()=>{
-    if(avgRating === null)setRating('new');
+    if(avgRating === null)setRating('New');
     if (avgRating)setRating(avgRating)
     setTileDescription((description + ' ' + description).slice(0, 80) + '...')  
   },[])
@@ -41,8 +41,9 @@ const SpotTile = ({ spot, setFavorites }) => {
     e.preventDefault()
     // stop propagation
     // stop prevent default
-    setFavorite(!favorite);
-    setHeartFill(favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart');
+    const fav = !favorite
+    setFavorite(fav);
+    setHeartFill(fav ? 'fa-regular fa-heart large' : 'fa-solid fa-heart large');
 
   };
   
@@ -89,16 +90,16 @@ const SpotTile = ({ spot, setFavorites }) => {
 
         
         <div className="spot-tile-image-container">
-          <img src={previewImage} alt="Spot preview" className="spot-image" />
+          <img src={previewImage} alt="Spot preview" className="spot-tile-spot-image" />
         </div>
 
-        <div className="spot-info">
+        <div className="spot-tile-spot-info">
           <div className="spot-tile-location">{city}, {state}</div>
           <div className="spot-tile-avg-rating">⭐️ {rating}</div>
           <div className="spot-tile-price">${price} / night</div>
         </div>
-        <div className="spot-description-line"></div>
-        <p className="spot-short-description">{tileDescription}</p>
+        <div className="spot-tile-description-line"></div>
+        <p className="spot-tile-short-description">{tileDescription}</p>
 
       {tooltipDisplay && (
         <div className="tooltip tooltiptext"
