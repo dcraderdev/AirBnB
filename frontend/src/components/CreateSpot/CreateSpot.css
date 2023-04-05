@@ -11,7 +11,7 @@
   top: 80px;
   display: flex;
   align-items: center;
-  transform: translate(-50%,-10%);
+  transform: translate(-50%,0%) scale(1.2);
   left: 50%;
 
 }

@@ -71,7 +71,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
   const handleMouseMove = (e) => {
     setTooltipDisplay(true)
-    setTooltip({ x: e.pageX, y: e.pageY - 90 });
+    setTooltip({ x: e.pageX - 35, y: e.pageY - 90 });
   };
 
   const handleMouseLeave = () => {
@@ -106,8 +106,10 @@ const SpotTile = ({ spot, setFavorites }) => {
             <div className="spot-tile-avg-rating-star"><i className="fa-solid fa-star" /></div>
             <div className="spot-tile-avg-rating">{rating}</div>
           </div>
-          <div className="spot-tile-price">${price}</div>
-          <div className="spot-tile-night">night</div>
+          <div className="spot-tile-price-night-container">
+            <div className="spot-tile-price">${price}</div>
+            <div className="spot-tile-night"> night</div>
+          </div>
         </div>
         <div className="spot-tile-description-line"></div>
         <p className="spot-tile-short-description">{tileDescription}</p>

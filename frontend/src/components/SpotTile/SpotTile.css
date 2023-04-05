@@ -84,24 +84,31 @@
   left: 5px;
   font-size: 14px;
 }
+.spot-tile-price-night-container{  
+  position: relative;
+  width: 100px;
+  height: fit-content;
+  display: flex;
+  align-items:flex-start;
+  top: 24px;
+
+}
 
 .spot-tile-price {
-  position: absolute;
-  top: 24px;
-  left: 5px;
+  position: relative;
   color: #222;
   font-size: 13px;
   font-weight: 500;
+  padding-left: 5px;
+
 }
 
 .spot-tile-night {
-  position: absolute;
-  top: 24px;
-  left: 45px;
+  padding-left: 4px;
+  position: relative;
   color: #222;
   font-size: 14px;
   font-weight:lighter;
-
 }
 
 .spot-tile-avg-rating-container {
@@ -128,21 +135,6 @@
   font-size: 14px;
 }
 
-.spot-tile-short-description {
-  /* position: absolute;
-  font-size: 15px;
-  height: 80%;
-  bottom: -15px;
-  padding-top: 12px;
-  padding: 5px; */
-}
-
-.spot-tile-description-line {
-  /* position: relative;
-  bottom: -25px;
-
-  border-top: solid black 1px; */
-}
 
 
 .tooltip {
