@@ -161,7 +161,7 @@ const CreateSpot = () => {
               />
             </label>
 
-            <label className="lat">
+            {/* <label className="lat">
               Latitude (optional)
               <input
                 className="lat-field"
@@ -179,7 +179,7 @@ const CreateSpot = () => {
                 value={lng}
                 onChange={(e) => setLng(e.target.value)}
               />
-            </label>
+            </label> */}
 
 
 

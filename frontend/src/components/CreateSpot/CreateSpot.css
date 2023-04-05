@@ -123,29 +123,29 @@
 
 .city{
   position: absolute;
-  top: 175px;
+  top: 155px;
 
 }
 .state{
   position: absolute;
-  top: 175px;
-
-}
-
-.city-field{
-  position: absolute;
-  width: 45%;
-  top: 175px;
-  left: 20px;
-}
-.state-field{
-  position: absolute;
-  width: 45%;
-  top: 175px;
+  top: 155px;
   left: 200px;
 }
 
-.lat{
+.city-field{
+  position: relative;
+  width: 114%;
+  top: 0px;
+  left: 0px;
+}
+.state-field{
+  position: relative;
+  width: 115%;
+  top: 0px;
+  left: 20px;
+}
+
+/* .lat{
   padding-left: 5px;
 }
 .lng{
@@ -163,7 +163,7 @@
   width: 45%;
   top: 205px;
   left: 200px;
-}
+} */
 
 
 
