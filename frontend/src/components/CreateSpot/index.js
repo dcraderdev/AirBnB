@@ -234,7 +234,7 @@ const CreateSpot = () => {
 
 
 
-            <button type="submit">Host</button>
+            <button className='host-form-submit-button' type="submit">Host</button>
           </form>
         </div>
       </div>

@@ -350,12 +350,18 @@
   position: relative;
   width: 100px;
   height: 35px;
-  bottom: 10%;
-  left: 170px;
+  left: 100px;
+  top: 10px;
 }
 
 
-
+.host-form-submit-button{
+  position: relative;
+  width: 100px;
+  height: 35px;
+  left: 230px;
+  top: 303px;
+}
 
 
 

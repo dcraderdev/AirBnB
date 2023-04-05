@@ -19,8 +19,7 @@ function SpotView() {
       dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
       })
     }
-    // setImageUrl(logo);
-    // setPreviewImageClass('preview-image-logo');
+    window.scrollTo(0, 0);
   }, [dispatch, spotId, user]);
 
   useEffect(() => {
