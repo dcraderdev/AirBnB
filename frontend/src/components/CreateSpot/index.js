@@ -23,6 +23,12 @@ const CreateSpot = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+
+
+console.log(spotPreviewImage);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,6 +67,7 @@ const CreateSpot = () => {
       console.log('Selected file:', file);
       setSpotPreviewImage(file.name)
       setSpotImages(()=>[...spotImages,file.name])
+      
     }
   }
 
@@ -243,7 +250,7 @@ const CreateSpot = () => {
       <div className='image-container'>
 
         <div className='image-main-container'>
-          <div className='image-main'>Image goes here</div>
+          <div className='image-main'>{spotPreviewImage}</div>
         </div>
 
         <input

@@ -3,6 +3,7 @@
 }
 
 
+
 .host-form-page {
   max-width: 1000px;
   height: 750px;
@@ -187,12 +188,6 @@
 
 
 
-
-
-
-
-
-
 .hostDiv input:hover {
   border: 1px solid rgb(0, 0, 0,0.4);
 }
@@ -201,7 +196,6 @@
   outline: none;
   border: 1px solid cornflowerblue;
 }
-
 
 
 .host-form-desc-header{
@@ -267,7 +261,7 @@
   display: block;
   width: 435px;
   padding: 5px;
-  margin-top: 3px;
+  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 14px;
@@ -285,7 +279,7 @@
   }
   
 .host-form-price-memo{
-  margin-top: 6px;
+  margin-top: 5px;
   position: relative;
   top: 220px;
   font-size: 10px;
@@ -302,7 +296,7 @@
   display: block;
   width: 100%;
   padding: 5px;
-  margin-top: 6px;
+  margin-top: 9px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 14px;

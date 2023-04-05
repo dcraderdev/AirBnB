@@ -63,7 +63,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
   const handleMouseMove = (e) => {
     setTooltipDisplay(true)
-    setTooltip({ x: e.pageX - 35, y: e.pageY - 90 });
+    setTooltip({ x: e.pageX, y: e.pageY - 90 });
   };
 
   const handleMouseLeave = () => {

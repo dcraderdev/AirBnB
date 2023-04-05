@@ -84,3 +84,24 @@ DATABASE_URL - copy value from Internal Database URL field
 
 
 npx sequelize-cli seed:generate --name user-seeds
+
+
+
+airb-n-b-clone-photos
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::airb-n-b-clone-photos/public/*"
+      ]
+    }
+  ]
+}
