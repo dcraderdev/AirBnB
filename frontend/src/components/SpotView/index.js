@@ -74,13 +74,16 @@ function SpotView() {
           </div>
 
           <div className="spot-view-des-res-container">
+            
 
             <div className="spot-view-description-header">
               Hosted by {currentSpot.Owner.firstName} {currentSpot.Owner.lastName}
             </div>
-            
-            <div className="spot-view-description">
-              <p>{currentSpot.description}</p>
+            <div className="spot-view-description-container">
+
+              <div className="spot-view-description-text">
+                <p>{currentSpot.description}</p>
+              </div>
             </div>
 
             <div className="spot-view-reservation-container">
@@ -92,6 +95,11 @@ function SpotView() {
           </div>
 
 
+        <div className="spot-view-review-container">
+          REVIEW COMPONENT
+
+        </div>
+             
         </div>
       )}
     </div>
