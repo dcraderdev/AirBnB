@@ -3,23 +3,24 @@
 }
 
 .host-form-page {
-  position: fixed;
-  top: 83px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  border: solid black 5px;
 
+  max-width: 1000px;
+  height: 1000px;
+  width: 1000px;
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translate(-50%,0%);
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 0;
-  left: 0;
+
 }
 
 
 .host-form-page-container {
-  position: absolute;
+  position: relative;
   right: 5%;
   top: 1%;
   border: 1px solid rgb(0, 0, 0);
@@ -29,11 +30,15 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 40%;
   height: 90%;
-
 }
 
+
+
+
+
+
 .image-container {
-  position: absolute;
+  position: relative;
   left: 5%;
   top: 1%;
   border: 1px solid rgb(0, 0, 0);
@@ -91,52 +96,107 @@
   height: 30px;
 }
 
-
-.close-button {
-  position: relative;
-  top: -20px;
-  left: -10px;
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  transform: scale(.8);
-}
-.country{
+.hostDiv label {
+  font-size: 10px;
   color: black;
 }
 
-.hostDiv label {
-  width: 95%;
-  padding: 3px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-
 .hostDiv input {
-  width: 95%;
-  padding: 3px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  padding: 1px;
+  margin-bottom: 3px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 14px;
   cursor: pointer;
-  border: 1px solid rgb(106, 106, 106);
+}
+.country{
+  position: relative;
+  top: 5px;
 }
 
+.address-field,
+.country-field{
+  position: relative;
+  width: 100%;
+}
+
+
+.city{
+  position: absolute;
+  top: 175px;
+
+}
+.state{
+  position: absolute;
+  top: 175px;
+
+}
+
+.city-field{
+  position: absolute;
+  width: 45%;
+  top: 175px;
+  left: 20px;
+}
+.state-field{
+  position: absolute;
+  width: 45%;
+  top: 175px;
+  left: 200px;
+}
+
+.lat{
+  padding-left: 5px;
+}
+.lng{
+  padding-left: 5px;
+}
+
+.lat-field{
+  position: absolute;
+  width: 45%;
+  top: 205px;
+  left: 20px;
+}
+.lng-field{
+  position: absolute;
+  width: 45%;
+  top: 205px;
+  left: 200px;
+}
+
+
+
 .hostDiv input:hover {
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0,0.4);
 }
 
 .hostDiv input:focus {
   outline: none;
   border: 1px solid cornflowerblue;
 }
+
+
+
+
+
+
+.host-form-loc-header{
+  position: relative;
+  top: 4px;
+  }
+  
+.host-form-loc-memo{
+  position: relative;
+  top: 4px;
+  font-size: 12px;
+}
+
+
+
+
+
+
 
 .hostDiv-button {
   width: 100%;

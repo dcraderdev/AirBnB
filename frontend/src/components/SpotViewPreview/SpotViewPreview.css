@@ -1,0 +1,105 @@
+.spot-view-container{
+  border: solid black 1px;
+  max-width: 1000px;
+  position: relative;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%,0%);
+  /* margin: auto; */
+}
+
+
+.spot-view-header{
+
+}
+
+.spot-view-image-container {
+  border: solid black 1px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.spot-view-preview-image-container {
+  position: relative;
+  left: 20px;
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.spot-view-slide-container {
+  border: solid rgb(32, 186, 101) 1px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 300px;
+  left: 40px;
+
+}
+
+
+
+.spot-view-preview-image{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-image-logo{
+  position: relative;
+  width: 80%;
+  height: 70%;
+  left: 10%;
+  top: 15%;
+}
+
+
+
+.spot-view-des-res-container {
+  border: solid rgb(186, 32, 32) 1px;
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.spot-view-reservation-container{
+  border: solid rgb(168, 32, 186) 1px;
+  position: absolute;
+  width: 20%;
+  height: 25%;
+  right: 5%;
+  top: 2%;
+  border-radius: 15px;
+}
+
+
+.spot-view-reservation-button{
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  bottom: 3%;
+  padding: 10px;
+  background-color: rgb(74, 113, 186);
+  color: white;
+  font-weight: bold;
+  border: solid rgb(74, 113, 186) 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .1s background-color;
+}
+
+.spot-view-reservation-button:hover {
+  background-color: #3b75e2;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+}
+
+.spot-view-reservation-button:active {
+  background-color: rgb(74, 113, 186);
+  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}

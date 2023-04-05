@@ -44,16 +44,8 @@ const CreateSpot = () => {
         spotPreviewImage,
       ))
 
-      console.log(response);
-      console.log(data.id);
-      console.log(`/spots/${data.id}`);
-      // if (response.ok){
-      //   console.log('-=-=-=');
-      //   console.log(response);
-      //   console.log('-=-=-=');
-// if(data) history.push(`/spots/${data.id}`)
+    if(data) history.push(`/spots/${data.id}`)
       
-      // }
     } catch (error) {
       console.error(error);
     };
@@ -119,24 +111,27 @@ const CreateSpot = () => {
         <div className="hostHeader">Host an Airbnb</div>
 
         <div className="hostDiv">
+
           <form onSubmit={handleSubmit}>
 
+            <div className='host-form-loc-header'>Where's your place located?</div>
+            <div className='host-form-loc-memo'>Guests will only get your exact address once they booked a reservation.</div>
 
             <label className="country">
               Country
               <input
-                className="countryField"
+                className="country-field"
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 required
-              />
+                />
             </label>
 
             <label className="address">
               Street Address
               <input
-                className="addressField"
+                className="address-field"
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -147,7 +142,7 @@ const CreateSpot = () => {
             <label className="city">
               City
               <input
-                className="cityField"
+                className="city-field"
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
@@ -158,7 +153,7 @@ const CreateSpot = () => {
             <label className="state">
               State
               <input
-                className="stateField"
+                className="state-field"
                 type="text"
                 value={state}
                 onChange={(e) => setState(e.target.value)}
@@ -169,7 +164,7 @@ const CreateSpot = () => {
             <label className="lat">
               Latitude (optional)
               <input
-                className="latField"
+                className="lat-field"
                 type="text"
                 value={lat}
                 onChange={(e) => setLat(e.target.value)}
@@ -179,7 +174,7 @@ const CreateSpot = () => {
             <label className="lng">
               Longitude (optional)
               <input
-                className="lngField"
+                className="lng-field"
                 type="text"
                 value={lng}
                 onChange={(e) => setLng(e.target.value)}
@@ -192,10 +187,12 @@ const CreateSpot = () => {
 
 
 
+{/* 
 
-
-
-
+            <div>Describe your place to guests</div>
+            <div>
+              Mention the best features of your space, any special amentities likefast wif or parking, and what you love about the neighborhood.
+            </div>
 
             <label className="description">
               Description
@@ -208,6 +205,15 @@ const CreateSpot = () => {
               />
             </label>
 
+            <div>
+              Create a title for your spot
+            </div>
+
+            <div>
+              Catch guests' attention with a spot title that highlights what makesyour place special.
+            </div>
+
+
             <label className="spotTitle">
               Spot Name
               <input
@@ -218,6 +224,14 @@ const CreateSpot = () => {
                 required
               />
             </label>
+
+            <div>
+              Set a base price for your spot
+            </div>
+
+            <div>
+              Competitive pricing can help your listing stand out and rank higher in search results.
+            </div>
 
             <label className="spotPrice">
               Spot Price
@@ -230,7 +244,15 @@ const CreateSpot = () => {
               />
             </label>
 
-            <label className="spotPreviewImage">
+            <div>
+              Liven up your spot with photos
+            </div>
+
+            <div>
+              Choose a file or submit a link to at least one photo to publish your spot.
+            </div> */}
+
+            {/* <label className="spotPreviewImage">
               Spot Preview Image
               <input
                 className="spotPreviewImageField"
@@ -240,7 +262,10 @@ const CreateSpot = () => {
                 required
               />
             </label>
-            <button type="submit">Host</button>
+
+
+
+            <button type="submit">Host</button> */}
           </form>
         </div>
       </div>
