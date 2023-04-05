@@ -19,14 +19,15 @@ const CreateSpot = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
+  const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
   const [spotImages, setSpotImages] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const fileTypes = ["pdf", "png", "jpg", "jpeg", "gif"];
 
-
-console.log(spotPreviewImage);
-
+console.log('--->',spotPreviewImage);
+ 
 
 
   const handleSubmit = async (e) => {
@@ -47,7 +48,7 @@ console.log(spotPreviewImage);
         description,
         name,
         price,
-        spotPreviewImage,
+        spotImages,
       ))
 
     if(data) history.push(`/spots/${data.id}`)
@@ -58,15 +59,24 @@ console.log(spotPreviewImage);
       console.log(error.status);
     };
   };
-  
 
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
+      console.log(URL.createObjectURL(file));
+
+      if (file && !fileTypes.includes(`${file.type.split("/")[1]}`)){
+        console.log('doesnt include');
+      }
+
+
       console.log('Selected file:', file);
-      setSpotPreviewImage(file.name)
+      setSpotPreviewImage(URL.createObjectURL(file))
+      setSpotPreviewImageLoaded(true)
+
       setSpotImages(()=>[...spotImages,file.name])
+
       
     }
   }
@@ -250,7 +260,7 @@ console.log(spotPreviewImage);
       <div className='image-container'>
 
         <div className='image-main-container'>
-          <div className='image-main'>{spotPreviewImage}</div>
+          <div className='image-main'>{spotPreviewImageLoaded && <img src={spotPreviewImage} alt='preview'></img>}</div>
         </div>
 
         <input
@@ -259,7 +269,7 @@ console.log(spotPreviewImage);
         style={{ display: 'none' }}
         accept="image/*"
         onChange={handleFileSelect}
-      />
+        />
 
         <div className='image-main-buttons'>
           <button 
@@ -290,4 +300,5 @@ export default CreateSpot;
 
 
 //    /Users/donovancrader/Documents/github/AirBnB/frontend/src/public/logo.png
- 
+//   // URL.createObjectURL(image)
+// https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL

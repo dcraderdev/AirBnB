@@ -14,32 +14,27 @@ const SpotTile = ({ spot, setFavorites }) => {
   const [favorite, setFavorite] = useState([false]);
   const [heartIcon, setHeartIcon] = useState("heart-icon");
   const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
-  const [previewImageClass, setPreviewImageClass] = useState('preview-image-logo')
-  const [imageUrl, setImageUrl] = useState(logo)
+  const [previewImageClass, setPreviewImageClass] = useState('preview-image-gray')
+  const [imageUrl, setImageUrl] = useState(false)
 
 
   const { name, previewImage, city, state, country, lat, lng, price, avgRating, description,
   } = spot;
 
 
-
-
   useEffect(()=>{
     if(avgRating !== 'NaN')setRating(avgRating)
     if(avgRating === 'NaN')setRating('New!');
-    setTileDescription((description + ' ' + description).slice(0, 80) + '...')  
+    setTileDescription((description).slice(0, 80) + '...')  
     if(previewImage !== null) {
       setImageUrl(previewImage)
       setPreviewImageClass('spot-tile-spot-image')
+
+      
     }
   },[])
 
 
-
-
-
-
-  
   const setFav = (e) => {
     e.stopPropagation()
     e.preventDefault()
@@ -75,7 +70,6 @@ const SpotTile = ({ spot, setFavorites }) => {
     <div>
 
       
-    
     <Link
       key={spot.id}
       to={`/spots/${spot.id}`}
@@ -89,7 +83,8 @@ const SpotTile = ({ spot, setFavorites }) => {
 
         
         <div className="spot-tile-image-container">
-          <img src={imageUrl} alt="Spot preview" className={previewImageClass} />
+          {!imageUrl && <div className={previewImageClass}></div>}
+          {imageUrl && <img src={imageUrl} alt="Spot preview" className={previewImageClass} />}
         </div>
 
         <div className="spot-tile-spot-info">
@@ -103,7 +98,6 @@ const SpotTile = ({ spot, setFavorites }) => {
             <div className="spot-tile-night"> night</div>
           </div>
         </div>
-        <div className="spot-tile-description-line"></div>
         <p className="spot-tile-short-description">{tileDescription}</p>
 
       {tooltipDisplay && (

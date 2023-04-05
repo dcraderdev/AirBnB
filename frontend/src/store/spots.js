@@ -68,7 +68,7 @@ export const createSpotThunk = (
   description,
   name,
   price,
-  spotPreviewImage
+  spotImages
   ) => async (dispatch) => {
   
   const response = await csrfFetch('/api/spots', {
@@ -83,7 +83,7 @@ export const createSpotThunk = (
       description,
       name,
       price,
-      spotPreviewImage
+      spotImages
     })
   });
   const data = await response.json();

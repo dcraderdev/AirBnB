@@ -2,6 +2,7 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const {
   setTokenCookie,
   requireAuth,
@@ -175,7 +176,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 });
 
 // Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (req, res, next) => {
   const { url, preview } = req.body;
   const spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
@@ -201,9 +202,17 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
       });
     }
 
+    const previewImageUrl = req.file ? 
+    await singleFileUpload({ file: req.file, public: true }) :
+    null;
+
+
+
+
     let newImage = await SpotImage.create({
       spotId: req.params.spotId,
-      url,
+      // url,
+      previewImageUrl, // <--- swapped out for url
       preview,
     });
 
@@ -303,9 +312,10 @@ if(spot){
 // Create a Spot
 router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
   
-  const { address, city, state, country, lat, lng, name, description, price } =  req.body;
+  const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
 
   const ownerId = req.user.id;
+
   newSpot = await Spot.create({
     ownerId,
     address,
@@ -318,6 +328,26 @@ router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
     description,
     price,
   });
+
+  if(spotImages){
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+    console.log('we have images!');
+  }
 
 
   if (newSpot){

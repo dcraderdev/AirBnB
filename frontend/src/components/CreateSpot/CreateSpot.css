@@ -34,23 +34,45 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  width: 80%;
+  max-width: 400px;
   height: 90%;
 }
-
-
 
 
 .image-main-container{
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   position: relative;
+  top: -15px;
   left: 5%;
   width: 80%;
-  height: 220px;
+  height: 250px;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(101, 97, 91,0.1);
+}
+
+.image-main {
+  width: 300px;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-main img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .image-thumbnail-container{
