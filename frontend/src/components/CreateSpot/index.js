@@ -22,13 +22,15 @@ const CreateSpot = () => {
   const [spotImages, setSpotImages] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
 
-    return dispatch(
+    const latValue = lat === '' ? null : lat;
+    const lngValue = lng === '' ? null : lng;
+
+    try {
+      const { data, response } = await dispatch(
       spotActions.createSpotThunk(
         country,
         address,
@@ -40,13 +42,25 @@ const CreateSpot = () => {
         name,
         price,
         spotPreviewImage,
-      )
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors([data.errors]);
-    });
+      ))
+
+      console.log(response);
+      console.log(data.id);
+      console.log(`/spots/${data.id}`);
+      // if (response.ok){
+      //   console.log('-=-=-=');
+      //   console.log(response);
+      //   console.log('-=-=-=');
+// if(data) history.push(`/spots/${data.id}`)
+      
+      // }
+    } catch (error) {
+      console.error(error);
+    };
   };
   
+
+
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -106,11 +120,7 @@ const CreateSpot = () => {
 
         <div className="hostDiv">
           <form onSubmit={handleSubmit}>
-            <ul>
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
-              ))}
-            </ul>
+
 
             <label className="country">
               Country

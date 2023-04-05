@@ -12,7 +12,8 @@ const Spots = () => {
 
   const dispatch = useDispatch();
   const spots = useSelector((state) => {
-    return state.spots.spots.Spots;
+
+    return state.spots.spots;
   });
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const Spots = () => {
     }
     fetchData();
   }, [dispatch]);
+
 
   if (loading) {
     return <div>Loading...</div>;

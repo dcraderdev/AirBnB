@@ -33,15 +33,16 @@ export const getAllSpotsThunk = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots', {
     method: 'GET',
   });
+
   const data = await response.json();
+
   dispatch(getSpots(data));
-  return response;
+  return {data,response};
 };
 
 
 export const getSpotThunk = (spotId) => async (dispatch) => {
 
-  console.log(spotId);
   if(spotId === null){
     dispatch(getSpot(null))
   }
@@ -50,9 +51,6 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
     method: 'GET',
   });
   const data = await response.json();
-
-  console.log(data);
-
 
   dispatch(getSpot(data));
   return response;
@@ -91,11 +89,11 @@ export const createSpotThunk = (
   const data = await response.json();
   console.log(data);
   dispatch(createSpot(data));
-  return response;
+  return {data,response};
 };
 
 
-const initialState = {spots: []};
+const initialState = { spots:[] };
 const spotsReducer = (state = initialState, action) => {
 
 
@@ -104,7 +102,7 @@ const spotsReducer = (state = initialState, action) => {
     case GET_SPOTS:
       return {
         ...newState,
-        spots: action.payload,
+        spots: action.payload.Spots,
       };
     case GET_SPOT:
       return {
@@ -112,9 +110,10 @@ const spotsReducer = (state = initialState, action) => {
         currentSpot: action.payload,
       };
     case CREATE_SPOT:
+
       return {
         ...newState,
-        spots: [...newState.spots, action.payload],
+        spots: [...newState.spots, action.payload.spot],
       };
     case REMOVE_USER:
       return {

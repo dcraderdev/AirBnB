@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './SpotTile.css';
 import { Link } from 'react-router-dom';
+import logo from "../../public/logo.png";
 
 const SpotTile = ({ spot, setFavorites }) => {
 
@@ -13,6 +14,9 @@ const SpotTile = ({ spot, setFavorites }) => {
   const [favorite, setFavorite] = useState([false]);
   const [heartIcon, setHeartIcon] = useState("heart-icon");
   const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
+  const [previewImageClass, setPreviewImageClass] = useState('preview-image-logo')
+  const [imageUrl, setImageUrl] = useState(logo)
+
 
   const {
     name,
@@ -29,10 +33,18 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
 
+
+
+
   useEffect(()=>{
     if(avgRating !== 'NaN')setRating(avgRating)
     if(avgRating === 'NaN')setRating('New!');
     setTileDescription((description + ' ' + description).slice(0, 80) + '...')  
+    if(previewImage !== null) {
+      setImageUrl(previewImage)
+      setPreviewImageClass('spot-tile-spot-image')
+    }
+
   },[])
 
   
@@ -85,7 +97,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
         
         <div className="spot-tile-image-container">
-          <img src={previewImage} alt="Spot preview" className="spot-tile-spot-image" />
+          <img src={imageUrl} alt="Spot preview" className={previewImageClass} />
         </div>
 
         <div className="spot-tile-spot-info">

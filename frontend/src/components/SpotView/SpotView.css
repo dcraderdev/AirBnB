@@ -50,6 +50,13 @@
   object-fit: cover;
 }
 
+.preview-image-logo{
+  position: relative;
+  width: 80%;
+  height: 70%;
+  left: 10%;
+  top: 15%;
+}
 
 
 

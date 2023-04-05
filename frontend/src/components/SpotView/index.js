@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotActions from '../../store/spots';
+import logo from "../../public/logo.png";
 import './SpotView.css'
 
 function SpotView() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const [rating, setRating] = useState('');
+  const [imageUrl, setImageUrl] = useState(logo)
+  const [previewImageClass, setPreviewImageClass] = useState('preview-image-logo')
 
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
@@ -20,10 +23,14 @@ function SpotView() {
     if (currentSpot) {
       if (currentSpot.avgStarRating === null) setRating('new');
       if (currentSpot.avgStarRating) setRating(currentSpot.avgStarRating);
+ 
+      if(currentSpot.SpotImages[0] && currentSpot.SpotImages[0].url) {
+        setImageUrl(currentSpot.SpotImages[0].url)
+        setPreviewImageClass('spot-view-preview-image')
+      }
     }
   }, [currentSpot]);
 
-  console.log(currentSpot);
 
 
   return (
@@ -49,7 +56,7 @@ function SpotView() {
           <div className="spot-view-image-container">
 
             <div className="spot-view-preview-image-container">
-              <img className="spot-view-preview-image" src={currentSpot.SpotImages[0].url} alt="Spot Preview Image"></img>
+              <img className={previewImageClass} src={imageUrl} alt="Spot Preview Image"></img>
             </div>
 
             <div className="spot-view-slide-container">

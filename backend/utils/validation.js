@@ -44,11 +44,11 @@ const validateSpotEdit = [
     .exists({ checkFalsy: true })
     .withMessage('Country is required'),
   check('lat') 
-    .optional()
+    .optional({ nullable: true })
     .isNumeric()
     .withMessage('Latitude must be a valid number if provided'),
   check('lng') 
-    .optional()
+    .optional({ nullable: true })
     .isNumeric()
     .withMessage('Longitude must be a valid number if provided'),
   check('name')
