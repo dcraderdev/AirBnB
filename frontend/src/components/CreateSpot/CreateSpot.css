@@ -2,48 +2,43 @@
   user-select: none;
 }
 
-.host-form-page {
-  border: solid black 5px;
 
+.host-form-page {
   max-width: 1000px;
-  height: 1000px;
-  width: 1000px;
-  position: absolute;
-  top: 110px;
-  left: 50%;
-  transform: translate(-50%,0%);
+  height: 750px;
+  width: 100%;
+  position: relative;
+  top: 80px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  transform: translate(-50%,-10%);
+  left: 50%;
 
 }
 
 .host-form-page-container {
-  position: relative;
-  right: 5%;
-  top: 1%;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(197, 81, 81);
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 40%;
+  width: 440px;
   height: 90%;
+  margin: 0 2.5%;
 }
 
 .image-container {
-  position: relative;
-  left: 5%;
-  top: 1%;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(197, 81, 81);
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 40%;
-
+  width: 400px;
   height: 90%;
 }
+
+
+
 
 .image-main-container{
   border: 1px solid rgb(0, 0, 0);
@@ -51,7 +46,7 @@
   position: relative;
   left: 5%;
   width: 80%;
-  height: 55%;
+  height: 220px;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -91,15 +86,19 @@
 }
 
 .host-header{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
   position: relative;
   top: -5px;
-  font-size: 20px;
-  left: 150px;
+  font-size: 25px;
+  left: 30%;
+
 }
 
 .hostDiv label {
   font-size: 10px;
   color: black;
+  padding-top: 3px;
 }
 
 .hostDiv input {
@@ -109,7 +108,23 @@
   border-radius: 3px;
   font-size: 14px;
   cursor: pointer;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
 }
+
+.host-form-loc-header{
+  position: relative;
+  margin-top: 4px;
+  font-size: 14px;
+  }
+  
+  
+.host-form-loc-memo{
+  position: relative;
+  top: 4px;
+  font-size: 10px;
+}
+
 .country{
   position: relative;
   top: 5px;
@@ -118,24 +133,24 @@
 .address-field,
 .country-field{
   position: relative;
-  width: 100%;
+  width: 440px;
 }
 
 
 .city{
   position: absolute;
-  top: 158px;
+  top: 188px;
 
 }
 .state{
   position: absolute;
-  top: 158px;
-  left: 260px;
+  top: 188px;
+  left: 320px;
 }
 
 .city-field{
   position: relative;
-  width: 135%;
+  width: 155%;
   top: 0px;
   left: 0px;
 }
@@ -148,26 +163,33 @@
 
 .lat{
   position: absolute;
-  top: 191px;
+  top: 225px;
 }
 .lng{
   position: absolute;
-  top: 191px;
-  left: 230px;
+  top: 225px;
+  left: 270px;
 }
 
 .lat-field{
   position: relative;
-  width: 85%;
+  width: 92%;
   top: 0px;
   left: 0px;
 }
 .lng-field{
   position: relative;
-  width: 91%;
+  width: 87%;
   top: 0px;
   left: 0px;
 }
+
+
+
+
+
+
+
 
 
 
@@ -182,18 +204,154 @@
 
 
 
-
-
-
-.host-form-loc-header{
+.host-form-desc-header{
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: solid black 1px;
   position: relative;
-  top: 4px;
+  font-size: 14px;
+  top: 80px;
   }
   
-.host-form-loc-memo{
+.host-form-desc-memo{
+  margin-top: 9px;
   position: relative;
-  top: 4px;
-  font-size: 12px;
+  top: 80px;
+  font-size: 10px;
+}
+
+.description{
+  position: absolute;
+  top: 325px;
+  width: 440px;
+}
+
+.description-field{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  display: block;
+  position: relative;
+  width: 435px;
+  height: 90px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+
+.host-form-title-header{
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: solid black 1px;
+  position: relative;
+  font-size: 14px;
+  top: 193px;
+  }
+  
+.host-form-title-memo{
+  margin-top: 9px;
+  position: relative;
+  top: 190px;
+  font-size: 10px;
+}
+.host-form-spot-title{
+  position: absolute;
+  top: 475px;
+  width: 440px;
+
+}
+
+.host-form-spot-title-field{
+  position: relative;
+  display: block;
+  width: 435px;
+  padding: 5px;
+  margin-top: 3px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+
+.host-form-price-header{
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: solid black 1px;
+  position: relative;
+  font-size: 14px;
+  top: 220px;
+  }
+  
+.host-form-price-memo{
+  margin-top: 6px;
+  position: relative;
+  top: 220px;
+  font-size: 10px;
+}
+.host-form-spot-price{
+  position: absolute;
+  top: 545px;
+  width: 435px;
+
+}
+
+.host-form-spot-price-field{
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+
+
+.host-form-spot-preview-image-header{
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: solid black 1px;
+  position: relative;
+  font-size: 14px;
+  top: 250px;
+  }
+  
+.host-form-spot-preview-image-memo{
+  margin-top: 5px;
+  position: relative;
+  top: 250px;
+  font-size: 10px;
+}
+.host-form-spot-preview-image{
+  position: absolute;
+  top: 625px;
+  width: 435px;
+
+}
+
+.host-form-spot-preview-image-field{
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+
+.host-form-add-spot-image-button{
+  position: relative;
+  width: 100px;
+  height: 35px;
+  bottom: 10%;
+  left: 170px;
 }
 
 

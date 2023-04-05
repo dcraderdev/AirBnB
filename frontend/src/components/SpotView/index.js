@@ -9,14 +9,18 @@ function SpotView() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const [rating, setRating] = useState('');
-  const [imageUrl, setImageUrl] = useState(logo)
-  const [previewImageClass, setPreviewImageClass] = useState('preview-image-logo')
-
+  // const [imageUrl, setImageUrl] = useState(logo)
+  // const [previewImageClass, setPreviewImageClass] = useState('spot-view-preview-image')
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
 
   useEffect(() => {
-    if (user) dispatch(spotActions.getSpotThunk(spotId));
+    if (user) {
+      dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
+      })
+    }
+    // setImageUrl(logo);
+    // setPreviewImageClass('preview-image-logo');
   }, [dispatch, spotId, user]);
 
   useEffect(() => {
@@ -24,13 +28,16 @@ function SpotView() {
       if (currentSpot.avgStarRating === null) setRating('new');
       if (currentSpot.avgStarRating) setRating(currentSpot.avgStarRating);
  
-      if(currentSpot.SpotImages[0] && currentSpot.SpotImages[0].url) {
-        setImageUrl(currentSpot.SpotImages[0].url)
-        setPreviewImageClass('spot-view-preview-image')
-      }
+      // if(currentSpot.SpotImages[0] && !currentSpot.SpotImages[0].url) {
+      //   setImageUrl(currentSpot.SpotImages[0].url)
+      //   setPreviewImageClass('spot-view-preview-image')
+      // }
     }
   }, [currentSpot]);
 
+  const imageUrl = currentSpot?.SpotImages?.[0]?.url || logo;
+  const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-image-logo';
+  const noImageFound = 'asdasd'
 
 
   return (

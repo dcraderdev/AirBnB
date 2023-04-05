@@ -32,3 +32,12 @@ body{
 *{
   font-family: 'Montserrat', sans-serif;
 }
+
+.close-button{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  position: relative;
+  top: -20px;
+  cursor: pointer;
+}

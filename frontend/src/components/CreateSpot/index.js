@@ -71,41 +71,7 @@ const CreateSpot = () => {
 
 
 
-<div className='image-container'>
 
-  <div className='image-main-container'>
-    <div className='image-main'>Image goes here</div>
-  </div>
-
-  <input
-  type="file"
-  id="fileInput"
-  style={{ display: 'none' }}
-  accept="image/*"
-  onChange={handleFileSelect}
-/>
-
-  <div className='image-main-buttons'>
-    <button 
-    className='image-main-button-add'
-    onClick={() => document.getElementById('fileInput').click()}
-    >
-      Add Image
-    </button>
-    <button className='image-main-button-crop'>Crop Image</button>
-    <button className='image-main-button-delete'>Delete Image</button>
-  </div>
-
-
-  <div className='image-thumbnail-container'>
-  {spotImages.map((image,index) => (
-    <div key={index} className='image-thumbnail'>
-      <ImageTile image={image} />
-    </div>
-  ))}
-</div>
-
-</div>
 
       <div className="host-form-page-container">
         <div className="host-header">Host an Airbnb</div>
@@ -186,38 +152,32 @@ const CreateSpot = () => {
 
 
 
-
-{/* 
-
-            <div>Describe your place to guests</div>
-            <div>
+            <div className='host-form-desc-header'>Describe your place to guests</div>
+            <div  className='host-form-desc-memo'>
               Mention the best features of your space, any special amentities likefast wif or parking, and what you love about the neighborhood.
             </div>
 
             <label className="description">
-              Description
-              <input
-                className="descriptionField"
-                type="text"
+              <textarea
+                className="description-field"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </label>
 
-            <div>
+            <div className='host-form-title-header'>
               Create a title for your spot
             </div>
 
-            <div>
+            <div className='host-form-title-memo'>
               Catch guests' attention with a spot title that highlights what makesyour place special.
             </div>
 
 
-            <label className="spotTitle">
-              Spot Name
+            <label className="host-form-spot-title">
               <input
-                className="spotTitleField"
+                className="host-form-spot-title-field"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -225,18 +185,17 @@ const CreateSpot = () => {
               />
             </label>
 
-            <div>
+            <div className='host-form-price-header'>
               Set a base price for your spot
             </div>
 
-            <div>
+            <div className='host-form-price-memo'>
               Competitive pricing can help your listing stand out and rank higher in search results.
             </div>
 
-            <label className="spotPrice">
-              Spot Price
+            <label className="host-form-spot-price">
               <input
-                className="spotPriceField"
+                className="host-form-spot-price-field"
                 type="text"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
@@ -244,33 +203,82 @@ const CreateSpot = () => {
               />
             </label>
 
-            <div>
+            <div className="host-form-spot-preview-image-header">
               Liven up your spot with photos
             </div>
 
-            <div>
+            <div className="host-form-spot-preview-image-memo">
               Choose a file or submit a link to at least one photo to publish your spot.
-            </div> */}
+            </div>
 
-            {/* <label className="spotPreviewImage">
+            <label className="host-form-spot-preview-image">
               Spot Preview Image
               <input
-                className="spotPreviewImageField"
+                className="host-form-spot-preview-image-field"
                 type="text"
                 value={spotPreviewImage}
                 onChange={(e) => setSpotPreviewImage(e.target.value)}
                 required
+
               />
+              <button 
+                className='host-form-add-spot-image-button'
+                onClick={() => document.getElementById('fileInput').click()}
+                >
+                  Add Image
+              </button>
             </label>
 
 
 
-            <button type="submit">Host</button> */}
+
+
+
+            <button type="submit">Host</button>
           </form>
         </div>
+      </div>
+      <div className='image-container'>
+
+        <div className='image-main-container'>
+          <div className='image-main'>Image goes here</div>
+        </div>
+
+        <input
+        type="file"
+        id="fileInput"
+        style={{ display: 'none' }}
+        accept="image/*"
+        onChange={handleFileSelect}
+      />
+
+        <div className='image-main-buttons'>
+          <button 
+          className='image-main-button-add'
+          onClick={() => document.getElementById('fileInput').click()}
+          >
+            Add Image
+          </button>
+          <button className='image-main-button-crop'>Crop Image</button>
+          <button className='image-main-button-delete'>Delete Image</button>
+        </div>
+
+
+        <div className='image-thumbnail-container'>
+        {spotImages.map((image,index) => (
+          <div key={index} className='image-thumbnail'>
+            <ImageTile image={image} />
+          </div>
+        ))}
+      </div>
+
       </div>
     </div>
   );
 };
 
 export default CreateSpot;
+
+
+//    /Users/donovancrader/Documents/github/AirBnB/frontend/src/public/logo.png
+ 
