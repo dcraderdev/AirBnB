@@ -9,6 +9,7 @@ function SpotView() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const [rating, setRating] = useState('');
+  const [loaded, isLoaded] = useState(false);
   // const [imageUrl, setImageUrl] = useState(logo)
   // const [previewImageClass, setPreviewImageClass] = useState('spot-view-preview-image')
   const user = useSelector((state) => state.session.user);
@@ -16,7 +17,9 @@ function SpotView() {
 
   useEffect(() => {
     if (user) {
+      isLoaded(false)
       dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
+        isLoaded(true)
       })
     }
     window.scrollTo(0, 0);
@@ -43,7 +46,7 @@ function SpotView() {
     <div>
       {!currentSpot && <p>Loading...</p>}
 
-      {currentSpot && user && (
+      {currentSpot && user && loaded && (
         <div className="spot-view-container">
 
           <div className="spot-view-header">
