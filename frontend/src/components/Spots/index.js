@@ -7,7 +7,7 @@ import * as spotActions from '../../store/spots';
 import './Spots.css';
 
 const Spots = () => {
-  const [loading, setLoading] = useState(true);
+  const [loaded, isLoaded] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
   const dispatch = useDispatch();
@@ -18,20 +18,20 @@ const Spots = () => {
 
   useEffect(() => {
     async function fetchData() {
-      await dispatch(spotActions.getAllSpotsThunk());
-      setLoading(false);
+      await dispatch(spotActions.getAllSpotsThunk()).then(()=>{
+        isLoaded(true);
+      })
     }
     fetchData();
   }, [dispatch]);
 
 
-  if (loading) {
+  if (!loaded) {
     return <div>Loading...</div>;
   }
-
-  if (!loading) {
-    return (
-      <>
+return (
+ 
+       <>
         <div className="spots-wrapper">
           <div className="spots-grid">
             {spots.map((spot) => (
@@ -41,7 +41,9 @@ const Spots = () => {
         </div>
       </>
     );
-  }
+  
+
+  
 };
 
 export default Spots;

@@ -18,20 +18,8 @@ const SpotTile = ({ spot, setFavorites }) => {
   const [imageUrl, setImageUrl] = useState(logo)
 
 
-  const {
-    name,
-    previewImage,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    price,
-    avgRating,
-    description,
+  const { name, previewImage, city, state, country, lat, lng, price, avgRating, description,
   } = spot;
-
-
 
 
 
@@ -44,8 +32,12 @@ const SpotTile = ({ spot, setFavorites }) => {
       setImageUrl(previewImage)
       setPreviewImageClass('spot-tile-spot-image')
     }
-
   },[])
+
+
+
+
+
 
   
   const setFav = (e) => {

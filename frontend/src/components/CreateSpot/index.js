@@ -48,6 +48,8 @@ const CreateSpot = () => {
       
     } catch (error) {
       console.error(error);
+      console.log(error.data);
+      console.log(error.status);
     };
   };
   
