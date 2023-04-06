@@ -6,7 +6,6 @@
   left: 50%;
   top: 100%;
   transform: translate(-50%,0%);
-  /* margin: auto; */
 }
 
 
@@ -15,9 +14,10 @@
 }
 
 .spot-view-image-container {
-  border: solid black 1px;
+  border: solid rgb(0, 0, 0) 3px;
   position: relative;
   width: 100%;
+  height: 400px;
   display: flex;
   overflow: hidden;
 }
@@ -25,9 +25,16 @@
 .spot-view-preview-image-container {
   position: relative;
   left: 0px;
-  width: 500px;
-  height: 320px;
+  width: 450px;
+  height: 400px;
   overflow: hidden;
+}
+
+.spot-view-preview-image{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 .spot-view-slide-container {
@@ -42,12 +49,7 @@
 
 }
 
-.spot-view-preview-image{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 
 .preview-image-logo{
   position: relative;

@@ -203,7 +203,7 @@ router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit,
         await SpotImage.create({
           spotId: newSpot.id,
           url: imageUrl,
-          preview: false,
+          preview: true,
         });
         console.log('-=-=--===-');
         console.log('image url',imageUrl );

@@ -45,6 +45,13 @@
 .spot-tile-spot-image {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.spot-tile-spot-image:hover {
+  transform: scale(1.03); 
+
 }
 
 /* git revert 273d557 */

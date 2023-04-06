@@ -11,6 +11,16 @@ import 'react-image-crop/dist/ReactCrop.css';
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
 
 const CreateSpot = () => {
+
+  const fileTypes = ["pdf", "png", "jpg", "jpeg", "gif"];
+  const [spotPreviewImage, setSpotPreviewImage] = useState('');
+  const [spotPreviewImageFile, setSpotPreviewImageFile] = useState('');
+  const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
+  const [spotImages, setSpotImages] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+
   const [country, setCountry] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -20,19 +30,52 @@ const CreateSpot = () => {
   const [description, setDescription] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [spotPreviewImage, setSpotPreviewImage] = useState('');
-  const [spotPreviewImageFile, setSpotPreviewImageFile] = useState('');
-  const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
-  const [spotImages, setSpotImages] = useState([]);
-  const [crop, setCrop] = useState({ aspect: 1, unit: 'px', width: 100, height: 100 });
-  const [croppedImageUrl, setCroppedImageUrl] = useState(null);
-  const [imageRef, setImageRef] = useState(null);
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const fileTypes = ["pdf", "png", "jpg", "jpeg", "gif"];
-
+  const [validationErrors, setValidationErrors] = useState({});
+  const [signInErrors, setSignInErrors] = useState({});
+  const [disabledButton, setDisabledButton] = useState(false);
+  const [buttonClass, setButtonClass] = useState('host-form-host-button');
+  const [buttonText, setButtonText] = useState('Host');
  
+
+  useEffect(() => {
+    const errors = {};
+    const createSpotErrors = {};
+    console.log(!country.length);
+
+    if (!country.length) errors['country'] = 'Please enter a country';
+    if (!address.length) errors['address'] = 'Please enter a address';
+    if (!city.length) errors['city'] = 'Please enter a city';
+    if (!state.length) errors['state'] = 'Please enter a state';
+    if (!description.length) errors['description'] = 'Please enter a description';
+    if (!name.length) errors['name'] = 'Please enter a name';
+    if (!price.length) errors['price'] = 'Please enter a price';
+
+    if (country.length < 4) {
+      errors['country'] = 'Please enter a country';
+      createSpotErrors['country'] = 'Username must be at least 4 characters';
+    }
+    if (address.length < 6) {
+      errors['address'] = 'Please enter a address';
+      createSpotErrors['address'] = 'address must be at least 6 characters';
+    }
+
+    setValidationErrors(errors);
+    setSignInErrors(createSpotErrors);
+  }, [country, address, city, state, description, name, price]);
+
+  
+  useEffect(() => {
+    if (Object.keys(signInErrors).length > 0) {
+      setButtonClass('signinDiv-button-disabled');
+    } else {
+      setButtonClass('signinDiv-button');
+    }
+  }, [signInErrors]);
+
+
+  
+
+
 
 
   const handleSubmit = async (e) => {
@@ -41,7 +84,6 @@ const CreateSpot = () => {
     const latValue = lat === '' ? null : lat;
     const lngValue = lng === '' ? null : lng;
 
-    const finalPreviewImageFile = croppedImageUrl ? await (await fetch(croppedImageUrl)).blob() : spotPreviewImageFile;
 
     try {
       const { data, response } = await dispatch(
@@ -55,7 +97,7 @@ const CreateSpot = () => {
         description,
         name,
         price,
-        finalPreviewImageFile,
+        spotPreviewImageFile,
       ))
 
     if(data) history.push(`/spots/${data.id}`)
@@ -87,46 +129,6 @@ const CreateSpot = () => {
     }
   }
 
-  const handleCropComplete = async (crop, image) => {
-    if (image && crop.width && crop.height) {
-      const croppedImageUrl = await getCroppedImage(image, crop);
-      setCroppedImageUrl(croppedImageUrl);
-    }
-  };
-
-  const getCroppedImage = (image, crop) => {
-    const canvas = document.createElement('canvas');
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
-    const ctx = canvas.getContext('2d');
-  
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      crop.width,
-      crop.height
-    );
-  
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        blob.name = 'cropped-image.jpg';
-        resolve(URL.createObjectURL(blob));
-      }, 'image/jpeg');
-    });
-  };
-
-
-  
-console.log(spotPreviewImage);
-
-
   return (
 
     <div className="host-form-page">
@@ -148,6 +150,7 @@ console.log(spotPreviewImage);
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 required
+                placeholder={validationErrors['country'] ? validationErrors['country'] : country}
                 />
             </label>
 
@@ -299,16 +302,6 @@ console.log(spotPreviewImage);
 
         <div className='image-main-container'>
           <div className='image-main'>{spotPreviewImageLoaded && <img src={spotPreviewImage} alt='preview'></img>}</div>
-          {/* <ReactCrop
-            className='image-main'
-            src={spotPreviewImage}
-            alt='preview'
-            crop={crop}
-            ruleOfThirds
-            onImageLoaded={setImageRef}
-            onChange={setCrop}
-            onComplete={(crop) => handleCropComplete(crop, imageRef)}
-          /> */}
         </div>
 
         <input

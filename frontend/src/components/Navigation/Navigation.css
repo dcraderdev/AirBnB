@@ -10,6 +10,8 @@
   left: 0px;
   height: 75px;
   width: 100%;
+  background-image: linear-gradient(to right, #fcf9f5ee, #ffffff);
+
 }
 
 .nav-line{
