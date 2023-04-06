@@ -54,7 +54,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(101, 97, 91,0.1);
 }
 
 .image-main {
@@ -62,6 +61,8 @@
   height: 280px;
   overflow: hidden;
   position: relative;
+  border: solid black 1px;
+  background-color: transparent;
 }
 
 .image-main img {

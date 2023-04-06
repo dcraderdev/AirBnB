@@ -179,9 +179,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 // Create a Spot
 router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit, async (req, res, next) => {
   
-
   const { address, city, state, country, lat, lng, name, description, price, spotImage } =  req.body;
-
   const ownerId = req.user.id;
 
   newSpot = await Spot.create({
@@ -199,10 +197,7 @@ router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit,
 
  
   if (newSpot) {
-    console.log('yes spot');
     if (req.file) {
-      console.log('yes req.file');
-      console.log(req.file);
       try {
         const imageUrl = await singleFileUpload({ file: req.file, public: true });
         await SpotImage.create({
@@ -210,25 +205,13 @@ router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit,
           url: imageUrl,
           preview: false,
         });
-        if(SpotImage){
-          console.log('yes SpotImage');
-          console.log('yes SpotImage');
-          console.log('yes SpotImage');
-          console.log('yes SpotImage');
-          console.log('yes SpotImage');
-          console.log('yes SpotImage');
-        }
-
         console.log('-=-=--===-');
         console.log('image url',imageUrl );
         console.log('-=-=--===-');
-
       } catch (error) {
         console.error("Error uploading file:", error);
       }
-    
-      }
-
+    }
 
     let spot = newSpot.toJSON()
     const lat = parseFloat(spot.lat);
@@ -257,7 +240,6 @@ router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit,
     err.status = 400;
     return next(err);
   }
-  return res.json({hey:'hello'})
 
 });
 
@@ -367,7 +349,11 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
 
 if(spot){
 
-  const imageUrls = spot.SpotImages.map(image => retrievePrivateFile(image.key));
+  const imageUrls = spot.SpotImages.map(image => {
+    console.log(image);
+    retrievePrivateFile(image.url)
+  });
+
   // return res.json(imageUrls);
 
 

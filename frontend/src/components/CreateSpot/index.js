@@ -5,6 +5,8 @@ import { Redirect, useHistory } from 'react-router-dom';
 import './CreateSpot.css';
 import * as spotActions from '../../store/spots';
 import ImageTile from '../ImageTile'
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
 
@@ -22,6 +24,9 @@ const CreateSpot = () => {
   const [spotPreviewImageFile, setSpotPreviewImageFile] = useState('');
   const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
   const [spotImages, setSpotImages] = useState([]);
+  const [crop, setCrop] = useState({ aspect: 1, unit: 'px', width: 100, height: 100 });
+  const [croppedImageUrl, setCroppedImageUrl] = useState(null);
+  const [imageRef, setImageRef] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -36,6 +41,8 @@ const CreateSpot = () => {
     const latValue = lat === '' ? null : lat;
     const lngValue = lng === '' ? null : lng;
 
+    const finalPreviewImageFile = croppedImageUrl ? await (await fetch(croppedImageUrl)).blob() : spotPreviewImageFile;
+
     try {
       const { data, response } = await dispatch(
       spotActions.createSpotThunk(
@@ -48,7 +55,7 @@ const CreateSpot = () => {
         description,
         name,
         price,
-        spotPreviewImageFile,
+        finalPreviewImageFile,
       ))
 
     if(data) history.push(`/spots/${data.id}`)
@@ -64,7 +71,6 @@ const CreateSpot = () => {
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
-      console.log(URL.createObjectURL(file));
 
       if (file && !fileTypes.includes(`${file.type.split("/")[1]}`)){
         console.log('doesnt include');
@@ -78,21 +84,52 @@ const CreateSpot = () => {
 
       setSpotImages(()=>[...spotImages,file])
 
-      
     }
   }
+
+  const handleCropComplete = async (crop, image) => {
+    if (image && crop.width && crop.height) {
+      const croppedImageUrl = await getCroppedImage(image, crop);
+      setCroppedImageUrl(croppedImageUrl);
+    }
+  };
+
+  const getCroppedImage = (image, crop) => {
+    const canvas = document.createElement('canvas');
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    const ctx = canvas.getContext('2d');
+  
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+  
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        blob.name = 'cropped-image.jpg';
+        resolve(URL.createObjectURL(blob));
+      }, 'image/jpeg');
+    });
+  };
+
+
+  
+console.log(spotPreviewImage);
 
 
   return (
 
-
-
     <div className="host-form-page">
-
-
-
-
-
       <div className="host-form-page-container">
         <div className="host-header">Host an Airbnb</div>
 
@@ -262,6 +299,16 @@ const CreateSpot = () => {
 
         <div className='image-main-container'>
           <div className='image-main'>{spotPreviewImageLoaded && <img src={spotPreviewImage} alt='preview'></img>}</div>
+          {/* <ReactCrop
+            className='image-main'
+            src={spotPreviewImage}
+            alt='preview'
+            crop={crop}
+            ruleOfThirds
+            onImageLoaded={setImageRef}
+            onChange={setCrop}
+            onComplete={(crop) => handleCropComplete(crop, imageRef)}
+          /> */}
         </div>
 
         <input
