@@ -33,7 +33,7 @@ const CreateSpot = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const [signInErrors, setSignInErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
-  const [buttonClass, setButtonClass] = useState('host-form-host-button');
+  const [buttonClass, setButtonClass] = useState('host-form-submit-button');
   const [buttonText, setButtonText] = useState('Host');
  
 
@@ -68,9 +68,9 @@ const CreateSpot = () => {
   
   useEffect(() => {
     if (Object.keys(signInErrors).length > 0) {
-      setButtonClass('signinDiv-button-disabled');
+      setButtonClass('host-form-submit-button disabled');
     } else {
-      setButtonClass('signinDiv-button');
+      setButtonClass('host-form-submit-button');
     }
   }, [signInErrors]);
 
@@ -308,9 +308,9 @@ const CreateSpot = () => {
 
 
 
+            
 
-
-            <button className='host-form-submit-button' type="submit">Host</button>
+            <button className={buttonClass} type="submit">Host</button>
           </form>
         </div>
       </div>

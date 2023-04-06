@@ -21,12 +21,14 @@ body{
   align-items: center;
   transform: translate(-50%,0%) scale(1.2);
   left: 50%;
-
+  
 }
 
 .host-form-page-container {
+  background-color: #ffffff;
+
+  background-image: linear-gradient(to right, rgb(255, 254, 254), #ffffff);
   border: 1px solid rgb(197, 81, 81);
-  background-color: #eae2d83b;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,8 +38,8 @@ body{
 }
 
 .image-container {
+  background-color: #ffffff;
   border: 1px solid rgb(197, 81, 81);
-  background-color: #eae2d83b;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -384,9 +386,42 @@ body{
   height: 35px;
   left: 230px;
   top: 303px;
+
+  background-color: rgb(74, 113, 186);
+  color: white;
+  font-weight: bold;
+  border: solid rgb(74, 113, 186) 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .1s background-color;
+
 }
 
 
+.host-form-submit-button:hover {
+  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  background-color: #3b75e2; */
+}
+
+.host-form-submit-button:active {
+  background-color: rgb(74, 113, 186);
+  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+}
+.disabled{
+  background-color: rgb(106, 125, 161);
+  border: solid rgb(74, 113, 186,0.6) 1px;
+
+}
+
+.disabled:hover{
+  /* border: solid rgba(255, 0, 0, 0.579) 1px;
+  background-color: rgba(106, 125, 161, 0.958); */
+
+}
+.disabled:focus {
+  outline: none;
+}
 
 
 .hostDiv-button {

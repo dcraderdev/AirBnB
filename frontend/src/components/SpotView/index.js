@@ -28,8 +28,8 @@ function SpotView() {
 
   const imageUrl = currentSpot?.SpotImages?.[0]?.url || logo;
   const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-image-logo';
-  const reviewsText = currentSpot && currentSpot.numReviews > 1 ? ' Reviews' : ' Review'
-  const rating = currentSpot && currentSpot.avgStarRating ? currentSpot.avgStarRating : 'new'
+  const reviewsText = currentSpot && currentSpot.numReviews == 1 ? ' Review' : ' Reviews'
+  const rating = currentSpot && currentSpot.avgStarRating === 'NaN' ? 'New!' : currentSpot.avgStarRating
 
   const comingSoon =()=>{
     alert('Feature coming soon')
