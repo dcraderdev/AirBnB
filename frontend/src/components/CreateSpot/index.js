@@ -41,6 +41,7 @@ const CreateSpot = () => {
     const errors = {};
     const createSpotErrors = {};
     console.log(!country.length);
+    console.log(spotPreviewImageFile.length);
 
     if (!country.length) errors['country'] = 'Please enter a country';
     if (!address.length) errors['address'] = 'Please enter a address';
@@ -49,6 +50,7 @@ const CreateSpot = () => {
     if (!description.length) errors['description'] = 'Please enter a description';
     if (!name.length) errors['name'] = 'Please enter a name';
     if (!price.length) errors['price'] = 'Please enter a price';
+    if (!spotPreviewImageFile.length) errors['spotPreviewImageFile'] = 'Please submit at least one photo';
 
     if (country.length < 4) {
       errors['country'] = 'Please enter a country';
@@ -61,7 +63,7 @@ const CreateSpot = () => {
 
     setValidationErrors(errors);
     setSignInErrors(createSpotErrors);
-  }, [country, address, city, state, description, name, price]);
+  }, [country, address, city, state, description, name, price, spotPreviewImageFile]);
 
   
   useEffect(() => {
@@ -162,6 +164,8 @@ const CreateSpot = () => {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
+                placeholder={validationErrors['address'] ? validationErrors['address'] : address}
+
               />
             </label>
 
@@ -173,6 +177,8 @@ const CreateSpot = () => {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 required
+                placeholder={validationErrors['city'] ? validationErrors['city'] : city}
+
               />
             </label>
 
@@ -184,6 +190,8 @@ const CreateSpot = () => {
                 value={state}
                 onChange={(e) => setState(e.target.value)}
                 required
+                placeholder={validationErrors['state'] ? validationErrors['state'] : state}
+
               />
             </label>
 
@@ -223,6 +231,8 @@ const CreateSpot = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
+                placeholder={validationErrors['description'] ? validationErrors['description'] : description}
+
               />
             </label>
 
@@ -242,6 +252,8 @@ const CreateSpot = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+                placeholder={validationErrors['name'] ? validationErrors['name'] : name}
+
               />
             </label>
 
@@ -260,6 +272,8 @@ const CreateSpot = () => {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 required
+                placeholder={validationErrors['price'] ? validationErrors['price'] : price}
+
               />
             </label>
 
@@ -276,9 +290,11 @@ const CreateSpot = () => {
               <input
                 className="host-form-spot-preview-image-field"
                 type="text"
-                value={spotPreviewImage}
+                value={spotPreviewImageFile.name}
                 onChange={(e) => setSpotPreviewImage(e.target.value)}
                 required
+                placeholder={validationErrors['spotPreviewImageFile'] ? validationErrors['spotPreviewImageFile'] : spotPreviewImageFile.name}
+
 
               />
               <button 
@@ -319,7 +335,7 @@ const CreateSpot = () => {
           >
             Add Image
           </button>
-          <button className='image-main-button-crop'>Crop Image</button>
+          <button className='image-main-button-default'>Make Default</button>
           <button className='image-main-button-delete'>Delete Image</button>
         </div>
 
