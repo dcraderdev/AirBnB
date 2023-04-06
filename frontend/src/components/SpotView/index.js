@@ -10,10 +10,13 @@ function SpotView() {
   const dispatch = useDispatch();
   const [rating, setRating] = useState('');
   const [loaded, isLoaded] = useState(false);
-  // const [imageUrl, setImageUrl] = useState(logo)
+  const [imageUrl2, setImageUrl2] = useState('https://airbnb-clone-spot-photos.s3.us-west-1.amazonaws.com/Screenshot%202023-04-05%20at%209.15.40%20PM.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMSJHMEUCIGMezm5H%2Fpekpuq5xKoy17mUbojvhpBSncUKeTLfMSBXAiEAxE6xs2CLJK69U80lQLG7vcQNclQuPb852aa2qhfX0Ykq5AIIJRAAGgw2Njk4MjMzNjExOTIiDDAWWYB9HRhvtGZ4lirBAiePNfUBcirYHp9pp2GAFwtmnmcO7R2XaCE1MjS8mVy%2B2PqZQ%2F%2FcRfGUe%2FiwJIrLEUZbCvxLNCRu%2BBc6h7I7WLMSAjauyRj9LGbj2UKARRTEwrwyJmVTI%2FtDjv880pm3GRtxBqm63diJTIJ2%2BWCmNX32QsWEbDEOsBOr%2FK3x0KGmWoUDfWztPnz%2B6bBY%2Fzpm1AJ7O6dYlGfrmnPTnkEwwmDMdts2mBf%2Bk5EgSXTSyjX9jA5rbFe9M%2Fsy%2BYXwXRLQiN%2FL%2FAzglCz8pIJMZBvoG1HqcMrqpiPN0mCl1PB4HmXEiMZ%2BPZwdAxuO4WInAfOp4TlR%2Fnc47DTPj3ZYVEb7t2QXH%2Bh3fpHmPscy0cs374EhY%2FNK5jsu9wq2kP%2FishCsFuiZoXJIy2RqfEqpQzrFPMSne5WqaB%2FSHXsKuN4UYZuKezCZ8bihBjqzAnM8jd93bVL7llvZ1atX8lZo9aX59SttCw8tWdXBEBxvqD5u82%2BsIAOg3sVGTqzsT9RMSYabJsy84nLjVPRzAveCSe6PqmcTKpZQhsi62ZXnLU7GYjbWNLTpdJNEpjmwx3E4VPyt258I8OlUrKbhzTKWVnOPy4OxoNV7cU9H8g3rqZ4SV%2F%2BpQ%2FCeWHxV8GGAY%2B9daAufBcmOEpc3TMbqODzZ02hkDUpSzypLKXMx8wU7iH7tAP4EqmMt807hUqjAjXmvZYAEUz%2B3CzMzovUIP82CqxMxBiFyESbCxqZaBhgeumux1ISIeVCP8YjadgSPlpHxjI48ZZWe7nNXEOCVsrKIy7PxX%2FcB48PYpPOQH%2B5nstvZui8iwxEHrw9VXwusjd%2FleEyBOaQztoFphaGO9Tm9KmA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230406T041938Z&X-Amz-SignedHeaders=host&X-Amz-Expires=299&X-Amz-Credential=ASIAZX5EVMCUI47OYTLS%2F20230406%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Signature=14b1877f391dcd2ae2ac130b241073b960b11c2e96c0fbbc89d52e67cd7980cb')
   // const [previewImageClass, setPreviewImageClass] = useState('spot-view-preview-image')
   const user = useSelector((state) => state.session.user);
-  const currentSpot = useSelector((state) => state.spots.currentSpot);
+  const currentSpot = useSelector((state) => {
+    return state.spots.currentSpot
+  });
+
 
   useEffect(() => {
     if (user) {
@@ -65,7 +68,7 @@ function SpotView() {
           <div className="spot-view-image-container">
 
             <div className="spot-view-preview-image-container">
-              <img className={previewImageClass} src={imageUrl} alt="Spot Preview Image"></img>
+              <img className={previewImageClass} src={imageUrl2} alt="Spot Preview Image"></img>
             </div>
 
             <div className="spot-view-slide-container">

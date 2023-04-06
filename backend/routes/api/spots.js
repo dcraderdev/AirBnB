@@ -2,7 +2,7 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
-const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
+const { singleFileUpload, singleMulterUpload, multipleFilesUpload, multipleMulterUpload, retrievePrivateFile } = require("../../awsS3");
 const {
   setTokenCookie,
   requireAuth,
@@ -175,6 +175,93 @@ router.get('/current', requireAuth, async (req, res, next) => {
   }
 });
 
+
+// Create a Spot
+router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit, async (req, res, next) => {
+  
+
+  const { address, city, state, country, lat, lng, name, description, price, spotImage } =  req.body;
+
+  const ownerId = req.user.id;
+
+  newSpot = await Spot.create({
+    ownerId,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  });
+
+ 
+  if (newSpot) {
+    console.log('yes spot');
+    if (req.file) {
+      console.log('yes req.file');
+      console.log(req.file);
+      try {
+        const imageUrl = await singleFileUpload({ file: req.file, public: true });
+        await SpotImage.create({
+          spotId: newSpot.id,
+          url: imageUrl,
+          preview: false,
+        });
+        if(SpotImage){
+          console.log('yes SpotImage');
+          console.log('yes SpotImage');
+          console.log('yes SpotImage');
+          console.log('yes SpotImage');
+          console.log('yes SpotImage');
+          console.log('yes SpotImage');
+        }
+
+        console.log('-=-=--===-');
+        console.log('image url',imageUrl );
+        console.log('-=-=--===-');
+
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+    
+      }
+
+
+    let spot = newSpot.toJSON()
+    const lat = parseFloat(spot.lat);
+    const lng = parseFloat(spot.lng);
+    const price = parseFloat(spot.price);
+    return res.status(200).json({ 
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat,
+      lng,
+      name: spot.name,
+      description: spot.description,
+      price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt,
+    });
+  } 
+
+  if (!newSpot) {
+    const err = new Error("Spot couldn't be created");
+    err.statusCode = 400;
+    err.status = 400;
+    return next(err);
+  }
+  return res.json({hey:'hello'})
+
+});
+
+
 // Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (req, res, next) => {
   const { url, preview } = req.body;
@@ -279,6 +366,11 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
   }
 
 if(spot){
+
+  const imageUrls = spot.SpotImages.map(image => retrievePrivateFile(image.key));
+  // return res.json(imageUrls);
+
+
   spot = spot.toJSON()
   const lat = parseFloat(spot.lat);
   const lng = parseFloat(spot.lng);
@@ -329,26 +421,6 @@ router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
     price,
   });
 
-  if(spotImages){
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-    console.log('we have images!');
-  }
-
 
   if (newSpot){
     let spot = newSpot.toJSON()
@@ -381,6 +453,7 @@ router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
 
 
 });
+
 
 // Edit a Spot
 router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
@@ -657,5 +730,159 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
   return res.status(200).json({ Bookings: filteredBookings });
 });
+
+
+
+
+
+
+// // Create a Spot
+// router.post('/createspot', requireAuth, validateSpotEdit, async (req, res, next) => {
+  
+//   console.log(req);
+
+
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   console.log('hitting route');
+//   // const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
+
+//   // const ownerId = req.user.id;
+
+//   // newSpot = await Spot.create({
+//   //   ownerId,
+//   //   address,
+//   //   city,
+//   //   state,
+//   //   country,
+//   //   lat,
+//   //   lng,
+//   //   name,
+//   //   description,
+//   //   price,
+//   // });
+
+ 
+
+//   //   if (newSpot) {
+//   //     // Check if there are any images in the request
+//   //     if (req.files && req.files.length > 0) {
+//   //       // Process each image and upload it to S3
+//   //       const imagesPromises = req.files.map(async (file) => {
+//   //         const imageUrl = await singleFileUpload({ file, public: true });
+//   //         return SpotImage.create({
+//   //           spotId: newSpot.id,
+//   //           url: imageUrl,
+//   //           preview: false, // or set to true for a specific image if needed
+//   //         });
+//   //       });
+  
+//   //       // Wait for all images to be uploaded and added to the database
+//   //       await Promise.all(imagesPromises);
+//   //     }
+
+
+//   //   let spot = newSpot.toJSON()
+//   //   const lat = parseFloat(spot.lat);
+//   //   const lng = parseFloat(spot.lng);
+//   //   const price = parseFloat(spot.price);
+//   //   return res.status(200).json({ 
+//   //     id: spot.id,
+//   //     ownerId: spot.ownerId,
+//   //     address: spot.address,
+//   //     city: spot.city,
+//   //     state: spot.state,
+//   //     country: spot.country,
+//   //     lat,
+//   //     lng,
+//   //     name: spot.name,
+//   //     description: spot.description,
+//   //     price,
+//   //     createdAt: spot.createdAt,
+//   //     updatedAt: spot.updatedAt,
+//   //   });
+//   // } 
+
+//   // if (!newSpot) {
+//   //   const err = new Error("Spot couldn't be created");
+//   //   err.statusCode = 400;
+//   //   err.status = 400;
+//   //   return next(err);
+//   // }
+//   return res.json({hey:'hello'})
+
+// });
+
+
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (req, res, next) => {
+  const { url, preview } = req.body;
+  const spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.statusCode = 404;
+    err.status = 404;
+    return next(err);
+  }
+
+  // Require proper authorization: Review must belong to the current user
+  if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
+    const err = new Error('Forbidden');
+    err.statusCode = 403;
+    err.status = 403;
+    return next(err);
+  }
+
+  if (spot) {
+
+    if(preview){
+      await SpotImage.update({ preview: false }, {
+        where: { spotId: req.params.spotId }
+      });
+    }
+
+    const previewImageUrl = req.file ? 
+    await singleFileUpload({ file: req.file, public: true }) :
+    null;
+
+
+
+
+    let newImage = await SpotImage.create({
+      spotId: req.params.spotId,
+      // url,
+      previewImageUrl, // <--- swapped out for url
+      preview,
+    });
+
+    if (newImage) {
+      return res.status(200).json({
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview,
+      });
+    }
+    if (!newImage) {
+      const err = new Error("Image couldn't be added");
+      err.statusCode = 400;
+      err.status = 400;
+      return next(err);
+    }
+  }
+});
+
+
+
 
 module.exports = router;

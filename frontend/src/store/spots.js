@@ -46,16 +46,20 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
   if(spotId === null){
     dispatch(getSpot(null))
   }
+console.log('here');
+
 
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'GET',
   });
   const data = await response.json();
 
+
+  console.log(data);
+
   dispatch(getSpot(data));
   return response;
 };
-
 
 
 export const createSpotThunk = (       
@@ -68,9 +72,45 @@ export const createSpotThunk = (
   description,
   name,
   price,
+  spotPreviewImageFile
+  ) => async (dispatch) => {
+    let spotImage = spotPreviewImageFile
+    const formData = new FormData();
+    formData.append("country", country);
+    formData.append("address", address);
+    formData.append("city", city);
+    formData.append("state", state);
+    formData.append("lat", lat);
+    formData.append("lng", lng);
+    formData.append("description", description);
+    formData.append("name", name);
+    formData.append("price", price);
+    if(spotPreviewImageFile) formData.append("spotImage", spotImage);
+    
+
+  const response = await csrfFetch('/api/spots', {
+    method: 'POST',
+    body: formData
+  });
+  const data = await response.json();
+  console.log(data);
+  dispatch(createSpot(data));
+  return {data,response};
+};
+
+export const createSpotThunk2 = (       
+  country,
+  address,
+  city,
+  state,
+  lat,
+  lng,
+  description,
+  name,
+  price,
   spotImages
   ) => async (dispatch) => {
-  
+
   const response = await csrfFetch('/api/spots', {
     method: 'POST',
     body:JSON.stringify({  
@@ -93,6 +133,8 @@ export const createSpotThunk = (
 };
 
 
+
+
 const initialState = { spots:[] };
 const spotsReducer = (state = initialState, action) => {
 
@@ -105,6 +147,7 @@ const spotsReducer = (state = initialState, action) => {
         spots: action.payload.Spots,
       };
     case GET_SPOT:
+
       return {
         ...newState,
         currentSpot: action.payload,

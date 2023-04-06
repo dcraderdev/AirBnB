@@ -19,6 +19,7 @@ const CreateSpot = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
+  const [spotPreviewImageFile, setSpotPreviewImageFile] = useState('');
   const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
   const [spotImages, setSpotImages] = useState([]);
   const dispatch = useDispatch();
@@ -26,7 +27,6 @@ const CreateSpot = () => {
 
   const fileTypes = ["pdf", "png", "jpg", "jpeg", "gif"];
 
-console.log('--->',spotPreviewImage);
  
 
 
@@ -48,7 +48,7 @@ console.log('--->',spotPreviewImage);
         description,
         name,
         price,
-        spotImages,
+        spotPreviewImageFile,
       ))
 
     if(data) history.push(`/spots/${data.id}`)
@@ -73,9 +73,10 @@ console.log('--->',spotPreviewImage);
 
       console.log('Selected file:', file);
       setSpotPreviewImage(URL.createObjectURL(file))
+      setSpotPreviewImageFile(file)
       setSpotPreviewImageLoaded(true)
 
-      setSpotImages(()=>[...spotImages,file.name])
+      setSpotImages(()=>[...spotImages,file])
 
       
     }
