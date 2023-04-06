@@ -185,8 +185,9 @@ const CreateSpot = () => {
 
     <div className="host-form-page">
       <div className="host-form-page-container">
-        <div className="host-header">Host an Airbnb</div>
-
+        <div className="host-header">
+          <div className="host-header-text">Host an Airbnb</div>
+         </div>
         <div className="hostDiv">
 
           <form onSubmit={handleSubmit}>

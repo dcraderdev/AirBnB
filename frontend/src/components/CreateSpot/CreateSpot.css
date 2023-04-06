@@ -8,7 +8,6 @@ body{
 
 
 .host-form-page {
-  border: 1px solid rgb(197, 81, 81);
   border-radius: 5px;
   max-width: 1000px;
   height: 750px;
@@ -39,7 +38,8 @@ body{
 
 
 .image-main-container{
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0,0.5);
+
 
   position: relative;
   left: -30px;
@@ -60,8 +60,6 @@ body{
 }
 
 .image-main img {
-  border: 1px solid rgb(0, 0, 0);
-
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -73,8 +71,9 @@ body{
 }
 
 .image-tile-container{
+  border-radius: 5px;
   width: 450px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0,0.5);
   background-color: white;
   position: relative;
   top: 30px;
@@ -103,8 +102,16 @@ body{
   top: -5px;
   font-size: 28px;
   left: 30%;
-
 }
+
+
+.host-header-text{
+  position: relative;
+  top: -5px;
+  left: 40%;
+}
+
+
 
 .hostDiv label {
   font-size: 10px;
