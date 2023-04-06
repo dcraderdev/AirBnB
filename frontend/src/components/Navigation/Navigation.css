@@ -10,7 +10,8 @@
   left: 0px;
   height: 75px;
   width: 100%;
-  background-image: linear-gradient(to right, #fcf9f5ee, #ffffff);
+  background-image: linear-gradient(to right, #f4f0ebee, #ffffff, #f4ede5ee);
+
 
 }
 
@@ -82,19 +83,22 @@
 .nav-profile-button:hover {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   cursor: pointer;
-
 }
+
+
 
 .nav-host-div:active,
 .nav-profile-button:active {
- background-color: rgb(254, 254, 254);
+ transform: scale(1.2);
+ background-color: #fff9f2ee;
  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .profile-button-active {
-  background-color: rgb(254, 254, 254);
+  background-color: #fff9f2ee;
   box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   cursor: pointer;
+  transform: scale(1.2);
 
  }
 

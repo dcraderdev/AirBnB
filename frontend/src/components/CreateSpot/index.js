@@ -31,51 +31,45 @@ const CreateSpot = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
-  const [signInErrors, setSignInErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
-  const [buttonClass, setButtonClass] = useState('host-form-submit-button');
+  const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Host');
  
 
   useEffect(() => {
     const errors = {};
-    const createSpotErrors = {};
-    console.log(!country.length);
-    console.log(spotPreviewImageFile.length);
 
-    if (!country.length) errors['country'] = 'Please enter a country';
-    if (!address.length) errors['address'] = 'Please enter a address';
-    if (!city.length) errors['city'] = 'Please enter a city';
-    if (!state.length) errors['state'] = 'Please enter a state';
-    if (!description.length) errors['description'] = 'Please enter a description';
-    if (!name.length) errors['name'] = 'Please enter a name';
-    if (!price.length) errors['price'] = 'Please enter a price';
-    if (!spotPreviewImageFile.length) errors['spotPreviewImageFile'] = 'Please submit at least one photo';
-
-    if (country.length < 4) {
-      errors['country'] = 'Please enter a country';
-      createSpotErrors['country'] = 'Username must be at least 4 characters';
-    }
-    if (address.length < 6) {
-      errors['address'] = 'Please enter a address';
-      createSpotErrors['address'] = 'address must be at least 6 characters';
-    }
+    if (!country.length)              errors['country'] = 'Please enter a country';
+    if (!address.length)              errors['address'] = 'Please enter a address';
+    if (!city.length)                 errors['city'] = 'Please enter a city';
+    if (!state.length)                errors['state'] = 'Please enter a state';
+    if (!description.length)          errors['description'] = 'Please enter a description';
+    if (!name.length)                 errors['name'] = 'Please enter a name';
+    if (!price.length)                errors['price'] = 'Please enter a price';
+    if (!spotPreviewImageFile) errors['spotPreviewImageFile'] = 'Please select at least one photo';
 
     setValidationErrors(errors);
-    setSignInErrors(createSpotErrors);
   }, [country, address, city, state, description, name, price, spotPreviewImageFile]);
 
   
   useEffect(() => {
-    if (Object.keys(signInErrors).length > 0) {
+console.log();
+
+
+
+    if (Object.keys(validationErrors).length > 0) {
       setButtonClass('host-form-submit-button disabled');
-    } else {
-      setButtonClass('host-form-submit-button');
+      setDisabledButton(true);
     }
-  }, [signInErrors]);
+    else {
+      setButtonClass('host-form-submit-button button');
+      setDisabledButton(false);
+    }
 
 
-  
+  }, [validationErrors]);
+
+
 
 
 
@@ -105,9 +99,17 @@ const CreateSpot = () => {
     if(data) history.push(`/spots/${data.id}`)
       
     } catch (error) {
+      setDisabledButton(true);
+
       console.error(error);
       console.log(error.data);
       console.log(error.status);
+
+
+      setTimeout(() => {
+        setDisabledButton(false);
+        setButtonClass('host-form-submit-button disabled');
+      }, 3000);
     };
   };
 
@@ -130,6 +132,11 @@ const CreateSpot = () => {
 
     }
   }
+
+
+  console.log(Object.keys(validationErrors));
+console.log(disabledButton);
+console.log(buttonClass);
 
   return (
 
@@ -290,28 +297,30 @@ const CreateSpot = () => {
               <input
                 className="host-form-spot-preview-image-field"
                 type="text"
-                value={spotPreviewImageFile.name}
+                value={spotPreviewImageFile.name ? spotPreviewImageFile.name : '' }
                 onChange={(e) => setSpotPreviewImage(e.target.value)}
                 required
                 placeholder={validationErrors['spotPreviewImageFile'] ? validationErrors['spotPreviewImageFile'] : spotPreviewImageFile.name}
-
-
               />
-              <button 
-                className='host-form-add-spot-image-button'
+
+            </label>
+
+            <button 
+             className={buttonClass}
+             type="submit"
+             disabled={Object.keys(validationErrors).length > 0 || disabledButton}>
+             {buttonText}
+            </button>
+
+          </form>
+
+      <button 
+                className='host-form-add-spot-image-button button'
                 onClick={() => document.getElementById('fileInput').click()}
                 >
                   Add Image
               </button>
-            </label>
 
-
-
-
-            
-
-            <button className={buttonClass} type="submit">Host</button>
-          </form>
         </div>
       </div>
       <div className='image-container'>
@@ -330,23 +339,20 @@ const CreateSpot = () => {
 
         <div className='image-main-buttons'>
           <button 
-          className='image-main-button-add'
+          className='image-main-button-add button'
           onClick={() => document.getElementById('fileInput').click()}
           >
             Add Image
           </button>
-          <button className='image-main-button-default'>Make Default</button>
-          <button className='image-main-button-delete'>Delete Image</button>
+          <button className='image-main-button-default button'>Make Default</button>
+          <button className='image-main-button-delete button'>Delete Image</button>
         </div>
 
 
-        <div className='image-thumbnail-container'>
-        {spotImages.map((image,index) => (
-          <div key={index} className='image-thumbnail'>
-            <ImageTile image={image} />
-          </div>
-        ))}
-      </div>
+        <div className='image-tile-container'>
+          <ImageTile spotImages={spotImages} setSpotImages={setSpotImages} />
+        </div>
+
 
       </div>
     </div>

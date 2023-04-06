@@ -19,7 +19,7 @@ function LoginModal({ closeModal }) {
 
 
   const [disabledButton, setDisabledButton] = useState(false);
-  const [buttonClass, setButtonClass] = useState('signinDiv-button');
+  const [buttonClass, setButtonClass] = useState('signinDiv-button button');
   const [buttonText, setButtonText] = useState('Log In');
 
 
@@ -56,9 +56,9 @@ function LoginModal({ closeModal }) {
   
   useEffect(() => {
     if (Object.keys(signInErrors).length > 0) {
-      setButtonClass('signinDiv-button-disabled');
+      setButtonClass('signinDiv-button disabled');
     } else {
-      setButtonClass('signinDiv-button');
+      setButtonClass('signinDiv-button button');
     }
   }, [signInErrors]);
 
@@ -154,13 +154,13 @@ function LoginModal({ closeModal }) {
         </button>
       </form>
       <div className="altLinks">
-        <div className="login-forgot-password-link" onClick={handleForgotPassword}>
+        <div className="login-forgot-password-link link" onClick={handleForgotPassword}>
           Forgot password?
         </div>
-        <div className="login-signup-link" onClick={handleSignUp}>
+        <div className="login-signup-link link" onClick={handleSignUp}>
           Sign Up
         </div>
-        <div className="demo-user-singin" onClick={demoUser}>
+        <div className="demo-user-singin link" onClick={demoUser}>
         Demo User
         </div>
       </div>

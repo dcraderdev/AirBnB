@@ -27,7 +27,7 @@ function SignupModal({ closeModal }) {
 
 
   const [disabledButton, setDisabledButton] = useState(false);
-  const [buttonClass, setButtonClass] = useState('signupDiv-button');
+  const [buttonClass, setButtonClass] = useState('signupDiv-button button');
   const [buttonText, setButtonText] = useState('Sign Up');
   const [emailText, setEmailText] = useState('Please enter an email');
   const [emailClass, setEmailClass] = useState('emailField');
@@ -69,9 +69,9 @@ function SignupModal({ closeModal }) {
 
   useEffect(() => {
     if (Object.keys(signupErrors).length > 0 || errorStatus) {
-      setButtonClass('signupDiv-button-disabled');
+      setButtonClass('signupDiv-button disabled');
     } else {
-      setButtonClass('signupDiv-button');
+      setButtonClass('signupDiv-button button');
     }
   }, [signupErrors, errorStatus]);
 
@@ -89,7 +89,7 @@ function SignupModal({ closeModal }) {
       if (response.ok) closeModal();
     } catch (error) {
       setDisabledButton(true);
-      setButtonClass('signinDiv-button-disabled');
+      setButtonClass('signinDiv-button disabled');
       setErrorStatus(true);
 
 
@@ -238,7 +238,7 @@ console.log(error.data.errors.email);
           </button>
         </form>
         <div className="altLinks">
-          <div className="signup-login-link" onClick={handleSignin}>
+          <div className="signup-login-link link" onClick={handleSignin}>
             Log In
           </div>
       </div>

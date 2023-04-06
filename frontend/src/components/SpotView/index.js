@@ -29,7 +29,7 @@ function SpotView() {
   const imageUrl = currentSpot?.SpotImages?.[0]?.url || logo;
   const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-image-logo';
   const reviewsText = currentSpot && currentSpot.numReviews == 1 ? ' Review' : ' Reviews'
-  const rating = currentSpot && currentSpot.avgStarRating === 'NaN' ? 'New!' : currentSpot.avgStarRating
+  const rating = currentSpot && currentSpot.avgStarRating !== 'NaN' ? currentSpot.avgStarRating : 'New!'
 
   const comingSoon =()=>{
     alert('Feature coming soon')
@@ -101,7 +101,7 @@ Nostrud veniam esse ad incididunt ex ex velit magna veniam incididunt proident i
               <div>
                 {currentSpot.price}Night ⭐️{rating} {currentSpot.numReviews} {reviewsText}
               </div>
-              <button className="spot-view-reservation-button divButton" onClick={comingSoon}></button>
+              <button className="spot-view-reservation-button button"></button>
             </div>
           </div>
 

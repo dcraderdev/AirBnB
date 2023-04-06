@@ -118,6 +118,7 @@
 
 }
 .profile-menu-logout-button:active {
+  transform: scale(.95);
   background-color: rgb(74, 113, 186);
 
 }

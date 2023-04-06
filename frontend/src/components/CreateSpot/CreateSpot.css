@@ -3,11 +3,7 @@
 }
 
 body{
-  background: linear-gradient(to right,#333, rgb(150, 36, 36), #333);
-  background-image: linear-gradient(to right, #eae2d8ee, #ffffff, #eae2d8ee);
-
-  /* background: linear-gradient(#648880, #293f50) */
-
+  background-image: linear-gradient(to right, #f4f0ebee, #ffffff, #f4ede5ee);
 }
 
 
@@ -21,7 +17,6 @@ body{
   align-items: center;
   transform: translate(-50%,0%) scale(1.2);
   left: 50%;
-  
 }
 
 .host-form-page-container {
@@ -50,24 +45,22 @@ body{
 
 
 .image-main-container{
-  border: 1px solid rgb(0, 0, 0);
   background-color: white;
   position: relative;
-  top: -15px;
+  top: 10px;
   left: 5%;
   width: 80%;
   height: 250px;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .image-main {
-  width: 300px;
-  height: 280px;
+  width: 360px;
+  height: 340px;
   overflow: hidden;
   position: relative;
   border: solid black 1px;
@@ -85,17 +78,14 @@ body{
   transform: translate(-50%, -50%);
 }
 
-.image-thumbnail-container{
+.image-tile-container{
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   position: relative;
-  top: 8%;
+  top: 10%;
   left: 5%;
-  width: 80%;
-  height: 20%;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 45%;
 }
 
 .image-main-buttons{
@@ -110,13 +100,7 @@ body{
   justify-content: space-evenly;
 }
 
-.image-thumbnail{
-  position: relative;
-  background-color: #3b75e2;
-  border: 1px solid rgb(0, 0, 0);
-  width: 30px;
-  height: 30px;
-}
+
 
 .host-header{
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -346,15 +330,17 @@ body{
   }
   
 .host-form-spot-preview-image-memo{
-  margin-top: 5px;
+  margin-top: 7px;
   position: relative;
   top: 250px;
   font-size: 10px;
 }
 .host-form-spot-preview-image{
   position: absolute;
-  top: 625px;
+  top: 632px;
   width: 435px;
+  height: 1px;
+
 
 }
 
@@ -363,11 +349,12 @@ body{
   display: block;
   width: 100%;
   padding: 5px;
-  margin-top: 6px;
+  margin-top: 3px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 14px;
   resize: vertical;
+  height: fit-content;
 }
 
 
@@ -376,9 +363,8 @@ body{
   width: 100px;
   height: 35px;
   left: 100px;
-  top: 10px;
+  top: 267px;
 }
-
 
 .host-form-submit-button{
   position: relative;
@@ -386,63 +372,19 @@ body{
   height: 35px;
   left: 230px;
   top: 303px;
-
-  background-color: rgb(74, 113, 186);
-  color: white;
-  font-weight: bold;
-  border: solid rgb(74, 113, 186) 1px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: .1s background-color;
-
-}
-
-
-.host-form-submit-button:hover {
-  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  background-color: #3b75e2; */
-}
-
-.host-form-submit-button:active {
-  background-color: rgb(74, 113, 186);
-  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-
-}
-.disabled{
-  background-color: rgb(106, 125, 161);
-  border: solid rgb(74, 113, 186,0.6) 1px;
-
 }
 
 .disabled:hover{
-  /* border: solid rgba(255, 0, 0, 0.579) 1px;
-  background-color: rgba(106, 125, 161, 0.958); */
-
+  border: solid rgba(255, 0, 0, 0.579) 1px;
+  background-color: rgba(106, 125, 161, 0.958);
 }
+
 .disabled:focus {
   outline: none;
 }
 
-
-.hostDiv-button {
-  width: 100%;
-  padding: 10px;
-  background-color: cornflowerblue;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: .1s background-color;
+.image-main-button-default{
+  position: relative;
 }
-
-.hostDiv-button:hover {
-  background-color: #3b75e2;
-}
-
-.hostDiv-button:focus {
-  outline: none;
-}
-
 
 

@@ -9,9 +9,6 @@
 }
 
 
-.spot-view-header{
-
-}
 
 .spot-view-image-container {
   border: solid rgb(0, 0, 0) 3px;
@@ -87,29 +84,14 @@
 
 .spot-view-reservation-button{
   position: absolute;
-  width: 80%;
-  left: 10%;
+  width: 60%;
+  left: 20%;
   bottom: 3%;
   padding: 10px;
-  background-color: rgb(74, 113, 186);
-  color: white;
-  font-weight: bold;
-  border: solid rgb(74, 113, 186) 1px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: .1s background-color;
-}
-
-.spot-view-reservation-button:hover {
-  background-color: #3b75e2;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
 }
 
-.spot-view-reservation-button:active {
-  background-color: rgb(74, 113, 186);
-  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-}
+
 
 
 .spot-view-description-header{

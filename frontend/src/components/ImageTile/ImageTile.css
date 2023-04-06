@@ -1,0 +1,35 @@
+/* 
+.image-tile-container {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  position: absolute;
+  top: 120%;
+  left: 5%;
+  width: 80%;
+  height: 50%;
+
+}
+
+
+
+.image-thumbnail-container{
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  position: absolute;
+  top: 8%;
+  left: 5%;
+  width: 80%;
+  height: 20%;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.image-thumbnail{
+  position: relative;
+  background-color: #3b75e2;
+  border: 1px solid rgb(0, 0, 0);
+  width: 30px;
+  height: 30px;
+} */
