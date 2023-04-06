@@ -53,9 +53,6 @@ const CreateSpot = () => {
 
   
   useEffect(() => {
-console.log();
-
-
 
     if (Object.keys(validationErrors).length > 0) {
       setButtonClass('host-form-submit-button disabled');
@@ -68,8 +65,6 @@ console.log();
 
 
   }, [validationErrors]);
-
-
 
 
 
@@ -114,6 +109,59 @@ console.log();
   };
 
 
+
+  const deleteImage = () => {
+  
+    const newImages = spotImages.filter((currentImage) => currentImage !== spotPreviewImageFile);
+    setSpotImages(newImages);
+    if (newImages && newImages[0]) {
+      setSpotPreviewImageFile(newImages[0]);
+      setSpotPreviewImage(URL.createObjectURL(newImages[0]));
+    } else {
+      setSpotPreviewImageFile('');
+      setSpotPreviewImage('');
+      setSpotPreviewImageLoaded(false);
+    }
+  };
+  
+
+  const removeImage = (image) => {
+    const newImages = spotImages.filter((currentImage) => currentImage !== image);
+    setSpotImages(newImages);
+    if (newImages && newImages[0]) {
+      setSpotPreviewImageFile(newImages[0]);
+      setSpotPreviewImage(URL.createObjectURL(newImages[0]));
+    } else {
+      setSpotPreviewImageFile('');
+      setSpotPreviewImage('');
+      setSpotPreviewImageLoaded(false);
+    }
+  };
+
+  const selectImage = (file) => {
+    setSpotPreviewImage(URL.createObjectURL(file))
+    setSpotPreviewImageFile(file);
+  };
+
+
+  const makeDefault = (file) => {
+
+    const index = spotImages.findIndex((currFile) => currFile === spotPreviewImageFile);
+    if (index > 0) {
+      const newImages = [
+        spotImages[index],
+        ...spotImages.slice(0, index),
+        ...spotImages.slice(index + 1),
+      ];
+      setSpotImages(newImages);
+    }
+
+  console.log(spotImages);
+
+  };
+
+  
+
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -123,7 +171,7 @@ console.log();
       }
 
 
-      console.log('Selected file:', file);
+      // console.log('Selected file:', file);
       setSpotPreviewImage(URL.createObjectURL(file))
       setSpotPreviewImageFile(file)
       setSpotPreviewImageLoaded(true)
@@ -132,11 +180,6 @@ console.log();
 
     }
   }
-
-
-  console.log(Object.keys(validationErrors));
-console.log(disabledButton);
-console.log(buttonClass);
 
   return (
 
@@ -344,13 +387,13 @@ console.log(buttonClass);
           >
             Add Image
           </button>
-          <button className='image-main-button-default button'>Make Default</button>
-          <button className='image-main-button-delete button'>Delete Image</button>
+          <button className='image-main-button-default button' onClick={makeDefault}>Make Default</button>
+          <button className='image-main-button-delete button' onClick={deleteImage}>Delete Image</button>
         </div>
 
 
         <div className='image-tile-container'>
-          <ImageTile spotImages={spotImages} setSpotImages={setSpotImages} />
+          <ImageTile spotImages={spotImages} setSpotImages={setSpotImages} removeImage={removeImage} selectImage={selectImage} />
         </div>
 
 

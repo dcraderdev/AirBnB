@@ -1,41 +1,32 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 
-const ImageTile = ({spotImages, setSpotImages}) => {
-
-  console.log(spotImages);
+import './ImageTile.css';
 
 
-//first image in list should be the default image 
-// create list object of all image names
-// have delete button next to each name to remove them from the spotImages array
+const ImageTile = ({ spotImages, setSpotImages, removeImage, selectImage }) => {
+
+  //first image in list should be the default image
+  // create list object of all image names
+  // have delete button next to each name to remove them from the spotImages array
 
 
+
+
+  console.log(spotImages.map((file, index) => {console.log('file',file);}));
 
   return (
+    <div>
+      <div className="image-thumbnail-container">
+        {spotImages && spotImages.map((file, index) => (
+          <div key={index} className="image-thumbnail" onClick={()=>{selectImage(file)}}>
+            <img src={URL.createObjectURL(file)} alt={`Thumbnail ${index}`}  />
+            <button className='button' onClick={() => removeImage(file)}>Delete</button>
+          </div>
+        ))}
+        
+      </div>
+    </div>
+  );
+};
 
-
-  
-      
-      <div>ImageTile</div>
-
-
-
-
-
-
-
-
-  )
-}
-
-export default ImageTile
-
-  // <div className='image-tile-container'>
-  //     {spotImages.map((image,index) => (
-  //         <div key={index} className='image-thumbnail'>
-  //           <ImageTile spotImages={spotImages} setSpotImages={setSpotImages} />
-  //         </div>
-  //       ))}
-      
-  //   </div>
-
+export default ImageTile;

@@ -121,7 +121,7 @@ console.log(error.data.errors.email);
       setTimeout(() => {
         setErrorStatus(false)
         setDisabledButton(false);
-        setButtonClass('signupDiv-button');
+        setButtonClass('signupDiv-button button');
         setEmail(emailText)
         setEmailClass('emailField');
         setUsername(usernameText)

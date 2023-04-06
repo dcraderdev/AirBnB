@@ -8,6 +8,8 @@ body{
 
 
 .host-form-page {
+  border: 1px solid rgb(197, 81, 81);
+  border-radius: 5px;
   max-width: 1000px;
   height: 750px;
   width: 100%;
@@ -20,38 +22,29 @@ body{
 }
 
 .host-form-page-container {
-  background-color: #ffffff;
-
-  background-image: linear-gradient(to right, rgb(255, 254, 254), #ffffff);
-  border: 1px solid rgb(197, 81, 81);
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 440px;
   height: 90%;
   margin: 0 2.5%;
 }
 
 .image-container {
-  background-color: #ffffff;
-  border: 1px solid rgb(197, 81, 81);
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 80%;
+  width: 90%;
   max-width: 400px;
   height: 90%;
+  position: relative;
+  top: 60px;
 }
 
 
 .image-main-container{
-  background-color: white;
+  border: 1px solid rgb(0, 0, 0);
+
   position: relative;
-  top: 10px;
-  left: 5%;
-  width: 80%;
-  height: 250px;
-  padding: 20px;
+  left: -30px;
+  top: -20px;
+  width: 450px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -59,15 +52,16 @@ body{
 }
 
 .image-main {
-  width: 360px;
-  height: 340px;
+
+  width: 450px;
+  height: 360px;
   overflow: hidden;
   position: relative;
-  border: solid black 1px;
-  background-color: transparent;
 }
 
 .image-main img {
+  border: 1px solid rgb(0, 0, 0);
+
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -79,19 +73,20 @@ body{
 }
 
 .image-tile-container{
+  width: 450px;
   border: 1px solid rgb(0, 0, 0);
   background-color: white;
   position: relative;
-  top: 10%;
-  left: 5%;
-  width: 90%;
-  height: 45%;
+  top: 30px;
+  left: -30px;
+  height: 150px;
+  overflow-y: hidden;
 }
 
 .image-main-buttons{
   transform: scale(1.2);
   position: relative;
-  top: 3%;
+  top: 0%;
   left: 15%;
   width: 70%;
   display: flex;

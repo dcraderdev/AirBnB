@@ -42,3 +42,10 @@
 .emailField-invalid{
   color: red;
 }
+
+.signupDiv-button {
+  border: 1px solid black;
+  display: relative;
+  width: 98%;
+
+}
