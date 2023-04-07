@@ -177,10 +177,18 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 
 // Create a Spot
-router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit, async (req, res, next) => {
+router.post('/', multipleMulterUpload("spotImages",20), requireAuth, validateSpotEdit, async (req, res, next) => {
   
-  const { address, city, state, country, lat, lng, name, description, price, spotImage } =  req.body;
+
+  console.log(req.files);
+  console.log(req.file);
+
+
+
+  const { address, city, state, country, lat, lng, name, description, price } =  req.body;
   const ownerId = req.user.id;
+
+
 
   newSpot = await Spot.create({
     ownerId,
@@ -195,23 +203,40 @@ router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit,
     price,
   });
 
- 
+
   if (newSpot) {
-    if (req.file) {
+    console.log('yes new spot');
+    console.log('yes new spot');
+    console.log('yes new spot');
+
+    if (req.files && req.files.length > 0) {
+    console.log('yes req.files');
+    console.log('yes req.files');
+    console.log('yes req.files');
+
       try {
-        const imageUrl = await singleFileUpload({ file: req.file, public: true });
-        await SpotImage.create({
-          spotId: newSpot.id,
-          url: imageUrl,
-          preview: true,
-        });
-        console.log('-=-=--===-');
-        console.log('image url',imageUrl );
-        console.log('-=-=--===-');
+        const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+  
+        for (let i = 0; i < imageUrls.length; i++) {
+          console.log('creating images');
+          console.log('creating images');
+       
+          const newImage = await SpotImage.create({
+            spotId: newSpot.id,
+            url: imageUrls[i],
+            preview: i === 0 ? true : false, 
+          });
+          if(newImage){
+          console.log('newImage created');
+          console.log('newImage created');
+            
+          }
+        }
       } catch (error) {
-        console.error("Error uploading file:", error);
+        console.error("Error uploading files:", error);
       }
     }
+ 
 
     let spot = newSpot.toJSON()
     const lat = parseFloat(spot.lat);
@@ -244,6 +269,74 @@ router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit,
 });
 
 
+// // Create a Spot
+// router.post('/', singleMulterUpload("spotImage"), requireAuth, validateSpotEdit, async (req, res, next) => {
+  
+//   const { address, city, state, country, lat, lng, name, description, price, spotImage } =  req.body;
+//   const ownerId = req.user.id;
+
+//   newSpot = await Spot.create({
+//     ownerId,
+//     address,
+//     city,
+//     state,
+//     country,
+//     lat,
+//     lng,
+//     name,
+//     description,
+//     price,
+//   });
+
+ 
+//   if (newSpot) {
+//     if (req.file) {
+//       try {
+//         const imageUrl = await singleFileUpload({ file: req.file, public: true });
+//         await SpotImage.create({
+//           spotId: newSpot.id,
+//           url: imageUrl,
+//           preview: true,
+//         });
+//         console.log('-=-=--===-');
+//         console.log('image url',imageUrl );
+//         console.log('-=-=--===-');
+//       } catch (error) {
+//         console.error("Error uploading file:", error);
+//       }
+//     }
+
+//     let spot = newSpot.toJSON()
+//     const lat = parseFloat(spot.lat);
+//     const lng = parseFloat(spot.lng);
+//     const price = parseFloat(spot.price);
+//     return res.status(200).json({ 
+//       id: spot.id,
+//       ownerId: spot.ownerId,
+//       address: spot.address,
+//       city: spot.city,
+//       state: spot.state,
+//       country: spot.country,
+//       lat,
+//       lng,
+//       name: spot.name,
+//       description: spot.description,
+//       price,
+//       createdAt: spot.createdAt,
+//       updatedAt: spot.updatedAt,
+//     });
+//   } 
+
+//   if (!newSpot) {
+//     const err = new Error("Spot couldn't be created");
+//     err.statusCode = 400;
+//     err.status = 400;
+//     return next(err);
+//   }
+
+// });
+
+
 // Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (req, res, next) => {
   const { url, preview } = req.body;
@@ -270,6 +363,28 @@ router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (r
         where: { spotId: req.params.spotId }
       });
     }
+
+
+
+    // if (newSpot) {
+    //   if (req.file) {
+    //     try {
+    //       const imageUrl = await multipleFilesUpload({ file: req.file, public: true });
+    //       await SpotImage.create({
+    //         spotId: newSpot.id,
+    //         url: imageUrl,
+    //         preview: true,
+    //       });
+    //       console.log('-=-=--===-');
+    //       console.log('image url',imageUrl );
+    //       console.log('-=-=--===-');
+    //     } catch (error) {
+    //       console.error("Error uploading file:", error);
+    //     }
+    //   }
+
+
+
 
     const previewImageUrl = req.file ? 
     await singleFileUpload({ file: req.file, public: true }) :

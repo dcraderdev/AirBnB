@@ -43,20 +43,11 @@ export const getAllSpotsThunk = () => async (dispatch) => {
 
 export const getSpotThunk = (spotId) => async (dispatch) => {
 
-  if(spotId === null){
-    dispatch(getSpot(null))
-  }
-console.log('here');
-
-
+  if(spotId === null) dispatch(getSpot(null))
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'GET',
   });
   const data = await response.json();
-
-
-  console.log(data);
-
   dispatch(getSpot(data));
   return response;
 };
@@ -72,9 +63,8 @@ export const createSpotThunk = (
   description,
   name,
   price,
-  spotPreviewImageFile
+  spotImages
   ) => async (dispatch) => {
-    let spotImage = spotPreviewImageFile
     const formData = new FormData();
     formData.append("country", country);
     formData.append("address", address);
@@ -85,7 +75,12 @@ export const createSpotThunk = (
     formData.append("description", description);
     formData.append("name", name);
     formData.append("price", price);
-    if(spotPreviewImageFile) formData.append("spotImage", spotImage);
+    // if(spotImages) formData.append("spotImages", spotImages);
+    if (spotImages) {
+      for (let i = 0; i < spotImages.length; i++) {
+        formData.append("spotImages", spotImages[i]);
+      }
+    }
     
 
   const response = await csrfFetch('/api/spots', {

@@ -67,7 +67,8 @@ const CreateSpot = () => {
   }, [validationErrors]);
 
 
-
+console.log('--->',spotPreviewImageFile);
+console.log('--->',spotImages);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,7 +89,7 @@ const CreateSpot = () => {
         description,
         name,
         price,
-        spotPreviewImageFile,
+        spotImages,
       ))
 
     if(data) history.push(`/spots/${data.id}`)
@@ -155,8 +156,6 @@ const CreateSpot = () => {
       ];
       setSpotImages(newImages);
     }
-
-  console.log(spotImages);
 
   };
 
