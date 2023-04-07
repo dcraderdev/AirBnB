@@ -65,6 +65,7 @@ export const createSpotThunk = (
   price,
   spotImages
   ) => async (dispatch) => {
+
     const formData = new FormData();
     formData.append("country", country);
     formData.append("address", address);

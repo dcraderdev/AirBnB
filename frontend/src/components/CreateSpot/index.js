@@ -63,18 +63,27 @@ const CreateSpot = () => {
       setDisabledButton(false);
     }
 
-
   }, [validationErrors]);
 
 
-console.log('--->',spotPreviewImageFile);
-console.log('--->',spotImages);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const latValue = lat === '' ? null : lat;
-    const lngValue = lng === '' ? null : lng;
+    // const latValue = lat === '' ? null : lat;
+    // const lngValue = lng === '' ? null : lng;
+
+
+    // console.log(lat === '' ? null : lat);
+    // console.log(lngValue);
+
+    setLat(lat === '' ? null : lat)
+    setLng(lng === '' ? null : lng)
+
+console.log(lat);
+console.log(lng);
+
 
 
     try {
@@ -96,6 +105,7 @@ console.log('--->',spotImages);
       
     } catch (error) {
       setDisabledButton(true);
+      setButtonClass('host-form-submit-button disabled');
 
       console.error(error);
       console.log(error.data);
@@ -104,7 +114,7 @@ console.log('--->',spotImages);
 
       setTimeout(() => {
         setDisabledButton(false);
-        setButtonClass('host-form-submit-button disabled');
+        setButtonClass('host-form-submit-button button');
       }, 3000);
     };
   };

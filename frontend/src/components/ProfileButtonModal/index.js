@@ -16,12 +16,9 @@ function ProfileButtonModal({ closeModal }) {
   const [hostText, setHostText] = useState('text')
 
   const user = useSelector((state) => {
-    console.log(state);
     return state.session.user
   });
 
-
-console.log(user);
 
 
 

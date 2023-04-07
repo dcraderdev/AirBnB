@@ -376,14 +376,9 @@ body{
   top: 303px;
 }
 
-.disabled:hover{
-  border: solid rgba(255, 0, 0, 0.579) 1px;
-  background-color: rgba(106, 125, 161, 0.958);
-}
 
-.disabled:focus {
-  outline: none;
-}
+
+
 
 .image-main-button-default{
   position: relative;

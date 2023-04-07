@@ -69,15 +69,13 @@ body{
 }
 
 .disabled {
+  font-size: 12px;
   width: 100%;
-  padding: 10px;
   background-color: rgb(106, 125, 161);
   color: white;
-  font-weight: bold;
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  transition: .2s border;
   border: solid rgb(74, 113, 186,0.6) 1px;
 }
 

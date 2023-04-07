@@ -178,17 +178,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 // Create a Spot
 router.post('/', multipleMulterUpload("spotImages",20), requireAuth, validateSpotEdit, async (req, res, next) => {
-  
-
-  console.log(req.files);
-  console.log(req.file);
-
+  console.log('inside spot before validation error');
+  console.log('inside spot before validation error');
+  console.log('inside spot before validation error');
+  console.log('inside spot before validation error');
 
 
   const { address, city, state, country, lat, lng, name, description, price } =  req.body;
   const ownerId = req.user.id;
-
-
 
   newSpot = await Spot.create({
     ownerId,
@@ -203,41 +200,23 @@ router.post('/', multipleMulterUpload("spotImages",20), requireAuth, validateSpo
     price,
   });
 
-
   if (newSpot) {
-    console.log('yes new spot');
-    console.log('yes new spot');
-    console.log('yes new spot');
-
     if (req.files && req.files.length > 0) {
-    console.log('yes req.files');
-    console.log('yes req.files');
-    console.log('yes req.files');
-
       try {
         const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
   
         for (let i = 0; i < imageUrls.length; i++) {
-          console.log('creating images');
-          console.log('creating images');
-       
           const newImage = await SpotImage.create({
             spotId: newSpot.id,
             url: imageUrls[i],
             preview: i === 0 ? true : false, 
           });
-          if(newImage){
-          console.log('newImage created');
-          console.log('newImage created');
-            
-          }
         }
       } catch (error) {
         console.error("Error uploading files:", error);
       }
     }
  
-
     let spot = newSpot.toJSON()
     const lat = parseFloat(spot.lat);
     const lng = parseFloat(spot.lng);
