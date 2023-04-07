@@ -70,6 +70,7 @@ body{
 
 .disabled {
   font-size: 12px;
+
   width: 100%;
   background-color: rgb(106, 125, 161);
   color: white;

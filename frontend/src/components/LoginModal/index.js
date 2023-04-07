@@ -76,11 +76,11 @@ function LoginModal({ closeModal }) {
     } catch (error) {
       console.error(error);
       setDisabledButton(true);
-      setButtonClass('signinDiv-button-disabled');
+      setButtonClass('signinDiv-button disabled');
       setButtonText('The provided credentials were invalid');
       setTimeout(() => {
         setDisabledButton(false);
-        setButtonClass('signinDiv-button');
+        setButtonClass('signinDiv-button button');
         setButtonText('Log In');
       }, 3000);
     }
