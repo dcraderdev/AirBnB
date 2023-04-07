@@ -146,6 +146,7 @@ body{
 .country{
   position: relative;
   top: 5px;
+
 }
 
 .address-field,
@@ -202,7 +203,9 @@ body{
   left: 0px;
 }
 
-
+.red-font{
+  color: red;
+}
 
 
 .hostDiv input:hover {
@@ -385,3 +388,14 @@ body{
 }
 
 
+
+.country-red-font::placeholder,
+.address-red-font::placeholder,
+.city-red-font::placeholder,
+.state-red-font::placeholder,
+.description-red-font::placeholder,
+.name-red-font::placeholder,
+.price-red-font::placeholder,
+.spotPreviewImageFile-red-font::placeholder {
+  color: red;
+}

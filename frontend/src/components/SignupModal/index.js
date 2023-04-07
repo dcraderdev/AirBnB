@@ -27,7 +27,7 @@ function SignupModal({ closeModal }) {
 
 
   const [disabledButton, setDisabledButton] = useState(false);
-  const [buttonClass, setButtonClass] = useState('signupDiv-button button');
+  const [buttonClass, setButtonClass] = useState('signupDiv-button button button2');
   const [buttonText, setButtonText] = useState('Sign Up');
   const [emailText, setEmailText] = useState('Please enter an email');
   const [emailClass, setEmailClass] = useState('emailField');
@@ -69,9 +69,9 @@ function SignupModal({ closeModal }) {
 
   useEffect(() => {
     if (Object.keys(signupErrors).length > 0 || errorStatus) {
-      setButtonClass('signupDiv-button disabled');
+      setButtonClass('signupDiv-button disabled disabled2');
     } else {
-      setButtonClass('signupDiv-button button');
+      setButtonClass('signupDiv-button button button2');
     }
   }, [signupErrors, errorStatus]);
 
@@ -89,7 +89,7 @@ function SignupModal({ closeModal }) {
       if (response.ok) closeModal();
     } catch (error) {
       setDisabledButton(true);
-      setButtonClass('signinDiv-button disabled');
+      setButtonClass('signinDiv-button disabled disabled2');
       setErrorStatus(true);
 
 
@@ -121,7 +121,7 @@ console.log(error.data.errors.email);
       setTimeout(() => {
         setErrorStatus(false)
         setDisabledButton(false);
-        setButtonClass('signupDiv-button button');
+        setButtonClass('signupDiv-button button button2');
         setEmail(emailText)
         setEmailClass('emailField');
         setUsername(usernameText)

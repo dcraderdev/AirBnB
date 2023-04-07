@@ -19,7 +19,7 @@ function LoginModal({ closeModal }) {
 
 
   const [disabledButton, setDisabledButton] = useState(false);
-  const [buttonClass, setButtonClass] = useState('signinDiv-button button');
+  const [buttonClass, setButtonClass] = useState('signinDiv-button button button2 ');
   const [buttonText, setButtonText] = useState('Log In');
 
 
@@ -56,9 +56,9 @@ function LoginModal({ closeModal }) {
   
   useEffect(() => {
     if (Object.keys(signInErrors).length > 0) {
-      setButtonClass('signinDiv-button disabled');
+      setButtonClass('signinDiv-button disabled disabled2');
     } else {
-      setButtonClass('signinDiv-button button');
+      setButtonClass('signinDiv-button button button2');
     }
   }, [signInErrors]);
 
@@ -76,20 +76,15 @@ function LoginModal({ closeModal }) {
     } catch (error) {
       console.error(error);
       setDisabledButton(true);
-      setButtonClass('signinDiv-button disabled');
+      setButtonClass('signinDiv-button disabled disabled2');
       setButtonText('The provided credentials were invalid');
       setTimeout(() => {
         setDisabledButton(false);
-        setButtonClass('signinDiv-button button');
+        setButtonClass('signinDiv-button button button2');
         setButtonText('Log In');
       }, 3000);
     }
   };
-
-
-
-
-
 
 
   const demoUser = async (e) => {

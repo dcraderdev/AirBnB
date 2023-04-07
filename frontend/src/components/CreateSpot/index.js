@@ -33,7 +33,9 @@ const CreateSpot = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
   const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
-  const [buttonText, setButtonText] = useState('Host');
+  const [buttonText, setButtonText] = useState('Create Spot');
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
  
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const CreateSpot = () => {
     if (!city.length)                 errors['city'] = 'Please enter a city';
     if (!state.length)                errors['state'] = 'Please enter a state';
     if (!description.length)          errors['description'] = 'Please enter a description';
-    if (!name.length)                 errors['name'] = 'Please enter a name';
+    if (!name.length)                 errors['name'] = 'Please enter a spot name';
     if (!price.length)                errors['price'] = 'Please enter a price';
     if (!spotPreviewImageFile) errors['spotPreviewImageFile'] = 'Please select at least one photo';
 
@@ -70,53 +72,51 @@ const CreateSpot = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setFormSubmitted(false);
+    }, 5000);
 
-    // const latValue = lat === '' ? null : lat;
-    // const lngValue = lng === '' ? null : lng;
+    if(!disabledButton){
+      try {
+        const { data, response } = await dispatch(
+        spotActions.createSpotThunk(
+          country,
+          address,
+          city,
+          state,
+          lat,
+          lng,
+          description,
+          name,
+          price,
+          spotImages,
+        ))
 
+      if(data) {
+        setFormSubmitted(true);
+        history.push(`/spots/${data.id}`)
+      }
+        
+      } catch (error) {
+        setDisabledButton(true);
+        setButtonClass('host-form-submit-button disabled');
 
-    // console.log(lat === '' ? null : lat);
-    // console.log(lngValue);
-
-    setLat(lat === '' ? null : lat)
-    setLng(lng === '' ? null : lng)
-
-console.log(lat);
-console.log(lng);
-
-
-
-    try {
-      const { data, response } = await dispatch(
-      spotActions.createSpotThunk(
-        country,
-        address,
-        city,
-        state,
-        lat,
-        lng,
-        description,
-        name,
-        price,
-        spotImages,
-      ))
-
-    if(data) history.push(`/spots/${data.id}`)
-      
-    } catch (error) {
-      setDisabledButton(true);
-      setButtonClass('host-form-submit-button disabled');
-
-      console.error(error);
-      console.log(error.data);
-      console.log(error.status);
+        console.error(error);
+        console.log(error.data);
+        console.log(error.status);
 
 
-      setTimeout(() => {
-        setDisabledButton(false);
-        setButtonClass('host-form-submit-button button');
-      }, 3000);
-    };
+        setTimeout(() => {
+          setDisabledButton(false);
+          setButtonClass('host-form-submit-button button');
+        }, 3000);
+      };
+    }
+  
+
+
+
   };
 
 
@@ -184,11 +184,14 @@ console.log(lng);
       setSpotPreviewImage(URL.createObjectURL(file))
       setSpotPreviewImageFile(file)
       setSpotPreviewImageLoaded(true)
-
       setSpotImages(()=>[...spotImages,file])
-
     }
   }
+
+
+  const getErrorClass = (field) => {
+    return formSubmitted && validationErrors[field] ? `${field}-red-font` : ``;
+  };
 
   return (
 
@@ -206,24 +209,29 @@ console.log(lng);
 
             <label className="country">
               Country
-              <input
-                className="country-field"
+              {/* <input
+                className={`country-field ${getErrorClass('country')}`}
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                required
                 placeholder={validationErrors['country'] ? validationErrors['country'] : country}
+                /> */}
+                <input
+                  className={`country-field ${getErrorClass('country')}`}
+                  type="text"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  placeholder={validationErrors['country'] ? validationErrors['country'] : country}
                 />
             </label>
 
             <label className="address">
               Street Address
               <input
-                className="address-field"
+                className={`address-field ${getErrorClass('address')}`}
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                required
                 placeholder={validationErrors['address'] ? validationErrors['address'] : address}
 
               />
@@ -232,11 +240,11 @@ console.log(lng);
             <label className="city">
               City
               <input
-                className="city-field"
+                className={`city-field ${getErrorClass('city')}`}
+
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                required
                 placeholder={validationErrors['city'] ? validationErrors['city'] : city}
 
               />
@@ -245,11 +253,10 @@ console.log(lng);
             <label className="state">
               State
               <input
-                className="state-field"
+                className={`state-field ${getErrorClass('state')}`}
                 type="text"
                 value={state}
                 onChange={(e) => setState(e.target.value)}
-                required
                 placeholder={validationErrors['state'] ? validationErrors['state'] : state}
 
               />
@@ -260,7 +267,7 @@ console.log(lng);
               <input
                 className="lat-field"
                 type="text"
-                value={lat}
+                value={lat || ''}
                 onChange={(e) => setLat(e.target.value)}
               />
             </label>
@@ -270,7 +277,7 @@ console.log(lng);
               <input
                 className="lng-field"
                 type="text"
-                value={lng}
+                value={lng || ''}
                 onChange={(e) => setLng(e.target.value)}
               />
             </label>
@@ -287,10 +294,9 @@ console.log(lng);
 
             <label className="description">
               <textarea
-                className="description-field"
+                className={`description-field ${getErrorClass('description')}`}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
                 placeholder={validationErrors['description'] ? validationErrors['description'] : description}
 
               />
@@ -307,11 +313,10 @@ console.log(lng);
 
             <label className="host-form-spot-title">
               <input
-                className="host-form-spot-title-field"
+                className={`host-form-spot-title-field ${getErrorClass('name')}`}
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                required
                 placeholder={validationErrors['name'] ? validationErrors['name'] : name}
 
               />
@@ -327,11 +332,10 @@ console.log(lng);
 
             <label className="host-form-spot-price">
               <input
-                className="host-form-spot-price-field"
+                className={`host-form-spot-price-field ${getErrorClass('price')}`}
                 type="text"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                required
                 placeholder={validationErrors['price'] ? validationErrors['price'] : price}
 
               />
@@ -348,11 +352,11 @@ console.log(lng);
             <label className="host-form-spot-preview-image">
               Spot Preview Image
               <input
-                className="host-form-spot-preview-image-field"
+                className={`host-form-spot-preview-image-field ${getErrorClass('spotPreviewImageFile')}`}
+                
                 type="text"
                 value={spotPreviewImageFile.name ? spotPreviewImageFile.name : '' }
                 onChange={(e) => setSpotPreviewImage(e.target.value)}
-                required
                 placeholder={validationErrors['spotPreviewImageFile'] ? validationErrors['spotPreviewImageFile'] : spotPreviewImageFile.name}
               />
 
@@ -361,7 +365,7 @@ console.log(lng);
             <button 
              className={buttonClass}
              type="submit"
-             disabled={Object.keys(validationErrors).length > 0 || disabledButton}>
+             >
              {buttonText}
             </button>
 

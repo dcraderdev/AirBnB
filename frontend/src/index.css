@@ -44,7 +44,10 @@ body{
   cursor: pointer;
 }
 
+.button2:active {
+  transform: scale(.98);
 
+}
 
 .button {
   background-color: rgb(74, 113, 186);
@@ -63,14 +66,14 @@ body{
 }
 
 .button:active {
-  transform: scale(.99);
+  transform: scale(.92);
+
   background-color: rgb(74, 113, 186);
   box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .disabled {
   font-size: 12px;
-
   width: 100%;
   background-color: rgb(106, 125, 161);
   color: white;
@@ -90,7 +93,7 @@ body{
 }
 
 .disabled:active {
-  transform: scale(.99);
+  transform: scale(.92);
   box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
@@ -129,4 +132,14 @@ input:focus {
 
 .link:active {
   text-decoration: none;
+}
+
+
+.button2:active {
+  transform: scale(.98);
+}
+
+
+.disabled2:active {
+  transform: scale(.98);
 }

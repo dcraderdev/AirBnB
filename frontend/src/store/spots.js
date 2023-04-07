@@ -71,8 +71,8 @@ export const createSpotThunk = (
     formData.append("address", address);
     formData.append("city", city);
     formData.append("state", state);
-    formData.append("lat", lat);
-    formData.append("lng", lng);
+    if (lat) formData.append("lat", lat);
+    if (lng) formData.append("lng", lng);
     formData.append("description", description);
     formData.append("name", name);
     formData.append("price", price);
