@@ -51,8 +51,8 @@ body{
 
 .button {
   background-color: rgb(74, 113, 186);
-  color: white;
   border: solid rgb(74, 113, 186) 1px;
+  color: white;
   border-radius: 3px;
   cursor: pointer;
   transition: .1s background-color;
@@ -67,15 +67,16 @@ body{
 
 .button:active {
   transform: scale(.92);
-
   background-color: rgb(74, 113, 186);
-  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  
 }
 
 .disabled {
   font-size: 12px;
   width: 100%;
   background-color: rgb(106, 125, 161);
+  
   color: white;
   border: none;
   border-radius: 3px;
@@ -86,6 +87,7 @@ body{
 .disabled:hover{
   border: solid rgba(255, 0, 0, 0.579) 1px;
   background-color: rgba(106, 125, 161, 0.958);
+  
 }
 
 .disabled:focus {
@@ -137,9 +139,13 @@ input:focus {
 
 .button2:active {
   transform: scale(.98);
+  box-shadow: rgba(60, 64, 67, .8) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
 }
 
 
 .disabled2:active {
+  box-shadow: rgba(60, 64, 67, .8) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
   transform: scale(.98);
 }

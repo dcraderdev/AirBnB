@@ -27,11 +27,22 @@ const CreateSpot = () => {
   const [state, setState] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
+  const [latText, setLatText] = useState('');
+  const [lngText, setLngText] = useState('');
+  const [priceText, setPriceText] = useState('');
+  const [lngClass, setLngClass] = useState('');
+  const [latClass, setLatClass] = useState('');
+  const [priceClass, setPriceClass] = useState('');
   const [description, setDescription] = useState('');
+  const [descriptionText, setDescriptionText] = useState('');
+  const [descriptionClass, setDescriptionClass] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
+  const [antiSpam, setAntiSpam] = useState(false);
+
+  
   const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Create Spot');
 
@@ -41,14 +52,14 @@ const CreateSpot = () => {
   useEffect(() => {
     const errors = {};
 
-    if (!country.length)              errors['country'] = 'Please enter a country';
-    if (!address.length)              errors['address'] = 'Please enter a address';
-    if (!city.length)                 errors['city'] = 'Please enter a city';
-    if (!state.length)                errors['state'] = 'Please enter a state';
-    if (!description.length)          errors['description'] = 'Please enter a description';
-    if (!name.length)                 errors['name'] = 'Please enter a spot name';
-    if (!price.length)                errors['price'] = 'Please enter a price';
-    if (!spotPreviewImageFile) errors['spotPreviewImageFile'] = 'Please select at least one photo';
+    if (!country.length)         errors['country'] = 'Please enter a country';
+    if (!address.length)         errors['address'] = 'Please enter a address';
+    if (!city.length)            errors['city'] = 'Please enter a city';
+    if (!state.length)           errors['state'] = 'Please enter a state';
+    if (!description.length)     errors['description'] = 'Please enter a description';
+    if (!name.length)            errors['name'] = 'Please enter a spot name';
+    if (!price.length)           errors['price'] = 'Please enter a price';
+    if (!spotPreviewImageFile)   errors['spotPreviewImageFile'] = 'Please select at least one photo';
 
     setValidationErrors(errors);
   }, [country, address, city, state, description, name, price, spotPreviewImageFile]);
@@ -99,6 +110,7 @@ const CreateSpot = () => {
       }
         
       } catch (error) {
+        setAntiSpam(true)
         setDisabledButton(true);
         setButtonClass('host-form-submit-button disabled');
 
@@ -106,17 +118,44 @@ const CreateSpot = () => {
         console.log(error.data);
         console.log(error.status);
 
+        if(error.data.errors.lat){
+          console.log('lat is messed up');
+          setLat('Latitude must be a number')
+          setLatClass('lat-field red-font')
+        }
+        if(error.data.errors.lng){
+          console.log('lng is messed up');
+          setLng('Longitude must be a number')
+          setLngClass('lng-field red-font')
+        }
+        if(error.data.errors.price){
+          console.log('price is messed up');
+          setPrice('Price must be a number')
+          setPriceClass('host-form-spot-price-field red-font')
+        }
+        if(error.data.errors.description){
+          console.log('description is messed up');
+          setDescription('Tell us more! (30 char min)')
+          setDescriptionClass('description-field red-font')
+        }
 
+        
+        
         setTimeout(() => {
+          setAntiSpam(false)
+          setLat(latText)
+          setLng(lngText)
+          setPrice(priceText)
+          setLngClass('');
+          setLatClass('');
+          setDescriptionClass('')
+          setDescription(descriptionText)
+          setPriceClass('');
           setDisabledButton(false);
           setButtonClass('host-form-submit-button button');
         }, 3000);
       };
     }
-  
-
-
-
   };
 
 
@@ -209,20 +248,13 @@ const CreateSpot = () => {
 
             <label className="country">
               Country
-              {/* <input
+              <input
                 className={`country-field ${getErrorClass('country')}`}
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 placeholder={validationErrors['country'] ? validationErrors['country'] : country}
-                /> */}
-                <input
-                  className={`country-field ${getErrorClass('country')}`}
-                  type="text"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  placeholder={validationErrors['country'] ? validationErrors['country'] : country}
-                />
+              />
             </label>
 
             <label className="address">
@@ -265,20 +297,27 @@ const CreateSpot = () => {
             <label className="lat">
               Latitude (optional)
               <input
-                className="lat-field"
+                className={latClass === '' ? 'lat-field' : latClass}
                 type="text"
                 value={lat || ''}
-                onChange={(e) => setLat(e.target.value)}
+                onChange={(e) => {
+                  setLat(e.target.value)
+                  setLatText(e.target.value)
+
+                }}
               />
             </label>
 
             <label className="lng">
               Longitude (optional)
               <input
-                className="lng-field"
+                className={lngClass === '' ? 'lng-field' : lngClass}
                 type="text"
                 value={lng || ''}
-                onChange={(e) => setLng(e.target.value)}
+                onChange={(e) => {
+                  setLng(e.target.value)
+                  setLngText(e.target.value)
+                }}
               />
             </label>
 
@@ -294,9 +333,12 @@ const CreateSpot = () => {
 
             <label className="description">
               <textarea
-                className={`description-field ${getErrorClass('description')}`}
+                className={descriptionClass === '' ? `description-field ${getErrorClass('description')}` : descriptionClass}
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {
+                  setDescription(e.target.value)
+                  setDescriptionText(e.target.value)
+                }}
                 placeholder={validationErrors['description'] ? validationErrors['description'] : description}
 
               />
@@ -313,7 +355,7 @@ const CreateSpot = () => {
 
             <label className="host-form-spot-title">
               <input
-                className={`host-form-spot-title-field ${getErrorClass('name')}`}
+                className={ `host-form-spot-title-field ${getErrorClass('name')}` }
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -332,10 +374,13 @@ const CreateSpot = () => {
 
             <label className="host-form-spot-price">
               <input
-                className={`host-form-spot-price-field ${getErrorClass('price')}`}
+                className={ priceClass === '' ? `host-form-spot-price-field ${getErrorClass('price')}` : priceClass}
                 type="text"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => {
+                  setPrice(e.target.value)
+                  setPriceText(e.target.value)
+                }}
                 placeholder={validationErrors['price'] ? validationErrors['price'] : price}
 
               />
@@ -365,6 +410,7 @@ const CreateSpot = () => {
             <button 
              className={buttonClass}
              type="submit"
+             disabled={antiSpam}
              >
              {buttonText}
             </button>

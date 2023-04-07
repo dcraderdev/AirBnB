@@ -99,7 +99,7 @@ Nostrud veniam esse ad incididunt ex ex velit magna veniam incididunt proident i
 
             <div className="spot-view-reservation-container">
               <div>
-                {currentSpot.price}Night ⭐️{rating} {currentSpot.numReviews} {reviewsText}
+                {currentSpot.price.toFixed(2)}Night ⭐️{rating} {currentSpot.numReviews} {reviewsText}
               </div>
               <button className="spot-view-reservation-button button"></button>
             </div>

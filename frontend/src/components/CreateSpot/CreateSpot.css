@@ -203,9 +203,7 @@ body{
   left: 0px;
 }
 
-.red-font{
-  color: red;
-}
+
 
 
 .hostDiv input:hover {
@@ -345,8 +343,6 @@ body{
   top: 632px;
   width: 435px;
   height: 1px;
-
-
 }
 
 .host-form-spot-preview-image-field{
@@ -380,9 +376,6 @@ body{
 }
 
 
-
-
-
 .image-main-button-default{
   position: relative;
 }
@@ -399,3 +392,9 @@ body{
 .spotPreviewImageFile-red-font::placeholder {
   color: red;
 }
+
+
+.red-font{
+  color: red;
+}
+

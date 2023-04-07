@@ -58,11 +58,12 @@ const validateSpotEdit = [
     .withMessage('Name must be less than 50 characters'),
   check('description')
     .exists({ checkFalsy: true })
+    .isLength({ min: 30 })
     .withMessage('Description is required'),
   check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required')
-    .isInt()
+    .isFloat()
     .withMessage('Price per day is required')
     ,
   handleValidationErrors
