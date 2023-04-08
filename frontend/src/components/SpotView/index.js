@@ -5,6 +5,7 @@ import * as spotActions from '../../store/spots';
 import logo from "../../public/logo.png";
 import './SpotView.css'
 import ImageSlider from '../ImageSlider'
+import Reviews from '../Reviews'
 
 function SpotView() {
   const { spotId } = useParams();
@@ -88,7 +89,9 @@ function SpotView() {
             <div className="spot-view-description-container">
 
               <div className="spot-view-description-text">
-                <p>{currentSpot.description}</p>
+                <p>{currentSpot.description}{currentSpot.description}{currentSpot.description}
+                {''}
+                {currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}</p>
               </div>
             </div>
 
@@ -102,7 +105,7 @@ function SpotView() {
 
 
         <div className="spot-view-review-container">
-          REVIEW COMPONENT
+          <Reviews />
 
         </div>
              

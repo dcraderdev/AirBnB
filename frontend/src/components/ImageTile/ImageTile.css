@@ -14,6 +14,7 @@
 
 
 .image-thumbnail{
+
   position: relative;
   background-color: #ffffff;
 
@@ -25,6 +26,8 @@
 }  
 
 .image-thumbnail img{
+
+
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -43,8 +46,6 @@
 /* Spot View Styles */
 
 .spot-view-image-thumbnail-container{
-  background-color: rgb(221, 32, 32);
-  border: solid black 1px;
   width: fit-content;
   display: flex;
   flex-direction: row;
@@ -53,12 +54,13 @@
   align-items: center;
   position: relative;
   height: 50%;
+
  
 }
 
 .spot-view-image-thumbnail{
   position: relative;
-  background-color: #4e4c4c;
+  background-color: #fffbfb;
   width: 220px;
   height: 213px;
   display: flex;
@@ -67,12 +69,14 @@
 }  
 
 .spot-view-image-thumbnail img{
-  border: solid rgb(134, 130, 130) 2px;
-  width: 100%;
-  height: 100%;
+  border: solid rgb(248, 246, 246) 2px;
+  width: 95%;
+  height: 95%;
   object-fit: cover;
   position: absolute;
   cursor: pointer;
+  border-radius: 10px;
+
 }
 
 .spot-view-image-thumbnail img:hover{

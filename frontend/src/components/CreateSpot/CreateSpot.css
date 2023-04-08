@@ -8,7 +8,6 @@ body{
 
 
 .host-form-page {
-  border-radius: 5px;
   max-width: 1000px;
   height: 750px;
   width: 100%;
@@ -47,7 +46,7 @@ body{
   left: -30px;
   top: -20px;
   width: 450px;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +72,7 @@ body{
 }
 
 .image-tile-container{
-  border-radius: 5px;
+  border-radius: 10px;
   width: 450px;
   border: 1px solid rgb(0, 0, 0,0.5);
   background-color: white;
