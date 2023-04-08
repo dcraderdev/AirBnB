@@ -9,7 +9,7 @@ import './Navigation.css';
 function ProfileButton({ user }) {
   const { modal, openModal, closeModal } = useContext(ModalContext);
 
-  const buttonClass = `nav-profile-button${modal === 'profileMenu' ? ' profile-button-active' : ''}`;
+  const buttonClass = `nav-profile-button nav-button${modal === 'profileMenu' ? ' profile-button-active' : ''}`;
 
   return (
     <div>

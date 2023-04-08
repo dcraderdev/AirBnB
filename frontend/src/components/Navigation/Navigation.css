@@ -41,57 +41,43 @@
   padding: 40px;
 }
 
-.nav-host-div{
-  border: solid rgb(0, 0, 0,0.1) .001px;
+
+.nav-profile-button,
+.nav-host-button{
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 40px;
-  width: 110px;
-  height: 25px;
+  border: solid rgb(0, 0, 0,0.3) .1px;
   border-radius: 15px;
   cursor: pointer;
-  transform: scale(1.3);
-  font-size: 10px;
+  background-color: transparent;
+  top: 23px;
+  font-size: 13px;
+  height: 33px;
+}
+
+.nav-host-button{
+  left: 20px;
+  width: 143px;
 }
 
 .nav-profile-button {
-  border: solid rgb(0, 0, 0,0.1) .001px;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  border-radius: 15px;
-  top: 26px;
-  right: 30px;
-  width: 60px;
-  height: 26px;
-  cursor: pointer;
-  background-color: transparent;
-  transform: scale(1.3);
+  right: 25px;
+  width: 80px;
+  height: 33.5px;
+
 }
 
+
 @media screen and (max-width: 590px) {
-  .nav-host-div{
+  .nav-host-button{
     visibility: hidden;
   }
 }
 
-.nav-host-div:hover,
-.nav-profile-button:hover {
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  cursor: pointer;
-}
 
-
-.nav-host-div:active,
-.nav-profile-button:active {
- transform: scale(1.2);
- background-color: #fff9f2ee;
- box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-}
 
 .profile-button-active {
   background-color: #fff9f2ee;
@@ -99,9 +85,6 @@
   cursor: pointer;
   transform: scale(1.2);
 }
-
-
-
 
 
  .profile-button-icons{
