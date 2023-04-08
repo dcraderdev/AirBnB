@@ -37,7 +37,9 @@ const CreateSpot = () => {
   const [description, setDescription] = useState('');
   const [descriptionText, setDescriptionText] = useState('');
   const [descriptionClass, setDescriptionClass] = useState('');
+  const [nameText, setNameText] = useState('');
   const [name, setName] = useState('');
+  const [nameClass, setNameClass] = useState('');
   const [price, setPrice] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
@@ -50,7 +52,7 @@ const CreateSpot = () => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   let timeoutId;
-  
+
   useEffect(() => {
     const errors = {};
 
@@ -146,17 +148,25 @@ const CreateSpot = () => {
           setDescriptionClass('description-field red-font');
         }
 
+        if (error.data.errors.name) {
+          console.log('name is messed up');
+          setName('Name must be less than 50 characters');
+          setNameClass('host-form-spot-title-field red-font');
+        }
+
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
           setAntiSpam(false);
           setLat(latText);
           setLng(lngText);
-          setPrice(priceText);
           setLngClass('');
           setLatClass('');
+          setPrice(priceText);
+          setPriceClass('');
           setDescriptionClass('');
           setDescription(descriptionText);
-          setPriceClass('');
+          setNameClass('');
+          setName(nameText);
           setDisabledButton(false);
           setButtonClass('host-form-submit-button button');
         }, 3000);
@@ -399,12 +409,13 @@ const CreateSpot = () => {
 
             <label className="host-form-spot-title">
               <input
-                className={`host-form-spot-title-field ${getErrorClass(
-                  'name'
-                )}`}
+                className={ nameClass === '' ? `host-form-spot-title-field ${getErrorClass('name')}` : nameClass}
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setNameText(e.target.value) 
+                  setName(e.target.value)
+                }}
                 placeholder={
                   validationErrors['name'] ? validationErrors['name'] : name
                 }

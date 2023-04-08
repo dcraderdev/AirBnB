@@ -9,7 +9,6 @@
 
 .spot-tile {
   position: relative;
-
   display: flex;
   flex-direction: column;
   border-radius: 14px;
@@ -18,9 +17,16 @@
   color: inherit;
   cursor: pointer;
   margin-bottom: 16px;
-  height: 220px;
-  max-width: 410px;
+  height: 320px;
+  width: 320px;
+  max-width: 430px;
+  transition: height 1s;
 }
+
+
+
+
+
 
 .spot-tile:hover > .spot-tile-image-container{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -81,6 +87,11 @@
   width: 100%;
   left: 0%;
   bottom: 0%;
+}
+
+.info{
+  height: 321px;
+
 }
 
 
@@ -150,7 +161,8 @@
 
 
 .tooltip {
-  position: relative;
+  border: solid black 1px;
+  position: fixed;
   width: fit-content;
   height: fit-content;
 
@@ -167,6 +179,7 @@
   color: #fff;
   text-align: center;
   border-radius: 6px;
+  border-top-left-radius: 12px;
   padding: 5px;
   position: fixed;
   z-index: 1000;

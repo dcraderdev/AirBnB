@@ -7,7 +7,7 @@ import logo from "../../public/logo.png";
 
 const SpotTile = ({ spot, setFavorites }) => {
 
-  const [tooltip, setTooltip] = useState({ display: false, x: 0, y: 0 });
+  const [tooltip, setTooltip] = useState({ x: -3000, y: 40 });
   const [tooltipDisplay, setTooltipDisplay] = useState(false);
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
@@ -58,7 +58,33 @@ const SpotTile = ({ spot, setFavorites }) => {
 
   const handleMouseMove = (e) => {
     setTooltipDisplay(true)
-    setTooltip({ x: e.pageX, y: e.pageY - 90 });
+    // setTooltip({ x: e.clientX, y: e.clientY - 90});
+
+    // var rect = e.target.getBoundingClientRect();
+    // var x = e.clientX - rect.left; //x position within the element.
+    // var y = e.clientY - rect.top;  //y position within the element.
+    // console.log("Left? : " + x + " ; Top? : " + y + ".");
+
+
+
+    // var x = (evt.pageX - $('#element').offset().left) + $(window).scrollLeft();
+    // var y = (evt.pageY - $('#element').offset().top) + $(window).scrollTop();
+
+
+    // Screen X/Y: ${e.screenX}, ${e.screenY}
+    // Client X/Y: ${e.clientX}, ${e.clientY}`;
+
+
+    // const x = e.pageX
+    // const y = e.pageY
+
+    var x = (e.pageX)
+    var y  = (e.pageY)
+
+    setTooltip({ x: x, y: y});
+    // setTooltip({ x: e.clientX + 10, y: e.clientY + 10});
+    // setTooltip({ x: e.screenX, y: e.screenY});
+
   };
 
   const handleMouseLeave = () => {
@@ -86,7 +112,7 @@ const SpotTile = ({ spot, setFavorites }) => {
           {!imageUrl && <div className={previewImageClass}></div>}
           {imageUrl && <img src={imageUrl} alt="Spot preview" className={previewImageClass} />}
         </div>
-
+        
         <div className="spot-tile-spot-info">
           <div className="spot-tile-location">{city}, {state}</div>
           <div className="spot-tile-avg-rating-container">
@@ -94,7 +120,7 @@ const SpotTile = ({ spot, setFavorites }) => {
             <div className="spot-tile-avg-rating">{rating}</div>
           </div>
           <div className="spot-tile-price-night-container">
-            <div className="spot-tile-price">${price}</div>
+            <div className="spot-tile-price">${price.toFixed(2)}</div>
             <div className="spot-tile-night"> night</div>
           </div>
         </div>
@@ -103,9 +129,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
       {tooltipDisplay && (
         <div className="tooltip tooltiptext"
-        style={{
-          top: tooltip.y + 'px',
-          left: tooltip.x + 'px'}}>
+>
           {name}
         </div>
       )}
