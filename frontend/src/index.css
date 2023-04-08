@@ -65,6 +65,8 @@ body{
   background-color: #3b75e2;
 }
 
+
+
 .button:active {
   transform: scale(.92);
   background-color: rgb(74, 113, 186);
@@ -153,6 +155,8 @@ input:focus {
 
 
 .nav-button{
+  background-color: white;
+  
   position: absolute;
   display: flex;
   justify-content: center;
@@ -161,7 +165,6 @@ input:focus {
   border: solid rgb(0, 0, 0,0.3) .1px;
   border-radius: 15px;
   cursor: pointer;
-  background-color: transparent;
 }
 
 
@@ -172,7 +175,6 @@ input:focus {
 
 
 .nav-button:active{
- transform: scale(1.2);
- background-color: #fff9f2ee;
+ transform: scale(.92);
  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }

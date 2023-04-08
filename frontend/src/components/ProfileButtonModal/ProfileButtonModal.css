@@ -2,18 +2,19 @@
   cursor: pointer;
   position: absolute;
   top: 50px;
-  right: 30px;
+  right: 25px;
   transform: scale(1);
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0,0.1);
+  border-top: none;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   width: 170px;
   height: fit-content;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 100;
+  z-index: 411;
 }
 
 .div-link {

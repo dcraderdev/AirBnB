@@ -11,8 +11,6 @@
   height: 75px;
   width: 100%;
   background-image: linear-gradient(to right, #f4f0ebee, #ffffff, #f4ede5ee);
-
-
 }
 
 .nav-line{
@@ -52,21 +50,21 @@
   border: solid rgb(0, 0, 0,0.3) .1px;
   border-radius: 15px;
   cursor: pointer;
-  background-color: transparent;
-  top: 23px;
-  font-size: 13px;
-  height: 33px;
+  top: 15px;
+  height: 40px;
 }
 
 .nav-host-button{
+  font-size: 16px;
   left: 20px;
-  width: 143px;
+  width: 163px;
 }
 
 .nav-profile-button {
+  font-size: 13px;
   right: 25px;
   width: 80px;
-  height: 33.5px;
+  height: 40.5px;
 
 }
 

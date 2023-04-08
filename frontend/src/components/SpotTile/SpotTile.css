@@ -23,7 +23,10 @@
   transition: height 1s;
 }
 
-
+.spot-tile:active{
+  transform: scale(.98);
+  box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+ }
 
 
 
@@ -78,12 +81,11 @@
 }
 
 .spot-tile-spot-info {
-
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 20%;
+  height: 18%;
   width: 100%;
   left: 0%;
   bottom: 0%;
@@ -91,7 +93,6 @@
 
 .info{
   height: 321px;
-
 }
 
 
@@ -165,7 +166,6 @@
   position: fixed;
   width: fit-content;
   height: fit-content;
-
 }
 
 .spot-tile:hover .tooltip {
