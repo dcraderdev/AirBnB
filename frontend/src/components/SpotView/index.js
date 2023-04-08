@@ -40,7 +40,7 @@ function SpotView() {
   };
 
 
-  const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-image-logo';
+  const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-default-image';
   const reviewsText = currentSpot && currentSpot.numReviews == 1 ? ' Review' : ' Reviews'
   const rating = currentSpot && currentSpot.avgStarRating !== 'NaN' ? currentSpot.avgStarRating : 'New!'
 
@@ -71,9 +71,16 @@ function SpotView() {
           <div className="spot-view-image-container">
 
             <div className="spot-view-preview-image-container">
+              
               <img className={previewImageClass} src={spotPreviewImage} alt="Spot Preview Image"></img>
-              <div className='preview-image-background'><img src={logo} alt="Spot Preview Image"></img></div>
+
+              <div className='preview-default-image'>
+                <img src={logo} alt="Airbnb logo" className='logo-scale'></img>
+              </div>
+
+
             </div>
+
 
             <div className="spot-view-slide-container">
               <ImageSlider spotImages={currentSpot.SpotImages} selectImage={selectImage}/>

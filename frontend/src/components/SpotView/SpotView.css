@@ -45,10 +45,16 @@
   overflow: hidden;
 }
 
-.preview-image-background{
-  left: -10%;
+.preview-default-image{
+  left: 0%;
   position: relative;
-  transform: scale(.2) translate(-60%,0%);
+}
+
+.logo-scale{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 0%) scale(.3);
 }
 
 .spot-view-preview-image{

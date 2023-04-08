@@ -12,6 +12,16 @@ const ImageSlider = ({ spotImages, selectImage }) => {
   useEffect(() => {
     let set1 = [];
     let set2 = [];
+    console.log(spotImages);
+    console.log(spotImages.length);
+    if(spotImages.length < 6){
+      console.log('need more images');
+      let imagesNeeded = 6 - spotImages.length
+      for(let i = 0; i < imagesNeeded; i++){
+        spotImages.push({})
+      }
+    }
+
     spotImages.map((image, i) => {
       if (i % 2 === 0) set1.push(image);
       if (i % 2 === 1) set2.push(image);
