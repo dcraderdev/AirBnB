@@ -5,11 +5,6 @@ import './ImageTile.css';
 
 const ImageTile = ({ spotImages, setSpotImages, removeImage, selectImage, type }) => {
 
-let source
-if(spotImages && spotImages[0]){
-  console.log(spotImages[0].url);
-  source = spotImages[0].url
-}
 
 
 if(type==='spotView'){
@@ -17,7 +12,7 @@ if(type==='spotView'){
     <div className="spot-view-image-thumbnail-container">
     {spotImages && spotImages.map((file, index) => (
       <div key={index} className="spot-view-image-thumbnail" onClick={()=>{selectImage(file)}}>
-        { source && <img src={file.url} alt={`Thumbnail ${spotImages[0].id}`}  />}
+        {<img src={file.url} alt={`Thumbnail ${spotImages[0].id}`}  />}
       </div>
     ))}
     
