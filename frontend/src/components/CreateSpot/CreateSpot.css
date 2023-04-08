@@ -3,7 +3,7 @@
 }
 
 body{
-  background-image: linear-gradient(to right, #f4f0ebee, #ffffff, #f4ede5ee);
+  background-image: linear-gradient(to right, #f4f0ebee,#fafafaee, #ffffff);
 }
 
 
@@ -13,7 +13,7 @@ body{
   height: 750px;
   width: 100%;
   position: relative;
-  top: 80px;
+  top: 50px;
   display: flex;
   align-items: center;
   transform: translate(-50%,0%) scale(1.2);

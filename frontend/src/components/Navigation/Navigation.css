@@ -10,7 +10,7 @@
   left: 0px;
   height: 75px;
   width: 100%;
-  background-image: linear-gradient(to right, #f4f0ebee, #ffffff, #f4ede5ee);
+  background-image: linear-gradient(to right, #ffffff, #f4f0ebee,#fafafaee, #ffffff);
 }
 
 .nav-line{
@@ -56,7 +56,7 @@
 
 .nav-host-button{
   font-size: 16px;
-  left: 20px;
+  left: -40px;
   width: 163px;
 }
 

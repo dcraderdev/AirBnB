@@ -9,6 +9,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
   const [tooltip, setTooltip] = useState({ x: -3000, y: 40 });
   const [tooltipDisplay, setTooltipDisplay] = useState(false);
+  const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
   const [favorite, setFavorite] = useState([false]);
@@ -22,10 +23,12 @@ const SpotTile = ({ spot, setFavorites }) => {
   } = spot;
 
 
+
   useEffect(()=>{
-    if(avgRating !== 'NaN')setRating(avgRating)
-    if(avgRating === 'NaN')setRating('New!');
-    setTileDescription((description).slice(0, 80) + '...')  
+    avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!')
+    name.length > 35 ? setDisplayName((name).slice(0, 33) + '...')  : setDisplayName(name)
+    setTileDescription((description).slice(0, 50) + '...')  
+    
     if(previewImage !== null) {
       setImageUrl(previewImage)
       setPreviewImageClass('spot-tile-spot-image')
@@ -78,14 +81,55 @@ const SpotTile = ({ spot, setFavorites }) => {
     // const x = e.pageX
     // const y = e.pageY
 
+
+
+
+    function getRelativeCoordinates (event, referenceElement) {
+
+      const position = {
+        x: event.pageX,
+        y: event.pageY
+      };
+    
+      const offset = {
+        left: referenceElement.offsetLeft,
+        top: referenceElement.offsetTop
+      };
+    
+      let reference = referenceElement.offsetParent;
+    
+      while(reference){
+        offset.left += reference.offsetLeft;
+        offset.top += reference.offsetTop;
+        reference = reference.offsetParent;
+      }
+    
+      return { 
+        x: position.x - offset.left,
+        y: position.y - offset.top,
+      }; 
+    
+    }
+
+
+    let coords = getRelativeCoordinates(e, e.target)
+
     var x = (e.pageX)
     var y  = (e.pageY)
+    // let x = coords.x
+    // let y = coords.y
 
     setTooltip({ x: x, y: y});
     // setTooltip({ x: e.clientX + 10, y: e.clientY + 10});
     // setTooltip({ x: e.screenX, y: e.screenY});
 
   };
+
+
+
+  
+
+
 
   const handleMouseLeave = () => {
     setTooltipDisplay(false);
@@ -128,9 +172,9 @@ const SpotTile = ({ spot, setFavorites }) => {
 
 
       {tooltipDisplay && (
-        <div className="tooltip tooltiptext"
->
-          {name}
+        <div className={"tooltip tooltiptext"}
+             >
+          {displayName}
         </div>
       )}
 

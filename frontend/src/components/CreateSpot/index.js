@@ -65,7 +65,7 @@ const CreateSpot = () => {
     if (!name.length) errors['name'] = 'Please enter a spot name';
     if (!price.length) errors['price'] = 'Please enter a price';
     if (!spotPreviewImageFile)
-      errors['spotPreviewImageFile'] = 'Please select at least one photo';
+      errors['spotPreviewImageFile'] = 'Please enter URL or Add Image from local files';
 
     setValidationErrors(errors);
   }, [
@@ -175,7 +175,7 @@ const CreateSpot = () => {
   };
 
   
-  const addImage = async () => {
+  const addImageFromUrl = async () => {
     if (imageUrl) {
       
       if (!fileTypes.includes(imageUrl.slice(-4))) {
@@ -205,34 +205,26 @@ const CreateSpot = () => {
   };
 
   const deleteImage = () => {
-    const newImages = spotImages.filter(
-      (currentImage) => currentImage !== spotPreviewImageFile
-    );
+    const newImages = spotImages.filter((currentImage) => currentImage !== spotPreviewImageFile);
     setSpotImages(newImages);
-    if (newImages && newImages[0]) {
-      setSpotPreviewImageFile(newImages[0]);
-      setSpotPreviewImage(URL.createObjectURL(newImages[0]));
-    } else {
-      setSpotPreviewImageFile('');
-      setSpotPreviewImage('');
-      setSpotPreviewImageLoaded(false);
-    }
   };
 
   const removeImage = (image) => {
-    const newImages = spotImages.filter(
-      (currentImage) => currentImage !== image
-    );
+    const newImages = spotImages.filter((currentImage) => currentImage !== image);
     setSpotImages(newImages);
-    if (newImages && newImages[0]) {
-      setSpotPreviewImageFile(newImages[0]);
-      setSpotPreviewImage(URL.createObjectURL(newImages[0]));
-    } else {
-      setSpotPreviewImageFile('');
-      setSpotPreviewImage('');
-      setSpotPreviewImageLoaded(false);
-    }
   };
+
+  useEffect(()=>{
+    if(!spotImages.length) {
+      setSpotPreviewImageLoaded(false);
+      return
+    }
+    if (spotImages && spotImages[0]) {
+      setSpotPreviewImageFile(spotImages[0]);
+      setSpotPreviewImage(URL.createObjectURL(spotImages[0]));
+    }
+  },[spotImages])
+
 
   const selectImage = (file) => {
     setSpotPreviewImage(URL.createObjectURL(file));
@@ -478,7 +470,7 @@ const CreateSpot = () => {
               <button
                 className="add-image-from-url button"
                 type="button"
-                onClick={addImage}
+                onClick={addImageFromUrl}
               >
                 Add From URL
               </button>
