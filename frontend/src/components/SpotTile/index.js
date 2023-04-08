@@ -100,6 +100,7 @@ const SpotTile = ({ spot, setFavorites }) => {
         </div>
         <p className="spot-tile-short-description">{tileDescription}</p>
 
+
       {tooltipDisplay && (
         <div className="tooltip tooltiptext"
         style={{

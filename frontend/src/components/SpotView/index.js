@@ -17,9 +17,9 @@ function SpotView() {
 
   useEffect(() => {
     if (user) {
-      isLoaded(false)
+      // isLoaded(false)
       dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
-        isLoaded(true)
+        // isLoaded(true)
       })
     }
     window.scrollTo(0, 0);
@@ -39,7 +39,7 @@ function SpotView() {
     <div>
       {!currentSpot && <p>Loading...</p>}
 
-      {currentSpot && user && loaded && (
+      {currentSpot && user && (
         <div className="spot-view-container">
 
           <div className="spot-view-header">
