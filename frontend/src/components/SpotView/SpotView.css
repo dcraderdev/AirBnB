@@ -1,5 +1,4 @@
 .spot-view-container{
-  border: solid black 1px;
   width: 1000px;
   position: relative;
   left: 50%;
@@ -30,7 +29,6 @@
 
 
 .spot-view-image-container {
-  border: black solid 1px;
   position: relative;
   width: 100%;
   height: 430px;
@@ -39,7 +37,6 @@
 }
 .spot-view-slide-container,
 .spot-view-preview-image-container {
-  border: black solid 1px;
   position: relative;
   left: 0px;
   width: 50%;
@@ -62,7 +59,6 @@
 
 
 .spot-view-slide-container {
-  border: solid rgb(32, 186, 101) 1px;
   position: relative;
   display: flex;
   justify-content: center;

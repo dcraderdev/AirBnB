@@ -31,10 +31,11 @@ const ImageSlider = ({ spotImages, selectImage }) => {
   };
 
   const imageSlideForward = (slider) => {
-    if (slider === 1 && currentIndex1 < spotImages.length - 1) {
+
+    if (slider === 1 && currentIndex1 < images1.length - 2) {
       setCurrentIndex1(currentIndex1 + 1);
     }
-    if (slider === 2 && currentIndex2 < spotImages.length - 1) {
+    if (slider === 2 && currentIndex2 < images2.length - 2) {
       setCurrentIndex2(currentIndex2 + 1);
     }
   };
@@ -44,7 +45,7 @@ const ImageSlider = ({ spotImages, selectImage }) => {
   };
 
   const imageTileStyle2 = {
-    transform: `translateX(-${currentIndex2 * 100}px)`,
+    transform: `translateX(-${currentIndex2 * 200}px)`,
   };;
 
   return (
