@@ -1,30 +1,55 @@
 .spot-view-container{
   border: solid black 1px;
-  max-width: 1000px;
-  min-width: 1000px;
+  width: 1000px;
   position: relative;
   left: 50%;
   top: 100%;
   transform: translate(-50%,0%);
 }
 
+.spot-view-header{
+  width: 1000px;
+  height: 70px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+}
+
+.spot-view-header div{
+  position: relative;
+  top: 15px;
+  font-size: 30px;
+}
+.spot-view-header h4{
+  position: relative;
+  top: 0px;
+
+}
 
 
 .spot-view-image-container {
-  border: solid rgb(0, 0, 0) 3px;
+  border: black solid 1px;
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 430px;
   display: flex;
   overflow: hidden;
 }
-
+.spot-view-slide-container,
 .spot-view-preview-image-container {
+  border: black solid 1px;
   position: relative;
   left: 0px;
-  width: 450px;
-  height: 400px;
+  width: 50%;
+  height: 100%;
   overflow: hidden;
+}
+
+.preview-image-background{
+  position: relative;
+  transform: scale(.2) translate(-60%,0%);
 }
 
 .spot-view-preview-image{
@@ -34,15 +59,17 @@
   object-fit: fill;
 }
 
+
+
 .spot-view-slide-container {
   border: solid rgb(32, 186, 101) 1px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 320px;
-  left: 40px;
+  width: 50%;
+  height: 430px;
+  left: 0px;
 
 }
 
@@ -94,13 +121,7 @@
 
 
 
-.spot-view-description-header{
-  position: absolute;
-  width: 300px;
-  font-size: 25px;
-  left: 0%;
-  top: 2%;
-}
+
 
 .spot-view-description-container {
   overflow-y: auto;

@@ -7,21 +7,29 @@ import LoginModal from '../LoginModal';
 import SignupModal from '../SignupModal';
 import { ModalContext } from '../../context/ModalContext';
 
-function ProfileButtonModal({ closeModal }) {
+function ProfileButtonModal({ closeModal}) {
   const history = useHistory();
   const modalRef = useRef();
   const dispatch = useDispatch();
   const { modal, openModal } = useContext(ModalContext);
   const formRef = useRef(null);
-  const [hostText, setHostText] = useState('text')
-
-  const user = useSelector((state) => {
-    return state.session.user
-  });
+  const [isHost, setIsHost] = useState('Host a spot')
+  const [loaded, isLoaded] = useState(false);
 
 
+  const user = useSelector(state => state.session.user );
 
-
+  const spots = useSelector(state => state.spots.spots);
+  
+  
+  useEffect(() => {
+    if (user) {
+      const hostCheck = spots.find(spot => spot.ownerId === user.id);
+      if(hostCheck)setIsHost('Manage Spots');
+    } else {
+      setIsHost('Host a spot');
+    }
+  },[spots,user])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -54,6 +62,7 @@ function ProfileButtonModal({ closeModal }) {
   };
 
   return (
+    
     <>
       <ul className='profileMenu' ref={formRef}>
         {user ? (
@@ -66,7 +75,7 @@ function ProfileButtonModal({ closeModal }) {
             </div>
 
             <div className='div-link' onClick={navHistory}>
-             {hostText}
+             {isHost}
             </div>
 
             <div className='profile-messages'>

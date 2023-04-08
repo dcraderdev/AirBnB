@@ -178,11 +178,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 // Create a Spot
 router.post('/', multipleMulterUpload("spotImages",20), requireAuth, validateSpotEdit, async (req, res, next) => {
-  console.log('inside spot before validation error');
-  console.log('inside spot before validation error');
-  console.log('inside spot before validation error');
-  console.log('inside spot before validation error');
-
 
   const { address, city, state, country, lat, lng, name, description, price } =  req.body;
   const ownerId = req.user.id;
@@ -444,7 +439,6 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
 if(spot){
 
   const imageUrls = spot.SpotImages.map(image => {
-    console.log(image);
     retrievePrivateFile(image.url)
   });
 
@@ -822,20 +816,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 //   console.log(req);
 
 
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
-//   console.log('hitting route');
 //   // const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
 
 //   // const ownerId = req.user.id;

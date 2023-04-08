@@ -19,6 +19,41 @@ module.exports = {
           preview: true,
         },
         {
+          spotId: 1,
+          url: 'https://media.gettyimages.com/id/200180083-001/photo/armchair-beside-stone-fireplace-in-log-cabin.jpg?s=612x612&w=gi&k=20&c=yvUdr16shZ_zU0dJ01WYKjXK7Erj9UyAggVpW-QW9IE=',
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: 'https://media.istockphoto.com/id/185106726/photo/rustic-cabin-interior.jpg?s=170667a&w=0&k=20&c=-b4fZXzTpT9BdYO4quJcipPuRPINSrUv_8wWKMs3HcM=',
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: 'https://wallpapercave.com/wp/wp9194965.jpg',
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: 'https://media.istockphoto.com/id/1350915033/photo/luxurious-log-cabin-interior.jpg?b=1&s=170667a&w=0&k=20&c=vdye_VLuFDUeqjJ8SVWXXYBkKCy7yqBOUYLLPFcPoG4=',
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: 'https://s42814.pcdn.co/wp-content/uploads/2020/09/iStock_185930591-scaled.jpg.optimal.jpg',
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDDTar8MW53kqh78M6Bhg4u3TTlq2VQ5KO6w&usqp=CAU',
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: 'https://live.staticflickr.com/2781/4467084233_e2c96d8272_b.jpg',
+          preview: false,
+        },
+        {
           spotId: 2,
           url: 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg',
           preview: true,

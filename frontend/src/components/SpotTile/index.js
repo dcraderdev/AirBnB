@@ -119,7 +119,7 @@ const SpotTile = ({ spot, setFavorites }) => {
     // let x = coords.x
     // let y = coords.y
 
-    setTooltip({ x: x, y: y});
+    // setTooltip({ x: x, y: y});
     // setTooltip({ x: e.clientX + 10, y: e.clientY + 10});
     // setTooltip({ x: e.screenX, y: e.screenY});
 
@@ -173,7 +173,7 @@ const SpotTile = ({ spot, setFavorites }) => {
 
       {tooltipDisplay && (
         <div className={"tooltip tooltiptext"}
-             >
+            >
           {displayName}
         </div>
       )}
@@ -190,4 +190,4 @@ const SpotTile = ({ spot, setFavorites }) => {
 export default SpotTile;
 
 
-        // style={{ top: tooltip.y + 'px', left: tooltip.x + 'px' }}
+        // style={{ top: tooltip.y + 'px', left: tooltip.x + 'px' }} 
