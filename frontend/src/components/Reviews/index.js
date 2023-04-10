@@ -24,7 +24,6 @@ const Reviews = ({currentSpot}) => {
         <div key={index} className='review-component-review'><UserReview review={review}/></div>
       ))}
 
-      Review Component
     
     
     

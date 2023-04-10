@@ -5,11 +5,11 @@ const UserReview = ({review}) => {
 
   return (
     <div className='user-review-container'>
+      
       <div className='user-review-name'>name</div>
 
       <div className='user-review-month-year'>month/year</div>
-      <div className='user-review'>month/year</div>
-      UserReview
+      <div className='user-review'>UserReview</div>
     </div>
   )
 }

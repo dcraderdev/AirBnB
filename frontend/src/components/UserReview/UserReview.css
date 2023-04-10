@@ -1,8 +1,8 @@
 .user-review-container{
   position: relative;
-  border: black solid 1px;
+  border: rgb(6, 95, 4) solid 3px;
   width: 1000px;
-  height: 200px;
+  height: 175px;
   top: 10px;
 }
 
@@ -11,7 +11,7 @@
   border: black solid 1px;
   width: 100px;
   height: 30px;
-  top: 10px;
+  top: 0px;
 }
 
 .user-review-month-year{
@@ -19,13 +19,13 @@
   border: black solid 1px;
   width: 100px;
   height: 30px;
-  top: 10px;
+  top: 0px;
 }
 
 .user-review{
   position: relative;
   border: black solid 1px;
   width: 1000px;
-  height: 100px;
-  top: 10px;
+  height: 115px;
+  top: 0px;
 }
