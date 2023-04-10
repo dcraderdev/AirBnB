@@ -21,15 +21,37 @@ module.exports = {
         firstName: 'Trina',
         lastName: 'Pine',
         email: 'user12@user.io',
-        username: 'FakeUser12',
-        hashedPassword: bcrypt.hashSync('password2')
+        username: 'NotAFakeUser12',
+        hashedPassword: bcrypt.hashSync('password')
       },
       {
         firstName: 'Hazel',
         lastName: 'Forest',
         email: 'user22@user.io',
-        username: 'FakeUser22',
-        hashedPassword: bcrypt.hashSync('password3')
+        username: 'AlsoNotAFakeUser22',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Birch',
+        lastName: 'Twig',
+        email: 'arborist@user.io',
+        username: 'Willow',
+        hashedPassword: bcrypt.hashSync('password'),
+
+      },
+      {
+        firstName: 'Sequoia',
+        lastName: 'Cone',
+        email: 'treeclimber@user.io',
+        username: 'Cedar',
+        hashedPassword: bcrypt.hashSync('password') 
+      },
+      {
+        firstName: 'Aspen',
+        lastName: 'Bark',
+        email: 'forester@user.io',
+        username: 'ElmWood',
+        hashedPassword: bcrypt.hashSync('password')
       }
     ], {});
   },

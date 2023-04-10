@@ -40,11 +40,6 @@ module.exports = {
         },
         {
           spotId: 1,
-          url: 'https://s42814.pcdn.co/wp-content/uploads/2020/09/iStock_185930591-scaled.jpg.optimal.jpg',
-          preview: false,
-        },
-        {
-          spotId: 1,
           url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDDTar8MW53kqh78M6Bhg4u3TTlq2VQ5KO6w&usqp=CAU',
           preview: false,
         },

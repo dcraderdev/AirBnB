@@ -48,6 +48,7 @@
 
 
 .slider-button:hover {
+  cursor: pointer;
   border:solid rgba(0, 0, 0, 0.393) 1px;
   background-color: rgba(234, 240, 239, 0.251);
 }

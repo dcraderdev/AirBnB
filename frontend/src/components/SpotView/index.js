@@ -5,6 +5,7 @@ import * as spotActions from '../../store/spots';
 import logo from "../../public/logo.png";
 import './SpotView.css'
 import ImageSlider from '../ImageSlider'
+import ReviewStat from '../ReviewStat'
 import Reviews from '../Reviews'
 
 function SpotView() {
@@ -41,8 +42,7 @@ function SpotView() {
 
 
   const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-default-image';
-  const reviewsText = currentSpot && currentSpot.numReviews == 1 ? ' Review' : ' Reviews'
-  const rating = currentSpot && currentSpot.avgStarRating !== 'NaN' ? currentSpot.avgStarRating : 'New!'
+
 
   const comingSoon =()=>{
     alert('Feature coming soon')
@@ -71,7 +71,7 @@ function SpotView() {
           <div className="spot-view-image-container">
 
             <div className="spot-view-preview-image-container">
-              
+
               <img className={previewImageClass} src={spotPreviewImage} alt="Spot Preview Image"></img>
 
               <div className='preview-default-image'>
@@ -103,16 +103,17 @@ function SpotView() {
             </div>
 
             <div className="spot-view-reservation-container">
-              <div>
-                {currentSpot.price.toFixed(2)}Night ⭐️{rating} {currentSpot.numReviews} {reviewsText}
-              </div>
+
+              <div className='spot-view-reservation-review-stat'><ReviewStat currentSpot={currentSpot} /></div>
+
+
               <button className="spot-view-reservation-button button"></button>
             </div>
           </div>
 
 
         <div className="spot-view-review-container">
-          <Reviews />
+          <Reviews currentSpot={currentSpot}/>
 
         </div>
              

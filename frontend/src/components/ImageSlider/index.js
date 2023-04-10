@@ -3,7 +3,6 @@ import ImageTile from '../ImageTile';
 import './ImageSlider.css';
 
 const ImageSlider = ({ spotImages, selectImage }) => {
-  console.log(spotImages);
   const [images1, setImages1] = useState([]);
   const [images2, setImages2] = useState([]);
   const [currentIndex1, setCurrentIndex1] = useState(0);
@@ -12,10 +11,7 @@ const ImageSlider = ({ spotImages, selectImage }) => {
   useEffect(() => {
     let set1 = [];
     let set2 = [];
-    console.log(spotImages);
-    console.log(spotImages.length);
     if(spotImages.length < 6){
-      console.log('need more images');
       let imagesNeeded = 6 - spotImages.length
       for(let i = 0; i < imagesNeeded; i++){
         spotImages.push({})

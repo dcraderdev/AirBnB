@@ -1,0 +1,31 @@
+.user-review-container{
+  position: relative;
+  border: black solid 1px;
+  width: 1000px;
+  height: 200px;
+  top: 10px;
+}
+
+.user-review-name{
+  position: relative;
+  border: black solid 1px;
+  width: 100px;
+  height: 30px;
+  top: 10px;
+}
+
+.user-review-month-year{
+  position: relative;
+  border: black solid 1px;
+  width: 100px;
+  height: 30px;
+  top: 10px;
+}
+
+.user-review{
+  position: relative;
+  border: black solid 1px;
+  width: 1000px;
+  height: 100px;
+  top: 10px;
+}
