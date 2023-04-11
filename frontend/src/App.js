@@ -18,12 +18,14 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
-  const { modal, closeModal } = useContext(ModalContext);
+  const { modal, closeModal} = useContext(ModalContext);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser());
     setIsLoaded(true);
   }, [dispatch]);
+
+
 
 
 

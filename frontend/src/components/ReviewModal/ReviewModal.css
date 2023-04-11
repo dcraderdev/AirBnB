@@ -1,11 +1,75 @@
 .review-modal-container{
-  border: solid rgb(0, 0, 0) 2px;
   position: absolute;
+  background-color:  #ffffff;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
-  width: 300px;
-  height: 105px;
-  border-radius: 15px;
-  background-color:  #ffffff;
+  height: 275px;
+  width: 450px;
+  padding: 20px;
+  border: solid rgb(0, 0, 0) 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+
+}
+
+.review-modal-header {
+  position: absolute;
+  left: 50%;
+  top: 25px;
+  transform: translate(-50%,-50%);
+  font-size: 24px;
+}
+
+
+
+.review-modal-container .close-button {
+  top: 0px;
+}
+
+
+.review-modal-container textarea {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  height: 125px;
+  width: 420px;
+  padding: 10px;
+
+}
+
+
+.review-modal-container label {
+  position: relative;
+  display: block;
+  top: 30px;
+}
+
+.review-modal-star-selection{
+  position: absolute;
+  right: 30px;
+  top: 62px;
+  height: fit-content;
+  width: fit-content;
+  font-size: 25px ;
+}
+
+
+.post-review-button {
+  position: relative;
+  top: 50px;
+  left: 2.5%;
+  width: 95%;
+  padding: 10px;
+
+}
+
+.review-modal-star-selection{
+  z-index: 1000;
+}
+
+.review-modal-star-selection .fa-star:hover {
+  cursor: pointer;
 }

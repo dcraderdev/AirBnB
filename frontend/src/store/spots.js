@@ -28,6 +28,25 @@ const createSpot = (spot) => {
   };
 };
 
+// const GET_REVIEWS = 'spots/reviews';
+// const getReviews = (reviews) => {
+
+//   return {
+//     type: GET_REVIEWS,
+//     payload: reviews,
+//   };
+// };
+
+
+const CREATE_REVIEW = 'review/create';
+const createReview = (review) => {
+
+  return {
+    type: CREATE_REVIEW,
+    payload: review,
+  };
+};
+
 
 export const getAllSpotsThunk = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots', {
@@ -134,7 +153,49 @@ export const createSpotThunk2 = (
 
 
 
-const initialState = { spots:[] };
+// export const getReviewsThunk = (review, stars, spotId) => async (dispatch) => {
+
+//   const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+//     method: 'POST',
+//     body:JSON.stringify({  
+//       review,
+//       stars
+//     })
+//   });
+//   const data = await response.json();
+//   dispatch(getReviews(data));
+//   return {data, response};
+// };
+
+
+export const createReviewThunk = (review, stars, spotId) => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: 'POST',
+    body:JSON.stringify({  
+      review,
+      stars
+    })
+  });
+  const data = await response.json();
+  dispatch(createReview(data));
+  return {data, response};
+};
+
+
+
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: 'DELETE'
+  });
+  const data = await response.json();
+  return {data, response};
+};
+
+
+
+const initialState = { spots:[], reviews:[] };
 const spotsReducer = (state = initialState, action) => {
 
 
@@ -149,6 +210,7 @@ const spotsReducer = (state = initialState, action) => {
 
       return {
         ...newState,
+        reviews: action.payload.Reviews,
         currentSpot: action.payload,
       };
     case CREATE_SPOT:
@@ -162,6 +224,16 @@ const spotsReducer = (state = initialState, action) => {
         ...newState,
         currentSpot: null
       }
+    // case GET_REVIEWS:
+    //   return {
+    //     ...newState,
+    //     reviews: [...newState.reviews, action.payload],
+    //   };
+    case CREATE_REVIEW:
+      return {
+        ...newState,
+        reviews: [...newState.reviews, action.payload],
+      };
 
     default:
       return newState;

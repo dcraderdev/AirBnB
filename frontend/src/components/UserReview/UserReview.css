@@ -2,7 +2,7 @@
   position: relative;
   width: 1000px;
   height: fit-content;
-  top: 20px;
+  top: 5px;
   margin-top: 10px;
   border-top: solid black 1px;
 }
@@ -18,10 +18,12 @@
 
 .user-review-month-year{
   position: relative;
-  width: 100px;
-  height: 30px;
+  width: 200px;
+  height: 20px;
   top: 0px;
   font-size: 18px;
+  display: flex;
+  justify-content: space-between;
 
 }
 

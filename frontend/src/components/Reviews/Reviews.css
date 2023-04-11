@@ -10,12 +10,11 @@
   position: relative;
   width: 150px;
   height: 30px;
-  top: 10px;
-  left: 5px;
+  top: -10px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(1.1);
 }
 .review-component-post-review-container button{
   width: 150px;
@@ -24,6 +23,7 @@
 
 
 .review-component-review-stat{
+  top: -20px;
   width: fit-content;
   font-size: 20px;
   position: relative;

@@ -426,6 +426,7 @@ router.get('/:spotId', async (req, res, next) => {
       {
         model: Review,
         attributes: ['id', 'review', 'stars', 'createdAt'],
+        order: [['createdAt', 'ASC']],
         include: [
           {
             model: User,
@@ -452,6 +453,9 @@ router.get('/:spotId', async (req, res, next) => {
     const imageUrls = spot.SpotImages.map(image => {
       retrievePrivateFile(image.url)
     });
+
+    
+
 
     spot = spot.toJSON()
     const lat = parseFloat(spot.lat);
@@ -713,6 +717,9 @@ router.post(
   requireAuth,
   validateReview,
   async (req, res, next) => {
+
+
+
     const { review, stars } = req.body;
     const spot = await Spot.findByPk(req.params.spotId);
 
