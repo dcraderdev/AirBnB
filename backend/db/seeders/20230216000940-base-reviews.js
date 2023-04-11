@@ -38,7 +38,7 @@ module.exports = {
         stars: 4
       },
       {
-        userId: 2,
+        userId: 1,
         spotId: 2,
         review: 'Our family had an unforgettable stay at this amazing Airbnb. The house was spacious, beautifully furnished, and spotlessly clean. The outdoor space was a lovely bonus, with a large patio and garden area where we enjoyed al fresco dining and relaxation. The host was very welcoming and made sure our stay was perfect in every way. We can\'t wait to return for another visit!',
         stars: 4

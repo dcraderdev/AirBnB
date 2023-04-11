@@ -18,15 +18,17 @@ function SpotView() {
   const currentSpot = useSelector((state) => {
     return state.spots.currentSpot
   });
+  
+
 
 
   useEffect(() => {
-    if (user) {
+
       isLoaded(false)
       dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
         isLoaded(true)
       })
-    }
+    
     window.scrollTo(0, 0);
   }, [dispatch, spotId, user]);
 
@@ -52,7 +54,7 @@ function SpotView() {
     <div>
       {!currentSpot && <p>Loading...</p>}
 
-      {currentSpot && user && loaded && (
+      {currentSpot && loaded && (
         <div className="spot-view-container">
 
           <div className="spot-view-header">
@@ -104,16 +106,37 @@ function SpotView() {
 
             <div className="spot-view-reservation-container">
 
-              <div className='spot-view-reservation-review-stat'><ReviewStat currentSpot={currentSpot} /></div>
+
+              <div className="spot-view-reservation-info">
+
+                <div className="spot-view-price-night-container">
+                  <div className="spot-view-price">${currentSpot.price.toFixed(2)}</div>
+
+                  <div className="spot-view-night"> night</div>
+                </div>
 
 
-              <button className="spot-view-reservation-button button"></button>
+                <div className="spot-view-review-stat-info">
+                  <ReviewStat />
+                </div>
+
+
+
+              </div>
+
+
+              <button className="spot-view-reservation-button button" onClick={()=>{alert('Feature coming soon!')}}>Reserve</button>
             </div>
+
+
+
+
+
           </div>
 
 
         <div className="spot-view-review-container">
-          <Reviews currentSpot={currentSpot}/>
+          <Reviews />
 
         </div>
              

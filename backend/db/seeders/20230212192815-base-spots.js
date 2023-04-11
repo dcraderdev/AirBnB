@@ -7,30 +7,6 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA; // define your schema in options object
 }
 
-// cabin style in sierra nevadas, ca
-// https://s42814.pcdn.co/wp-content/uploads/2020/09/iStock_185930591-scaled.jpg.optimal.jpg
-
-// mansion in san diego ca
-// https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg
-
-// nice house in waco, tx
-// https://images.familyhomeplans.com/cdn-cgi/image/fit=scale-down,quality=85/plans/44207/44207-b600.jpg
-
-// 6 bedroom 5 bath in san diego, ca
-// https://cdn.onekindesign.com/wp-content/uploads/2019/10/Traditional-English-Manor-House-Jauregui-Architect-01-1-Kindesign.jpg
-
-// estate in florida
-//https://robbreport.com/wp-content/uploads/2022/10/1-35.jpg?w=1000
-
-// mansion in Miamim Fl
-//https://images.wsj.net/im-466164?width=1280&size=1
-
-// mansion in hawaii
-//https://robbreport.com/wp-content/uploads/2022/12/1-11.jpg?w=1000
-
-// beach hosue in hawaii
-// https://www.myglobalviewpoint.com/wp-content/uploads/2021/04/2a-Beachfront-Estate-with-Private-Hot-Tub.jpg
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = 'Spots';
@@ -51,7 +27,7 @@ module.exports = {
           price: 1000,
         },
         {
-          ownerId: 1,
+          ownerId: 2,
           address: 'Mansion Street',
           city: 'San Diego',
           state: 'California',

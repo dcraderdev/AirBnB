@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import CreateSpot from './components/CreateSpot';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
+import ReviewModal from './components/ReviewModal';
 import ProfileButtonModal from './components/ProfileButtonModal';
 import SpotView from './components/SpotView';
 import Home from './components/Home';
@@ -32,11 +33,12 @@ function App() {
 
       {modal && (
         <div className={
-          modal === 'profileMenu'? 'modal-container-transparent': 'modal-container' }>
+          modal === 'profileMenu' || 'review' ? 'modal-container-transparent': 'modal-container' }>
              
           {modal === 'login' && <LoginModal closeModal={closeModal} />}
           {modal === 'signup' && <SignupModal closeModal={closeModal} />}
           {modal === 'profileMenu' && <ProfileButtonModal closeModal={closeModal} />}
+          {modal === 'review' && <ReviewModal closeModal={closeModal} />}
         </div>
 
 

@@ -107,6 +107,8 @@ export const createSpotThunk2 = (
   spotImages
   ) => async (dispatch) => {
 
+
+
   const response = await csrfFetch('/api/spots', {
     method: 'POST',
     body:JSON.stringify({  
@@ -122,6 +124,7 @@ export const createSpotThunk2 = (
       spotImages
     })
   });
+
   const data = await response.json();
   console.log(data);
   dispatch(createSpot(data));

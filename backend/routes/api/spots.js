@@ -393,7 +393,7 @@ router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (r
 
 
 // Get ALL details of a Spot from an id
-router.get('/:spotId', requireAuth, async (req, res, next) => {
+router.get('/:spotId', async (req, res, next) => {
 
   let spot = await Spot.findByPk(req.params.spotId, {
     attributes: [
@@ -425,7 +425,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
       },
       {
         model: Review,
-        attributes: ['id', 'review', 'stars'],
+        attributes: ['id', 'review', 'stars', 'createdAt'],
         include: [
           {
             model: User,
@@ -457,7 +457,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
     const lat = parseFloat(spot.lat);
     const lng = parseFloat(spot.lng);
     const price = parseFloat(spot.price);
-    const numReviews = parseFloat(spot.numReviews);
+    const numReviews = parseFloat(spot.Reviews.length);
     const avgStarRating = parseFloat(spot.avgStarRating).toFixed(2);
     return res.status(200).json({ 
       id: spot.id,
@@ -490,7 +490,7 @@ router.get('/:spotId', requireAuth, async (req, res, next) => {
 
 
 // // // Get details of a Spot from an id
-router.get('/basic/:spotId', requireAuth, async (req, res, next) => {
+router.get('/basic/:spotId', async (req, res, next) => {
 
   let spot = await Spot.findByPk(req.params.spotId, {
     attributes: [

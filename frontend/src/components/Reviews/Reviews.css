@@ -1,8 +1,49 @@
 .review-component-container{
-  position: relative;
-  border: black solid 1px;
+  position: absolute;
   width: 1000px;
-  height: 1000px;
-  top: 400px;
+  height: fit-content;
+  top: -25px;
+  padding: 60px;
 }
 
+.review-component-post-review-container{
+  position: relative;
+  width: 150px;
+  height: 30px;
+  top: 10px;
+  left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1.1);
+}
+.review-component-post-review-container button{
+  width: 150px;
+  height: 30px;
+}
+
+
+.review-component-review-stat{
+  width: fit-content;
+  font-size: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.review-component-be-first-review {
+  border-top: solid rgb(0, 0, 0) 2px;
+  border-bottom: solid rgb(0, 0, 0) 2px;
+  position: relative;
+  width: 1000px;
+  height: 105px;
+  right: 0%;
+  top: 45px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
