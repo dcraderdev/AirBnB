@@ -87,7 +87,7 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     let spotId = currentSpot.id
     try {
       const { response } = await dispatch(
@@ -95,26 +95,27 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
       );
 
 
-      const timer = setTimeout(() => {
-        setShowError(false)
-          
-        }, 3000);
-        clearInterval(timer)
-
     if (response.ok) {
       render()
-      closeModal();
+      closeModal(); 
     }
 
+
+
+
     } catch (error) {
+      console.error(error);
 
       setShowError(true)
-      console.error(error);
+
       const timer = setTimeout(() => {
-      setShowError(false)
-        
+        setShowError(false);
       }, 3000);
-      clearInterval(timer)
+      return () => clearTimeout(timer);
+
+
+
+
     }
   };
 
@@ -122,8 +123,8 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
   return (
     <div className='review-modal-container' ref={formRef}>
     
-      <div className='review-modal-header'>How was your stay?</div>
-      {showError && (<div className='review-modal-error'>Error submitting review... </div> )}
+      {!showError && (<div className='review-modal-header'>How was your stay?</div>)}
+      {showError && (<div className='review-modal-error'>   Error submitting review... Please try again in a moment. </div>)}
       <button className="close-button" onClick={closeModal} >
         X
       </button>
@@ -140,8 +141,8 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
       </div>
 
 
-      <label>
-      Leave your review here
+      <label className='review-modal-label'>
+      Leave your review here!
           <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}

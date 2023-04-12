@@ -22,6 +22,15 @@
   font-size: 24px;
 }
 
+.review-modal-error{
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translate(-50%,-50%);
+  font-size: 18px;
+  color: red;
+}
+
 
 
 .review-modal-container .close-button {
@@ -44,7 +53,7 @@
 .review-modal-container label {
   position: relative;
   display: block;
-  top: 30px;
+  top: 35px;
 }
 
 .review-modal-star-selection{

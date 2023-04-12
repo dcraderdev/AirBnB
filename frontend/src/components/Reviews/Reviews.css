@@ -16,9 +16,13 @@
   justify-content: center;
   align-items: center;
 }
-.review-component-post-review-container button{
+.review-component-review-stat button{
   width: 150px;
-  height: 30px;
+  height: 25px;
+  position: relative;
+
+  left: 10px;
+
 }
 
 

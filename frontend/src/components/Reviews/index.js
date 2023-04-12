@@ -8,39 +8,48 @@ import UserReview from '../UserReview'
 import ReviewStat from '../ReviewStat'
 
 
-const Reviews = ({currentSpot, reviews}) => {
-  const [userHasReview, setUserHasReview] = useState(false)
-  const [spotHasReviews, setSpotHasReviews] = useState(true)
-  const [isSpotOwner, setIsSpotOwner] = useState(false)
+const Reviews = ({currentSpot}) => {
   const { modal, openModal, closeModal, render, needsRerender  } = useContext(ModalContext);
+  const [spotHasReviews, setSpotHasReviews] = useState(true)
+
+
 
   const user = useSelector((state) => state.session.user);
 
-
-  // useEffect(() => {
-
-  //   if (user && reviews) {
-  //     const checkHasReview = reviews.find((review) => {
-  //       return review.User.id === user.id;
-  //     });
-
-  //   setUserHasReview(checkHasReview ? true : false);
-  //   setIsSpotOwner(currentSpot.ownerId===user.id)
-  //   }
-
-  // }, [reviews, user]);
+  const [reviews, setReviews] = useState([])
+  const [isSpotOwner, setIsSpotOwner] = useState(true);
+  const [hasReview, setHasReview] = useState(true);
 
 
+  useEffect(() => {
+    if(user && currentSpot){
 
+      setReviews(currentSpot.Reviews)
+      setIsSpotOwner(currentSpot.ownerId===user.id)
+    }
+  }, [user,currentSpot]);
+
+
+
+
+  useEffect(() => {
+    if (user && reviews) {
+      const hasReview = reviews.find((review) => {
+        return review.User.id === user.id;
+      });
+      setHasReview(hasReview ? true : false);
+    }
+  }, [reviews, user]);
 
 
    return  (
     <div className='review-component-container'>
 
-      <div className='review-component-review-stat'><ReviewStat currentSpot={currentSpot} /></div>
-
-      <div className='review-component-post-review-container'>
-        {!userHasReview && !isSpotOwner && user && 
+      <div className='review-component-review-stat'>
+        
+        <ReviewStat currentSpot={currentSpot} />
+      
+        {!hasReview && !isSpotOwner && user && 
         <button 
         className='review-component-post-review button' 
         onClick={()=>{ 
@@ -49,6 +58,10 @@ const Reviews = ({currentSpot, reviews}) => {
         >
           Post Your Review
         </button>}
+      
+      </div>
+
+      <div className='review-component-post-review-container'>
       </div>
 
       {!spotHasReviews && !isSpotOwner && user && (

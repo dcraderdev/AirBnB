@@ -18,33 +18,26 @@ function SpotView() {
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
   const [spotPreviewImageClass, setSpotPreviewImageClass] = useState('');
 
-  const [isSpotOwner, setIsSpotOwner] = useState('');
-  const [hasReview, setHasReview] = useState('');
-
-
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
 
-  const [reviews, setReviews] = useState([])
   const { modal, openModal, closeModal,needsRerender,setNeedsRerender } = useContext(ModalContext);
 
 
 
 
   useEffect(() => {
-    isLoaded(false)
+    isLoaded(false);
+
     dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
-      isLoaded(true)
+      setNeedsRerender(false)
+      isLoaded(true);
+
     })
   
     window.scrollTo(0, 0);
   }, [dispatch, spotId, user]);
-
-
-
-
-
-
+  
 
 
 
@@ -57,34 +50,20 @@ function SpotView() {
   }, [needsRerender]);
 
 
-
   useEffect(() => {
-    if(currentSpot){
-      setSpotPreviewImage(currentSpot?.SpotImages?.[0]?.url || logo);
-      setReviews(currentSpot.Reviews)
-      setIsSpotOwner(currentSpot?.ownerId===user?.id)
-      setSpotPreviewImageClass (currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-default-image')
+    if (currentSpot) {
+      setSpotPreviewImage(
+        currentSpot?.SpotImages?.[0]?.url
+          ? currentSpot?.SpotImages?.[0]?.url
+          : 'preview-default-image'
+      );
+      setSpotPreviewImageClass(
+        currentSpot?.SpotImages?.[0]?.url
+          ? 'spot-view-preview-image'
+          : 'preview-default-image'
+      );
     }
   }, [currentSpot]);
-
-
-
-
-  useEffect(() => {
-
-    if (user && reviews) {
-      const hasReview = reviews.find((review) => {
-        return review.User.id === user.id;
-      });
-
-      setHasReview(hasReview ? true : false);
-    }
-
-  }, [reviews, user]);
-
-
-
-
 
   const selectImage = (file) => {
     setSpotPreviewImage(file.url);
@@ -183,7 +162,7 @@ function SpotView() {
 
 
         <div className="spot-view-review-container">
-          <Reviews reviews={reviews} currentSpot={currentSpot} />
+          <Reviews currentSpot={currentSpot} />
 
         </div>
              
