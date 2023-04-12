@@ -8,46 +8,44 @@ import UserReview from '../UserReview'
 import ReviewStat from '../ReviewStat'
 
 
-const Reviews = ({reviews}) => {
+const Reviews = ({currentSpot, reviews}) => {
   const [userHasReview, setUserHasReview] = useState(false)
   const [spotHasReviews, setSpotHasReviews] = useState(true)
   const [isSpotOwner, setIsSpotOwner] = useState(false)
-  const { modal, openModal, closeModal } = useContext(ModalContext);
+  const { modal, openModal, closeModal, render, needsRerender  } = useContext(ModalContext);
 
   const user = useSelector((state) => state.session.user);
-  const currentSpot = useSelector((state) => state.spots.currentSpot);
-
-console.log(reviews);
 
 
+  // useEffect(() => {
 
-  useEffect(() => {
+  //   if (user && reviews) {
+  //     const checkHasReview = reviews.find((review) => {
+  //       return review.User.id === user.id;
+  //     });
 
-    if (user && reviews) {
-      const checkHasReview = reviews.find((review) => {
-        return review.User.id === user.id;
-      });
+  //   setUserHasReview(checkHasReview ? true : false);
+  //   setIsSpotOwner(currentSpot.ownerId===user.id)
+  //   }
 
-    setUserHasReview(checkHasReview ? true : false);
-    setIsSpotOwner(currentSpot.ownerId===user.id)
-    }
-
-  }, [reviews, user]);
+  // }, [reviews, user]);
 
 
-console.log(spotHasReviews);
+
 
 
    return  (
     <div className='review-component-container'>
 
-      <div className='review-component-review-stat'><ReviewStat /></div>
+      <div className='review-component-review-stat'><ReviewStat currentSpot={currentSpot} /></div>
 
       <div className='review-component-post-review-container'>
         {!userHasReview && !isSpotOwner && user && 
         <button 
         className='review-component-post-review button' 
-        onClick={()=>{ openModal('review')}}
+        onClick={()=>{ 
+          openModal('review')
+      }}
         >
           Post Your Review
         </button>}

@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import './ReviewStat.css';
 
-const ReviewStat = () => {
-  const currentSpot = useSelector((state) => {
-    return state.spots.currentSpot;
-  });
+const ReviewStat = ({currentSpot}) => {
+
+  const [rating, setRating] = useState('')
+  const [reviewsText, setReviewsText] = useState('')
+
+  useEffect(()=>{
+    setReviewsText(currentSpot && currentSpot.numReviews == 1 ? ' Review' : ' Reviews')
+    setRating(currentSpot && currentSpot.avgStarRating !== 'NaN' ? currentSpot.avgStarRating: 'New!')
+  },[currentSpot])
 
 
-  const reviewsText =
-    currentSpot && currentSpot.numReviews == 1 ? ' Review' : ' Reviews';
-  const rating =
-    currentSpot && currentSpot.avgStarRating !== 'NaN'
-      ? currentSpot.avgStarRating
-      : 'New!';
+  console.log(currentSpot);
+
+
+console.log(rating);
 
   return (
     <>

@@ -11,7 +11,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
 
 const CreateSpot = () => {
-  const fileTypes = ['.png', '.jpg', '.jpeg'];
+  const fileTypes = ['.png', '.jpg', 'jpeg'];
   const [imageUrl, setImageUrl] = useState('');
   const [imageUrlClass, setImageUrlClass] = useState('');
   const [imageUrlText, setImageUrlText] = useState('');

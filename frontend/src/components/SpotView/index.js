@@ -16,43 +16,73 @@ function SpotView() {
   const dispatch = useDispatch();
   const [loaded, isLoaded] = useState(false);
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
+  const [spotPreviewImageClass, setSpotPreviewImageClass] = useState('');
+
+  const [isSpotOwner, setIsSpotOwner] = useState('');
+  const [hasReview, setHasReview] = useState('');
+
 
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
 
   const [reviews, setReviews] = useState([])
-  const { modal, openModal, closeModal } = useContext(ModalContext);
+  const { modal, openModal, closeModal,needsRerender,setNeedsRerender } = useContext(ModalContext);
 
-  useEffect(() => {
-    
-    if(!modal){
-      console.log('modal closed, rerendering spot');
-      isLoaded(false)
-      dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
-        setReviews(currentSpot.Reviews)
-        isLoaded(true)
-      })
-      
-    }
-
-
-  }, [closeModal]);
 
 
 
   useEffect(() => {
-      isLoaded(false)
-      dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
-        if(currentSpot) setReviews(currentSpot.Reviews)
-        if(reviews) isLoaded(true)
-      })
-    
+    isLoaded(false)
+    dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
+      isLoaded(true)
+    })
+  
     window.scrollTo(0, 0);
   }, [dispatch, spotId, user]);
 
+
+
+
+
+
+
+
+
   useEffect(() => {
-    setSpotPreviewImage(currentSpot?.SpotImages?.[0]?.url || logo);
+
+    dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
+      setNeedsRerender(false)
+    })
+  
+  }, [needsRerender]);
+
+
+
+  useEffect(() => {
+    if(currentSpot){
+      setSpotPreviewImage(currentSpot?.SpotImages?.[0]?.url || logo);
+      setReviews(currentSpot.Reviews)
+      setIsSpotOwner(currentSpot?.ownerId===user?.id)
+      setSpotPreviewImageClass (currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-default-image')
+    }
   }, [currentSpot]);
+
+
+
+
+  useEffect(() => {
+
+    if (user && reviews) {
+      const hasReview = reviews.find((review) => {
+        return review.User.id === user.id;
+      });
+
+      setHasReview(hasReview ? true : false);
+    }
+
+  }, [reviews, user]);
+
+
 
 
 
@@ -61,7 +91,6 @@ function SpotView() {
   };
 
 
-  const previewImageClass = currentSpot?.SpotImages?.[0]?.url ? 'spot-view-preview-image' : 'preview-default-image';
 
 
   const comingSoon =()=>{
@@ -92,7 +121,7 @@ function SpotView() {
 
             <div className="spot-view-preview-image-container">
 
-              <img className={previewImageClass} src={spotPreviewImage} alt="Spot Preview Image"></img>
+              <img className={spotPreviewImageClass} src={spotPreviewImage} alt="Spot Preview Image"></img>
 
               <div className='preview-default-image'>
                 <img src={logo} alt="Airbnb logo" className='logo-scale'></img>
@@ -135,7 +164,7 @@ function SpotView() {
 
 
                 <div className="spot-view-review-stat-info">
-                  <ReviewStat />
+                  <ReviewStat currentSpot={currentSpot}/>
                 </div>
 
 
@@ -154,7 +183,7 @@ function SpotView() {
 
 
         <div className="spot-view-review-container">
-          <Reviews reviews={reviews} />
+          <Reviews reviews={reviews} currentSpot={currentSpot} />
 
         </div>
              

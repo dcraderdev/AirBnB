@@ -13,6 +13,7 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
   const [starIndex, setStarIndex] = useState(-1);
   const [validationErrors, setValidationErrors] = useState({});
   const [createReviewErrors, setCreateReviewErrors] = useState({});
+  const [showError, setShowError] = useState(false);
 
   const [disabledButton, setDisabledButton] = useState(false);
   const [buttonClass, setButtonClass] = useState('post-review-button button button2 ');
@@ -20,7 +21,7 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
 
   const currentSpot = useSelector((state) => state.spots.currentSpot);
   const dispatch = useDispatch();
-  const { modal, openModal } = useContext(ModalContext);
+  const { modal, openModal, render, setNeedsRerender } = useContext(ModalContext);
 
 
   useEffect(() => {
@@ -93,13 +94,27 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
         spotActions.createReviewThunk(review, rating, spotId)
       );
 
+
+      const timer = setTimeout(() => {
+        setShowError(false)
+          
+        }, 3000);
+        clearInterval(timer)
+
     if (response.ok) {
+      render()
       closeModal();
     }
 
     } catch (error) {
-      console.error(error);
 
+      setShowError(true)
+      console.error(error);
+      const timer = setTimeout(() => {
+      setShowError(false)
+        
+      }, 3000);
+      clearInterval(timer)
     }
   };
 
@@ -108,6 +123,7 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
     <div className='review-modal-container' ref={formRef}>
     
       <div className='review-modal-header'>How was your stay?</div>
+      {showError && (<div className='review-modal-error'>Error submitting review... </div> )}
       <button className="close-button" onClick={closeModal} >
         X
       </button>
