@@ -13,12 +13,6 @@ const ReviewStat = ({currentSpot}) => {
     setRating(currentSpot && currentSpot.avgStarRating !== 'NaN' ? currentSpot.avgStarRating: 'New!')
   },[currentSpot])
 
-
-  console.log(currentSpot);
-
-
-console.log(rating);
-
   return (
     <>
       {!currentSpot.numReviews && (

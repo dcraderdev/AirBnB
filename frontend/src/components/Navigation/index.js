@@ -8,7 +8,7 @@ import './Navigation.css';
 import Logo from "./logo";
 
 
-function Navigation({ isLoaded }){
+function Navigation(){
 
   const user = useSelector(state=> state.session.user)
   const history = useHistory()

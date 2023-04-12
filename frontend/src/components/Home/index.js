@@ -10,7 +10,7 @@ const Home = () => {
   const sessionUser = useSelector(state => state.session.user);
   return (
     <div>
-      <Spots/>
+      <Spots page={'home'}/>
     </div>
   )
 }

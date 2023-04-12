@@ -72,7 +72,7 @@ const Reviews = ({currentSpot}) => {
         </div>
       )}
 
-      {spotHasReviews && reviews.slice().reverse().map((review,index)=>(
+      {spotHasReviews && reviews.map((review,index)=>(
         <div key={index} className='review-component-review'><UserReview review={review}/></div>
       ))}
 

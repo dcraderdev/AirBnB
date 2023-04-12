@@ -25,12 +25,7 @@ const UserReview = ({review, setUpdate}) => {
     if(user){
       setIsCreator(user.id === review.User.id ? true : false)
     }
-
-  },[])
-
-
-
-
+  },[user,review])
 
 
   const deleteReview = async (e) => {

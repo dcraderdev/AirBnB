@@ -152,7 +152,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
       const lat = parseFloat(spot.lat);
       const lng = parseFloat(spot.lng);
       const price = parseFloat(spot.price);
-      const avgRating = parseFloat(spot.avgRating);
+      const avgRating = parseFloat(spot.avgRating).toFixed(2);
       return { 
         id: spot.id,
         ownerId: spot.ownerId,
@@ -304,132 +304,7 @@ router.post('/:spotId/images',singleMulterUpload("image"), requireAuth, async (r
 
 
 
-
-
 // // Get ALL details of a Spot from an id
-// router.get('/:spotId', async (req, res, next) => {
-  
-
-//   let spot = await Spot.findByPk(req.params.spotId, {
-//     attributes: [
-//       'id',
-//       'ownerId',
-//       'address',
-//       'city',
-//       'state',
-//       'country',
-//       'lat',
-//       'lng',
-//       'name',
-//       'description',
-//       'price',
-//       'createdAt',
-//       'updatedAt',
-//       [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-//       [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')),'avgStarRating'],
-//     ],
-//     include: [
-//       {
-//         model: SpotImage,
-//         attributes: ['id', 'url', 'preview'],
-//       },
-//       {
-//         model: User,
-//         as: 'Owner',
-//         attributes: ['id', 'firstName', 'lastName'],
-//       },
-//       {
-//         model: Review,
-//         attributes: ['id', 'review', 'stars', 'createdAt'],
-//         include: [
-//           {
-//             model: User,
-//             attributes: ['id', 'firstName', 'lastName'],
-//           },
-//           {
-//             model: ReviewImage,
-//             attributes: ['id', 'url'],
-//           },
-//         ],
-//       },
-//     ],
-//     // group: ['Spot.id', 'SpotImages.id', 'Owner.id', 'Reviews.spotId', 'Reviews.id'],
-
-//     group: ['Spot.id', 'SpotImages.id', 'Owner.id', 'Reviews.spotId', 'Reviews.id',
-//     Sequelize.col('Reviews->User.id'),
-//     Sequelize.col('Reviews->ReviewImage.id')],
-
-//     order: [['Reviews', 'createdAt', 'DESC']],
-
-//   });
-
-//   if (!spot || spot === null) {
-//     const err = new Error("Spot couldn't be found");
-//     err.statusCode = 404;
-//     err.status = 404;
-//     return next(err);
-//   }
-
-//   if(spot){
-
-//     const imageUrls = spot.SpotImages.map(image => {
-//       retrievePrivateFile(image.url)
-//     });
-
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-//     console.log(spot);
-
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-
-//     spot = spot.toJSON()
-//     const lat = parseFloat(spot.lat);
-//     const lng = parseFloat(spot.lng);
-//     const price = parseFloat(spot.price);
-//     const numReviews = parseFloat(spot.Reviews.length);
-//     const avgStarRating = parseFloat(spot.avgStarRating).toFixed(2);
-
-
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-//     console.log(avgStarRating);
-
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-//     console.log('-=-=-=-=-=');
-
-
-//     return res.status(200).json({ 
-//       id: spot.id,
-//       ownerId: spot.ownerId,
-//       address: spot.address,
-//       city: spot.city,
-//       state: spot.state,
-//       country: spot.country,
-//       lat,
-//       lng,
-//       name: spot.name,
-//       description: spot.description,
-//       price,
-//       createdAt: spot.createdAt,
-//       updatedAt: spot.updatedAt,
-//       numReviews,
-//       avgStarRating,
-//       previewImage: spot.previewImage,
-//       SpotImages: spot.SpotImages,
-//       Owner: spot.Owner,
-//       Reviews: spot.Reviews,
-//     });
-//   }
-// });
-
-
-
-
 router.get('/:spotId', async (req, res, next) => {
   let spot = await Spot.findByPk(req.params.spotId, {
     attributes: [
@@ -470,7 +345,7 @@ router.get('/:spotId', async (req, res, next) => {
   const reviews = await Review.findAll({
     where: { spotId: spot.id },
     attributes: ['id', 'review', 'stars', 'createdAt'],
-    order: [['createdAt', 'ASC']],
+    order: [['createdAt', 'DESC']],
     include: [
       {
         model: User,

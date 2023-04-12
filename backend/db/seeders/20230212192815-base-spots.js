@@ -65,7 +65,7 @@ module.exports = {
           price: 1000,
         },
         {
-          ownerId: 1,
+          ownerId: 3,
           address: 'Florida Estate Road',
           city: 'Miami',
           state: 'Florida',
@@ -78,7 +78,7 @@ module.exports = {
           price: 1000,
         },
         {
-          ownerId: 1,
+          ownerId: 4,
           address: 'Miami Mansion Street',
           city: 'Miami',
           state: 'Florida',
@@ -91,7 +91,7 @@ module.exports = {
           price: 1000,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Hawaii Mansion Road',
           city: 'Honolulu',
           state: 'Hawaii',
@@ -104,7 +104,7 @@ module.exports = {
           price: 1000,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Beach House Street',
           city: 'Honolulu',
           state: 'Hawaii',
@@ -117,7 +117,7 @@ module.exports = {
           price: 1000,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Sunset Boulevard',
           city: 'Lahaina',
           state: 'Hawaii',
@@ -130,7 +130,7 @@ module.exports = {
           price: 1200,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Palm Tree Lane',
           city: 'Kailua',
           state: 'Hawaii',
@@ -143,7 +143,7 @@ module.exports = {
           price: 1100,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Kapalua Bay Road',
           city: 'Lahaina',
           state: 'Hawaii',
@@ -156,7 +156,7 @@ module.exports = {
           price: 1500,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Alii Drive',
           city: 'Kailua-Kona',
           state: 'Hawaii',
@@ -169,7 +169,7 @@ module.exports = {
           price: 800,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: 'Kalanianaole Highway',
           city: 'Waimanalo',
           state: 'Hawaii',
@@ -182,7 +182,7 @@ module.exports = {
           price: 900,
         },
         {
-          ownerId: 1,
+          ownerId: 6,
           address: 'Kuakini Highway',
           city: 'Kailua-Kona',
           state: 'Hawaii',

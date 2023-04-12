@@ -24,7 +24,7 @@ function ProfileButtonModal({ closeModal}) {
   
   useEffect(() => {
     if (user) {
-      const hostCheck = spots.find(spot => spot.ownerId === user.id);
+      const hostCheck = spots.find(spot => spot.ownerId === user.id)
       if(hostCheck)setIsHost('Manage Spots');
     } else {
       setIsHost('Host a spot');
@@ -50,7 +50,8 @@ function ProfileButtonModal({ closeModal}) {
   };
   const navHistory = () => {
     closeModal();
-    history.push('/host')
+    isHost ? history.push('/manage') : history.push('/host')
+    
   };
   const navHelp = () => {
     closeModal();

@@ -4,6 +4,7 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CreateSpot from './components/CreateSpot';
+import ManageSpots from './components/ManageSpots';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
 import ReviewModal from './components/ReviewModal';
@@ -21,8 +22,9 @@ function App() {
   const { modal, closeModal} = useContext(ModalContext);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser());
-    setIsLoaded(true);
+    dispatch(sessionActions.restoreUser()).then(()=>{
+      setIsLoaded(true);
+    });
   }, [dispatch]);
 
 
@@ -31,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {isLoaded && <Navigation />}
 
       {modal && (
         <div className={
@@ -56,6 +58,10 @@ function App() {
         
         <Route exact path="/host">
           <CreateSpot />
+        </Route>
+
+        <Route exact path="/manage">
+          <ManageSpots />
         </Route>
 
         <Route exact path="/">

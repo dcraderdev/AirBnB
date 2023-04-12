@@ -2,48 +2,91 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotTile from '../SpotTile';
+import SpotTileManage from '../SpotTileManage';
 import * as spotActions from '../../store/spots';
 
 import './Spots.css';
 
-const Spots = () => {
+const Spots = ({ page }) => {
   const [loaded, isLoaded] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const [spots, setSpots] = useState([]);
 
   const dispatch = useDispatch();
-  const spots = useSelector((state) => {
-
-    return state.spots.spots;
-  });
+  const allSpots = useSelector((state) => state.spots.spots);
+  const userSpots = useSelector((state) => state.spots.userSpots);
 
   useEffect(() => {
-    async function fetchData() {
-      await dispatch(spotActions.getAllSpotsThunk()).then(()=>{
-        isLoaded(true);
-      })
-    }
+    const fetchData = async () => {
+      let action;
+
+      if (page === 'home') {
+        action = spotActions.getAllSpotsThunk();
+      } else if (page === 'manage') {
+        action = spotActions.getUsersSpotsThunk();
+      }
+
+      if (action) {
+        await dispatch(action).then(() => {
+          isLoaded(true);
+        });
+      }
+    };
+
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, page]);
 
+  useEffect(() => {
+    if (loaded) {
+      if (page === 'home') {
+        setSpots(allSpots);
+      } else if (page === 'manage') {
+        setSpots(userSpots.Spots);
+      }
+    }
+  }, [loaded, page, allSpots, userSpots]);
 
-  if (!loaded) {
-    return <div>Loading...</div>;
+  {
+    !loaded && <div>Loading...</div>;
   }
-return (
- 
-       <>
+
+  if (page === 'home') {
+    return (
+      <>
         <div className="spots-wrapper">
           <div className="spots-grid">
             {spots.map((spot) => (
-              <SpotTile key={spot.id} spot={spot} setFavorites={setFavorites} />
+              <SpotTile
+                key={spot.id}
+                spot={spot}
+                setFavorites={setFavorites}
+                page={page}
+              />
             ))}
           </div>
         </div>
       </>
     );
-  
+  }
 
-  
+  if (page === 'manage') {
+    return (
+      <>
+        <div className="spots-wrapper">
+          <div className="spots-grid">
+            {spots.map((spot) => (
+              <SpotTileManage
+                key={spot.id}
+                spot={spot}
+                setFavorites={setFavorites}
+                page={page}
+              />
+            ))}
+          </div>
+        </div>
+      </>
+    );
+  }
 };
 
 export default Spots;

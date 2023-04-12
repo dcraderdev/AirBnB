@@ -18,6 +18,15 @@ const getSpot = (spot) => {
   };
 };
 
+const USER_SPOTS = 'spot/user';
+const userSpots = (spots) => {
+  return {
+    type: USER_SPOTS,
+    payload: spots,
+  };
+};
+
+
 
 const CREATE_SPOT = 'spots/create';
 const createSpot = (spot) => {
@@ -71,6 +80,16 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
   return response;
 };
 
+export const getUsersSpotsThunk = () => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/spots/current`, {
+    method: 'GET',
+  });
+  const data = await response.json();
+  dispatch(userSpots(data));
+  return response;
+};
+
 
 export const createSpotThunk = (       
   country,
@@ -114,16 +133,16 @@ export const createSpotThunk = (
 };
 
 export const createSpotThunk2 = (       
-  country,
-  address,
-  city,
-  state,
-  lat,
-  lng,
-  description,
-  name,
-  price,
-  spotImages
+country,
+address,
+city,
+state,
+lat,
+lng,
+description,
+name,
+price,
+spotImages
   ) => async (dispatch) => {
 
 
@@ -149,23 +168,6 @@ export const createSpotThunk2 = (
   dispatch(createSpot(data));
   return {data,response};
 };
-
-
-
-
-// export const getReviewsThunk = (review, stars, spotId) => async (dispatch) => {
-
-//   const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-//     method: 'POST',
-//     body:JSON.stringify({  
-//       review,
-//       stars
-//     })
-//   });
-//   const data = await response.json();
-//   dispatch(getReviews(data));
-//   return {data, response};
-// };
 
 
 export const createReviewThunk = (review, stars, spotId) => async (dispatch) => {
@@ -195,7 +197,7 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 
 
 
-const initialState = { spots:[], reviews:[] };
+const initialState = { spots:[], reviews:[], userSpots: [] };
 const spotsReducer = (state = initialState, action) => {
 
 
@@ -207,14 +209,19 @@ const spotsReducer = (state = initialState, action) => {
         spots: action.payload.Spots,
       };
     case GET_SPOT:
-
       return {
         ...newState,
-        reviews: action.payload.Reviews,
         currentSpot: action.payload,
       };
-    case CREATE_SPOT:
+    case USER_SPOTS:
+      return {
+        ...newState,
+        userSpots: action.payload,
+      };
 
+
+
+    case CREATE_SPOT:
       return {
         ...newState,
         spots: [...newState.spots, action.payload.spot],
@@ -224,11 +231,6 @@ const spotsReducer = (state = initialState, action) => {
         ...newState,
         currentSpot: null
       }
-    // case GET_REVIEWS:
-    //   return {
-    //     ...newState,
-    //     reviews: [...newState.reviews, action.payload],
-    //   };
     case CREATE_REVIEW:
       return {
         ...newState,

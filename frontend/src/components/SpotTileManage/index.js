@@ -1,11 +1,11 @@
 //SpotTile
 import React, { useState, useRef, useEffect } from 'react';
 
-import './SpotTile.css';
+import './SpotTileManage.css';
 import { Link } from 'react-router-dom';
 import logo from '../../public/logo.png';
 
-const SpotTile = ({ spot, setFavorites, page }) => {
+const SpotTileManage = ({ spot, setFavorites, page }) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
@@ -64,15 +64,6 @@ const SpotTile = ({ spot, setFavorites, page }) => {
     <div>
       <Link to={`/spots/${spot.id}`} className="spot-tile-link">
         <div className="spot-tile">
-          <div
-            className={heartIcon}
-            onClick={setFav}
-            onMouseMove={handleFavHover}
-            onMouseLeave={handleFavLeave}
-          >
-            <div className={heartFill}></div>
-          </div>
-
           <div className="spot-tile-image-container">
             {!imageUrl && <div className={previewImageClass}></div>}
             {imageUrl && (
@@ -108,4 +99,4 @@ const SpotTile = ({ spot, setFavorites, page }) => {
   );
 };
 
-export default SpotTile;
+export default SpotTileManage;

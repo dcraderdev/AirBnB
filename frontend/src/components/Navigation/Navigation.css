@@ -78,10 +78,9 @@
 
 
 .profile-button-active {
-  background-color: #fff9f2ee;
   box-shadow: rgba(127, 127, 127, 0.9) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   cursor: pointer;
-  transform: scale(1.2);
+  transform: scale(1);
 }
 
 
