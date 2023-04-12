@@ -4,13 +4,12 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CreateSpot from './components/CreateSpot';
-import ManageSpots from './components/ManageSpots';
+import Spots from './components/Spots';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
 import ReviewModal from './components/ReviewModal';
 import ProfileButtonModal from './components/ProfileButtonModal';
 import SpotView from './components/SpotView';
-import Home from './components/Home';
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
 import { ModalContext } from './context/ModalContext';
@@ -26,7 +25,6 @@ function App() {
       setIsLoaded(true);
     });
   }, [dispatch]);
-
 
 
 
@@ -61,11 +59,14 @@ function App() {
         </Route>
 
         <Route exact path="/manage">
-          <ManageSpots />
+          <Spots page={'manage'}/>
+
+    
         </Route>
 
         <Route exact path="/">
-            <Home />
+          <Spots page={'home'}/>
+
         </Route>
 
 

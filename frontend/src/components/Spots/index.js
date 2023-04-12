@@ -16,25 +16,23 @@ const Spots = ({ page }) => {
   const allSpots = useSelector((state) => state.spots.spots);
   const userSpots = useSelector((state) => state.spots.userSpots);
 
+
+
+
   useEffect(() => {
-    const fetchData = async () => {
+
       let action;
-
-      if (page === 'home') {
-        action = spotActions.getAllSpotsThunk();
-      } else if (page === 'manage') {
-        action = spotActions.getUsersSpotsThunk();
-      }
-
+      if (page === 'home') action = spotActions.getAllSpotsThunk();
+      if (page === 'manage') action = spotActions.getUsersSpotsThunk();
+       
       if (action) {
-        await dispatch(action).then(() => {
+        dispatch(action).then(() => {
           isLoaded(true);
         });
-      }
-    };
+      };
 
-    fetchData();
   }, [dispatch, page]);
+
 
   useEffect(() => {
     if (loaded) {
@@ -46,9 +44,12 @@ const Spots = ({ page }) => {
     }
   }, [loaded, page, allSpots, userSpots]);
 
-  {
-    !loaded && <div>Loading...</div>;
-  }
+
+
+
+
+
+  { !loaded && <div>Loading...</div>; }
 
   if (page === 'home') {
     return (
@@ -69,7 +70,7 @@ const Spots = ({ page }) => {
     );
   }
 
-  if (page === 'manage') {
+  if (page === 'manage' && spots) {
     return (
       <>
         <div className="spots-wrapper">

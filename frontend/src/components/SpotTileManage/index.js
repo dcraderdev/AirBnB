@@ -41,24 +41,6 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
     }
   }, []);
 
-  const setFav = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setFavorite(!favorite);
-    setHeartFill(
-      !favorite ? 'fa-regular fa-heart large' : 'fa-solid fa-heart large'
-    );
-  };
-
-  const handleFavHover = (e) => {
-    setHeartFill(
-      favorite ? 'fa-regular fa-heart large' : 'fa-solid fa-heart large'
-    );
-  };
-
-  const handleFavLeave = (e) => {
-    setHeartFill(favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart');
-  };
 
   return (
     <div>
@@ -95,6 +77,17 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
           <div className="tooltip tooltiptext">{displayName}</div>
         </div>
       </Link>
+
+      <div className='spot-tile-manage-buttons'> 
+        <button className="spot-tile-manage-update-button button" onClick={()=>{ }} >
+              Update
+        </button>
+
+        <button className="spot-tile-manage-delete-button button" onClick={()=>{ }} >
+              Delete
+        </button>
+      </div>
+
     </div>
   );
 };

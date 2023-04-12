@@ -30,8 +30,10 @@ const Reviews = ({currentSpot}) => {
   }, [user,currentSpot]);
 
 
-
-
+console.log(currentSpot,'currentSpot');
+console.log(!isSpotOwner);
+console.log(currentSpot.Reviews.length > 0);
+console.log(user);
 
 
   useEffect(() => {
@@ -66,7 +68,7 @@ const Reviews = ({currentSpot}) => {
       <div className='review-component-post-review-container'>
       </div>
 
-      {!spotHasReviews && !isSpotOwner && user && (
+      {!currentSpot.Reviews.length > 0 && !isSpotOwner && user && (
         <div className='review-component-be-first-review'>
           Be the first to post a review!
         </div>
