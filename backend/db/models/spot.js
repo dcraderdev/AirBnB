@@ -126,6 +126,43 @@ module.exports = (sequelize, DataTypes) => {
         },
 
 
+        withPreviewAndRatingAndReviews() {
+          return {
+            attributes: [
+              'id',
+              'ownerId',
+              'address',
+              'city',
+              'state',
+              'country',
+              'lat',
+              'lng',
+              'name',
+              'description',
+              'price',
+              'createdAt',
+              'updatedAt',
+              [
+                Sequelize.literal(
+                  `(SELECT AVG(stars) FROM ${
+                    schema ? `"${schema}"."Reviews"` : 'Reviews'
+                  } WHERE "Reviews"."spotId" = "Spot"."id")`
+                ),
+                'avgRating',
+              ],
+              [
+                Sequelize.literal(
+                  `(SELECT url FROM ${
+                    schema ? `"${schema}"."SpotImages"` : 'SpotImages'
+                  } WHERE "SpotImages"."spotId" = "Spot"."id" AND "SpotImages"."preview" = true LIMIT 1)`
+                ),
+                'previewImage',
+              ],
+            ],
+          };
+        },
+
+
       },
     },
   );

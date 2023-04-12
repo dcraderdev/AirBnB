@@ -32,6 +32,8 @@ const Reviews = ({currentSpot}) => {
 
 
 
+
+
   useEffect(() => {
     if (user && reviews) {
       const hasReview = reviews.find((review) => {
@@ -70,7 +72,7 @@ const Reviews = ({currentSpot}) => {
         </div>
       )}
 
-      {spotHasReviews && reviews.map((review,index)=>(
+      {spotHasReviews && reviews.slice().reverse().map((review,index)=>(
         <div key={index} className='review-component-review'><UserReview review={review}/></div>
       ))}
 
