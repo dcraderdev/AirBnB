@@ -31,12 +31,10 @@
 
 
 
-
-
 .slider-button{
   top: 100px;
   position: absolute;
-  background-color: rgba(234, 240, 239, 0.251);
+  background-color: rgba(234, 240, 239, 0.426);
   display: flex;
   justify-content: center;
   align-items: center;

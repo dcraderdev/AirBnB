@@ -60,24 +60,17 @@ const CreateSpot = () => {
     if (!address.length) errors['address'] = 'Please enter an address';
     if (!city.length) errors['city'] = 'Please enter a city';
     if (!state.length) errors['state'] = 'Please enter a state';
-    if (!description.length)
-      errors['description'] = 'Please enter a description';
+    if (!description.length) errors['description'] = 'Please enter a description';
     if (!name.length) errors['name'] = 'Please enter a spot name';
     if (!price.length) errors['price'] = 'Please enter a price';
-    if (!spotPreviewImageFile)
-      errors['spotPreviewImageFile'] = 'Please enter URL or Add Image from local files';
+    if (!spotPreviewImageFile) errors['spotPreviewImageFile'] = 'Please enter URL or Add Image from local files';
 
+
+    if (!spotImages.length) errors['spotImages'] = 'Please enter URL or Add Image from local files';
+      
+    
     setValidationErrors(errors);
-  }, [
-    country,
-    address,
-    city,
-    state,
-    description,
-    name,
-    price,
-    spotPreviewImageFile,
-  ]);
+  }, [country,address,city,state,description,name,price,spotPreviewImageFile,spotImages]);
 
   useEffect(() => {
     if (Object.keys(validationErrors).length > 0) {
@@ -93,7 +86,9 @@ const CreateSpot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
+    setDisabledButton(true);
     setTimeout(() => {
+      setDisabledButton(false);
       setFormSubmitted(false);
     }, 5000);
 
@@ -123,33 +118,25 @@ const CreateSpot = () => {
         setDisabledButton(true);
         setButtonClass('host-form-submit-button disabled');
 
-        console.error(error);
-        console.log(error.data);
-        console.log(error.status);
 
         if (error.data.errors.lat) {
-          console.log('lat is messed up');
           setLat('Latitude must be a number');
           setLatClass('lat-field red-font');
         }
         if (error.data.errors.lng) {
-          console.log('lng is messed up');
           setLng('Longitude must be a number');
           setLngClass('lng-field red-font');
         }
         if (error.data.errors.price) {
-          console.log('price is messed up');
           setPrice('Price must be a number');
           setPriceClass('host-form-spot-price-field red-font');
         }
         if (error.data.errors.description) {
-          console.log('description is messed up');
           setDescription('Tell us more! (30 char min)');
           setDescriptionClass('description-field red-font');
         }
 
         if (error.data.errors.name) {
-          console.log('name is messed up');
           setName('Name must be less than 50 characters');
           setNameClass('host-form-spot-title-field red-font');
         }
@@ -249,10 +236,8 @@ const CreateSpot = () => {
     const file = e.target.files[0];
     if (file) {
       if (file && !fileTypes.includes(`${file.type.split('/')[1]}`)) {
-        console.log('doesnt include');
       }
 
-      // console.log('Selected file:', file);
       setSpotPreviewImage(URL.createObjectURL(file));
       setSpotPreviewImageFile(file);
       setSpotPreviewImageLoaded(true);

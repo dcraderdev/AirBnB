@@ -3,9 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './SpotTile.css';
 import { Link } from 'react-router-dom';
-import logo from '../../public/logo.png';
 
-const SpotTile = ({ spot, setFavorites, page }) => {
+const SpotTile = ({ spot, setFavorites}) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
@@ -20,13 +19,11 @@ const SpotTile = ({ spot, setFavorites, page }) => {
     previewImage,
     city,
     state,
-    country,
-    lat,
-    lng,
     price,
     avgRating,
     description,
   } = spot;
+
 
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');

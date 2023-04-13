@@ -22,6 +22,7 @@ const Spots = ({ page }) => {
 
 
   useEffect(() => {
+    isLoaded(false)
 
       let action;
       if (page === 'home') action = spotActions.getAllSpotsThunk();
@@ -29,6 +30,7 @@ const Spots = ({ page }) => {
        
       if (action) {
         dispatch(action).then(() => {
+
           isLoaded(true);
           setNeedsRerender(false)
         });
@@ -36,6 +38,12 @@ const Spots = ({ page }) => {
 
   }, [dispatch, page, needsRerender]);
 
+
+  useEffect(() => {
+    if (loaded) {
+
+    }
+  }, [loaded, page, allSpots, userSpots]);
 
   useEffect(() => {
     if (loaded) {
@@ -47,32 +55,24 @@ const Spots = ({ page }) => {
     }
   }, [loaded, page, allSpots, userSpots]);
 
-  // useEffect(() => {
-
-  //   dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
-  //     setNeedsRerender(false)
-  //   })
-  
-  // }, [needsRerender]);
-
-
 
 
 
   { !loaded && <div>Loading...</div>; }
 
-  if (page === 'home') {
+  if (page === 'home' && loaded  && spots) {
     return (
       <>
         <div className="spots-wrapper">
           <div className="spots-grid">
-            {spots.map((spot) => (
-              <SpotTile
-                key={spot.id}
+            {spots.map((spot,index) => (
+
+                <SpotTile
+                key={index}
+                spotId={spot.id}
                 spot={spot}
                 setFavorites={setFavorites}
-                page={page}
-              />
+                />
             ))}
           </div>
         </div>
@@ -80,18 +80,16 @@ const Spots = ({ page }) => {
     );
   }
 
-  if (page === 'manage' && spots) {
+  if (page === 'manage'  && loaded && spots) {
     return (
       <>
       <div className='spots-manage-spots-header'>Manage Spots</div>
         <div className="spots-wrapper">
           <div className="spots-grid">
-            {spots.map((spot) => (
+            {spots.map((spot,index) => (
               <SpotTileManage
-                key={spot.id}
+                key={index}
                 spot={spot}
-                setFavorites={setFavorites}
-                page={page}
               />
             ))}
           </div>

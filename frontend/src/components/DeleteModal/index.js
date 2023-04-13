@@ -50,7 +50,6 @@ const DeleteModal = ({}) => {
   const handleDelete = async () =>{
     console.log(updateObj);
 
-    // console.log('its a spot');
     if(updateObj.address){
       let spotId = updateObj.id
       try {
@@ -70,7 +69,6 @@ const DeleteModal = ({}) => {
     }
 
 
-    // console.log('its a review');
     if(updateObj.review){
       let reviewId = updateObj.id
       try {
@@ -90,12 +88,20 @@ const DeleteModal = ({}) => {
  
     }
   }
+  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        closeModal();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
 
-
-  // if (!loaded) {
-  //   return <div>Loading...</div>;
-  // }
   return (
     <div className="delete-modal-container" ref={formRef}>
       <div className="delete-modal-header">Confirm Delete</div>

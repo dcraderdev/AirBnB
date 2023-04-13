@@ -18,18 +18,35 @@ function ProfileButtonModal() {
 
 
   const user = useSelector(state => state.session.user );
-
   const spots = useSelector(state => state.spots.spots);
+
+console.log(user);
   
   
   useEffect(() => {
+
+
+    console.log('opening modal');
+
+    isLoaded(false)
+
     if (user) {
       const hostCheck = spots.find(spot => spot.ownerId === user.id)
-      if(hostCheck)setIsHost('Manage Spots');
-    } else {
-      setIsHost('Host a spot');
+
+      if(hostCheck) setIsHost('Manage Spots')
+      if(!hostCheck) setIsHost('Host a spot');
+      isLoaded(true)
+    
+      
     }
   },[spots,user])
+
+
+
+
+
+
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -66,7 +83,7 @@ function ProfileButtonModal() {
     
     <>
       <ul className='profileMenu' ref={formRef}>
-        {user ? (
+        {loaded && user ? (
           <div>
             <div className='profile-user-welcome'>
               <div className='profile-icon'> <i className="fa-solid fa-user" /></div>

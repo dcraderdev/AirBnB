@@ -3,31 +3,17 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import './SpotTileManage.css';
 import { Link } from 'react-router-dom';
-import logo from '../../public/logo.png';
 import { ModalContext } from '../../context/ModalContext';
 
-const SpotTileManage = ({ spot, setFavorites, page }) => {
+const SpotTileManage = ({ spot }) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
-  const [favorite, setFavorite] = useState([false]);
-  const [heartIcon, setHeartIcon] = useState('heart-icon');
-  const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
   const [previewImageClass, setPreviewImageClass] = useState('preview-image-gray');
   const [imageUrl, setImageUrl] = useState(false);
   const {modal, openModal, setUpdateObj} = useContext(ModalContext)
 
   const {name,previewImage,city,state,price,avgRating,description} = spot;
-
-
-
-
-
-
-// TO DO
-
-// make sure we can delete more than one spot in a row from the manage spots tab
-// make sure the manageSpots/hsot a spot in profile modal pops up correctly
 
 
 
@@ -87,7 +73,7 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
 
       <div className='spot-tile-manage-buttons-container'> 
         <button className="spot-tile-manage-update-button button" onClick={()=>{ }} >
-              Update
+          Update
         </button>
 
         <button className="spot-tile-manage-delete-button button" onClick={()=>{

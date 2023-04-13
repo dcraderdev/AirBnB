@@ -19,7 +19,7 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
-  const { modal, closeModal} = useContext(ModalContext);
+  const { modal} = useContext(ModalContext);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(()=>{
@@ -27,7 +27,7 @@ function App() {
     });
   }, [dispatch]);
 
-
+  
   return (
     <>
       {isLoaded && <Navigation />}
@@ -60,13 +60,10 @@ function App() {
 
         <Route exact path="/manage">
           <Spots page={'manage'}/>
-
-    
         </Route>
 
         <Route exact path="/">
           <Spots page={'home'}/>
-
         </Route>
 
 

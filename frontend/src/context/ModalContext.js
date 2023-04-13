@@ -9,7 +9,6 @@ const ModalProvider = ({ children }) => {
 
   const [updateObj, setUpdateObj] = useState(null);
   
-  console.log(updateObj);
 
   const openModal = (modalType) => {
     setModal(modalType);
