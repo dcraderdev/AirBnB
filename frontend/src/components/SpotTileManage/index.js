@@ -2,9 +2,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import './SpotTileManage.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ModalContext } from '../../context/ModalContext';
-
 const SpotTileManage = ({ spot }) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
@@ -16,7 +15,7 @@ const SpotTileManage = ({ spot }) => {
   const {name,previewImage,city,state,price,avgRating,description} = spot;
 
 
-
+  const history = useHistory()
 
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');
@@ -72,7 +71,11 @@ const SpotTileManage = ({ spot }) => {
       </Link>
 
       <div className='spot-tile-manage-buttons-container'> 
-        <button className="spot-tile-manage-update-button button" onClick={()=>{ }} >
+        <button className="spot-tile-manage-update-button button" onClick={()=>{
+          console.log('click');
+          history.push(`/manage/${spot.id}`)
+         }} >
+
           Update
         </button>
 

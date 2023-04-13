@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import './CreateSpot.css';
+import './EditSpot.css';
 import * as spotActions from '../../store/spots';
 import ImageTile from '../ImageTile';
 import ReactCrop from 'react-image-crop';
@@ -10,7 +10,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
 
-const CreateSpot = () => {
+const EditSpot = () => {
   const fileTypes = ['.png', '.jpg', 'jpeg'];
   const [imageUrl, setImageUrl] = useState('');
   const [imageUrlClass, setImageUrlClass] = useState('');
@@ -48,7 +48,7 @@ const CreateSpot = () => {
   const [buttonClass, setButtonClass] = useState(
     'host-form-submit-button button'
   );
-  const [buttonText, setButtonText] = useState('Create Spot');
+  const [buttonText, setButtonText] = useState('Update Spot');
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   let timeoutId;
@@ -253,7 +253,7 @@ const CreateSpot = () => {
     <div className="host-form-page">
       <div className="host-form-page-container">
         <div className="host-header">
-          <div className="host-header-text">Host an Airbnb</div>
+          <div className="host-header-text">Update your Spot</div>
         </div>
         <div className="hostDiv">
           <form onSubmit={handleSubmit}>
@@ -525,4 +525,4 @@ const CreateSpot = () => {
   );
 };
 
-export default CreateSpot;
+export default EditSpot;

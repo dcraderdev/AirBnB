@@ -4,6 +4,7 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CreateSpot from './components/CreateSpot';
+import EditSpot from './components/EditSpot';
 import Spots from './components/Spots';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
@@ -56,6 +57,10 @@ function App() {
         
         <Route exact path="/host">
           <CreateSpot />
+        </Route>
+
+        <Route exact path="/manage/:spotId">
+          <EditSpot />
         </Route>
 
         <Route exact path="/manage">
