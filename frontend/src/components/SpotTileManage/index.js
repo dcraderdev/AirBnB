@@ -30,6 +30,29 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
     description,
   } = spot;
 
+
+
+
+
+
+// TO DO
+
+// make sure we can delete more than one spot in a row from the manage spots tab
+// make sure the manageSpots/hsot a spot in profile modal pops up correctly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');
     name.length > 35
