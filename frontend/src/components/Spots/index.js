@@ -82,6 +82,7 @@ const Spots = ({ page }) => {
   if (page === 'manage' && spots) {
     return (
       <>
+      <div className='spots-manage-spots-header'>Manage Spots</div>
         <div className="spots-wrapper">
           <div className="spots-grid">
             {spots.map((spot) => (

@@ -77,7 +77,10 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
           <p className="spot-tile-short-description">{tileDescription}</p>
 
           <div className="tooltip tooltiptext">{displayName}</div>
+          
         </div>
+
+        
       </Link>
 
       <div className='spot-tile-manage-buttons-container'> 

@@ -43,3 +43,12 @@
   display: flex;
   justify-content: center;
 }
+
+.spots-manage-spots-header{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 10px;
+  font-size: 35px;
+}
