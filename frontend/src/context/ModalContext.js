@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 const ModalContext = createContext();
 
@@ -7,10 +7,15 @@ const ModalProvider = ({ children }) => {
   const [modal, setModal] = useState(null);
   const [needsRerender, setNeedsRerender] = useState(false);
 
+  const [updateObj, setUpdateObj] = useState(null);
+  
+  console.log(updateObj);
+
   const openModal = (modalType) => {
     setModal(modalType);
-
   };
+
+
 
   const closeModal = () => {
     setModal(null);
@@ -22,7 +27,7 @@ const ModalProvider = ({ children }) => {
 
 
   return (
-    <ModalContext.Provider value={{ modal, openModal, closeModal, render, needsRerender, setNeedsRerender }}>
+    <ModalContext.Provider value={{ modal, openModal, closeModal, render, needsRerender, setNeedsRerender, updateObj, setUpdateObj }}>
       {children}
     </ModalContext.Provider>
   );

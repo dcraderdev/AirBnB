@@ -1,14 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react'
 import './UserReview.css'
 import { useDispatch, useSelector } from 'react-redux';
-import * as spotActions from '../../store/spots';
 import { ModalContext } from '../../context/ModalContext';
 
 const UserReview = ({review, setUpdate}) => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const [isCreator, setIsCreator] = useState(false)
-  const { modal, openModal, closeModal,render,needsRerender,setNeedsRerender } = useContext(ModalContext);
+  const { modal, openModal, closeModal,render,needsRerender,setNeedsRerender, updateObj, setUpdateObj } = useContext(ModalContext);
 
   function getMonthName(index) {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -28,21 +27,7 @@ const UserReview = ({review, setUpdate}) => {
   },[user,review])
 
 
-  const deleteReview = async (e) => {
 
-      let reviewId = review.id
-      try {
-        const { response } = await dispatch(
-          spotActions.deleteReviewThunk(reviewId)
-        );
-  
-        if (response.ok) {
-          render()
-        }
-      } catch (error) {
-        console.error(error);
-      }
-  };
 
   return (
     <div className='user-review-container'>
@@ -54,8 +39,8 @@ const UserReview = ({review, setUpdate}) => {
       {isCreator && <button
             className="image-main-button-delete button"
             onClick={()=>{
-              render()
-              deleteReview()
+              openModal('delete')
+              setUpdateObj(review)
             }
           }
           >

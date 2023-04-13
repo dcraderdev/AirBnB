@@ -1,9 +1,10 @@
 //Spots
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotTile from '../SpotTile';
 import SpotTileManage from '../SpotTileManage';
 import * as spotActions from '../../store/spots';
+import { ModalContext } from '../../context/ModalContext';
 
 import './Spots.css';
 
@@ -15,6 +16,7 @@ const Spots = ({ page }) => {
   const dispatch = useDispatch();
   const allSpots = useSelector((state) => state.spots.spots);
   const userSpots = useSelector((state) => state.spots.userSpots);
+  const {needsRerender} = useContext(ModalContext)
 
 
 
@@ -31,7 +33,7 @@ const Spots = ({ page }) => {
         });
       };
 
-  }, [dispatch, page]);
+  }, [dispatch, page, needsRerender]);
 
 
   useEffect(() => {
@@ -44,6 +46,13 @@ const Spots = ({ page }) => {
     }
   }, [loaded, page, allSpots, userSpots]);
 
+  // useEffect(() => {
+
+  //   dispatch(spotActions.getSpotThunk(spotId)).then(()=>{
+  //     setNeedsRerender(false)
+  //   })
+  
+  // }, [needsRerender]);
 
 
 

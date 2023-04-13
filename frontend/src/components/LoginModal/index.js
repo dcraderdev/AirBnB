@@ -5,9 +5,9 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import './LoginModal.css';
 import { ModalContext } from '../../context/ModalContext';
 
-function LoginModal({ closeModal }) {
+function LoginModal() {
 
-  const { modal, openModal } = useContext(ModalContext);
+  const { modal, openModal, closeModal} = useContext(ModalContext);
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();

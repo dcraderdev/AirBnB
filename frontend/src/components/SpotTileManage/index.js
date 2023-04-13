@@ -1,9 +1,10 @@
 //SpotTile
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import './SpotTileManage.css';
 import { Link } from 'react-router-dom';
 import logo from '../../public/logo.png';
+import { ModalContext } from '../../context/ModalContext';
 
 const SpotTileManage = ({ spot, setFavorites, page }) => {
   const [displayName, setDisplayName] = useState('');
@@ -14,6 +15,7 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
   const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
   const [previewImageClass, setPreviewImageClass] = useState('preview-image-gray');
   const [imageUrl, setImageUrl] = useState(false);
+  const {modal, openModal, setUpdateObj} = useContext(ModalContext)
 
   const {
     name,
@@ -78,12 +80,15 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
         </div>
       </Link>
 
-      <div className='spot-tile-manage-buttons'> 
+      <div className='spot-tile-manage-buttons-container'> 
         <button className="spot-tile-manage-update-button button" onClick={()=>{ }} >
               Update
         </button>
 
-        <button className="spot-tile-manage-delete-button button" onClick={()=>{ }} >
+        <button className="spot-tile-manage-delete-button button" onClick={()=>{
+          openModal('delete')
+          setUpdateObj(spot)
+          }} >
               Delete
         </button>
       </div>

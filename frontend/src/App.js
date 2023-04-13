@@ -8,6 +8,7 @@ import Spots from './components/Spots';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
 import ReviewModal from './components/ReviewModal';
+import DeleteModal from './components/DeleteModal';
 import ProfileButtonModal from './components/ProfileButtonModal';
 import SpotView from './components/SpotView';
 import * as sessionActions from './store/session';
@@ -27,20 +28,19 @@ function App() {
   }, [dispatch]);
 
 
-
-
   return (
     <>
       {isLoaded && <Navigation />}
 
       {modal && (
         <div className={
-          modal === 'profileMenu' || 'review' ? 'modal-container-transparent': 'modal-container' }>
+          modal === 'profileMenu' ? 'modal-container-transparent': 'modal-container' }>
              
-          {modal === 'login' && <LoginModal closeModal={closeModal} />}
-          {modal === 'signup' && <SignupModal closeModal={closeModal} />}
-          {modal === 'profileMenu' && <ProfileButtonModal closeModal={closeModal} />}
-          {modal === 'review' && <ReviewModal closeModal={closeModal} />}
+          {modal === 'login' && <LoginModal />}
+          {modal === 'signup' && <SignupModal />}
+          {modal === 'profileMenu' && <ProfileButtonModal />}
+          {modal === 'review' && <ReviewModal />}
+          {modal === 'delete' && <DeleteModal />}
         </div>
 
 

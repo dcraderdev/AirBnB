@@ -37,14 +37,15 @@ const createSpot = (spot) => {
   };
 };
 
-// const GET_REVIEWS = 'spots/reviews';
-// const getReviews = (reviews) => {
+const DELETE_SPOT = 'spots/delete';
+const deleteSpot = (spot) => {
 
-//   return {
-//     type: GET_REVIEWS,
-//     payload: reviews,
-//   };
-// };
+  return {
+    type: DELETE_SPOT,
+    payload: spot,
+  };
+};
+
 
 
 const CREATE_REVIEW = 'review/create';
@@ -170,6 +171,17 @@ spotImages
 };
 
 
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'DELETE',
+  });
+  const data = await response.json();
+  console.log(data);
+  dispatch(deleteSpot(data));
+  return {data,response};
+};
+
 export const createReviewThunk = (review, stars, spotId) => async (dispatch) => {
 
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
@@ -219,13 +231,18 @@ const spotsReducer = (state = initialState, action) => {
         userSpots: action.payload,
       };
 
-
-
     case CREATE_SPOT:
       return {
         ...newState,
         spots: [...newState.spots, action.payload.spot],
       };
+
+    case DELETE_SPOT:
+      return {
+        ...newState,
+        deletedSpot: action.payload.spot,
+      };
+
     case REMOVE_USER:
       return {
         ...newState,

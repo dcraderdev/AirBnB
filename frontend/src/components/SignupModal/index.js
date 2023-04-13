@@ -7,9 +7,9 @@ import { ModalContext } from '../../context/ModalContext';
 import "./SignupModal.css";
 
 
-function SignupModal({ closeModal }) {
+function SignupModal() {
 
-  const { modal, openModal } = useContext(ModalContext);
+  const { modal, openModal, closeModal } = useContext(ModalContext);
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory()

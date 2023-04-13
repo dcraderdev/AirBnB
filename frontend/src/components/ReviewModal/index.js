@@ -6,7 +6,7 @@ import './ReviewModal.css';
 import { ModalContext } from '../../context/ModalContext';
 import * as spotActions from '../../store/spots';
 
-const ReviewModal = ({ closeModal, onReviewAdded}) => {
+const ReviewModal = () => {
   const formRef = useRef(null);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
@@ -21,7 +21,7 @@ const ReviewModal = ({ closeModal, onReviewAdded}) => {
 
   const currentSpot = useSelector((state) => state.spots.currentSpot);
   const dispatch = useDispatch();
-  const { modal, openModal, render, setNeedsRerender } = useContext(ModalContext);
+  const { modal, closeModal, openModal, render, setNeedsRerender } = useContext(ModalContext);
 
 
   useEffect(() => {

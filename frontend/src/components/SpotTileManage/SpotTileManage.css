@@ -1,0 +1,21 @@
+.spot-tile-manage-buttons-container{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 18%;
+  width: 100%;
+  top: -30px;
+}
+
+
+.spot-tile-manage-delete-button,
+.spot-tile-manage-update-button{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 40%;
+}

@@ -7,11 +7,11 @@ import LoginModal from '../LoginModal';
 import SignupModal from '../SignupModal';
 import { ModalContext } from '../../context/ModalContext';
 
-function ProfileButtonModal({ closeModal}) {
+function ProfileButtonModal() {
   const history = useHistory();
   const modalRef = useRef();
   const dispatch = useDispatch();
-  const { modal, openModal } = useContext(ModalContext);
+  const { modal, openModal,closeModal } = useContext(ModalContext);
   const formRef = useRef(null);
   const [isHost, setIsHost] = useState('Host a spot')
   const [loaded, isLoaded] = useState(false);
