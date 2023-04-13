@@ -126,7 +126,7 @@ function SpotView() {
               <div className="spot-view-description-text">
                 <p>{currentSpot.description}{currentSpot.description}{currentSpot.description}
                 {''}
-                {currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}{currentSpot.description}</p>
+                {currentSpot.description}</p>
               </div>
             </div>
 

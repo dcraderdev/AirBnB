@@ -16,7 +16,7 @@ const Spots = ({ page }) => {
   const dispatch = useDispatch();
   const allSpots = useSelector((state) => state.spots.spots);
   const userSpots = useSelector((state) => state.spots.userSpots);
-  const {needsRerender} = useContext(ModalContext)
+  const {needsRerender, setNeedsRerender} = useContext(ModalContext)
 
 
 
@@ -30,6 +30,7 @@ const Spots = ({ page }) => {
       if (action) {
         dispatch(action).then(() => {
           isLoaded(true);
+          setNeedsRerender(false)
         });
       };
 

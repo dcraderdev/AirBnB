@@ -30,12 +30,6 @@ const Reviews = ({currentSpot}) => {
   }, [user,currentSpot]);
 
 
-console.log(currentSpot,'currentSpot');
-console.log(!isSpotOwner);
-console.log(currentSpot.Reviews.length > 0);
-console.log(user);
-
-
   useEffect(() => {
     if (user && reviews) {
       const hasReview = reviews.find((review) => {

@@ -17,18 +17,7 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
   const [imageUrl, setImageUrl] = useState(false);
   const {modal, openModal, setUpdateObj} = useContext(ModalContext)
 
-  const {
-    name,
-    previewImage,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    price,
-    avgRating,
-    description,
-  } = spot;
+  const {name,previewImage,city,state,price,avgRating,description} = spot;
 
 
 
@@ -39,16 +28,6 @@ const SpotTileManage = ({ spot, setFavorites, page }) => {
 
 // make sure we can delete more than one spot in a row from the manage spots tab
 // make sure the manageSpots/hsot a spot in profile modal pops up correctly
-
-
-
-
-
-
-
-
-
-
 
 
 
