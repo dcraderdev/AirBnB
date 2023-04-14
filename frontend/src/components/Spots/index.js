@@ -21,6 +21,7 @@ const Spots = ({ page }) => {
 
 
 
+
   useEffect(() => {
     isLoaded(false)
 

@@ -82,7 +82,6 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
 };
 
 export const getUsersSpotsThunk = () => async (dispatch) => {
-
   const response = await csrfFetch(`/api/spots/current`, {
     method: 'GET',
   });
@@ -246,7 +245,8 @@ const spotsReducer = (state = initialState, action) => {
     case REMOVE_USER:
       return {
         ...newState,
-        currentSpot: null
+        currentSpot: null,
+        userSpots: []
       }
     case CREATE_REVIEW:
       return {

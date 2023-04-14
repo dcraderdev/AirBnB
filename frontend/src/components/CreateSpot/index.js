@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
@@ -7,8 +7,7 @@ import * as spotActions from '../../store/spots';
 import ImageTile from '../ImageTile';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-
-// country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
+import { ModalContext } from '../../context/ModalContext';
 
 const CreateSpot = () => {
   const fileTypes = ['.png', '.jpg', 'jpeg'];
@@ -45,12 +44,13 @@ const CreateSpot = () => {
   const [disabledButton, setDisabledButton] = useState(false);
   const [antiSpam, setAntiSpam] = useState(false);
 
-  const [buttonClass, setButtonClass] = useState(
-    'host-form-submit-button button'
-  );
+  const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Create Spot');
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const user = useSelector((state) => state.session.user);
+  const {openModal, needsRerender, setNeedsRerender} = useContext(ModalContext)
+  
   let timeoutId;
 
   useEffect(() => {
@@ -91,6 +91,12 @@ const CreateSpot = () => {
       setDisabledButton(false);
       setFormSubmitted(false);
     }, 5000);
+
+
+    if(!user){
+      openModal('login')
+      return
+    }
 
     if (!disabledButton) {
       try {

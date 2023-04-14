@@ -1,4 +1,3 @@
-//SpotTile
 import React, { useState, useEffect, useContext } from 'react';
 
 import './SpotTileManage.css';
@@ -72,7 +71,6 @@ const SpotTileManage = ({ spot }) => {
 
       <div className='spot-tile-manage-buttons-container'> 
         <button className="spot-tile-manage-update-button button" onClick={()=>{
-          console.log('click');
           history.push(`/manage/${spot.id}`)
          }} >
 

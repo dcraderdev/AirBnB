@@ -3,13 +3,7 @@ import logo from '../../public/logo.png';
 
 import './ImageTile.css';
 
-const ImageTile = ({
-  spotImages,
-  setSpotImages,
-  removeImage,
-  selectImage,
-  type,
-}) => {
+const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
   if (type === 'spotView') {
     return (
       <div className="spot-view-image-thumbnail-container">
@@ -37,8 +31,6 @@ const ImageTile = ({
       </div>
     );
   }
-
-  // { source && <img src={source} alt={`Thumbnail ${spotImages[0].id}`}  />}
 
   return (
     <div>

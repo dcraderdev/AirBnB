@@ -20,8 +20,7 @@ function SpotView() {
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
 
-  const { modal, openModal, closeModal, needsRerender, setNeedsRerender } =
-    useContext(ModalContext);
+  const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
 
   useEffect(() => {
     isLoaded(false);

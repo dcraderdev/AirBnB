@@ -89,7 +89,7 @@ const sessionReducer = (state = initialState, action) => {
     case REMOVE_USER:
       return {
         ...newState,
-        user: null,
+        user: null
       };
     default:
       return newState;

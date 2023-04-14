@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import './EditSpot.css';
 import * as spotActions from '../../store/spots';
 import ImageTile from '../ImageTile';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import { ModalContext } from '../../context/ModalContext';
 
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
 
 const EditSpot = () => {
+  const { spotId } = useParams();
+
   const fileTypes = ['.png', '.jpg', 'jpeg'];
   const [imageUrl, setImageUrl] = useState('');
   const [imageUrlClass, setImageUrlClass] = useState('');
@@ -21,6 +24,7 @@ const EditSpot = () => {
   const [spotImages, setSpotImages] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loaded, isLoaded] = useState(false);
 
   const [country, setCountry] = useState('');
   const [address, setAddress] = useState('');
@@ -44,14 +48,100 @@ const EditSpot = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
   const [antiSpam, setAntiSpam] = useState(false);
-
-  const [buttonClass, setButtonClass] = useState(
-    'host-form-submit-button button'
-  );
+  const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Update Spot');
-
   const [formSubmitted, setFormSubmitted] = useState(false);
   let timeoutId;
+  const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
+  const user = useSelector((state) => state.session.user);
+  const currentSpot = useSelector((state) => state.spots.currentSpot);
+
+  // setCountry
+  // setAddress
+  // setCity
+  // setState
+  // setLat
+  // setLng
+  // setDescription
+  // setName
+  // setPrice
+
+
+
+
+
+
+
+  
+  useEffect(() => {
+    console.log('loading component');
+    isLoaded(false);
+    
+    dispatch(spotActions.getSpotThunk(spotId)).then(() => {
+      console.log(currentSpot);
+      setNeedsRerender(false);
+      
+    });
+
+  }, [dispatch, spotId, user]);
+
+
+
+  useEffect(() => {
+    if (currentSpot) {
+      setCountry(currentSpot.country);
+      setAddress(currentSpot.address);
+      setCity(currentSpot.city);
+      setState(currentSpot.state);
+      setLat(currentSpot.lat);
+      setLng(currentSpot.lng);
+      setDescription(currentSpot.description);
+      setName(currentSpot.name);
+      setPrice(currentSpot.price);
+  
+      console.log('--------------', currentSpot.SpotImages);
+      let images = currentSpot.SpotImages;
+
+      console.log(images);
+  
+
+
+    }
+  }, [currentSpot, loaded]);
+  
+
+//   const getImageFiles = async () => {
+//     return Promise.all(
+//       images.map(async (image, index) => {
+//         console.log(image);
+
+//         try {
+//           const response = await fetch(image.url);
+//           const blob = await response.blob();
+//           const file = new File([blob], 'image_from_url', { type: blob.type });
+
+//           setSpotPreviewImage(URL.createObjectURL(file));
+//           setSpotPreviewImageFile(file);
+//           setSpotPreviewImageLoaded(true);
+//           setSpotImages((prevSpotImages) => [...prevSpotImages, file]);
+//           setImageUrl('');
+//         } catch (error) {
+//           console.error('Error fetching image from URL:', error);
+//         }
+//       })
+//     );
+//   };
+
+//   const loadImages = async () => {
+//     await getImageFiles();
+//     isLoaded(true);
+//   };
+
+//   loadImages();
+// }
+
+
+
 
   useEffect(() => {
     const errors = {};

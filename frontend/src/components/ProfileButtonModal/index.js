@@ -3,47 +3,56 @@ import { useHistory} from 'react-router-dom';
 import { useDispatch, useSelector  } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './ProfileButtonModal.css';
-import LoginModal from '../LoginModal';
-import SignupModal from '../SignupModal';
 import { ModalContext } from '../../context/ModalContext';
+import * as spotActions from '../../store/spots';
 
 function ProfileButtonModal() {
   const history = useHistory();
-  const modalRef = useRef();
   const dispatch = useDispatch();
-  const { modal, openModal,closeModal } = useContext(ModalContext);
+  const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
   const formRef = useRef(null);
   const [isHost, setIsHost] = useState('Host a spot')
   const [loaded, isLoaded] = useState(false);
 
-
-  const user = useSelector(state => state.session.user );
+  const user = useSelector(state => {
+    return state.session.user
+  });
   const spots = useSelector(state => state.spots.spots);
+  const userSpots = useSelector(state => state.spots.userSpots.Spots);
 
-console.log(user);
-  
-  
+
+
   useEffect(() => {
-
-
-    console.log('opening modal');
-
     isLoaded(false)
 
-    if (user) {
-      const hostCheck = spots.find(spot => spot.ownerId === user.id)
+      let action = spotActions.getUsersSpotsThunk();
+       
+      if (action) {
+        dispatch(action).then(() => {
 
-      if(hostCheck) setIsHost('Manage Spots')
-      if(!hostCheck) setIsHost('Host a spot');
-      isLoaded(true)
-    
-      
+          isLoaded(true);
+          setNeedsRerender(false)
+        });
+      };
+
+  }, [dispatch, needsRerender]);
+
+
+  useEffect(() => {
+    if (loaded) {
+
     }
-  },[spots,user])
+  }, [loaded, spots, userSpots]);
 
-
-
-
+  useEffect(() => {
+    if (loaded) {
+      if (userSpots.length) {
+        setIsHost('Manage Spots')
+      } else {
+        setIsHost('Host a spot');
+      }
+    }
+  }, [loaded, spots, userSpots]);
 
 
 
@@ -67,7 +76,7 @@ console.log(user);
   };
   const navHistory = () => {
     closeModal();
-    isHost ? history.push('/manage') : history.push('/host')
+    isHost && user ? history.push('/manage') : history.push('/host')
     
   };
   const navHelp = () => {
