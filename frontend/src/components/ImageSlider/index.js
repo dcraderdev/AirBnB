@@ -54,6 +54,8 @@ const ImageSlider = ({ spotImages, selectImage }) => {
     transform: `translateX(-${currentIndex2 * 200}px)`,
   };;
 
+
+
   return (
     <div>
       <div className="slider1">

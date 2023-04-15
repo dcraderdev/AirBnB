@@ -5,8 +5,7 @@ import { Redirect, useHistory, useParams } from 'react-router-dom';
 import './EditSpot.css';
 import * as spotActions from '../../store/spots';
 import ImageTile from '../ImageTile';
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import ImageSlider from '../ImageSlider';
 import { ModalContext } from '../../context/ModalContext';
 
 // country,address,city,state,lat,lng,description,spotTitle,spotPrice,spotPreviewImage
@@ -25,6 +24,7 @@ const EditSpot = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loaded, isLoaded] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const [country, setCountry] = useState('');
   const [address, setAddress] = useState('');
@@ -51,43 +51,56 @@ const EditSpot = () => {
   const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Update Spot');
   const [formSubmitted, setFormSubmitted] = useState(false);
-  let timeoutId;
   const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
+  let timeoutId;
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
 
-  // setCountry
-  // setAddress
-  // setCity
-  // setState
-  // setLat
-  // setLng
-  // setDescription
-  // setName
-  // setPrice
 
 
-
-
-
-
-
-  
+  // first load in curernt images
   useEffect(() => {
     console.log('loading component');
-    isLoaded(false);
     
     dispatch(spotActions.getSpotThunk(spotId)).then(() => {
-      console.log(currentSpot);
-      setNeedsRerender(false);
-      
-    });
+      setImagesLoaded(true)
+    })
 
   }, [dispatch, spotId, user]);
 
 
 
+  // first load in current images
   useEffect(() => {
+    if(loaded) return
+    if(imagesLoaded){
+      
+      let images = currentSpot.SpotImages;
+
+      console.log(images);
+
+          images.map((image, index) => {
+            setSpotImages((prevSpotImages) => [...prevSpotImages, image.url]);
+            setSpotPreviewImage(image.url);
+          })
+            isLoaded(true)
+            setSpotPreviewImageLoaded(true);
+        }
+
+  }, [imagesLoaded, currentSpot]);
+
+
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    if(loaded){
     if (currentSpot) {
       setCountry(currentSpot.country);
       setAddress(currentSpot.address);
@@ -105,40 +118,9 @@ const EditSpot = () => {
       console.log(images);
   
 
-
-    }
-  }, [currentSpot, loaded]);
+    }}
+  }, [loaded]);
   
-
-//   const getImageFiles = async () => {
-//     return Promise.all(
-//       images.map(async (image, index) => {
-//         console.log(image);
-
-//         try {
-//           const response = await fetch(image.url);
-//           const blob = await response.blob();
-//           const file = new File([blob], 'image_from_url', { type: blob.type });
-
-//           setSpotPreviewImage(URL.createObjectURL(file));
-//           setSpotPreviewImageFile(file);
-//           setSpotPreviewImageLoaded(true);
-//           setSpotImages((prevSpotImages) => [...prevSpotImages, file]);
-//           setImageUrl('');
-//         } catch (error) {
-//           console.error('Error fetching image from URL:', error);
-//         }
-//       })
-//     );
-//   };
-
-//   const loadImages = async () => {
-//     await getImageFiles();
-//     isLoaded(true);
-//   };
-
-//   loadImages();
-// }
 
 
 
@@ -253,6 +235,7 @@ const EditSpot = () => {
 
   
   const addImageFromUrl = async () => {
+    console.log('click');
     if (imageUrl) {
       
       if (!fileTypes.includes(imageUrl.slice(-4))) {
@@ -265,6 +248,7 @@ const EditSpot = () => {
         }, 3000);
         return
       }
+
       try {
         const response = await fetch(imageUrl);
         const blob = await response.blob();
@@ -298,14 +282,17 @@ const EditSpot = () => {
     }
     if (spotImages && spotImages[0]) {
       setSpotPreviewImageFile(spotImages[0]);
-      setSpotPreviewImage(URL.createObjectURL(spotImages[0]));
+      // setSpotPreviewImage(URL.createObjectURL(spotImages[0]));
+      setSpotPreviewImage(spotImages[0]);
+
     }
   },[spotImages])
 
 
   const selectImage = (file) => {
-    setSpotPreviewImage(URL.createObjectURL(file));
-    setSpotPreviewImageFile(file);
+    console.log(file);
+    setSpotPreviewImage(file);
+    // setSpotPreviewImage(URL.createObjectURL(file));
   };
 
   const makeDefault = (file) => {
@@ -326,14 +313,29 @@ const EditSpot = () => {
     const file = e.target.files[0];
     if (file) {
       if (file && !fileTypes.includes(`${file.type.split('/')[1]}`)) {
+        
       }
-
+      console.log('-=-=-=--');
+      console.log('-=-=-=--');
+      console.log(file);
+      console.log('-=-=-=--');
+      console.log('-=-=-=--');
       setSpotPreviewImage(URL.createObjectURL(file));
       setSpotPreviewImageFile(file);
       setSpotPreviewImageLoaded(true);
-      setSpotImages(() => [...spotImages, file]);
+
+      let tempImage = URL.createObjectURL(file)
+      setSpotImages(() => [...spotImages, tempImage]);
+
+
+      // setSpotImages(() => [...spotImages, file]);
     }
   };
+  
+  console.log(spotImages);
+
+
+
 
   const getErrorClass = (field) => {
     return formSubmitted && validationErrors[field] ? `${field}-red-font` : ``;
@@ -608,6 +610,7 @@ const EditSpot = () => {
             setSpotImages={setSpotImages}
             removeImage={removeImage}
             selectImage={selectImage}
+            type={'spotUpdate'}
           />
         </div>
       </div>

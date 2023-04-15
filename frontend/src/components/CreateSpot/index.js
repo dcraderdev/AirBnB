@@ -18,6 +18,7 @@ const CreateSpot = () => {
   const [spotPreviewImageFile, setSpotPreviewImageFile] = useState('');
   const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
   const [spotImages, setSpotImages] = useState([]);
+  const [spotImageFiles, setSpotImageFiles] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -51,6 +52,7 @@ const CreateSpot = () => {
   const user = useSelector((state) => state.session.user);
   const {openModal, needsRerender, setNeedsRerender} = useContext(ModalContext)
   
+
   let timeoutId;
 
   useEffect(() => {
@@ -524,6 +526,7 @@ const CreateSpot = () => {
             setSpotImages={setSpotImages}
             removeImage={removeImage}
             selectImage={selectImage}
+            type={'spotCreate'}
           />
         </div>
       </div>

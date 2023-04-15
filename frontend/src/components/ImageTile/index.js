@@ -32,8 +32,10 @@ const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
     );
   }
 
-  return (
-    <div>
+ 
+  if (type === 'spotCreate') {
+    return (
+      <div>
       <div className="image-thumbnail-container">
         {spotImages &&
           spotImages.map((file, index) => (
@@ -52,7 +54,35 @@ const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
           ))}
       </div>
     </div>
-  );
+    );
+  }
+
+
+  if (type === 'spotUpdate') {
+
+    return (
+      <div>
+        <div className="image-thumbnail-container">
+          {spotImages &&
+            spotImages.map((file, index) => (
+              <div
+                key={index}
+                className="image-thumbnail"
+                onClick={() => {
+                  selectImage(file);
+                }}
+              >
+                <img src={file} alt={`Thumbnail ${index}`} />
+                {/* <img src={URL.createObjectURL(file)} alt={`Thumbnail ${index}`} /> */}
+                <button className="button" onClick={() => removeImage(file)}>
+                  Delete
+                </button>
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default ImageTile;
