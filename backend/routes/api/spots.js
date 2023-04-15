@@ -393,13 +393,6 @@ router.get('/:spotId', async (req, res, next) => {
 
 
 
-
-
-
-
-
-
-
 // // // Get details of a Spot from an id
 router.get('/basic/:spotId', async (req, res, next) => {
 
@@ -485,15 +478,130 @@ if(spot){
 
 });
 
-// Create a Spot
-router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
+// // Create a Spot
+// router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
   
-  const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
+//   const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
 
-  const ownerId = req.user.id;
+//   const ownerId = req.user.id;
 
-  newSpot = await Spot.create({
-    ownerId,
+//   newSpot = await Spot.create({
+//     ownerId,
+//     address,
+//     city,
+//     state,
+//     country,
+//     lat,
+//     lng,
+//     name,
+//     description,
+//     price,
+//   });
+
+
+//   if (newSpot){
+//     let spot = newSpot.toJSON()
+//     const lat = parseFloat(spot.lat);
+//     const lng = parseFloat(spot.lng);
+//     const price = parseFloat(spot.price);
+//     return res.status(200).json({ 
+//       id: spot.id,
+//       ownerId: spot.ownerId,
+//       address: spot.address,
+//       city: spot.city,
+//       state: spot.state,
+//       country: spot.country,
+//       lat,
+//       lng,
+//       name: spot.name,
+//       description: spot.description,
+//       price,
+//       createdAt: spot.createdAt,
+//       updatedAt: spot.updatedAt,
+//     });
+//   } 
+
+//   if (!newSpot) {
+//     const err = new Error("Spot couldn't be created");
+//     err.statusCode = 400;
+//     err.status = 400;
+//     return next(err);
+//   }
+
+
+// });
+
+
+// Edit a Spot
+router.put('/:spotId', multipleMulterUpload("spotImages",20), requireAuth,validateSpotEdit, async (req, res, next) => {
+
+
+  const { address, city, state, country, lat, lng, name, description, price} = req.body;
+
+  console.log('-=-=-=-=-=');
+  console.log('-=-=-=-=-=');
+  console.log('-=-=-=-=-=');
+
+
+  console.log(price);
+  console.log(description);
+  console.log(name);
+
+
+  console.log('-=-=-=-=-=');
+  console.log('-=-=-=-=-=');
+  console.log('-=-=-=-=-=');
+
+
+  // return res.status(200).json({spot:{id:1}});
+
+
+
+  const spot = await Spot.findByPk(req.params.spotId);
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.statusCode = 404;
+    err.status = 404;
+    return next(err);
+  }
+
+
+// Require proper authorization: Review must belong to the current user
+if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
+  const err = new Error('Forbidden');
+  err.statusCode = 403;
+  err.status = 403;
+  return next(err);
+}
+
+if(spot){
+  if (req.files && req.files.length > 0) {
+    try {
+      const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+
+      for (let i = 0; i < imageUrls.length; i++) {
+        const newImage = await SpotImage.create({
+          spotId:spot.id,
+          url: imageUrls[i],
+          preview: i === 0 ? true : false, 
+        });
+      }
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
+}
+}
+
+// if(preview){
+//   await SpotImage.update({ preview: false }, {
+//     where: { spotId: req.params.spotId }
+//   });
+// }
+
+
+
+  await spot.update({
     address,
     city,
     state,
@@ -505,88 +613,59 @@ router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
     price,
   });
 
-
-  if (newSpot){
-    let spot = newSpot.toJSON()
-    const lat = parseFloat(spot.lat);
-    const lng = parseFloat(spot.lng);
-    const price = parseFloat(spot.price);
-    return res.status(200).json({ 
-      id: spot.id,
-      ownerId: spot.ownerId,
-      address: spot.address,
-      city: spot.city,
-      state: spot.state,
-      country: spot.country,
-      lat,
-      lng,
-      name: spot.name,
-      description: spot.description,
-      price,
-      createdAt: spot.createdAt,
-      updatedAt: spot.updatedAt,
-    });
-  } 
-
-  if (!newSpot) {
-    const err = new Error("Spot couldn't be created");
-    err.statusCode = 400;
-    err.status = 400;
-    return next(err);
-  }
-
-
-});
-
-
-// Edit a Spot
-router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
-    const spot = await Spot.findByPk(req.params.spotId);
-
-    if (!spot) {
-      const err = new Error("Spot couldn't be found");
-      err.statusCode = 404;
-      err.status = 404;
-      return next(err);
-    }
-
-
-  // Require proper authorization: Review must belong to the current user
-  if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
-    const err = new Error('Forbidden');
-    err.statusCode = 403;
-    err.status = 403;
-    return next(err);
-  }
-
-
-
-    const {
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price,
-    } = req.body;
-    await spot.update({
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price,
-    });
-
-    return res.status(200).json(spot);
-  }
+  return res.status(200).json(spot);
+}
 );
+
+
+// // Edit a Spot
+// router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
+//     const spot = await Spot.findByPk(req.params.spotId);
+
+//     if (!spot) {
+//       const err = new Error("Spot couldn't be found");
+//       err.statusCode = 404;
+//       err.status = 404;
+//       return next(err);
+//     }
+
+
+//   // Require proper authorization: Review must belong to the current user
+//   if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
+//     const err = new Error('Forbidden');
+//     err.statusCode = 403;
+//     err.status = 403;
+//     return next(err);
+//   }
+
+
+
+//     const {
+//       address,
+//       city,
+//       state,
+//       country,
+//       lat,
+//       lng,
+//       name,
+//       description,
+//       price,
+//     } = req.body;
+//     await spot.update({
+//       address,
+//       city,
+//       state,
+//       country,
+//       lat,
+//       lng,
+//       name,
+//       description,
+//       price,
+//     });
+
+//     return res.status(200).json(spot);
+//   }
+// );
 
 // Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {

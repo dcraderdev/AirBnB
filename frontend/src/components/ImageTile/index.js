@@ -47,7 +47,11 @@ const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
               }}
             >
               <img src={URL.createObjectURL(file)} alt={`Thumbnail ${index}`} />
-              <button className="button" onClick={() => removeImage(file)}>
+              <button className="button" onClick={(e) => {
+                e.stopPropagation();
+                removeImage(file)
+                }}>
+
                 Delete
               </button>
             </div>
@@ -59,7 +63,6 @@ const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
 
 
   if (type === 'spotUpdate') {
-
     return (
       <div>
         <div className="image-thumbnail-container">
@@ -73,8 +76,10 @@ const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
                 }}
               >
                 <img src={file} alt={`Thumbnail ${index}`} />
-                {/* <img src={URL.createObjectURL(file)} alt={`Thumbnail ${index}`} /> */}
-                <button className="button" onClick={() => removeImage(file)}>
+                <button className="button" onClick={(e) => {
+                  e.stopPropagation();
+                  removeImage(file)
+                  }}>
                   Delete
                 </button>
               </div>
@@ -83,6 +88,8 @@ const ImageTile = ({spotImages,setSpotImages,removeImage,selectImage,type}) => {
       </div>
     );
   }
+
+
 };
 
 export default ImageTile;

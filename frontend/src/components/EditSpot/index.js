@@ -21,6 +21,11 @@ const EditSpot = () => {
   const [spotPreviewImageFile, setSpotPreviewImageFile] = useState('');
   const [spotPreviewImageLoaded, setSpotPreviewImageLoaded] = useState(false);
   const [spotImages, setSpotImages] = useState([]);
+  const [spotImageFiles, setSpotImageFiles] = useState([]);
+
+  const [defaultImage, setDefaultImage] = useState([]);
+
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [loaded, isLoaded] = useState(false);
@@ -47,7 +52,6 @@ const EditSpot = () => {
   const [price, setPrice] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
-  const [antiSpam, setAntiSpam] = useState(false);
   const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Update Spot');
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -58,10 +62,8 @@ const EditSpot = () => {
 
 
 
-  // first load in curernt images
+  // first load in current spot
   useEffect(() => {
-    console.log('loading component');
-    
     dispatch(spotActions.getSpotThunk(spotId)).then(() => {
       setImagesLoaded(true)
     })
@@ -70,7 +72,7 @@ const EditSpot = () => {
 
 
 
-  // first load in current images
+  //load in current images
   useEffect(() => {
     if(loaded) return
     if(imagesLoaded){
@@ -83,6 +85,7 @@ const EditSpot = () => {
             setSpotImages((prevSpotImages) => [...prevSpotImages, image.url]);
             setSpotPreviewImage(image.url);
           })
+            setDefaultImage(spotImages[0])
             isLoaded(true)
             setSpotPreviewImageLoaded(true);
         }
@@ -91,14 +94,15 @@ const EditSpot = () => {
 
 
 
+// at the end before makign edit we need to compare new spotImages with the old and see if any are missing, 
+// and also add on any files from the spotImageFiles to our aws
 
 
 
 
 
 
-
-
+// load in spot info to text fields
   useEffect(() => {
     if(loaded){
     if (currentSpot) {
@@ -111,6 +115,13 @@ const EditSpot = () => {
       setDescription(currentSpot.description);
       setName(currentSpot.name);
       setPrice(currentSpot.price);
+      setLatText(currentSpot.lat);
+      setLngText(currentSpot.lng);
+      setDescriptionText(currentSpot.description);
+      setNameText(currentSpot.name);
+      setPriceText(currentSpot.price);
+
+
   
       console.log('--------------', currentSpot.SpotImages);
       let images = currentSpot.SpotImages;
@@ -120,11 +131,8 @@ const EditSpot = () => {
 
     }}
   }, [loaded]);
-  
 
-
-
-
+// validation and error handling
   useEffect(() => {
     const errors = {};
 
@@ -134,17 +142,20 @@ const EditSpot = () => {
     if (!state.length) errors['state'] = 'Please enter a state';
     if (!description.length) errors['description'] = 'Please enter a description';
     if (!name.length) errors['name'] = 'Please enter a spot name';
-    if (!price.length) errors['price'] = 'Please enter a price';
-    if (!spotPreviewImageFile) errors['spotPreviewImageFile'] = 'Please enter URL or Add Image from local files';
-
+    if (!price) errors['price'] = 'Please enter a price';
+    if (!defaultImage) errors['defaultImage'] = 'Please enter URL or Add Image from local files';
 
     if (!spotImages.length) errors['spotImages'] = 'Please enter URL or Add Image from local files';
       
     
     setValidationErrors(errors);
-  }, [country,address,city,state,description,name,price,spotPreviewImageFile,spotImages]);
+  }, [country,address,city,state,description,name,price,defaultImage,spotImages]);
 
+
+
+// validation and error handling
   useEffect(() => {
+
     if (Object.keys(validationErrors).length > 0) {
       setButtonClass('host-form-submit-button disabled');
       setDisabledButton(true);
@@ -155,19 +166,70 @@ const EditSpot = () => {
   }, [validationErrors]);
 
 
+
+
+
+
+// if(currentSpot && loaded){
+
+//   console.log('----old----');
+//   console.log(currentSpot.SpotImages);
+//   console.log('-=-=-=-=-=-=-');
+
+//   console.log('----new----');
+//   console.log(spotImages);
+//   console.log('-=-=-=-=-=-=-');
+
+// }
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setDisabledButton(true);
-    setTimeout(() => {
-      setDisabledButton(false);
-      setFormSubmitted(false);
-    }, 5000);
 
-    if (!disabledButton) {
+    if (disabledButton) return
+
+    
+    
+    // which to add...
+    // spotImageFiles get added
+    console.log(spotImageFiles);
+    let imagesToAdd = []
+    spotImageFiles.map((obj)=>imagesToAdd.push(obj.file))
+
+    // which to delete...
+    //anything thats not still in our spotImages stateArray
+    const getRemovedImageIds = () => {
+      if (currentSpot && loaded) {
+        const removedImageIds = [];
+    
+        for (let i = 0; i < currentSpot.SpotImages.length; i++) {
+          const image = currentSpot.SpotImages[i];
+          const imageUrl = image.url;
+    
+          // Check if imageUrl is not in the spotImages array
+          if (!spotImages.includes(imageUrl)) {
+            // If not, add the image ID to the removedImageIds array
+            removedImageIds.push(image.id);
+          }
+        }
+    
+        return removedImageIds;
+      }
+      return [];
+    };
+
+    let imagesToRemove = getRemovedImageIds()
+
+    console.log(imagesToRemove);
+    console.log(imagesToAdd);
+
+  
+    let spotId = currentSpot.id
       try {
         const { data, response } = await dispatch(
-          spotActions.createSpotThunk(
+          spotActions.editSpotThunk(
+            spotId,
             country,
             address,
             city,
@@ -177,7 +239,8 @@ const EditSpot = () => {
             description,
             name,
             price,
-            spotImages
+            imagesToRemove,
+            imagesToAdd
           )
         );
 
@@ -186,10 +249,11 @@ const EditSpot = () => {
           history.push(`/spots/${data.id}`);
         }
       } catch (error) {
-        setAntiSpam(true);
+
         setDisabledButton(true);
         setButtonClass('host-form-submit-button disabled');
 
+        if(error.data){
 
         if (error.data.errors.lat) {
           setLat('Latitude must be a number');
@@ -212,10 +276,10 @@ const EditSpot = () => {
           setName('Name must be less than 50 characters');
           setNameClass('host-form-spot-title-field red-font');
         }
-
+      }
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
-          setAntiSpam(false);
+    
           setLat(latText);
           setLng(lngText);
           setLngClass('');
@@ -229,7 +293,6 @@ const EditSpot = () => {
           setDisabledButton(false);
           setButtonClass('host-form-submit-button button');
         }, 3000);
-      }
     }
   };
 
@@ -253,51 +316,67 @@ const EditSpot = () => {
         const response = await fetch(imageUrl);
         const blob = await response.blob();
         const file = new File([blob], 'image_from_url', { type: blob.type });
-
-        setSpotPreviewImage(URL.createObjectURL(file));
-        setSpotPreviewImageFile(file);
-        setSpotPreviewImageLoaded(true);
-        setSpotImages((prevSpotImages) => [...prevSpotImages, file]);
+        
+        setSpotPreviewImage(imageUrl);
+        setSpotImages((prevSpotImages) => [...prevSpotImages, imageUrl]);
+        setSpotImageFiles((prevSpotImageFiles) => [...prevSpotImageFiles, {img: imageUrl,file}]);
         setImageUrl('');
+
+
       } catch (error) {
+
+        // if error, pop up modal to show that user needs to download the picture and upload
+        // host server doesnt allow image sharing
+
+
         console.error('Error fetching image from URL:', error);
       }
     }
   };
 
   const deleteImage = () => {
-    const newImages = spotImages.filter((currentImage) => currentImage !== spotPreviewImageFile);
+    const newImages = spotImages.filter((currentImage) => currentImage !== spotPreviewImage);
+    const newFiles = spotImageFiles.filter((currentImage) => currentImage.img !== spotPreviewImage);
     setSpotImages(newImages);
+    setSpotImageFiles(newFiles);
   };
+
 
   const removeImage = (image) => {
     const newImages = spotImages.filter((currentImage) => currentImage !== image);
+    const newFiles = spotImageFiles.filter((currentImage) => currentImage.img !== image);
     setSpotImages(newImages);
+    setSpotImageFiles(newFiles);
   };
+
+  
 
   useEffect(()=>{
     if(!spotImages.length) {
       setSpotPreviewImageLoaded(false);
+      setDefaultImage(false);
       return
     }
     if (spotImages && spotImages[0]) {
+      setDefaultImage(spotImages[0])
       setSpotPreviewImageFile(spotImages[0]);
-      // setSpotPreviewImage(URL.createObjectURL(spotImages[0]));
       setSpotPreviewImage(spotImages[0]);
-
     }
   },[spotImages])
 
 
-  const selectImage = (file) => {
-    console.log(file);
-    setSpotPreviewImage(file);
-    // setSpotPreviewImage(URL.createObjectURL(file));
+
+
+
+// sets main image
+  const selectImage = (image) => {
+    setSpotPreviewImage(image);
   };
 
+  // reorders spotImage preview and sets defualt image for backend processing
   const makeDefault = (file) => {
     const index = spotImages.findIndex(
-      (currFile) => currFile === spotPreviewImageFile
+      (currFile) => currFile === spotPreviewImage
     );
     if (index > 0) {
       const newImages = [
@@ -306,33 +385,22 @@ const EditSpot = () => {
         ...spotImages.slice(index + 1),
       ];
       setSpotImages(newImages);
+      setDefaultImage(file)
     }
   };
 
+
+// creates img src for new image, adds image to spotImageFiles to be backend processed 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file && !fileTypes.includes(`${file.type.split('/')[1]}`)) {
-        
-      }
-      console.log('-=-=-=--');
-      console.log('-=-=-=--');
-      console.log(file);
-      console.log('-=-=-=--');
-      console.log('-=-=-=--');
       setSpotPreviewImage(URL.createObjectURL(file));
-      setSpotPreviewImageFile(file);
-      setSpotPreviewImageLoaded(true);
-
       let tempImage = URL.createObjectURL(file)
       setSpotImages(() => [...spotImages, tempImage]);
-
-
-      // setSpotImages(() => [...spotImages, file]);
+      setSpotImageFiles((prevSpotImageFiles) => [...prevSpotImageFiles, {img: tempImage, file}]);
     }
   };
   
-  console.log(spotImages);
 
 
 
@@ -340,6 +408,10 @@ const EditSpot = () => {
   const getErrorClass = (field) => {
     return formSubmitted && validationErrors[field] ? `${field}-red-font` : ``;
   };
+
+
+
+
 
   return (
     <div className="host-form-page">
@@ -531,7 +603,7 @@ const EditSpot = () => {
             <label className="host-form-spot-preview-image">
               Add image from URL (.png .jpg .jpeg format only)
               <input
-                className={ imageUrlClass === '' ? `host-form-spot-preview-image-field ${getErrorClass('spotPreviewImageFile')}` : imageUrlClass}
+                className={ imageUrlClass === '' ? `host-form-spot-preview-image-field ${getErrorClass('defaultImage')}` : imageUrlClass}
                 type="text"
                 value={imageUrl}
                 onChange={(e) => {
@@ -539,8 +611,8 @@ const EditSpot = () => {
                   setImageUrlText(e.target.value)
                 }}
                 placeholder={
-                  validationErrors['spotPreviewImageFile']
-                    ? validationErrors['spotPreviewImageFile']
+                  validationErrors['defaultImage']
+                    ? validationErrors['defaultImage']
                     : spotPreviewImageFile.name
                 }
               />
@@ -553,7 +625,7 @@ const EditSpot = () => {
               </button>
             </label>
 
-            <button className={buttonClass} type="submit" disabled={antiSpam}>
+            <button className={buttonClass} type="submit" disabled={disabledButton}>
               {buttonText}
             </button>
           </form>

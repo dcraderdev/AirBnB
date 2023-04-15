@@ -106,7 +106,7 @@ module.exports = {
         },
         {
           spotId: 13,
-          url: 'https://images.wsj.net/im-644493/?width=2000&#038;size=1.949',
+          url: 'https://images.wsj.net/im-644493/?width=2000&#038;size=1.949.jpg',
           preview: true,
         },
         {

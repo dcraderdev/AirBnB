@@ -188,6 +188,9 @@ const CreateSpot = () => {
         const blob = await response.blob();
         const file = new File([blob], 'image_from_url', { type: blob.type });
 
+
+        
+
         setSpotPreviewImage(URL.createObjectURL(file));
         setSpotPreviewImageFile(file);
         setSpotPreviewImageLoaded(true);

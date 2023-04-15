@@ -37,6 +37,15 @@ const createSpot = (spot) => {
   };
 };
 
+const EDIT_SPOT = 'spots/edit';
+const editSpot = (spot) => {
+
+  return {
+    type: EDIT_SPOT,
+    payload: spot,
+  };
+};
+
 const DELETE_SPOT = 'spots/delete';
 const deleteSpot = (spot) => {
 
@@ -132,41 +141,56 @@ export const createSpotThunk = (
   return {data,response};
 };
 
-export const createSpotThunk2 = (       
-country,
-address,
-city,
-state,
-lat,
-lng,
-description,
-name,
-price,
-spotImages
+
+export const editSpotThunk = (   
+  spotId,    
+  country,
+  address,
+  city,
+  state,
+  lat,
+  lng,
+  description,
+  name,
+  price,
+  imagesToRemove,
+  imagesToAdd
   ) => async (dispatch) => {
+    
+
+    console.log('inside thunk');
+    console.log('inside thunk');
 
 
+    const formData = new FormData();
+    formData.append("country", country);
+    formData.append("address", address);
+    formData.append("city", city);
+    formData.append("state", state);
+    if (lat) formData.append("lat", lat);
+    if (lng) formData.append("lng", lng);
+    formData.append("description", description);
+    formData.append("name", name);
+    formData.append("price", price);
+    // if(spotImages) formData.append("spotImages", spotImages);
+    if (imagesToAdd) {
+      for (let i = 0; i < imagesToAdd.length; i++) {
+        formData.append("spotImages", imagesToAdd[i]);
+      }
+    }
+    
 
-  const response = await csrfFetch('/api/spots', {
-    method: 'POST',
-    body:JSON.stringify({  
-      country,
-      address,
-      city,
-      state,
-      lat,
-      lng,
-      description,
-      name,
-      price,
-      spotImages
-    })
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'PUT',
+    body: formData
   });
+
+  console.log(response);
 
   const data = await response.json();
   console.log(data);
-  dispatch(createSpot(data));
-  return {data,response};
+  // dispatch(editSpot(data));
+  if(data) return {data,response};
 };
 
 
@@ -234,6 +258,11 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...newState,
         spots: [...newState.spots, action.payload.spot],
+      };
+
+    case EDIT_SPOT:
+      return {
+        ...newState
       };
 
     case DELETE_SPOT:
