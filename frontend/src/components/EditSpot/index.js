@@ -98,6 +98,28 @@ const EditSpot = () => {
 
 
 
+
+  // useEffect(()=>{
+  //   if(loaded){
+  //     if(!spotImages.length) {
+  //       setSpotPreviewImageLoaded(false);
+  //       setDefaultImage(false);
+  //       return
+  //     }
+  //     if (spotImages && spotImages[0]) {
+  //       setDefaultImage(spotImages[0])
+  //       setSpotPreviewImageFile(spotImages[0]);
+  //       setSpotPreviewImage(spotImages[0]);
+  //     }
+  //   }
+  // },[spotImages])
+
+
+
+
+
+
+
 // load in spot info to text fields
   useEffect(() => {
     if(loaded){
@@ -444,20 +466,6 @@ console.log(defaultImage);
 
   
 
-  // useEffect(()=>{
-  //   if(loaded){
-  //     if(!spotImages.length) {
-  //       setSpotPreviewImageLoaded(false);
-  //       setDefaultImage(false);
-  //       return
-  //     }
-  //     if (spotImages && spotImages[0]) {
-  //       setDefaultImage(spotImages[0])
-  //       setSpotPreviewImageFile(spotImages[0]);
-  //       setSpotPreviewImage(spotImages[0]);
-  //     }
-  //   }
-  // },[spotImages])
 
 
 

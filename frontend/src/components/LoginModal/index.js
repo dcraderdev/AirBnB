@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import './LoginModal.css';
 import { ModalContext } from '../../context/ModalContext';
+import * as spotActions from '../../store/spots';
+
 
 function LoginModal() {
 
@@ -72,7 +74,10 @@ function LoginModal() {
         sessionActions.login({ credential, password })
       );
 
-      if (response.ok) closeModal();
+      if (response.ok) {
+        dispatch(spotActions.getUsersSpotsThunk())
+        closeModal()
+      };
     } catch (error) {
       console.error(error);
       setDisabledButton(true);
@@ -92,7 +97,10 @@ function LoginModal() {
     const { response } = await dispatch(
       sessionActions.login({ credential:'Demo-lition2', password:'password' })
     );
-    if (response.ok) closeModal();
+    if (response.ok) {
+      dispatch(spotActions.getUsersSpotsThunk())
+      closeModal()
+    };
   };
   
 

@@ -19,19 +19,19 @@ import { ModalContext } from './context/ModalContext';
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loaded, isLoaded] = useState(false);
   const { modal} = useContext(ModalContext);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(()=>{
-      setIsLoaded(true);
+      isLoaded(true);
     });
   }, [dispatch]);
 
   
   return (
     <>
-      {isLoaded && <Navigation />}
+      {loaded && <Navigation />}
 
       {modal && (
         <div className={

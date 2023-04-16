@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-
-import './SpotTileManage.css';
 import { Link, useHistory } from 'react-router-dom';
 import { ModalContext } from '../../context/ModalContext';
+import './SpotTileManage.css';
+
 const SpotTileManage = ({ spot }) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
@@ -27,7 +27,7 @@ const SpotTileManage = ({ spot }) => {
       setImageUrl(previewImage);
       setPreviewImageClass('spot-tile-spot-image');
     }
-  }, []);
+  }, [spot]);
 
 
   return (

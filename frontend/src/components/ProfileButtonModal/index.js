@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useContext, useState } from 'react';
 import { useHistory} from 'react-router-dom';
 import { useDispatch, useSelector  } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import './ProfileButtonModal.css';
 import { ModalContext } from '../../context/ModalContext';
-import * as spotActions from '../../store/spots';
+import './ProfileButtonModal.css';
 
 function ProfileButtonModal() {
   const history = useHistory();
@@ -12,47 +11,22 @@ function ProfileButtonModal() {
   const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
   const formRef = useRef(null);
   const [isHost, setIsHost] = useState('Host a spot')
-  const [loaded, isLoaded] = useState(false);
 
-  const user = useSelector(state => {
-    return state.session.user
-  });
-  const spots = useSelector(state => state.spots.spots);
+  const user = useSelector(state => state.session.user);
+
   const userSpots = useSelector(state => state.spots.userSpots.Spots);
 
 
 
   useEffect(() => {
-    isLoaded(false)
-
-      let action = spotActions.getUsersSpotsThunk();
-       
-      if (action) {
-        dispatch(action).then(() => {
-
-          isLoaded(true);
-          setNeedsRerender(false)
-        });
-      };
-
-  }, [dispatch, needsRerender]);
-
-
-  useEffect(() => {
-    if (loaded) {
-
-    }
-  }, [loaded, spots, userSpots]);
-
-  useEffect(() => {
-    if (loaded) {
+    if(user){
       if (userSpots.length) {
         setIsHost('Manage Spots')
       } else {
         setIsHost('Host a spot');
       }
     }
-  }, [loaded, spots, userSpots]);
+  }, [user, userSpots]);
 
 
 
@@ -88,11 +62,14 @@ function ProfileButtonModal() {
     openModal(type)
   };
 
+
+
+
   return (
     
     <>
       <ul className='profileMenu' ref={formRef}>
-        {loaded && user ? (
+        {user ? (
           <div>
             <div className='profile-user-welcome'>
               <div className='profile-icon'> <i className="fa-solid fa-user" /></div>
