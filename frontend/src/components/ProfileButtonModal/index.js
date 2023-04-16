@@ -10,7 +10,7 @@ function ProfileButtonModal() {
   const dispatch = useDispatch();
   const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
   const formRef = useRef(null);
-  const [isHost, setIsHost] = useState('Host a spot')
+  const [isHost, setIsHost] = useState('')
 
   const user = useSelector(state => state.session.user);
 
