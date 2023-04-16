@@ -336,6 +336,7 @@ router.get('/:spotId', async (req, res, next) => {
   });
 
   if (!spot) {
+
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
     err.status = 404;
@@ -535,35 +536,35 @@ if(spot){
 // Edit a Spot
 router.put('/:spotId', multipleMulterUpload("spotImages",20), requireAuth,validateSpotEdit, async (req, res, next) => {
 
-  console.log(req.body);
+
+  const { country, address, city, state,  lat, lng, description, name, price, imagesToRemove, stringifiedDefaultImageObject} = req.body;
+
+  let defaultImageObject, defaultImage, isBlob, fileName
 
 
-  const { country, address, city, state,  lat, lng, description, name, price, imagesToRemove, defaultImageObject} = req.body;
+  console.log('-=-=-=-=-=-=-');
 
-console.log('-=-=-=-=-=-=-');
-console.log('-=-=-=-=-=-=-');
-if(defaultImageObject){
-  let defImgObj = JSON.parse(defaultImageObject)
-  console.log(defImgObj);
+  if(stringifiedDefaultImageObject){
+    defaultImageObject = JSON.parse(stringifiedDefaultImageObject)
+    defaultImage = defaultImageObject.defaultImage
+    isBlob = defaultImageObject.isBlob
+    imageId = defaultImageObject.defaultId
+    fileName = defaultImageObject.name
+  }
 
-  console.log(defImgObj.defaultImage);
-  console.log(defImgObj.isBlob);
-}
-console.log('-=-=-=-=-=-=-');
-console.log('-=-=-=-=-=-=-');
+  
+  console.log(isBlob);
+  console.log(defaultImage);
 
-console.log(lat);
-console.log(lng);
-
+  console.log(defaultImageObject);
+  console.log(fileName);
 
   const parsedImagesToRemove = imagesToRemove.split(',').map(Number);
 
 
   const spotId = req.params.spotId
   const spot = await Spot.findByPk(spotId);
-  
   if (!spot) {
-
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
     err.status = 404;
@@ -582,49 +583,48 @@ if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
 if(spot){
 
 
-console.log(spot);
-
-
-
     // Handle deletes
     for (let i = 0; i < parsedImagesToRemove.length; i++) {
       const imageId = parsedImagesToRemove[i]
-      
-
       const spotImage = await SpotImage.findByPk(imageId);
-
       if (spotImage) {
         await spotImage.destroy();
       }
     }
 
 
-//handle adds
-  if (req.files && req.files.length > 0) {
-    try {
-      const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+// Handle adds
+if (req.files && req.files.length > 0) {
+  try {
+    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
 
-      for (let i = 0; i < imageUrls.length; i++) {
+    for (let i = 0; i < imageUrls.length; i++) {
 
-        // set default photos
-        if(i === 0){
-          await SpotImage.update({ preview: false }, {
-            where: { spotId }
-          });
+      // Check if the uploaded file is the new default image
+      const isNewDefaultImage = imageUrls[i].originalName === fileName;
+
+      // If this is the new default image, set the preview field of other images to false
+      if (isNewDefaultImage) {
+
+        // Find the current default image and set its preview field to false
+        const currentDefaultImage = await SpotImage.findOne({ where: { spotId, preview: true } });
+        if (currentDefaultImage) {
+          await currentDefaultImage.update({ preview: false });
         }
 
-        const newImage = await SpotImage.create({
-          spotId:spot.id,
-          url: imageUrls[i],
-          //if this is preview photo, set others to false
-
-          preview: i === 0 ? true : false, 
-        });
       }
-    } catch (error) {
-      console.error("Error uploading files:", error);
+
+      const newImage = await SpotImage.create({
+        spotId: spot.id,
+        url: imageUrls[i].url,
+        preview: isNewDefaultImage
+      });
     }
+  } catch (error) {
+    console.error("Error uploading files:", error);
+  }
 }
+
 
 }
 

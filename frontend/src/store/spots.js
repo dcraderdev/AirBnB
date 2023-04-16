@@ -171,10 +171,8 @@ export const editSpotThunk = (spotId, country, address, city, state, lat, lng, d
     }
   }
   if(defaultImageObject){
-    formData.append("defaultImageObject", JSON.stringify(defaultImageObject));
+    formData.append("stringifiedDefaultImageObject", JSON.stringify(defaultImageObject));
   }
-
-  
 
 const response = await csrfFetch(`/api/spots/${spotId}`, {
   method: 'PUT',

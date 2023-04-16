@@ -21,7 +21,7 @@ const singleFileUpload = async ({ file, public = false }) => {
 
   // Return the link if public. If private, return the name of the file in your
   // S3 bucket as the key in your database for subsequent retrieval.
-  return public ? result.Location : result.Key;
+  return public ? {url:result.Location, originalName:file.originalname} : result.Key;
 };
 
 const multipleFilesUpload = async ({files, public = false}) => {

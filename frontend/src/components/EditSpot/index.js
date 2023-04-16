@@ -80,6 +80,10 @@ const EditSpot = () => {
       
       let images = currentSpot.SpotImages;
 
+
+      console.log(images);
+
+
           images.map((image, index) => {
             if(image.preview){
               setDefaultImage(image.url)
@@ -133,7 +137,7 @@ const EditSpot = () => {
     }}
   }, [loaded]);
 
-// validation and error handling
+// validation and error handling - form
   useEffect(() => {
     const errors = {};
 
@@ -153,7 +157,7 @@ const EditSpot = () => {
   }, [country,address,city,state,description,name,price,defaultImage,spotImages]);
 
 
-// validation and error handling
+// validation and error handling - button
   useEffect(() => {
 
     if (Object.keys(validationErrors).length > 0) {
@@ -170,18 +174,41 @@ const EditSpot = () => {
  // Set the defaultImageObject state variable
  useEffect(() => {
   if (loaded) {
+
+    if (originalDefaultImage === defaultImage) {
+      setDefaultImageObject(null)
+    }
+
     if (originalDefaultImage !== defaultImage) {
       if (defaultImage.toString().slice(0, 4) === "blob") {
-        setDefaultImageObject({ defaultImage: spotImages[0], isBlob: true });
-      } else {
-        setDefaultImageObject({ defaultImage: defaultImage, isBlob: false });
+        let name
+
+        spotImageFiles.map((file)=>{
+          if(file.img === defaultImage){
+            name = file.name
+          }
+        })
+
+
+
+        setDefaultImageObject({ defaultImage: spotImages[0], isBlob: true, defaultId: null, name:name });
+
+      } else {     
+        let defaultId 
+        currentSpot.SpotImages.map((image)=>{
+          if(image.url === defaultImage){
+            defaultId = image.id
+          }
+        })
+
+        setDefaultImageObject({ defaultImage: defaultImage, isBlob: false, defaultId });
       }
     }
   }
 }, [defaultImage, originalDefaultImage,loaded]);
     
 
-//  // Check the defaultImageObject state variable
+//  // Check the defaultImageObject state
 //  useEffect(() => {
 //   console.log('defaultImageObject',defaultImageObject);
 // }, [defaultImageObject]);
@@ -338,6 +365,8 @@ const EditSpot = () => {
         return
       }
 
+      console.log(imageUrl);
+
       try {
         const response = await fetch(imageUrl);
         const blob = await response.blob();
@@ -375,18 +404,17 @@ const EditSpot = () => {
     setSpotImageFiles(newFiles);
   };
 
-  
-
-
-
-
 
 // sets main image
   const selectImage = (image) => {
+    console.log(image);
     setSpotPreviewImage(image);
   };
 
-  // reorders spotImage preview and sets defualt image for backend processing
+
+
+
+  // reorders spotImage preview and sets default image for backend processing
   const makeDefault = (file) => {
     const index = spotImages.findIndex(
       (currFile) => currFile === spotPreviewImage
@@ -406,11 +434,12 @@ const EditSpot = () => {
 // creates img src for new image, adds image to spotImageFiles to be backend processed 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
+
     if (file) {
       setSpotPreviewImage(URL.createObjectURL(file));
       let tempImage = URL.createObjectURL(file)
       setSpotImages(() => [...spotImages, tempImage]);
-      setSpotImageFiles((prevSpotImageFiles) => [...prevSpotImageFiles, {img: tempImage, file}]);
+      setSpotImageFiles((prevSpotImageFiles) => [...prevSpotImageFiles, {img: tempImage, file, name:file.name}]);
     }
   };
   
@@ -650,11 +679,16 @@ const EditSpot = () => {
       </div>
       <div className="image-container">
         <div className="image-main-container">
+
           <div className="image-main">
             {spotPreviewImageLoaded && (
               <img src={spotPreviewImage} alt="preview"></img>
             )}
+              {/* <img src={'https://airbnb-clone-spot-photos.s3.amazonaws.com/public/1681687214144.png'} alt="preview"></img> */}
+
           </div>
+
+          
         </div>
 
         <input
