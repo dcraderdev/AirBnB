@@ -142,60 +142,51 @@ export const createSpotThunk = (
 };
 
 
-export const editSpotThunk = (   
-  spotId,    
-  country,
-  address,
-  city,
-  state,
-  lat,
-  lng,
-  description,
-  name,
-  price,
-  imagesToRemove,
-  imagesToAdd,
-  defaultImage
-  ) => async (dispatch) => {
+
+export const editSpotThunk = (spotId, country, address, city, state, lat, lng, description, name, price, imagesToRemove, imagesToAdd, defaultImageObject) => async (dispatch) => {
     
+  console.log('inside thunk');
+  console.log('inside thunk');
 
-    console.log('inside thunk');
-    console.log('inside thunk');
+  console.log('lat',lat);
+  console.log('lng',lng);
 
-    console.log('lat',lat);
-    console.log('lng',lng);
+  console.log(defaultImageObject);
 
-
-    const formData = new FormData();
-    formData.append("country", country);
-    formData.append("address", address);
-    formData.append("city", city);
-    formData.append("state", state);
-    if (lat) formData.append("lat", lat);
-    if (lng) formData.append("lng", lng);
-    formData.append("description", description);
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("imagesToRemove", imagesToRemove);
-    // if(spotImages) formData.append("spotImages", spotImages);
-    if (imagesToAdd) {
-      for (let i = 0; i < imagesToAdd.length; i++) {
-        formData.append("spotImages", imagesToAdd[i]);
-      }
+  const formData = new FormData();
+  formData.append("country", country);
+  formData.append("address", address);
+  formData.append("city", city);
+  formData.append("state", state);
+  if (lat) formData.append("lat", lat);
+  if (lng) formData.append("lng", lng);
+  formData.append("description", description);
+  formData.append("name", name);
+  formData.append("price", price);
+  formData.append("imagesToRemove", imagesToRemove);
+  // if(spotImages) formData.append("spotImages", spotImages);
+  if (imagesToAdd) {
+    for (let i = 0; i < imagesToAdd.length; i++) {
+      formData.append("spotImages", imagesToAdd[i]);
     }
-    
+  }
+  if(defaultImageObject){
+    formData.append("defaultImageObject", JSON.stringify(defaultImageObject));
+  }
 
-  const response = await csrfFetch(`/api/spots/${spotId}`, {
-    method: 'PUT',
-    body: formData
-  });
+  
 
-  console.log(response);
+const response = await csrfFetch(`/api/spots/${spotId}`, {
+  method: 'PUT',
+  body: formData
+});
 
-  const data = await response.json();
-  console.log(data);
-  // dispatch(editSpot(data));
-  if(data) return {data,response};
+console.log(response);
+
+const data = await response.json();
+console.log(data);
+// dispatch(editSpot(data));
+if(data) return {data,response};
 };
 
 

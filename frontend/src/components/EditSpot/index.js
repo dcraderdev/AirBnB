@@ -98,26 +98,18 @@ const EditSpot = () => {
 
 
 
-
-  // useEffect(()=>{
-  //   if(loaded){
-  //     if(!spotImages.length) {
-  //       setSpotPreviewImageLoaded(false);
-  //       setDefaultImage(false);
-  //       return
-  //     }
-  //     if (spotImages && spotImages[0]) {
-  //       setDefaultImage(spotImages[0])
-  //       setSpotPreviewImageFile(spotImages[0]);
-  //       setSpotPreviewImage(spotImages[0]);
-  //     }
-  //   }
-  // },[spotImages])
-
-
-
-
-
+//check if spotImages changes, first picture is default image
+  useEffect(()=>{
+    if(loaded){
+      if(!spotImages.length) {
+        setDefaultImage(false);
+        return
+      }
+      if (spotImages && spotImages[0]) {
+        setDefaultImage(spotImages[0])
+      }
+    }
+  },[spotImages])
 
 
 // load in spot info to text fields
@@ -161,7 +153,6 @@ const EditSpot = () => {
   }, [country,address,city,state,description,name,price,defaultImage,spotImages]);
 
 
-
 // validation and error handling
   useEffect(() => {
 
@@ -174,85 +165,26 @@ const EditSpot = () => {
     }
   }, [validationErrors]);
 
-
-
  // Check if the current default is different from the original default
  // Check if it's a blob
  // Set the defaultImageObject state variable
  useEffect(() => {
   if (loaded) {
-    console.log('Default Image:', defaultImage);
-    console.log('Default Image:', originalDefaultImage);
-
-console.log('checking image');
-console.log('checking image');
-console.log('checking image');
-console.log('checking image');
-
-console.log('Sliced Image:', defaultImage.toString().slice(0, 4));
-console.log(defaultImage);
-
-
     if (originalDefaultImage !== defaultImage) {
       if (defaultImage.toString().slice(0, 4) === "blob") {
-        console.log('yes blob');
-        console.log('yes blob');
-        console.log('yes blob');
-        console.log('yes blob');
         setDefaultImageObject({ defaultImage: spotImages[0], isBlob: true });
       } else {
-        console.log('no blob');
-        console.log('no blob');
-        console.log('no blob');
-        console.log('no blob');
-
         setDefaultImageObject({ defaultImage: defaultImage, isBlob: false });
       }
     }
   }
-
-    console.log(defaultImageObject);
-
 }, [defaultImage, originalDefaultImage,loaded]);
     
 
-
-//   useEffect(() => {
-//     if(loaded){
-
-//       console.log('-=-=-=-=-');
-//       console.log('-=-=-=-=-');
-//       console.log(defaultImage.toString().slice(0, 4));
-//       console.log( spotImages[0]);
-//       console.log('-=-=-=-=-');
-//       console.log('-=-=-=-=-');
-
-// let url = spotImages[0]
-     
-//       if (originalDefaultImage !== defaultImage) {
-//         if (defaultImage.toString().slice(0, 4) === "blob") {
-//           console.log('yes blob');
-//           console.log('yes blob');
-//           console.log('yes blob');
-//           console.log('yes blob');
-//           console.log('yes blob');
-//           setDefaultImageObject({ defaultImage:url, isBlob: true });
-//         } else {
-//           console.log('no blob');
-//           console.log('no blob');
-//           console.log('no blob');
-//           console.log('no blob');
-          
-//           setDefaultImageObject({ defaultImage, isBlob: false });
-//         }
-//       }
-//     }
-
-//     console.log(defaultImageObject);
-    
-//   }, [defaultImage, originalDefaultImage]);
-  
-
+//  // Check the defaultImageObject state variable
+//  useEffect(() => {
+//   console.log('defaultImageObject',defaultImageObject);
+// }, [defaultImageObject]);
 
 
 
@@ -261,50 +193,10 @@ console.log(defaultImage);
 
     if (disabledButton) return
 
-    console.log(defaultImageObject);
-
-    // let isBlob, defaultImg
-
-    // if(defaultImage){
-    //   isBlob = defaultImage.slice(0,4) === 'blob' ? true : false
-    // }
-    // // let isBlob = defaultImage.slice(0,4) === 'blob' ? true : false
-    // // let defaultImg
-
-    // console.log('isBlob',isBlob);
-
-    // if(isBlob){
-    //   defaultImg = {defaultImage, isBlob}
-    // }
-
-    // console.log(defaultImg);
-    // // console.log(defaultImage);
-
-    // // if slice is blob, then we need to upload photo, and set new photo as default
-    // //  find curr default, set to preview:false
-
-    // // if slice is not blob then check if preview currently true
-    // //  if not preview photo, find curr default, set to preview:false
-
-
-    // //check if default has been changed
-    // if(originalDefaultImage!==defaultImage){
-
-    //   let isBlob = defaultImage.slice(0,4) === 'blob' ? true : false
-
-    //   if(isBlob){
-    //     defaultImg = {defaultImage, isBlob}
-    //   }
-
-    // }
-
-    
-
-
     // which to add...
     // spotImageFiles get added
-    let imagesToAdd = []
-    spotImageFiles.map((obj)=>imagesToAdd.push(obj.file))
+    let imagesToAdd = spotImageFiles.map((obj)=>obj.file)
+
 
     // which to delete...
     //anything thats not still in our spotImages stateArray
@@ -332,9 +224,26 @@ console.log(defaultImage);
 
     console.log(imagesToRemove);
     console.log(imagesToAdd);
+    console.log(defaultImageObject);
 
+
+    console.log(country);
+    console.log(address);
+    console.log(city);
+    console.log(state);
+    console.log(lat);
+    console.log(lng);
+    console.log(description);
+    console.log(name);
+    console.log(price);
+    console.log(imagesToRemove);
+    console.log(imagesToAdd);
+    console.log(defaultImageObject);
   
+
     let spotId = currentSpot.id
+    console.log(spotId);
+
       try {
         const { data, response } = await dispatch(
           spotActions.editSpotThunk(
@@ -369,6 +278,7 @@ console.log(defaultImage);
         setButtonClass('host-form-submit-button disabled');
 
         if(error.data){
+          if(error.data.errors){
 
         if (error.data.errors.lat) {
           setLat('Latitude must be a number');
@@ -392,6 +302,7 @@ console.log(defaultImage);
           setNameClass('host-form-spot-title-field red-font');
         }
       }
+    }
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
     

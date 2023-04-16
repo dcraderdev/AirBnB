@@ -535,9 +535,25 @@ if(spot){
 // Edit a Spot
 router.put('/:spotId', multipleMulterUpload("spotImages",20), requireAuth,validateSpotEdit, async (req, res, next) => {
 
+  console.log(req.body);
 
-  const {country, address, city, state,  lat, lng, description, name, price, imagesToRemove, defaultImage} = req.body;
 
+  const { country, address, city, state,  lat, lng, description, name, price, imagesToRemove, defaultImageObject} = req.body;
+
+console.log('-=-=-=-=-=-=-');
+console.log('-=-=-=-=-=-=-');
+if(defaultImageObject){
+  let defImgObj = JSON.parse(defaultImageObject)
+  console.log(defImgObj);
+
+  console.log(defImgObj.defaultImage);
+  console.log(defImgObj.isBlob);
+}
+console.log('-=-=-=-=-=-=-');
+console.log('-=-=-=-=-=-=-');
+
+console.log(lat);
+console.log(lng);
 
 
   const parsedImagesToRemove = imagesToRemove.split(',').map(Number);
@@ -545,7 +561,9 @@ router.put('/:spotId', multipleMulterUpload("spotImages",20), requireAuth,valida
 
   const spotId = req.params.spotId
   const spot = await Spot.findByPk(spotId);
+  
   if (!spot) {
+
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
     err.status = 404;
