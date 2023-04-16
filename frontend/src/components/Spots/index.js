@@ -24,22 +24,16 @@ const Spots = ({ page }) => {
 
   useEffect(() => {
     isLoaded(false)
-
-    console.log('needing rerender');
-    console.log('needing rerender');
-    console.log('needing rerender');
-    console.log('needing rerender');
-
-      let action;
-      if (page === 'home') action = spotActions.getAllSpotsThunk();
-      if (page === 'manage') action = spotActions.getUsersSpotsThunk();
-       
-      if (action) {
-        dispatch(action).then(() => {
-          isLoaded(true);
-          setNeedsRerender(false)
-        });
-      };
+    let action;
+    if (page === 'home') action = spotActions.getAllSpotsThunk();
+    if (page === 'manage') action = spotActions.getUsersSpotsThunk();
+     
+    if (action) {
+      dispatch(action).then(() => {
+        isLoaded(true);
+        setNeedsRerender(false)
+      });
+    };
 
   }, [dispatch, page, needsRerender]);
 
