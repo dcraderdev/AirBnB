@@ -25,6 +25,8 @@ const SpotTile = ({ spot, setFavorites}) => {
   } = spot;
 
 
+
+
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');
     name.length > 35

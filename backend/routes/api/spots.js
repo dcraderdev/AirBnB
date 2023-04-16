@@ -536,29 +536,15 @@ if(spot){
 router.put('/:spotId', multipleMulterUpload("spotImages",20), requireAuth,validateSpotEdit, async (req, res, next) => {
 
 
-  const { address, city, state, country, lat, lng, name, description, price} = req.body;
-
-  console.log('-=-=-=-=-=');
-  console.log('-=-=-=-=-=');
-  console.log('-=-=-=-=-=');
-
-
-  console.log(price);
-  console.log(description);
-  console.log(name);
-
-
-  console.log('-=-=-=-=-=');
-  console.log('-=-=-=-=-=');
-  console.log('-=-=-=-=-=');
-
-
-  // return res.status(200).json({spot:{id:1}});
+  const {country, address, city, state,  lat, lng, description, name, price, imagesToRemove, defaultImage} = req.body;
 
 
 
-  const spot = await Spot.findByPk(req.params.spotId);
+  const parsedImagesToRemove = imagesToRemove.split(',').map(Number);
 
+
+  const spotId = req.params.spotId
+  const spot = await Spot.findByPk(spotId);
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.statusCode = 404;
@@ -576,14 +562,44 @@ if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
 }
 
 if(spot){
+
+
+console.log(spot);
+
+
+
+    // Handle deletes
+    for (let i = 0; i < parsedImagesToRemove.length; i++) {
+      const imageId = parsedImagesToRemove[i]
+      
+
+      const spotImage = await SpotImage.findByPk(imageId);
+
+      if (spotImage) {
+        await spotImage.destroy();
+      }
+    }
+
+
+//handle adds
   if (req.files && req.files.length > 0) {
     try {
       const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
 
       for (let i = 0; i < imageUrls.length; i++) {
+
+        // set default photos
+        if(i === 0){
+          await SpotImage.update({ preview: false }, {
+            where: { spotId }
+          });
+        }
+
         const newImage = await SpotImage.create({
           spotId:spot.id,
           url: imageUrls[i],
+          //if this is preview photo, set others to false
+
           preview: i === 0 ? true : false, 
         });
       }
@@ -591,14 +607,8 @@ if(spot){
       console.error("Error uploading files:", error);
     }
 }
+
 }
-
-// if(preview){
-//   await SpotImage.update({ preview: false }, {
-//     where: { spotId: req.params.spotId }
-//   });
-// }
-
 
 
   await spot.update({

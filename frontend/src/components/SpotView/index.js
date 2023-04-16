@@ -40,12 +40,34 @@ function SpotView() {
   }, [needsRerender]);
 
   useEffect(() => {
+
+
+    // find default image
+    let defaultImage
+
+    if (currentSpot && currentSpot.SpotImages) {
+      currentSpot.SpotImages.map((image)=>{
+        if(image.preview === true){
+          defaultImage = image
+        }
+        return defaultImage === true
+      })
+    }
+
+    console.log(defaultImage);
+    if(defaultImage){
+
+      setSpotPreviewImage(defaultImage.url)
+    }
+
+
+
     if (currentSpot) {
-      setSpotPreviewImage(
-        currentSpot?.SpotImages?.[0]?.url
-          ? currentSpot?.SpotImages?.[0]?.url
-          : 'preview-default-image'
-      );
+      // setSpotPreviewImage(
+      //   currentSpot?.SpotImages?.[0]?.url
+      //     ? currentSpot?.SpotImages?.[0]?.url
+      //     : 'preview-default-image'
+      // );
       setSpotPreviewImageClass(
         currentSpot?.SpotImages?.[0]?.url
           ? 'spot-view-preview-image'
@@ -53,6 +75,12 @@ function SpotView() {
       );
     }
   }, [currentSpot]);
+
+
+
+
+
+
 
   const selectImage = (file) => {
     setSpotPreviewImage(file.url);

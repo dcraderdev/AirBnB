@@ -154,12 +154,16 @@ export const editSpotThunk = (
   name,
   price,
   imagesToRemove,
-  imagesToAdd
+  imagesToAdd,
+  defaultImage
   ) => async (dispatch) => {
     
 
     console.log('inside thunk');
     console.log('inside thunk');
+
+    console.log('lat',lat);
+    console.log('lng',lng);
 
 
     const formData = new FormData();
@@ -172,6 +176,7 @@ export const editSpotThunk = (
     formData.append("description", description);
     formData.append("name", name);
     formData.append("price", price);
+    formData.append("imagesToRemove", imagesToRemove);
     // if(spotImages) formData.append("spotImages", spotImages);
     if (imagesToAdd) {
       for (let i = 0; i < imagesToAdd.length; i++) {
@@ -258,11 +263,6 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...newState,
         spots: [...newState.spots, action.payload.spot],
-      };
-
-    case EDIT_SPOT:
-      return {
-        ...newState
       };
 
     case DELETE_SPOT:

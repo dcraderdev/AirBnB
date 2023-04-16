@@ -23,8 +23,9 @@ const EditSpot = () => {
   const [spotImages, setSpotImages] = useState([]);
   const [spotImageFiles, setSpotImageFiles] = useState([]);
 
-  const [defaultImage, setDefaultImage] = useState([]);
-
+  const [defaultImage, setDefaultImage] = useState('');
+  const [originalDefaultImage, setOriginalDefaultImage] = useState([]);
+  const [defaultImageObject, setDefaultImageObject] = useState(null);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -79,26 +80,21 @@ const EditSpot = () => {
       
       let images = currentSpot.SpotImages;
 
-      console.log(images);
-
           images.map((image, index) => {
-            setSpotImages((prevSpotImages) => [...prevSpotImages, image.url]);
-            setSpotPreviewImage(image.url);
+            if(image.preview){
+              setDefaultImage(image.url)
+              setOriginalDefaultImage(image.url)
+              setSpotPreviewImage(image.url);
+              setSpotPreviewImageLoaded(true);
+              setSpotImages((prevSpotImages) => [image.url, ...prevSpotImages]);
+            } else {
+              setSpotImages((prevSpotImages) => [...prevSpotImages, image.url]);
+            }
           })
-            setDefaultImage(spotImages[0])
             isLoaded(true)
-            setSpotPreviewImageLoaded(true);
         }
 
-  }, [imagesLoaded, currentSpot]);
-
-
-
-// at the end before makign edit we need to compare new spotImages with the old and see if any are missing, 
-// and also add on any files from the spotImageFiles to our aws
-
-
-
+  }, [imagesLoaded, currentSpot,loaded]);
 
 
 
@@ -120,15 +116,6 @@ const EditSpot = () => {
       setDescriptionText(currentSpot.description);
       setNameText(currentSpot.name);
       setPriceText(currentSpot.price);
-
-
-  
-      console.log('--------------', currentSpot.SpotImages);
-      let images = currentSpot.SpotImages;
-
-      console.log(images);
-  
-
     }}
   }, [loaded]);
 
@@ -167,20 +154,83 @@ const EditSpot = () => {
 
 
 
+ // Check if the current default is different from the original default
+ // Check if it's a blob
+ // Set the defaultImageObject state variable
+ useEffect(() => {
+  if (loaded) {
+    console.log('Default Image:', defaultImage);
+    console.log('Default Image:', originalDefaultImage);
+
+console.log('checking image');
+console.log('checking image');
+console.log('checking image');
+console.log('checking image');
+
+console.log('Sliced Image:', defaultImage.toString().slice(0, 4));
+console.log(defaultImage);
 
 
+    if (originalDefaultImage !== defaultImage) {
+      if (defaultImage.toString().slice(0, 4) === "blob") {
+        console.log('yes blob');
+        console.log('yes blob');
+        console.log('yes blob');
+        console.log('yes blob');
+        setDefaultImageObject({ defaultImage: spotImages[0], isBlob: true });
+      } else {
+        console.log('no blob');
+        console.log('no blob');
+        console.log('no blob');
+        console.log('no blob');
 
-// if(currentSpot && loaded){
+        setDefaultImageObject({ defaultImage: defaultImage, isBlob: false });
+      }
+    }
+  }
 
-//   console.log('----old----');
-//   console.log(currentSpot.SpotImages);
-//   console.log('-=-=-=-=-=-=-');
+    console.log(defaultImageObject);
 
-//   console.log('----new----');
-//   console.log(spotImages);
-//   console.log('-=-=-=-=-=-=-');
+}, [defaultImage, originalDefaultImage,loaded]);
+    
 
-// }
+
+//   useEffect(() => {
+//     if(loaded){
+
+//       console.log('-=-=-=-=-');
+//       console.log('-=-=-=-=-');
+//       console.log(defaultImage.toString().slice(0, 4));
+//       console.log( spotImages[0]);
+//       console.log('-=-=-=-=-');
+//       console.log('-=-=-=-=-');
+
+// let url = spotImages[0]
+     
+//       if (originalDefaultImage !== defaultImage) {
+//         if (defaultImage.toString().slice(0, 4) === "blob") {
+//           console.log('yes blob');
+//           console.log('yes blob');
+//           console.log('yes blob');
+//           console.log('yes blob');
+//           console.log('yes blob');
+//           setDefaultImageObject({ defaultImage:url, isBlob: true });
+//         } else {
+//           console.log('no blob');
+//           console.log('no blob');
+//           console.log('no blob');
+//           console.log('no blob');
+          
+//           setDefaultImageObject({ defaultImage, isBlob: false });
+//         }
+//       }
+//     }
+
+//     console.log(defaultImageObject);
+    
+//   }, [defaultImage, originalDefaultImage]);
+  
+
 
 
 
@@ -189,11 +239,48 @@ const EditSpot = () => {
 
     if (disabledButton) return
 
+    console.log(defaultImageObject);
+
+    // let isBlob, defaultImg
+
+    // if(defaultImage){
+    //   isBlob = defaultImage.slice(0,4) === 'blob' ? true : false
+    // }
+    // // let isBlob = defaultImage.slice(0,4) === 'blob' ? true : false
+    // // let defaultImg
+
+    // console.log('isBlob',isBlob);
+
+    // if(isBlob){
+    //   defaultImg = {defaultImage, isBlob}
+    // }
+
+    // console.log(defaultImg);
+    // // console.log(defaultImage);
+
+    // // if slice is blob, then we need to upload photo, and set new photo as default
+    // //  find curr default, set to preview:false
+
+    // // if slice is not blob then check if preview currently true
+    // //  if not preview photo, find curr default, set to preview:false
+
+
+    // //check if default has been changed
+    // if(originalDefaultImage!==defaultImage){
+
+    //   let isBlob = defaultImage.slice(0,4) === 'blob' ? true : false
+
+    //   if(isBlob){
+    //     defaultImg = {defaultImage, isBlob}
+    //   }
+
+    // }
+
     
-    
+
+
     // which to add...
     // spotImageFiles get added
-    console.log(spotImageFiles);
     let imagesToAdd = []
     spotImageFiles.map((obj)=>imagesToAdd.push(obj.file))
 
@@ -240,7 +327,8 @@ const EditSpot = () => {
             name,
             price,
             imagesToRemove,
-            imagesToAdd
+            imagesToAdd,
+            defaultImageObject
           )
         );
 
@@ -249,6 +337,11 @@ const EditSpot = () => {
           history.push(`/spots/${data.id}`);
         }
       } catch (error) {
+
+        console.log('yes error');
+        console.log('yes error');
+
+        console.log(error);
 
         setDisabledButton(true);
         setButtonClass('host-form-submit-button disabled');
@@ -351,19 +444,20 @@ const EditSpot = () => {
 
   
 
-  useEffect(()=>{
-    if(!spotImages.length) {
-      setSpotPreviewImageLoaded(false);
-      setDefaultImage(false);
-      return
-    }
-    if (spotImages && spotImages[0]) {
-      setDefaultImage(spotImages[0])
-      setSpotPreviewImageFile(spotImages[0]);
-      setSpotPreviewImage(spotImages[0]);
-    }
-  },[spotImages])
-
+  // useEffect(()=>{
+  //   if(loaded){
+  //     if(!spotImages.length) {
+  //       setSpotPreviewImageLoaded(false);
+  //       setDefaultImage(false);
+  //       return
+  //     }
+  //     if (spotImages && spotImages[0]) {
+  //       setDefaultImage(spotImages[0])
+  //       setSpotPreviewImageFile(spotImages[0]);
+  //       setSpotPreviewImage(spotImages[0]);
+  //     }
+  //   }
+  // },[spotImages])
 
 
 
@@ -408,9 +502,6 @@ const EditSpot = () => {
   const getErrorClass = (field) => {
     return formSubmitted && validationErrors[field] ? `${field}-red-font` : ``;
   };
-
-
-
 
 
   return (
