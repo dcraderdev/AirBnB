@@ -145,13 +145,6 @@ export const createSpotThunk = (
 
 export const editSpotThunk = (spotId, country, address, city, state, lat, lng, description, name, price, imagesToRemove, imagesToAdd, defaultImageObject) => async (dispatch) => {
     
-  console.log('inside thunk');
-  console.log('inside thunk');
-
-  console.log('lat',lat);
-  console.log('lng',lng);
-
-  console.log(defaultImageObject);
 
   const formData = new FormData();
   formData.append("country", country);

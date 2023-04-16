@@ -80,10 +80,6 @@ const EditSpot = () => {
       
       let images = currentSpot.SpotImages;
 
-
-      console.log(images);
-
-
           images.map((image, index) => {
             if(image.preview){
               setDefaultImage(image.url)
@@ -175,10 +171,12 @@ const EditSpot = () => {
  useEffect(() => {
   if (loaded) {
 
+    // if same image as orginal
     if (originalDefaultImage === defaultImage) {
       setDefaultImageObject(null)
     }
 
+    // if dif image and blob
     if (originalDefaultImage !== defaultImage) {
       if (defaultImage.toString().slice(0, 4) === "blob") {
         let name
@@ -189,10 +187,9 @@ const EditSpot = () => {
           }
         })
 
+      setDefaultImageObject({ defaultImage: spotImages[0], isBlob: true, defaultId: null, name:name });
 
-
-        setDefaultImageObject({ defaultImage: spotImages[0], isBlob: true, defaultId: null, name:name });
-
+    // if dif image and not blob
       } else {     
         let defaultId 
         currentSpot.SpotImages.map((image)=>{
