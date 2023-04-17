@@ -1,0 +1,66 @@
+.error-modal-container{
+  position: absolute;
+  background-color:  #ffffff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  height: 165px;
+  width: 450px;
+  padding: 20px;
+  border: solid rgb(0, 0, 0) 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.error-modal-close-button{
+  position: absolute;
+  top: 10px;
+  left: 5px;
+}
+
+.error-modal-header{
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+
+}
+
+.error-modal-memo{
+  position: absolute;
+  left: 25px;
+  width: 480px;
+  top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.error-modal-memo-thanks{
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  bottom: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+
+}
+
+.error-modal-confirm-button{
+  position: absolute;
+  width: 98%;
+  padding: 10px;
+  font-size: 15px;
+  left: 1%;
+  bottom: 10px;
+}

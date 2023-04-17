@@ -359,14 +359,8 @@ body{
   height: fit-content;
 }
 
-.add-image-from-url{
-  position: absolute;
-  left: 315px;
-  top: 20px;
-  width: 120px;
-  height: 15px;
-  font-size: 10px;
-}
+
+ 
 
 
 .host-form-add-spot-image-button{
@@ -407,4 +401,5 @@ body{
 .red-font{
   color: red;
 }
+
 

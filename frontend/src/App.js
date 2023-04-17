@@ -10,6 +10,7 @@ import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
 import ReviewModal from './components/ReviewModal';
 import DeleteModal from './components/DeleteModal';
+import ErrorModal from './components/ErrorModal';
 import ProfileButtonModal from './components/ProfileButtonModal';
 import SpotView from './components/SpotView';
 import * as sessionActions from './store/session';
@@ -42,6 +43,7 @@ function App() {
           {modal === 'profileMenu' && <ProfileButtonModal />}
           {modal === 'review' && <ReviewModal />}
           {modal === 'delete' && <DeleteModal />}
+          {modal === 'error' && <ErrorModal />}
         </div>
 
 

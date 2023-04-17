@@ -69,6 +69,21 @@ module.exports = {
           preview: false,
         },
         {
+          spotId: 2,
+          url: 'https://authenticflorida.com/wp-content/uploads/2021/03/thumbnail-1-640x480.jpg',
+          preview: false,
+        },
+        {
+          spotId: 2,
+          url: 'https://i.pinimg.com/originals/88/2b/7b/882b7b64f8ece3cb5d06682dec5c58fd.jpg',
+          preview: false,
+        },
+        {
+          spotId: 2,
+          url: 'https://s3.amazonaws.com/finegardening.s3.tauntoncloud.com/app/uploads/2019/11/06142238/7.jpeg',
+          preview: false,
+        },
+        {
           spotId: 3,
           url: 'https://images.familyhomeplans.com/cdn-cgi/image/fit=scale-down,quality=85/plans/44207/44207-b600.jpg',
           preview: true,
@@ -78,6 +93,25 @@ module.exports = {
           url: 'https://na.rdcpix.com/6d88e5731f7bf0bfd8aec506d1f358b8w-c4109625419rd-w832_h468_r4_q80.jpg',
           preview: false,
         },
+
+        {
+          spotId: 3,
+          url: 'https://www.leveragere.com/slir/w1050-h550-c1050x550/assets/609.jpg',
+          preview: false,
+        },
+        
+        {
+          spotId: 3,
+          url: 'https://static.wixstatic.com/media/76d808_00a008f133a74fe38c3887fa547cd5f1~mv2.jpg/v1/fill/w_640,h_568,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/76d808_00a008f133a74fe38c3887fa547cd5f1~mv2.jpg',
+          preview: false,
+        },
+
+        {
+          spotId: 3,
+          url: 'https://st.hzcdn.com/simgs/pictures/bathrooms/hoover-baths-highland-design-build-img~dce121200d9623f1_14-6384-1-d2d6925.jpg',
+          preview: false,
+        },
+
         {
           spotId: 3,
           url: 'https://www.progardentips.com/wp-content/uploads/2022/01/Sunken-Gardens-730x548.jpg',
@@ -108,6 +142,26 @@ module.exports = {
         {
           spotId: 4,
           url: 'https://i.insider.com/62223628dcce010019a6cf6d?width=1000&format=jpeg&auto=webp',
+          preview: false,
+        },
+        {
+          spotId: 4,
+          url: 'https://i0.wp.com/stockellhomes.com/wp-content/uploads/2020/02/P1052763copy-scaled.jpg?resize=1080%2C720&ssl=1',
+          preview: false,
+        },
+        {
+          spotId: 4,
+          url: 'https://www.homestratosphere.com/wp-content/uploads/2017/02/Bathroom-628.jpg',
+          preview: false,
+        },
+        {
+          spotId: 4,
+          url: 'https://murreybowling.com/wp-content/uploads/home-bowling-alley.jpg',
+          preview: false,
+        },
+        {
+          spotId: 4,
+          url: 'https://st.hzcdn.com/simgs/pictures/landscapes/sophisticated-south-of-the-border-transformation-where-color-is-king-siobhan-s-magical-garden-transformations-img~4de1499f03b32f6a_8-1010-1-aa88fe0.jpg',
           preview: false,
         },
         {

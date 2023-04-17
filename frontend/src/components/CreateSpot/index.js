@@ -49,7 +49,7 @@ const CreateSpot = () => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const user = useSelector((state) => state.session.user);
-  const {openModal, needsRerender, setNeedsRerender} = useContext(ModalContext)
+  const { modal, openModal, closeModal, needsRerender, setNeedsRerender, setUpdateObj } = useContext(ModalContext);
   const [defaultImage, setDefaultImage] = useState('');
   
 
@@ -214,6 +214,8 @@ const CreateSpot = () => {
         setImageUrl('');
       } catch (error) {
         console.error('Error fetching image from URL:', error);
+        openModal('error')
+        setUpdateObj('addImage')
       }
     }
   };

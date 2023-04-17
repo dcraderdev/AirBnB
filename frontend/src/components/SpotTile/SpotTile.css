@@ -25,7 +25,7 @@
 
 
 .spot-tile:hover > .spot-tile-image-container{
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -165,9 +165,7 @@
   height: fit-content;
 }
 
-.large-tip{
 
-}
 
 .spot-tile:hover .tooltip {
   visibility: visible;

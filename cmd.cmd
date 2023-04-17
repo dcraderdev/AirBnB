@@ -105,5 +105,3 @@ airb-n-b-clone-photos
     }
   ]
 }
-
-

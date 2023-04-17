@@ -56,7 +56,7 @@ const EditSpot = () => {
   const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Update Spot');
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
+  const { modal, openModal, closeModal, needsRerender, setNeedsRerender, setUpdateObj } = useContext(ModalContext);
   let timeoutId;
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
@@ -344,6 +344,8 @@ const EditSpot = () => {
 
 
       } catch (error) {
+        openModal('error')
+        setUpdateObj('addImage')
 
         // if error, pop up modal to show that user needs to download the picture and upload
         // host server doesnt allow image sharing
