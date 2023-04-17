@@ -3,6 +3,8 @@ import { useHistory} from 'react-router-dom';
 import { useDispatch, useSelector  } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { ModalContext } from '../../context/ModalContext';
+import * as spotActions from '../../store/spots';
+
 import './ProfileButtonModal.css';
 
 function ProfileButtonModal() {
@@ -26,7 +28,18 @@ function ProfileButtonModal() {
         setIsHost('Host a spot');
       }
     }
-  }, [user, userSpots]);
+  }, [user, userSpots, needsRerender]);
+
+  useEffect(() => {
+    if(user){
+      if(user){
+        dispatch(spotActions.getUsersSpotsThunk()).then(() => {
+          setNeedsRerender(false)
+        });
+      }
+    }
+  }, [user, needsRerender]);
+
 
 
 
@@ -50,7 +63,7 @@ function ProfileButtonModal() {
   };
   const navHistory = () => {
     closeModal();
-    isHost && user ? history.push('/manage') : history.push('/host')
+    isHost === 'Manage Spots' && user ? history.push('/manage') : history.push('/host')
     
   };
   const navHelp = () => {

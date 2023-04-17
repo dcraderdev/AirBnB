@@ -43,7 +43,6 @@ const CreateSpot = () => {
   const [price, setPrice] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
   const [disabledButton, setDisabledButton] = useState(false);
-  const [antiSpam, setAntiSpam] = useState(false);
 
   const [buttonClass, setButtonClass] = useState('host-form-submit-button button');
   const [buttonText, setButtonText] = useState('Create Spot');
@@ -51,9 +50,12 @@ const CreateSpot = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const user = useSelector((state) => state.session.user);
   const {openModal, needsRerender, setNeedsRerender} = useContext(ModalContext)
+  const [defaultImage, setDefaultImage] = useState('');
   
 
   let timeoutId;
+
+
 
   useEffect(() => {
     const errors = {};
@@ -64,15 +66,12 @@ const CreateSpot = () => {
     if (!state.length) errors['state'] = 'Please enter a state';
     if (!description.length) errors['description'] = 'Please enter a description';
     if (!name.length) errors['name'] = 'Please enter a spot name';
-    if (!price.length) errors['price'] = 'Please enter a price';
-    if (!spotPreviewImageFile) errors['spotPreviewImageFile'] = 'Please enter URL or Add Image from local files';
-
-
+    if (!price) errors['price'] = 'Please enter a price';
     if (!spotImages.length) errors['spotImages'] = 'Please enter URL or Add Image from local files';
       
     
-    setValidationErrors(errors);
-  }, [country,address,city,state,description,name,price,spotPreviewImageFile,spotImages]);
+  setValidationErrors(errors);
+  }, [country,address,city,state,description,name,price,spotImages]);
 
   useEffect(() => {
     if (Object.keys(validationErrors).length > 0) {
@@ -84,8 +83,20 @@ const CreateSpot = () => {
     }
   }, [validationErrors]);
 
+  useEffect(()=>{
+    if(!spotImages.length) {
+      setSpotPreviewImageLoaded(false);
+      return
+    }
+    if (spotImages && spotImages[0]) {
+      setSpotPreviewImageFile(spotImages[0]);
+      setSpotPreviewImage(URL.createObjectURL(spotImages[0]));
+    }
+  },[spotImages])
+
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setFormSubmitted(true);
     setDisabledButton(true);
@@ -100,7 +111,9 @@ const CreateSpot = () => {
       return
     }
 
-    if (!disabledButton) {
+    
+    if (disabledButton) return
+
       try {
         const { data, response } = await dispatch(
           spotActions.createSpotThunk(
@@ -122,10 +135,12 @@ const CreateSpot = () => {
           history.push(`/spots/${data.id}`);
         }
       } catch (error) {
-        setAntiSpam(true);
         setDisabledButton(true);
         setButtonClass('host-form-submit-button disabled');
 
+
+        if(error.data){
+          if(error.data.errors){
 
         if (error.data.errors.lat) {
           setLat('Latitude must be a number');
@@ -148,10 +163,11 @@ const CreateSpot = () => {
           setName('Name must be less than 50 characters');
           setNameClass('host-form-spot-title-field red-font');
         }
+      }
+    }
 
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
-          setAntiSpam(false);
           setLat(latText);
           setLng(lngText);
           setLngClass('');
@@ -165,7 +181,7 @@ const CreateSpot = () => {
           setDisabledButton(false);
           setButtonClass('host-form-submit-button button');
         }, 3000);
-      }
+      
     }
   };
 
@@ -212,16 +228,7 @@ const CreateSpot = () => {
     setSpotImages(newImages);
   };
 
-  useEffect(()=>{
-    if(!spotImages.length) {
-      setSpotPreviewImageLoaded(false);
-      return
-    }
-    if (spotImages && spotImages[0]) {
-      setSpotPreviewImageFile(spotImages[0]);
-      setSpotPreviewImage(URL.createObjectURL(spotImages[0]));
-    }
-  },[spotImages])
+
 
 
   const selectImage = (file) => {
@@ -246,8 +253,6 @@ const CreateSpot = () => {
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file && !fileTypes.includes(`${file.type.split('/')[1]}`)) {
-      }
 
       setSpotPreviewImage(URL.createObjectURL(file));
       setSpotPreviewImageFile(file);
@@ -472,7 +477,7 @@ const CreateSpot = () => {
               </button>
             </label>
 
-            <button className={buttonClass} type="submit" disabled={antiSpam}>
+            <button className={buttonClass} type="submit" disabled={disabledButton}> 
               {buttonText}
             </button>
           </form>

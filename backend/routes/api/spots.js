@@ -174,23 +174,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
 });
 
 // Create a Spot
-router.post(
-  '/',
-  multipleMulterUpload('spotImages', 20),
-  requireAuth,
-  validateSpotEdit,
-  async (req, res, next) => {
-    const {
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price,
-    } = req.body;
+router.post( '/', multipleMulterUpload('spotImages', 20), requireAuth, validateSpotEdit, async (req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const ownerId = req.user.id;
 
     newSpot = await Spot.create({
@@ -206,6 +191,7 @@ router.post(
       price,
     });
 
+    // Handle adds
     if (newSpot) {
       if (req.files && req.files.length > 0) {
         try {
@@ -217,7 +203,7 @@ router.post(
           for (let i = 0; i < imageUrls.length; i++) {
             const newImage = await SpotImage.create({
               spotId: newSpot.id,
-              url: imageUrls[i],
+              url: imageUrls[i].url,
               preview: i === 0 ? true : false,
             });
           }
@@ -225,6 +211,10 @@ router.post(
           console.error('Error uploading files:', error);
         }
       }
+
+
+
+
 
       let spot = newSpot.toJSON();
       const lat = parseFloat(spot.lat);

@@ -26,13 +26,13 @@ function Navigation(){
   useEffect(() => {
     isLoaded(false)
     if(user){
-
       dispatch(spotActions.getUsersSpotsThunk()).then(() => {
         setNeedsRerender(false)
       });
     }
     isLoaded(true);
-  }, [dispatch, needsRerender,user]);
+  }, [dispatch, needsRerender, user]);
+
 
   return (
     <>

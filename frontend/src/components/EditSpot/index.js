@@ -148,7 +148,6 @@ const EditSpot = () => {
     if (!name.length) errors['name'] = 'Please enter a spot name';
     if (!price) errors['price'] = 'Please enter a price';
     if (!defaultImage) errors['defaultImage'] = 'Please enter URL or Add Image from local files';
-
     if (!spotImages.length) errors['spotImages'] = 'Please enter URL or Add Image from local files';
       
     
