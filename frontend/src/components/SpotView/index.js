@@ -138,21 +138,6 @@ function SpotView() {
               <div className="spot-view-description-text">
                 <p>
                   {currentSpot.description}
-                  Est occaecat do magna dolore voluptate. Ea eiusmod anim minim
-                  in commodo est anim. Ut anim proident ut dolor est velit.
-                  Proident ea voluptate aliqua elit sint proident ut irure elit
-                  consectetur est commodo dolore. Veniam excepteur deserunt
-                  eiusmod enim. Reprehenderit aliquip laboris sunt non eiusmod
-                  laborum ut veniam. Quis cillum nostrud Lorem voluptate.
-                  Officia ullamco eu adipisicing esse exercitation deserunt sit.
-                  Consectetur ut ullamco nisi pariatur aliqua occaecat nulla
-                  pariatur irure mollit voluptate. Officia ullamco esse ad
-                  labore ea cupidatat cillum nisi esse fugiat veniam. Veniam
-                  proident ad ut non amet nostrud occaecat elit. Sit id et
-                  dolore deserunt culpa ea cupidatat adipisicing anim in veniam
-                  exercitation adipisicing. Aute consectetur nostrud minim qui
-                  quis tempor cupidatat excepteur elit laboris nisi velit
-                  commodo nisi.
                 </p>
               </div>
             </div>
