@@ -15,7 +15,6 @@ function ProfileButtonModal() {
   const [isHost, setIsHost] = useState('')
 
   const user = useSelector(state => state.session.user);
-
   const userSpots = useSelector(state => state.spots.userSpots.Spots);
 
 
@@ -39,10 +38,6 @@ function ProfileButtonModal() {
       }
     }
   }, [user, needsRerender]);
-
-
-  
-
 
 
   useEffect(() => {
@@ -82,6 +77,7 @@ function ProfileButtonModal() {
   return (
     
     <>
+    <div className='ghost-button'></div>
       <ul className='profileMenu' ref={formRef}>
         {user ? (
           <div>

@@ -20,16 +20,20 @@
   height: 320px;
   width: 320px;
   max-width: 430px;
-  transition: height 1s;
+  transition: height 3s ease-in, transform 3s ease-in;
 }
 
 
 .spot-tile:hover > .spot-tile-image-container{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
 }
 
 .spot-tile:hover{
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+  z-index: 10000;
+  transition: height 3s ease-in, transform 3s ease-in;
+
 }
 
 .spot-tile-image-container {
@@ -49,7 +53,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 2s ease;
+  
 }
 
 .spot-tile-spot-image:hover {

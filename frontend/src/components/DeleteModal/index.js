@@ -68,24 +68,19 @@ const DeleteModal = ({}) => {
       }
     }
 
-
     if(updateObj.review){
       let reviewId = updateObj.id
       try {
         const { response } = await dispatch(
           spotActions.deleteReviewThunk(reviewId)
         );
-  
         if (response.ok) {
-        
           render()
           closeModal()
-    
         }
       } catch (error) {
         console.error(error);
       }
- 
     }
   }
   

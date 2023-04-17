@@ -54,14 +54,61 @@ module.exports = {
           preview: true,
         },
         {
+          spotId: 2,
+          url: 'https://i.insider.com/5e389df35bc79c536974f1f8?width=700.jpg',
+          preview: false,
+        },
+        {
+          spotId: 2,
+          url: 'https://travellersworldwide.com/wp-content/uploads/2022/04/shutterstock_1446113918.jpg.webp',
+          preview: false,
+        },
+        {
+          spotId: 2,
+          url: 'https://images.squarespace-cdn.com/content/v1/58487dc4b8a79b6d02499b60/1659113029412-0YP2JAMKKVK26GN24V4H/Francis+York+Bespoke+Modern+Mansion+in+the+Hills+of+Bel+Air+1.jpg',
+          preview: false,
+        },
+        {
           spotId: 3,
           url: 'https://images.familyhomeplans.com/cdn-cgi/image/fit=scale-down,quality=85/plans/44207/44207-b600.jpg',
           preview: true,
         },
         {
+          spotId: 3,
+          url: 'https://na.rdcpix.com/6d88e5731f7bf0bfd8aec506d1f358b8w-c4109625419rd-w832_h468_r4_q80.jpg',
+          preview: false,
+        },
+        {
+          spotId: 3,
+          url: 'https://www.progardentips.com/wp-content/uploads/2022/01/Sunken-Gardens-730x548.jpg',
+          preview: false,
+        },
+        {
+          spotId: 3,
+          url: 'https://i.pinimg.com/originals/08/1e/01/081e01afb82ec1d12543feb5811fc8c7.jpg',
+          preview: false,
+        },
+        
+        
+        {
           spotId: 4,
           url: 'https://cdn.onekindesign.com/wp-content/uploads/2019/10/Traditional-English-Manor-House-Jauregui-Architect-01-1-Kindesign.jpg',
           preview: true,
+        },
+        {
+          spotId: 4,
+          url: 'https://nypost.com/wp-content/uploads/sites/2/2022/08/13000-identical-brothers-asking-54m-for-side-by-side-mansions-01.jpg',
+          preview: false,
+        },
+        {
+          spotId: 4,
+          url: 'https://floridatrippers.com/wp-content/uploads/2021/06/Botanical-Gardens-in-FL-Naples-Botanical-Gardens-1.jpg',
+          preview: false,
+        },
+        {
+          spotId: 4,
+          url: 'https://i.insider.com/62223628dcce010019a6cf6d?width=1000&format=jpeg&auto=webp',
+          preview: false,
         },
         {
           spotId: 5,

@@ -17,6 +17,25 @@
   z-index: 411;
 }
 
+.ghost-button{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 15px;
+  cursor: pointer;
+  top: 22px;
+  height: 40px;
+  font-size: 13px;
+  right: 32px;
+  width: 80px;
+}
+
+.ghost-button:hover{
+  cursor: pointer;
+}
+
 .div-link {
   position: relative;
   transition: background-color 0.2s ease;
