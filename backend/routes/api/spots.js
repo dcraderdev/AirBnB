@@ -647,6 +647,7 @@ router.put(
               }
             }
 
+            
             const newImage = await SpotImage.create({
               spotId: spot.id,
               url: imageUrls[i].url,
