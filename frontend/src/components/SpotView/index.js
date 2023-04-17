@@ -54,9 +54,7 @@ function SpotView() {
       })
     }
 
-    console.log(defaultImage);
     if(defaultImage){
-
       setSpotPreviewImage(defaultImage.url)
     }
 
@@ -103,7 +101,7 @@ function SpotView() {
               {currentSpot.city}
               {', '}
               {currentSpot.state}
-              {', '}
+              {' '}
               {currentSpot.country}
             </h4>
           </div>

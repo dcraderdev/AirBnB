@@ -559,7 +559,6 @@ router.put(
 
     let defaultImageObject, defaultImage, isBlob, fileName, imageId;
 
-    console.log('-=-=-=-=-=-=-');
 
     if (stringifiedDefaultImageObject) {
       defaultImageObject = JSON.parse(stringifiedDefaultImageObject);
@@ -568,14 +567,6 @@ router.put(
       imageId = defaultImageObject.defaultId;
       fileName = defaultImageObject.name;
     }
-
-    console.log(isBlob);
-    console.log(defaultImage);
-
-    console.log(defaultImageObject);
-    console.log(fileName);
-
-    console.log(imageId);
 
     const parsedImagesToRemove = imagesToRemove.split(',').map(Number);
 
@@ -647,7 +638,7 @@ router.put(
               }
             }
 
-            
+
             const newImage = await SpotImage.create({
               spotId: spot.id,
               url: imageUrls[i].url,

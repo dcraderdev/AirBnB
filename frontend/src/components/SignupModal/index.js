@@ -100,13 +100,6 @@ function SignupModal() {
         }
       }
 
-console.log(error.data);
-console.log(error.data.errors);
-
-console.log(error.data.errors.username);
-console.log(error.data.errors.email);
-
-
       if (error.status === 403) {
         if (error.data.errors && error.data.errors.email) {
           setUsername('Username must be unique');

@@ -48,7 +48,6 @@ const DeleteModal = ({}) => {
   }, [setting]);
 
   const handleDelete = async () =>{
-    console.log(updateObj);
 
     if(updateObj.address){
       let spotId = updateObj.id

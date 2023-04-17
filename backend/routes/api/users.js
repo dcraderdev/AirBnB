@@ -25,7 +25,6 @@ router.post('/', validateSignup, async (req, res, next) => {
   if (verifyUsername) errors.email = "User with that email already exists"
 
 
-  console.log(errors);
                       
       
   if(errors.username || errors.email){

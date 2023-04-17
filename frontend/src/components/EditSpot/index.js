@@ -208,13 +208,6 @@ const EditSpot = () => {
 }, [defaultImage, originalDefaultImage,loaded]);
     
 
-//  // Check the defaultImageObject state
-//  useEffect(() => {
-//   console.log('defaultImageObject',defaultImageObject);
-// }, [defaultImageObject]);
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -249,27 +242,7 @@ const EditSpot = () => {
 
     let imagesToRemove = getRemovedImageIds()
 
-    console.log(imagesToRemove);
-    console.log(imagesToAdd);
-    console.log(defaultImageObject);
-
-
-    console.log(country);
-    console.log(address);
-    console.log(city);
-    console.log(state);
-    console.log(lat);
-    console.log(lng);
-    console.log(description);
-    console.log(name);
-    console.log(price);
-    console.log(imagesToRemove);
-    console.log(imagesToAdd);
-    console.log(defaultImageObject);
-  
-
     let spotId = currentSpot.id
-    console.log(spotId);
 
       try {
         const { data, response } = await dispatch(
@@ -296,10 +269,6 @@ const EditSpot = () => {
         }
       } catch (error) {
 
-        console.log('yes error');
-        console.log('yes error');
-
-        console.log(error);
 
         setDisabledButton(true);
         setButtonClass('host-form-submit-button disabled');
@@ -351,7 +320,6 @@ const EditSpot = () => {
 
   
   const addImageFromUrl = async () => {
-    console.log('click');
     if (imageUrl) {
       
       if (!fileTypes.includes(imageUrl.slice(-4))) {
@@ -364,8 +332,6 @@ const EditSpot = () => {
         }, 3000);
         return
       }
-
-      console.log(imageUrl);
 
       try {
         const response = await fetch(imageUrl);
@@ -407,7 +373,6 @@ const EditSpot = () => {
 
 // sets main image
   const selectImage = (image) => {
-    console.log(image);
     setSpotPreviewImage(image);
   };
 

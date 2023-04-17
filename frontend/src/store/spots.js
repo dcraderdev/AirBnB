@@ -136,7 +136,7 @@ export const createSpotThunk = (
     body: formData
   });
   const data = await response.json();
-  console.log(data);
+
   dispatch(createSpot(data));
   return {data,response};
 };
@@ -172,10 +172,10 @@ const response = await csrfFetch(`/api/spots/${spotId}`, {
   body: formData
 });
 
-console.log(response);
+
 
 const data = await response.json();
-console.log(data);
+
 // dispatch(editSpot(data));
 if(data) return {data,response};
 };
@@ -187,7 +187,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
     method: 'DELETE',
   });
   const data = await response.json();
-  console.log(data);
+
   dispatch(deleteSpot(data));
   return {data,response};
 };
