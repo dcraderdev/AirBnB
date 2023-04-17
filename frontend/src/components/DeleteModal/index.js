@@ -47,8 +47,9 @@ const DeleteModal = ({}) => {
     }
   }, [setting]);
 
-  const handleDelete = async () =>{
-
+  const handleDelete = async (e) =>{
+    e.stopPropagation();
+    e.preventDefault();
     if(updateObj.address){
       let spotId = updateObj.id
       try {
@@ -57,7 +58,7 @@ const DeleteModal = ({}) => {
         );
   
         if (response.ok) {
-        
+          e.preventDefault();
           render()
           closeModal()
     
