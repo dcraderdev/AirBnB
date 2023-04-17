@@ -25,11 +25,14 @@ function Navigation(){
 
   useEffect(() => {
     isLoaded(false)
-    dispatch(spotActions.getUsersSpotsThunk()).then(() => {
-      setNeedsRerender(false)
-    });
+    if(user){
+
+      dispatch(spotActions.getUsersSpotsThunk()).then(() => {
+        setNeedsRerender(false)
+      });
+    }
     isLoaded(true);
-  }, [dispatch, needsRerender]);
+  }, [dispatch, needsRerender,user]);
 
   return (
     <>

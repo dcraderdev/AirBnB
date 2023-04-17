@@ -15,34 +15,34 @@ const Spots = ({ page }) => {
 
   const dispatch = useDispatch();
   const allSpots = useSelector((state) => state.spots.spots);
+  const user = useSelector((state) => state.session.user);
   const userSpots = useSelector((state) => state.spots.userSpots);
-  const {needsRerender, setNeedsRerender} = useContext(ModalContext)
-
-
-
+  const { needsRerender, setNeedsRerender } = useContext(ModalContext);
 
 
   useEffect(() => {
-    isLoaded(false)
-    let action;
-    if (page === 'home') action = spotActions.getAllSpotsThunk();
-    if (page === 'manage') action = spotActions.getUsersSpotsThunk();
-     
-    if (action) {
-      dispatch(action).then(() => {
+    isLoaded(false);
+    if (!user) {
+      dispatch(spotActions.getAllSpotsThunk()).then(() => {
         isLoaded(true);
-        setNeedsRerender(false)
+        setNeedsRerender(false);
+        return
       });
-    };
-
-  }, [dispatch, page, needsRerender]);
-
-
-  useEffect(() => {
-    if (loaded) {
-
     }
-  }, [loaded, page, allSpots, userSpots]);
+    if (user) {
+      dispatch(spotActions.getAllSpotsThunk()).then(() => {
+        dispatch(spotActions.getUsersSpotsThunk()).then(() => {
+          isLoaded(true);
+          setNeedsRerender(false);
+          return
+        });
+      });
+    }
+  }, [dispatch, page, needsRerender,user]);
+
+
+
+
 
   useEffect(() => {
     if (loaded) {
@@ -54,24 +54,22 @@ const Spots = ({ page }) => {
     }
   }, [loaded, page, allSpots, userSpots]);
 
+  {
+    (!loaded || needsRerender) && <div>Loading...</div>;
+  }
 
-
-
-  { (!loaded || needsRerender) && <div>Loading...</div>; }
-
-  if (page === 'home' && loaded  && spots) {
+  if (page === 'home' && loaded && spots) {
     return (
       <>
         <div className="spots-wrapper">
           <div className="spots-grid">
-            {spots.map((spot,index) => (
-
-                <SpotTile
+            {spots.map((spot, index) => (
+              <SpotTile
                 key={index}
                 spotId={spot.id}
                 spot={spot}
                 setFavorites={setFavorites}
-                />
+              />
             ))}
           </div>
         </div>
@@ -79,18 +77,14 @@ const Spots = ({ page }) => {
     );
   }
 
-
-  if (page === 'manage'  && loaded && spots && !needsRerender) {
+  if (page === 'manage' && loaded && spots && !needsRerender) {
     return (
       <>
-      <div className='spots-manage-spots-header'>Manage Spots</div>
+        <div className="spots-manage-spots-header">Manage Spots</div>
         <div className="spots-wrapper">
           <div className="spots-grid">
-            {spots.map((spot,index) => (
-              <SpotTileManage
-                key={index}
-                spot={spot}
-              />
+            {spots.map((spot, index) => (
+              <SpotTileManage key={index} spot={spot} />
             ))}
           </div>
         </div>
