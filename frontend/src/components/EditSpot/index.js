@@ -63,6 +63,9 @@ const EditSpot = () => {
 
 
 
+
+
+
   // first load in current spot
   useEffect(() => {
     dispatch(spotActions.getSpotThunk(spotId)).then(() => {
