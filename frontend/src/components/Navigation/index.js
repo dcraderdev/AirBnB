@@ -6,9 +6,10 @@ import * as sessionActions from '../../store/session';
 import * as spotActions from '../../store/spots';
 import { ModalContext } from '../../context/ModalContext';
 import ProfileButton from './ProfileButton';
-import Logo from "./logo";
+// import Logo from "./logo";
 import './Navigation.css';
-
+import logo from "../../public/logo.png";
+import "./logo.css";
 
 function Navigation(){
   const history = useHistory()
@@ -34,12 +35,18 @@ function Navigation(){
   }, [dispatch, needsRerender, user]);
 
 
+  const handleLogoClick = () => {
+    history.push('/');
+  };
+
+
   return (
     <>
     {loaded && (
       <nav className="nav-bar">
       <div className='nav-line'></div>
-      <Logo />
+      <img className='logo' src={logo} alt="Logo" onClick={handleLogoClick}/>
+
 
       <div className='nav-user-buttons'>
         {user && (
