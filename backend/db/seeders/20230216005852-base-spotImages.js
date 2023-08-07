@@ -50,7 +50,7 @@ module.exports = {
         },
         {
           spotId: 2,
-          url: 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg',
+          url: 'https://media.zenfs.com/en/robb_report_967/37615a7a53d792aad0d08eddd2e53ffb',
           preview: true,
         },
         {

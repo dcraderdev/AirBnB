@@ -997,7 +997,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 //   // }
 //   return res.json({hey:'hello'})
 
-// });
+// });Create
 
 // Add an Image to a Spot based on the Spot's id
 router.post(
