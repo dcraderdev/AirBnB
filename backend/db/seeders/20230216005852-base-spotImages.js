@@ -50,7 +50,7 @@ module.exports = {
         },
         {
           spotId: 2,
-          url: 'https://media.zenfs.com/en/robb_report_967/37615a7a53d792aad0d08eddd2e53ffb',
+          url: 'https://ewscripps.brightspotcdn.com/dims4/default/8aa5006/2147483647/strip/true/crop/1008x567+0+45/resize/1280x720!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2Fd3%2F4a%2Fe175535e4093a9bde2ceee4234e8%2Fscreen-shot-2019-10-08-at-12.40.04%20PM.png',
           preview: true,
         },
         {
