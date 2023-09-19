@@ -9,7 +9,7 @@ import { ModalContext } from '../../context/ModalContext';
 import './Spots.css';
 
 const Spots = ({ page }) => {
-  const [loaded, isLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [spots, setSpots] = useState([]);
 
@@ -21,10 +21,19 @@ const Spots = ({ page }) => {
 
 
   useEffect(() => {
-    isLoaded(false);
+  }, []);
+  
+  
+  
+  useEffect(() => {
+    setIsLoaded(false);
     if (!user) {
       dispatch(spotActions.getAllSpotsThunk()).then(() => {
-        isLoaded(true);
+        
+        
+        setTimeout(() => {
+          setIsLoaded(true);
+        }, 1000);
         setNeedsRerender(false);
         return
       });
@@ -32,7 +41,9 @@ const Spots = ({ page }) => {
     if (user) {
       dispatch(spotActions.getAllSpotsThunk()).then(() => {
         dispatch(spotActions.getUsersSpotsThunk()).then(() => {
-          isLoaded(true);
+          setTimeout(() => {
+            setIsLoaded(true);
+          }, 1000);
           setNeedsRerender(false);
           return
         });
@@ -45,20 +56,18 @@ const Spots = ({ page }) => {
 
 
   useEffect(() => {
-    if (loaded) {
-      if (page === 'home') {
+      if (page === 'home' && allSpots) {
         setSpots(allSpots);
-      } else if (page === 'manage') {
+      } else if (page === 'manage' && userSpots) {
         setSpots(userSpots.Spots);
       }
-    }
-  }, [loaded, page, allSpots, userSpots]);
+  }, [ page, allSpots, userSpots]);
 
   {
-    (!loaded || needsRerender) && <div>Loading...</div>;
+    ( needsRerender) && <div>Loading...</div>;
   }
 
-  if (page === 'home' && loaded && spots) {
+  if (page === 'home' && spots) {
     return (
       <>
         <div className="spots-wrapper">
@@ -69,6 +78,8 @@ const Spots = ({ page }) => {
                 spotId={spot.id}
                 spot={spot}
                 setFavorites={setFavorites}
+                isLoaded={isLoaded}
+                index={index}
               />
             ))}
           </div>
@@ -77,14 +88,18 @@ const Spots = ({ page }) => {
     );
   }
 
-  if (page === 'manage' && loaded && spots && !needsRerender) {
+  if (page === 'manage' && isLoaded && spots && !needsRerender) {
     return (
       <>
         <div className="spots-manage-spots-header">Manage Spots</div>
         <div className="spots-wrapper">
           <div className="spots-grid">
             {spots.map((spot, index) => (
-              <SpotTileManage key={index} spot={spot} />
+              <SpotTileManage 
+              key={index} 
+              spot={spot}                
+              isLoaded={isLoaded}
+              index={index} />
             ))}
           </div>
         </div>

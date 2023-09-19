@@ -3,8 +3,9 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './SpotTile.css';
 import { Link } from 'react-router-dom';
+import SpotTileSkeleton from '../SpotTileSkeleton';
 
-const SpotTile = ({ spot, setFavorites}) => {
+const SpotTile = ({ spot, setFavorites, isLoaded, index}) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
@@ -13,6 +14,7 @@ const SpotTile = ({ spot, setFavorites}) => {
   const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
   const [previewImageClass, setPreviewImageClass] = useState('preview-image-gray');
   const [imageUrl, setImageUrl] = useState(false);
+
 
   const {
     name,
@@ -24,8 +26,9 @@ const SpotTile = ({ spot, setFavorites}) => {
     description,
   } = spot;
 
+  const delayTime = index * 0.2;
 
-
+console.log(isLoaded);
 
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');
@@ -59,10 +62,31 @@ const SpotTile = ({ spot, setFavorites}) => {
     setHeartFill(favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart');
   };
 
+
+
+
+
   return (
     <div>
-      <Link to={`/spots/${spot.id}`} className="spot-tile-link">
-        <div className="spot-tile">
+
+
+
+
+
+
+            <Link to={`/spots/${spot.id}`} className="spot-tile-link">
+
+
+<div className={`spot-tile2 ${isLoaded ? ' fade-out' : ''}`} style={{ animationDelay: `${delayTime}s` }}>
+
+      <SpotTileSkeleton spot={spot}/>
+</div>
+
+
+
+
+
+<div className={`spot-tile ${isLoaded ? '' : ' '}`}>
           <div
             className={heartIcon}
             onClick={setFav}
@@ -98,7 +122,7 @@ const SpotTile = ({ spot, setFavorites}) => {
               <div className="spot-tile-night"> night</div>
             </div>
           </div>
-          <p className="spot-tile-short-description">{tileDescription}</p>
+          <p className="spot-tile-short-description">{}</p>
 
           <div className="tooltip tooltiptext">{displayName}</div>
         </div>

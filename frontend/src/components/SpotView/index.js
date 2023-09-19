@@ -13,7 +13,7 @@ import { ModalContext } from '../../context/ModalContext';
 function SpotView() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const [loaded, isLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
   const [spotPreviewImageClass, setSpotPreviewImageClass] = useState('');
 
@@ -23,11 +23,11 @@ function SpotView() {
   const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
 
   useEffect(() => {
-    isLoaded(false);
+    setIsLoaded(false);
 
     dispatch(spotActions.getSpotThunk(spotId)).then(() => {
       setNeedsRerender(false);
-      isLoaded(true);
+      setIsLoaded(true);
     });
 
     window.scrollTo(0, 0);
@@ -92,7 +92,7 @@ function SpotView() {
     <div>
       {!currentSpot && <p>Loading...</p>}
 
-      {currentSpot && loaded && (
+      {currentSpot && isLoaded && (
         <div className="spot-view-container">
           <div className="spot-view-header">
             <div>{currentSpot.name}</div>

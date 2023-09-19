@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { ModalContext } from '../../context/ModalContext';
+import SpotTileSkeleton from '../SpotTileSkeleton';
 import './SpotTileManage.css';
 
-const SpotTileManage = ({ spot }) => {
+const SpotTileManage = ({ spot , isLoaded, index}) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
@@ -15,6 +16,8 @@ const SpotTileManage = ({ spot }) => {
 
 
   const history = useHistory()
+  const delayTime = index * 0.2;
+
 
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');
@@ -31,7 +34,20 @@ const SpotTileManage = ({ spot }) => {
 
 
   return (
+
     <div>
+
+
+
+<div className={`spot-tile2 ${isLoaded ? ' fade-out' : ''}`} style={{ animationDelay: `${delayTime}s` }}>
+
+      <SpotTileSkeleton spot={spot}/>
+</div>
+
+
+
+
+
       <Link to={`/spots/${spot.id}`} className="spot-tile-link">
         <div className="spot-tile">
           <div className="spot-tile-image-container">

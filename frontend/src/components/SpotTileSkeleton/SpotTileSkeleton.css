@@ -1,0 +1,127 @@
+.spottileskeleton-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+
+
+
+.spottileskeleton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  padding: 5px;
+  color: inherit;
+  cursor: pointer;
+  margin-bottom: 16px;
+  height: 320px;
+  width: 320px;
+  max-width: 430px;
+  transition: height 3s ease-in, transform 3s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+}
+
+
+
+
+
+
+.spottileskeleton-image-container {
+  position: absolute;
+  top: 5%;
+  left: 0%;
+  width: 99%;
+  height: 75%;
+  border-radius: 14px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+
+}
+
+
+
+
+
+.spottileskeleton-spot-info {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 18%;
+  width: 100%;
+  left: 0%;
+  bottom: 0%;
+  
+}
+
+
+
+
+.spottileskeleton-location {
+  position: absolute;
+  width: 60%;
+  top: 0px;
+  left: 8px;
+  height: 20px;
+
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+
+
+}
+.spottileskeleton-price-night-container{  
+  position: relative;
+  width: 100px;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+
+
+  top: 27px;
+  height: 20px;
+  margin-left: 8px;
+  border-radius: 6px;
+
+
+}
+
+
+
+.spottileskeleton-short-description{
+  width: 300px;
+  height: 200px;
+
+
+}
+
+.spottileskeleton-avg-rating-container {
+  width: 70px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+
+
+  border-radius: 6px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

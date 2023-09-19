@@ -21,6 +21,28 @@
   width: 320px;
   max-width: 430px;
   transition: height 3s ease-in, transform 3s ease-in;
+  
+}
+
+.spot-tile2 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  padding: 5px;
+  background-color: #fff;
+  color: inherit;
+  cursor: pointer;
+  margin-bottom: 16px;
+  height: 320px;
+  width: 320px;
+  max-width: 430px;
+  z-index: 1000000000;
+}
+
+
+.hidden{
+  visibility: hidden;
 }
 
 
@@ -40,12 +62,15 @@
   position: absolute;
   top: 0%;
   left: 0%;
-  width: 100%;
+  width: 99%;
   height: 80%;
   border-radius: 14px;
   overflow: hidden;
   justify-content: center;
   align-items: center;
+
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 
@@ -131,6 +156,7 @@
   width: 300px;
   height: 200px;
   overflow-wrap: break-word;
+  
 }
 
 .spot-tile-avg-rating-container {
@@ -163,6 +189,7 @@
   position: fixed;
   width: fit-content;
   height: fit-content;
+  
 }
 
 
@@ -186,6 +213,7 @@
   opacity: 0;
   transition: opacity 0.3s;
   border: solid black 1px;
+  
 }
 
 
