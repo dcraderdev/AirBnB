@@ -30,10 +30,10 @@
 
 .spottileskeleton-image-container {
   position: absolute;
-  top: 5%;
+  top: 0%;
   left: 0%;
   width: 99%;
-  height: 75%;
+  height: 80%;
   border-radius: 14px;
   overflow: hidden;
   justify-content: center;

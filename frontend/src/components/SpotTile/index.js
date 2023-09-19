@@ -5,30 +5,21 @@ import './SpotTile.css';
 import { Link } from 'react-router-dom';
 import SpotTileSkeleton from '../SpotTileSkeleton';
 
-const SpotTile = ({ spot, setFavorites, isLoaded, index}) => {
+const SpotTile = ({ spot, setFavorites, isLoaded, index }) => {
   const [displayName, setDisplayName] = useState('');
   const [rating, setRating] = useState('');
   const [tileDescription, setTileDescription] = useState('');
   const [favorite, setFavorite] = useState([false]);
   const [heartIcon, setHeartIcon] = useState('heart-icon');
   const [heartFill, setHeartFill] = useState('fa-regular fa-heart');
-  const [previewImageClass, setPreviewImageClass] = useState('preview-image-gray');
+  const [previewImageClass, setPreviewImageClass] =
+    useState('preview-image-gray');
   const [imageUrl, setImageUrl] = useState(false);
 
-
-  const {
-    name,
-    previewImage,
-    city,
-    state,
-    price,
-    avgRating,
-    description,
-  } = spot;
+  const { name, previewImage, city, state, price, avgRating, description } =
+    spot;
 
   const delayTime = index * 0.2;
-
-console.log(isLoaded);
 
   useEffect(() => {
     avgRating !== 'NaN' ? setRating(avgRating) : setRating('New!');
@@ -62,31 +53,17 @@ console.log(isLoaded);
     setHeartFill(favorite ? 'fa-regular fa-heart' : 'fa-solid fa-heart');
   };
 
-
-
-
-
   return (
     <div>
+      <Link to={`/spots/${spot.id}`} className="spot-tile-link">
+        <div
+          className={`spot-tile2 ${isLoaded ? ' fade-out' : ''}`}
+          style={{ animationDelay: `${delayTime}s` }}
+        >
+          <SpotTileSkeleton spot={spot} />
+        </div>
 
-
-
-
-
-
-            <Link to={`/spots/${spot.id}`} className="spot-tile-link">
-
-
-<div className={`spot-tile2 ${isLoaded ? ' fade-out' : ''}`} style={{ animationDelay: `${delayTime}s` }}>
-
-      <SpotTileSkeleton spot={spot}/>
-</div>
-
-
-
-
-
-<div className={`spot-tile ${isLoaded ? '' : ' '}`}>
+        <div className={`spot-tile ${isLoaded ? '' : ' '}`}>
           <div
             className={heartIcon}
             onClick={setFav}

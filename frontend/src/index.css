@@ -194,14 +194,14 @@ textarea:focus {
 
 
 .shimmer {
-  animation-duration: 3.2s;
+  animation-duration: 4.2s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-name: shimmer;
   animation-timing-function: linear;
   background: #ddd;
   background: linear-gradient(to right, #eeecec 8%, #F0F0F0 18%, #F6F6F6 33%);
-  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background: linear-gradient(to right, #eae8e8 8%, #e3e0e0 18%, #efeeee 33%);
 
 
 
