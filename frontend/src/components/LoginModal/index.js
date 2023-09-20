@@ -120,6 +120,7 @@ function LoginModal() {
 
 
   return (
+
     <div className="signin-form-page-container" ref={formRef}>
       <div className="signinHeader">Sign In</div>
       <button className="close-button" onClick={closeModal} >
@@ -168,6 +169,8 @@ function LoginModal() {
         </div>
       </div>
     </div>
+
+
   );
 }
 

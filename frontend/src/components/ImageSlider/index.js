@@ -46,6 +46,13 @@ const ImageSlider = ({ spotImages, selectImage, isMobileView }) => {
 
   useEffect(() => {
 
+    if(spotImages.length < 6){
+      let imagesNeeded = 6 - spotImages.length
+      for(let i = 0; i < imagesNeeded; i++){
+        spotImages.push({})
+      }
+    }
+
     if(isMobileView) {
       setImages1(spotImages);
       return
@@ -54,12 +61,6 @@ const ImageSlider = ({ spotImages, selectImage, isMobileView }) => {
 
     let set1 = [];
     let set2 = [];
-    if(spotImages.length < 6){
-      let imagesNeeded = 6 - spotImages.length
-      for(let i = 0; i < imagesNeeded; i++){
-        spotImages.push({})
-      }
-    }
 
     spotImages.map((image, i) => {
       if (i % 2 === 0) set1.push(image);

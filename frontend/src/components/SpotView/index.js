@@ -96,6 +96,9 @@ function SpotView() {
     alert('Feature coming soon');
   };
 
+
+  console.log(spotPreviewImage);
+
   return (
     <>
       {isMobileView && (
@@ -115,9 +118,31 @@ function SpotView() {
               </div>
 
               <div className="spot-view-image-container-mobile">
+
+                
                 {spotPreviewImage && (
                   <img src={spotPreviewImage} alt="Spot Preview Image"></img>
+
+                //   :
+
+                //   <img
+                //   src={logo}
+                //   alt="Airbnb logo"
+                //   className="logo-scale"
+                // ></img>
                 )}
+
+
+{ !spotPreviewImage  &&  <div className="preview-default-image-mobile">
+                    <img
+                      src={logo}
+                      alt="Airbnb logo"
+                      className="logo-scale-mobile"
+                    ></img>
+                  </div>
+}
+
+
               </div>
 
             <div className="spot-view-slide-container-mobile">

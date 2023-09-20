@@ -7,7 +7,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 100000000;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -20,23 +20,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 10000000;
   background-color: transparent;
 }
 
-body{
-  /* background-image: linear-gradient(to right, #fcf9f553, #ffffff); */
-
-  /* background-color: #ffffff; */
-
-
-
-
-}
 
 
 *{
-  /* font-family: 'Montserrat', sans-serif; */
   font-family: Helvetica Neue;
 
 }

@@ -19,14 +19,15 @@ const Reviews = ({ currentSpot, isMobileView }) => {
   const [hasReview, setHasReview] = useState(true);
 
   useEffect(() => {
-    if (user && currentSpot) {
+    if (currentSpot) {
       setReviews(currentSpot.Reviews);
+      if(!user) return
       setIsSpotOwner(currentSpot.ownerId === user.id);
     }
   }, [user, currentSpot]);
 
   useEffect(() => {
-    if (user && reviews) {
+    if (reviews && user) {
       const hasReview = reviews.find((review) => {
         return review.User.id === user.id;
       });
@@ -34,7 +35,6 @@ const Reviews = ({ currentSpot, isMobileView }) => {
     }
   }, [reviews, user]);
 
-  console.log(isMobileView);
 
   return (
     <>
@@ -61,7 +61,7 @@ const Reviews = ({ currentSpot, isMobileView }) => {
           <div className="review-component-post-review-container-mobile">
 
 
-          {!currentSpot.Reviews.length > 0 && !isSpotOwner && user && (
+          {!currentSpot.Reviews.length && (
             <div className="review-component-be-first-review">
               Be the first to post a review!
             </div>
@@ -109,7 +109,7 @@ const Reviews = ({ currentSpot, isMobileView }) => {
 
           <div className="review-component-post-review-container"></div>
 
-          {!currentSpot.Reviews.length > 0 && !isSpotOwner && user && (
+          {!currentSpot.Reviews.length && (
             <div className="review-component-be-first-review">
               Be the first to post a review!
             </div>

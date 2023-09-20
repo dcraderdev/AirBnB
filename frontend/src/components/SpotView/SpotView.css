@@ -60,6 +60,23 @@
   transform: translate(-50%, 0%) scale(.3);
 }
 
+
+.preview-default-image-mobile{
+  left: 50%;
+  position: relative;
+  width: 95%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+
+
+
+
+
+
+
+
 .spot-view-preview-image{
   position: relative;
   width: 100%;

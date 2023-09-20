@@ -64,7 +64,7 @@ function ProfileButtonModal() {
   };
   const navHelp = () => {
     closeModal();
-    history.push('/help')
+    history.push('/')
   };
   const navModal = (type) => {
     closeModal();

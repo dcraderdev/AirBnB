@@ -9,7 +9,7 @@ const UserReview = ({review, setUpdate, isMobileView}) => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const [isCreator, setIsCreator] = useState(false)
-  const { modal, openModal, closeModal,render,needsRerender,setNeedsRerender, updateObj, setUpdateObj } = useContext(ModalContext);
+  const { openModal, setUpdateObj } = useContext(ModalContext);
 
   function getMonthName(index) {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -29,7 +29,6 @@ const UserReview = ({review, setUpdate, isMobileView}) => {
   },[user,review])
 
 
-console.log(isMobileView);
 
   return (
 
