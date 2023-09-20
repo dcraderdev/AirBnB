@@ -1,13 +1,18 @@
 .user-review-container{
   position: relative;
   width: 1000px;
+  width: 100vw;
   height: fit-content;
   top: -25px;
   border-top: solid black 1px;
 }
 
+
+
+
 .user-review-name{
   margin-top: 15px;
+  margin-bottom: 10px;
   position: relative;
   width: 100px;
   height: 30px;
@@ -17,6 +22,8 @@
 
 .user-review-month-year{
   position: relative;
+  margin-bottom: 10px;
+
   width: 200px;
   height: 20px;
   top: 0px;
@@ -26,6 +33,8 @@
 }
 
 .user-review{
+  margin-bottom: 10px;
+
   position: relative;
   width: 1000px;
   height: fit-content;

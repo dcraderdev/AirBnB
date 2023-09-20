@@ -12,9 +12,6 @@
   height: 30px;
   top: -10px;
   left: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .review-component-review-stat button{
   width: 150px;

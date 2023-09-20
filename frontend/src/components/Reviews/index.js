@@ -69,7 +69,9 @@ const Reviews = ({currentSpot}) => {
       )}
 
       {spotHasReviews && reviews.map((review,index)=>(
-        <div key={index} className='review-component-review'><UserReview review={review}/></div>
+        <div key={index} className='review-component-review'>
+          <UserReview review={review}/>
+        </div>
       ))}
 
     </div>

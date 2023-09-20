@@ -55,3 +55,50 @@
   background-color: rgba(210, 218, 216, 0.251);
 }
 
+
+
+/* Mobile View Stylings */
+
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.carousel-double-image,
+.carousel-slides {
+  display: flex;
+  transition: transform 0.4s;
+}
+
+
+.carousel-image {
+  width: 50%;
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
+
+  height: 20vh;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+
+
+
+
+
+}
+
+
+.carousel-image img{
+  width: 50vw;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+

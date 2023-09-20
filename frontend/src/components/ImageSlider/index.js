@@ -1,14 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ImageTile from '../ImageTile';
 import './ImageSlider.css';
 
-const ImageSlider = ({ spotImages, selectImage }) => {
+
+
+
+const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
   const [images1, setImages1] = useState([]);
   const [images2, setImages2] = useState([]);
   const [currentIndex1, setCurrentIndex1] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
 
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  let clonedEnd = spotImages.slice(0, 1);
+  let loopedImages = spotImages % 2 === 0 ? [...spotImages] : [ ...spotImages, ...clonedEnd];
+
+
+
+  const swipeContainerRef = useRef(null);
+  let touchStartX = 0;
+
+  const handleTouchStart = event => {
+    touchStartX = event.touches[0].clientX;
+  };
+
+  const handleTouchEnd = event => {
+    const touchEndX = event.changedTouches[0].clientX;
+    const diffX = touchStartX - touchEndX;
+
+    // If swiped left and there are more images to show
+    if (diffX > 50 && currentSlide < loopedImages.length / 2 - 1) {
+      setCurrentSlide(prev => prev + 1);
+    }
+
+    // If swiped right and there are previous images
+    if (diffX < -50 && currentSlide > 0) {
+
+      setCurrentSlide(prev => prev - 1);
+    }
+  };
+
   useEffect(() => {
+    const container = swipeContainerRef.current;
+    container.addEventListener('touchstart', handleTouchStart);
+    container.addEventListener('touchend', handleTouchEnd);
+     
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [currentSlide]);
+
+  const sliderStyle = {
+    transform: `translateX(-${currentSlide * window.innerWidth}px)`,
+    transition: 'transform 0.3s ease',
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+
+    if(isMobile) return
     let set1 = [];
     let set2 = [];
     if(spotImages.length < 6){
@@ -56,8 +119,14 @@ const ImageSlider = ({ spotImages, selectImage }) => {
 
 
 
+
+
   return (
-    <div>
+
+    <>
+    
+    
+{!isMobile &&            <div>
       <div className="slider1">
         <div className="back-button slider-button" onClick={() => imageSlideBack(1)}>
           <i className="fa-solid fa-angles-left"></i>
@@ -83,7 +152,28 @@ const ImageSlider = ({ spotImages, selectImage }) => {
           <i className="fa-solid fa-angles-right"></i>
         </div>
       </div>
-    </div>
+    </div>}
+
+
+
+
+
+{isMobile && (
+        <div className="carousel-container" ref={swipeContainerRef}>
+          <div className="carousel-slides" style={sliderStyle}>
+            {loopedImages.map((image, index) => (
+              <div key={index} className="carousel-image" onClick={() => selectImage(image)}>
+                <img src={image.url} alt={`Slide ${index}`} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+</>
+
+
+
   );
 };
 export default ImageSlider;

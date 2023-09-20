@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
-import * as sessionActions from '../../store/session';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import './CreateSpot.css';
 import * as spotActions from '../../store/spots';
 import ImageTile from '../ImageTile';
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
 import { ModalContext } from '../../context/ModalContext';
 
 const CreateSpot = () => {

@@ -9,6 +9,7 @@ import ImageSlider from '../ImageSlider';
 import ReviewStat from '../ReviewStat';
 import Reviews from '../Reviews';
 import { ModalContext } from '../../context/ModalContext';
+import { WindowContext } from '../../context/WindowContext';
 
 function SpotView() {
   const { spotId } = useParams();
@@ -16,11 +17,19 @@ function SpotView() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [spotPreviewImage, setSpotPreviewImage] = useState('');
   const [spotPreviewImageClass, setSpotPreviewImageClass] = useState('');
+  const [isMobileView, setIsMobileView] = useState(true);
 
   const user = useSelector((state) => state.session.user);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
 
   const { modal, openModal, closeModal, needsRerender, setNeedsRerender } = useContext(ModalContext);
+  const { windowWidth } = useContext(WindowContext);
+
+    useEffect(() => {
+
+    }, [windowWidth]);
+
+
 
   useEffect(() => {
     setIsLoaded(false);
@@ -40,25 +49,21 @@ function SpotView() {
   }, [needsRerender]);
 
   useEffect(() => {
-
-
     // find default image
-    let defaultImage
+    let defaultImage;
 
     if (currentSpot && currentSpot.SpotImages) {
-      currentSpot.SpotImages.map((image)=>{
-        if(image.preview === true){
-          defaultImage = image
+      currentSpot.SpotImages.map((image) => {
+        if (image.preview === true) {
+          defaultImage = image;
         }
-        return defaultImage === true
-      })
+        return defaultImage === true;
+      });
     }
 
-    if(defaultImage){
-      setSpotPreviewImage(defaultImage.url)
+    if (defaultImage) {
+      setSpotPreviewImage(defaultImage.url);
     }
-
-
 
     if (currentSpot) {
       // setSpotPreviewImage(
@@ -74,12 +79,6 @@ function SpotView() {
     }
   }, [currentSpot]);
 
-
-
-
-
-
-
   const selectImage = (file) => {
     setSpotPreviewImage(file.url);
   };
@@ -89,45 +88,48 @@ function SpotView() {
   };
 
   return (
-    <div>
-      {!currentSpot && <p>Loading...</p>}
+    <>
+      {isMobileView && (
+        <div>
+          {!currentSpot && <p>Loading...</p>}
 
-      {currentSpot && isLoaded && (
-        <div className="spot-view-container">
-          <div className="spot-view-header">
-            <div>{currentSpot.name}</div>
+          {currentSpot && isLoaded && (
+            <div className="spot-view-container-mobile">
+              <div className="spot-view-header mobile">
+                <div>{currentSpot.name}</div>
 
-            <h4>
-              {currentSpot.city}
-              {', '}
-              {currentSpot.state}
-              {' '}
-              {currentSpot.country}
-            </h4>
-          </div>
-
-          <div className="spot-view-image-container">
-            <div className="spot-view-preview-image-container">
-              <img
-                className={spotPreviewImageClass}
-                src={spotPreviewImage}
-                alt="Spot Preview Image"
-              ></img>
-
-              <div className="preview-default-image">
-                <img src={logo} alt="Airbnb logo" className="logo-scale"></img>
+                <h4>
+                  {currentSpot.city}
+                  {', '}
+                  {currentSpot.state} {currentSpot.country}
+                </h4>
               </div>
-            </div>
 
-            <div className="spot-view-slide-container">
+              <div className="spot-view-image-container-mobile">
+                {spotPreviewImage && (
+                  <img src={spotPreviewImage} alt="Spot Preview Image"></img>
+                )}
+              </div>
+
+            <div className="spot-view-slide-container-mobile">
               <ImageSlider
                 spotImages={currentSpot.SpotImages}
                 selectImage={selectImage}
+                isMobile={true}
               />
             </div>
-          </div>
 
-          <div className="spot-view-des-res-container">
+              {/* { spotPreviewImage &&             <img
+                className={spotPreviewImageClass}
+                src={spotPreviewImage}
+                alt="Spot Preview Image"
+              ></img>}
+
+         
+
+            {/*  */}
+
+              {/* <div className="spot-view-des-res-container">
             <div className="spot-view-description-header">
               Hosted by {currentSpot.Owner.firstName}{' '}
               {currentSpot.Owner.lastName}
@@ -168,10 +170,98 @@ function SpotView() {
 
           <div className="spot-view-review-container">
             <Reviews currentSpot={currentSpot} />
-          </div>
+          </div> */}
+            </div>
+          )}
         </div>
       )}
-    </div>
+
+      {!isMobileView && (
+        <div>
+          {!currentSpot && <p>Loading...</p>}
+
+          {currentSpot && isLoaded && (
+            <div className="spot-view-container">
+              <div className="spot-view-header">
+                <div>{currentSpot.name}</div>
+
+                <h4>
+                  {currentSpot.city}
+                  {', '}
+                  {currentSpot.state} {currentSpot.country}
+                </h4>
+              </div>
+
+              <div className="spot-view-image-container">
+                <div className="spot-view-preview-image-container">
+                  <img
+                    className={spotPreviewImageClass}
+                    src={spotPreviewImage}
+                    alt="Spot Preview Image"
+                  ></img>
+
+                  <div className="preview-default-image">
+                    <img
+                      src={logo}
+                      alt="Airbnb logo"
+                      className="logo-scale"
+                    ></img>
+                  </div>
+                </div>
+
+                <div className="spot-view-slide-container">
+                  <ImageSlider
+                    spotImages={currentSpot.SpotImages}
+                    selectImage={selectImage}
+                  />
+                </div>
+              </div>
+
+              <div className="spot-view-des-res-container">
+                <div className="spot-view-description-header">
+                  Hosted by {currentSpot.Owner.firstName}{' '}
+                  {currentSpot.Owner.lastName}
+                </div>
+                <div className="spot-view-description-container">
+                  <div className="spot-view-description-text">
+                    <p>{currentSpot.description}</p>
+                  </div>
+                </div>
+
+                <div className="spot-view-reservation-container">
+                  <div className="spot-view-reservation-info">
+                    <div className="spot-view-price-night-container">
+                      <div className="spot-view-price">
+                        ${currentSpot.price.toFixed(2)}
+                      </div>
+
+                      <div className="spot-view-night"> night</div>
+                    </div>
+
+                    <div className="spot-view-review-stat-info">
+                      <ReviewStat currentSpot={currentSpot} />
+                    </div>
+                  </div>
+
+                  <button
+                    className="spot-view-reservation-button button"
+                    onClick={() => {
+                      alert('Feature coming soon!');
+                    }}
+                  >
+                    Reserve
+                  </button>
+                </div>
+              </div>
+
+              <div className="spot-view-review-container">
+                <Reviews currentSpot={currentSpot} />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 
