@@ -11,11 +11,22 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   z-index: 1000;
-
+  max-width: 90vw;
 }
+
+
+
+
+
+
+
+
+
 
 .review-modal-header {
   position: absolute;
+  width: 100%;
+  text-align: center;
   left: 50%;
   top: 25px;
   transform: translate(-50%,-50%);
@@ -45,16 +56,23 @@
   margin-top: 10px;
   height: 125px;
   width: 420px;
-  padding: 10px;
+  width: 95%;
+  left: 50%;
+  transform: translate(-50%,0);
+
 
 }
 
 
 .review-modal-container label {
   position: relative;
-  display: block;
   top: 35px;
 }
+.review-modal-label{
+  margin-left:8px;
+}
+
+
 
 .review-modal-star-selection{
   position: absolute;
@@ -82,3 +100,5 @@
 .review-modal-star-selection .fa-star:hover {
   cursor: pointer;
 }
+
+

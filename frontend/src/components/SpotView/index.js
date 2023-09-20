@@ -147,8 +147,6 @@ function SpotView() {
             <div className="spot-view-reservation-container-mobile">
 
 
-
-
               <div className="spot-view-reservation-info-mobile">
                 <div className="spot-view-price-night-container-mobile">
                   <div className="spot-view-price-mobile">
@@ -162,9 +160,6 @@ function SpotView() {
                   <ReviewStat currentSpot={currentSpot} />
                 </div>
               </div>
-
-
-
 
 
 

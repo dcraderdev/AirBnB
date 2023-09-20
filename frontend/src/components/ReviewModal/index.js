@@ -31,7 +31,7 @@ const ReviewModal = () => {
     const errors = {};
     const reviewErrors = {};
 
-    if (!review.length) errors['review'] = 'Please enter a review';
+    if (!review.length) errors['review'] = 'Tell us about your stay!';
     if (rating < 1) {
       errors['rating'] = 'Please enter at least 1 star';
       reviewErrors['rating'] = 'Please enter at least 1 star';
@@ -141,8 +141,8 @@ const ReviewModal = () => {
       </div>
 
 
-      <label className='review-modal-label'>
-      Leave your review here!
+      <label>
+       <div className='review-modal-label'>Leave your review here!</div>
           <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}

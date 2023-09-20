@@ -36,7 +36,9 @@ body{
 
 
 *{
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: Helvetica Neue;
+
 }
 
 .close-button{

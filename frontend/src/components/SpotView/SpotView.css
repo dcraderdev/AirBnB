@@ -231,6 +231,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   font-size: 20px;
+
+
 }
 
 .spot-view-header.mobile div{
@@ -243,20 +245,26 @@
 }
 
 .spot-view-container-mobile{
-  width: 100vw;
   width: 98vw;
 
   position: absolute;
   left: 0px;
-
 }
 
 
 .spot-view-image-container-mobile {
   position: relative;
-  width: 100%;
-  width: 98vw;
+  width: 97vw;
   height: 40vh;
+
+
+  left: 50%;
+  transform: translate(-50%,0);
+
+
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border: solid rgb(248, 246, 246) 2px;
+  border-radius: 10px;
 
 
 
@@ -268,6 +276,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
 
 
   display: flex;
@@ -283,7 +292,6 @@
   position: relative;
   left: 0px;
   margin-top: 5px;
-  width: 100vw;
   width: 98vw;
 
   height: 20vh;
@@ -297,7 +305,6 @@
   width: 50vw;
   height: 40vh;
   overflow: hidden;
-  border: green solid 1px;
 
 }
 
@@ -313,10 +320,10 @@
   justify-content: center;
   align-items: center;
   height: fit-content;
-  width: 100vw;
   width: 98vw;
 
 }
+
 
 .spot-view-description-text-mobile,
 .spot-view-description-header-mobile {
@@ -327,6 +334,13 @@
   margin-top: 10px;
 }
 
+.spot-view-description-header-mobile {
+
+  margin-top: 50px;
+
+}
+
+
 .spot-view-description-text-mobile{
   font-size: 20px;
 }
@@ -334,7 +348,6 @@
 
 
 .spot-view-reservation-container-mobile{
-  width: 100vw;
   width: 98vw;
 
   height: fit-content;
@@ -350,7 +363,6 @@
 
 .reservation-spacing-mobile{
   height: 120px;
-  width: 100vw;
   width: 98vw;
 
 }
@@ -365,6 +377,8 @@
   border-top: #222 solid 1px;
   background-color: #ffff;
   z-index: 100000;
+  width: 98vw;
+
 
 }
 
@@ -380,7 +394,7 @@
   width: 150px;
   height: fit-content;
   display: flex;
-  top: 15px;
+  top: 25px;
   left: 8px;
 }
 
@@ -407,7 +421,7 @@
 
 .spot-view-review-stat-info-mobile{
   position: relative;
-  top: 26px;
+  top: 30px;
   left: 6px;
   width: fit-content;
   display: flex;
@@ -418,11 +432,12 @@
 .spot-view-reservation-button-mobile{
   position: absolute;
   right: 40px;
-  bottom: 15px;
+  bottom: 30px;
   padding: 10px;
   width: 40vw;
   height: 40px;
   font-size: 20px;
+  z-index: 100000;
 }
 
 
@@ -433,7 +448,6 @@
 
 
 .spot-view-review-container-mobile{
-  width: 100vw;
   width: 98vw;
 
   height: fit-content;
