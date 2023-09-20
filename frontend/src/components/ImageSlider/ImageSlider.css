@@ -79,13 +79,10 @@
   flex-shrink: 0;
 
   height: 20vh;
-  aspect-ratio: 1/1;
-  object-fit: cover;
 
-
-
-
-
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 
 
@@ -93,6 +90,7 @@
   width: 50vw;
   aspect-ratio: 1/1;
   object-fit: cover;
+
 }
 
 
@@ -102,3 +100,36 @@
   transition: transform 0.3s ease;
 }
 
+.back-button-mobile {
+  left: 8px;
+}
+
+.forward-button-mobile {
+  right: 8px;
+}
+
+
+.slider-button-mobile{
+  top: 100px;
+  position: absolute;
+  background-color: rgba(234, 240, 239, 0.426);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.slider-button-mobile:hover {
+  cursor: pointer;
+  border:solid rgba(0, 0, 0, 0.393) 1px;
+  background-color: rgba(234, 240, 239, 0.251);
+}
+
+.slider-button-mobile:active {
+  background-color: rgba(210, 218, 216, 0.251);
+}

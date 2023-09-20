@@ -5,7 +5,7 @@ import { ModalContext } from '../../context/ModalContext';
 
 
 
-const UserReview = ({review, setUpdate}) => {
+const UserReview = ({review, setUpdate, isMobileView}) => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const [isCreator, setIsCreator] = useState(false)
@@ -29,9 +29,39 @@ const UserReview = ({review, setUpdate}) => {
   },[user,review])
 
 
-
+console.log(isMobileView);
 
   return (
+
+<>
+
+{ isMobileView &&   
+    <div className='user-review-container-mobile'>
+       
+      <div className='user-review-name'>{review.User.firstName}</div>
+
+     <div className='user-review-month-year'>{monthName} {year}
+      
+      {isCreator && <button
+            className="image-main-button-delete button"
+            onClick={()=>{
+              openModal('delete')
+              setUpdateObj(review)
+            }
+          }
+          >
+            Delete Review
+          </button>}
+      </div>
+      <div className='user-review-mobile'>{review.review}</div>
+
+    </div>
+    
+    }
+
+
+
+    { !isMobileView &&   
     <div className='user-review-container'>
       
       <div className='user-review-name'>{review.User.firstName}</div>
@@ -50,7 +80,13 @@ const UserReview = ({review, setUpdate}) => {
           </button>}
       </div>
       <div className='user-review'>{review.review}</div>
-    </div>
+    </div>}
+
+</>
+
+
+
+
   )
 }
 export default UserReview

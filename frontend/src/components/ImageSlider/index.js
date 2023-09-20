@@ -5,7 +5,7 @@ import './ImageSlider.css';
 
 
 
-const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
+const ImageSlider = ({ spotImages, selectImage, isMobileView }) => {
   const [images1, setImages1] = useState([]);
   const [images2, setImages2] = useState([]);
   const [currentIndex1, setCurrentIndex1] = useState(0);
@@ -42,8 +42,30 @@ const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
     }
   };
 
+
+
+  const mobileImageSlideBack = () => {
+    if ( currentSlide < loopedImages.length / 2 - 1) {
+      setCurrentSlide(prev => prev + 1);
+    }
+  };
+
+  const mobileImageSlideForward = () => {
+
+    if ( currentSlide > 0) {
+
+      setCurrentSlide(prev => prev - 1);
+    }
+  };
+
+
+
+
+
+
   useEffect(() => {
     const container = swipeContainerRef.current;
+    if(!container) return
     container.addEventListener('touchstart', handleTouchStart);
     container.addEventListener('touchend', handleTouchEnd);
      
@@ -71,7 +93,7 @@ const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
 
   useEffect(() => {
 
-    if(isMobile) return
+    if(isMobileView) return
     let set1 = [];
     let set2 = [];
     if(spotImages.length < 6){
@@ -126,7 +148,7 @@ const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
     <>
     
     
-{!isMobile &&            <div>
+{!isMobileView &&            <div>
       <div className="slider1">
         <div className="back-button slider-button" onClick={() => imageSlideBack(1)}>
           <i className="fa-solid fa-angles-left"></i>
@@ -158,8 +180,14 @@ const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
 
 
 
-{isMobile && (
+{isMobileView && (
         <div className="carousel-container" ref={swipeContainerRef}>
+
+
+        <div className="back-button-mobile slider-button-mobile" onClick={() => mobileImageSlideForward()}>
+          <i className="fa-solid fa-angles-left"></i>
+        </div>
+
           <div className="carousel-slides" style={sliderStyle}>
             {loopedImages.map((image, index) => (
               <div key={index} className="carousel-image" onClick={() => selectImage(image)}>
@@ -167,6 +195,11 @@ const ImageSlider = ({ spotImages, selectImage, isMobile }) => {
               </div>
             ))}
           </div>
+
+
+          <div className="forward-button-mobile slider-button-mobile" onClick={() => mobileImageSlideBack()}>
+          <i className="fa-solid fa-angles-right"></i>
+        </div>
         </div>
       )}
 

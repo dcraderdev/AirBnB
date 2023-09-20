@@ -3,16 +3,17 @@ import React, { createContext, useEffect, useState, useRef } from 'react';
 export const WindowContext = createContext();
 
 export const WindowProvider = ({ children }) => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [scrollPosition, setScrollPosition] = useState(window.scrollY);
-  const searchInputRef = useRef();
-  const commentRef = useRef()
+  const profileBtnRef = useRef()
 
   useEffect(() => {
 
 
     const handleResize = () => {
-      setWindowSize(window.innerWidth);
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
     }
 
     window.addEventListener('resize', handleResize);
@@ -39,7 +40,7 @@ export const WindowProvider = ({ children }) => {
 
 
   return (
-    <WindowContext.Provider value={ {windowSize, scrollPosition, searchInputRef, commentRef} }>
+    <WindowContext.Provider value={ {windowHeight, windowWidth, scrollPosition, profileBtnRef} }>
       {children}
     </WindowContext.Provider>
   );

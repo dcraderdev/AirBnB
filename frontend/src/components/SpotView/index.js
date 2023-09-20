@@ -27,7 +27,16 @@ function SpotView() {
 
     useEffect(() => {
 
+      console.log(windowWidth);
+      if(windowWidth > 1010){
+        setIsMobileView(false)
+      }else {
+        setIsMobileView(true)
+      }
+
     }, [windowWidth]);
+
+    console.log(isMobileView);
 
 
 
@@ -115,50 +124,52 @@ function SpotView() {
               <ImageSlider
                 spotImages={currentSpot.SpotImages}
                 selectImage={selectImage}
-                isMobile={true}
+                isMobileView={true}
               />
             </div>
 
-              {/* { spotPreviewImage &&             <img
-                className={spotPreviewImageClass}
-                src={spotPreviewImage}
-                alt="Spot Preview Image"
-              ></img>}
 
-         
+<div className="spot-view-description-container-mobile">
 
-            {/*  */}
-
-              {/* <div className="spot-view-des-res-container">
-            <div className="spot-view-description-header">
+            <div className="spot-view-description-header-mobile">
               Hosted by {currentSpot.Owner.firstName}{' '}
               {currentSpot.Owner.lastName}
             </div>
-            <div className="spot-view-description-container">
-              <div className="spot-view-description-text">
-                <p>
-                  {currentSpot.description}
-                </p>
-              </div>
-            </div>
 
-            <div className="spot-view-reservation-container">
-              <div className="spot-view-reservation-info">
-                <div className="spot-view-price-night-container">
-                  <div className="spot-view-price">
+            <div className="spot-view-description-text-mobile">
+              {currentSpot.description}
+            </div>
+</div>
+
+
+
+
+            <div className="spot-view-reservation-container-mobile">
+
+
+
+
+              <div className="spot-view-reservation-info-mobile">
+                <div className="spot-view-price-night-container-mobile">
+                  <div className="spot-view-price-mobile">
                     ${currentSpot.price.toFixed(2)}
                   </div>
 
-                  <div className="spot-view-night"> night</div>
+                  <div className="spot-view-night-mobile"> night</div>
                 </div>
 
-                <div className="spot-view-review-stat-info">
+                <div className="spot-view-review-stat-info-mobile">
                   <ReviewStat currentSpot={currentSpot} />
                 </div>
               </div>
 
+
+
+
+
+
               <button
-                className="spot-view-reservation-button button"
+                className="spot-view-reservation-button-mobile button"
                 onClick={() => {
                   alert('Feature coming soon!');
                 }}
@@ -166,13 +177,20 @@ function SpotView() {
                 Reserve
               </button>
             </div>
-          </div>
+          
 
-          <div className="spot-view-review-container">
-            <Reviews currentSpot={currentSpot} />
-          </div> */}
+          <div className="spot-view-review-container-mobile">
+            <Reviews currentSpot={currentSpot} isMobileView={isMobileView} />
+          </div> 
+
+          <div className='reservation-spacing-mobile'></div>
+
             </div>
           )}
+
+
+
+
         </div>
       )}
 
@@ -213,6 +231,7 @@ function SpotView() {
                   <ImageSlider
                     spotImages={currentSpot.SpotImages}
                     selectImage={selectImage}
+                    isMobileView={false}
                   />
                 </div>
               </div>
@@ -255,7 +274,7 @@ function SpotView() {
               </div>
 
               <div className="spot-view-review-container">
-                <Reviews currentSpot={currentSpot} />
+                <Reviews currentSpot={currentSpot} isMobileView={isMobileView} />
               </div>
             </div>
           )}

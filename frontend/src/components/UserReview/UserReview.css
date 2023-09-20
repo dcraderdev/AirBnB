@@ -1,10 +1,13 @@
 .user-review-container{
   position: relative;
   width: 1000px;
-  width: 100vw;
+  max-width: 100vw;
   height: fit-content;
   top: -25px;
   border-top: solid black 1px;
+
+
+
 }
 
 
@@ -37,6 +40,62 @@
 
   position: relative;
   width: 1000px;
+  height: fit-content;
+  top: 0px;
+  font-size: 16px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+/*  MOBILE STYLINGS */
+
+
+.user-review-container-mobile{
+  position: relative;
+  width: 98%;
+  min-height: 100px;
+  height: fit-content;
+  top: -25px;
+  border-top: solid black 1px;
+
+}
+
+
+
+
+.user-review-name{
+  margin-top: 15px;
+  margin-bottom: 10px;
+  position: relative;
+  width: 100px;
+  height: 30px;
+  top: 0px;
+  font-size: 25px;
+}
+
+.user-review-month-year{
+  position: relative;
+  margin-bottom: 10px;
+
+  width: 200px;
+  height: 20px;
+  top: 0px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-review-mobile{
+  margin-bottom: 10px;
+
+  position: relative;
+  width: 100%;
   height: fit-content;
   top: 0px;
   font-size: 16px;
