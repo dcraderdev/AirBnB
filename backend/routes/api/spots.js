@@ -475,56 +475,6 @@ router.get('/basic/:spotId', async (req, res, next) => {
   }
 });
 
-// // Create a Spot
-// router.post('/', requireAuth, validateSpotEdit, async (req, res, next) => {
-
-//   const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
-
-//   const ownerId = req.user.id;
-
-//   newSpot = await Spot.create({
-//     ownerId,
-//     address,
-//     city,
-//     state,
-//     country,
-//     lat,
-//     lng,
-//     name,
-//     description,
-//     price,
-//   });
-
-//   if (newSpot){
-//     let spot = newSpot.toJSON()
-//     const lat = parseFloat(spot.lat);
-//     const lng = parseFloat(spot.lng);
-//     const price = parseFloat(spot.price);
-//     return res.status(200).json({
-//       id: spot.id,
-//       ownerId: spot.ownerId,
-//       address: spot.address,
-//       city: spot.city,
-//       state: spot.state,
-//       country: spot.country,
-//       lat,
-//       lng,
-//       name: spot.name,
-//       description: spot.description,
-//       price,
-//       createdAt: spot.createdAt,
-//       updatedAt: spot.updatedAt,
-//     });
-//   }
-
-//   if (!newSpot) {
-//     const err = new Error("Spot couldn't be created");
-//     err.statusCode = 400;
-//     err.status = 400;
-//     return next(err);
-//   }
-
-// });
 
 // Edit a Spot
 router.put(
@@ -657,51 +607,6 @@ router.put(
   }
 );
 
-// // Edit a Spot
-// router.put('/:spotId', requireAuth,validateSpotEdit, async (req, res, next) => {
-//     const spot = await Spot.findByPk(req.params.spotId);
-
-//     if (!spot) {
-//       const err = new Error("Spot couldn't be found");
-//       err.statusCode = 404;
-//       err.status = 404;
-//       return next(err);
-//     }
-
-//   // Require proper authorization: Review must belong to the current user
-//   if(parseInt(req.user.id) !== parseInt(spot.ownerId) ){
-//     const err = new Error('Forbidden');
-//     err.statusCode = 403;
-//     err.status = 403;
-//     return next(err);
-//   }
-
-//     const {
-//       address,
-//       city,
-//       state,
-//       country,
-//       lat,
-//       lng,
-//       name,
-//       description,
-//       price,
-//     } = req.body;
-//     await spot.update({
-//       address,
-//       city,
-//       state,
-//       country,
-//       lat,
-//       lng,
-//       name,
-//       description,
-//       price,
-//     });
-
-//     return res.status(200).json(spot);
-//   }
-// );
 
 // Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
@@ -929,75 +834,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   return res.status(200).json({ Bookings: filteredBookings });
 });
 
-// // Create a Spot
-// router.post('/createspot', requireAuth, validateSpotEdit, async (req, res, next) => {
-
-//   console.log(req);
-
-//   // const { address, city, state, country, lat, lng, name, description, price, spotImages } =  req.body;
-
-//   // const ownerId = req.user.id;
-
-//   // newSpot = await Spot.create({
-//   //   ownerId,
-//   //   address,
-//   //   city,
-//   //   state,
-//   //   country,
-//   //   lat,
-//   //   lng,
-//   //   name,
-//   //   description,
-//   //   price,
-//   // });
-
-//   //   if (newSpot) {
-//   //     // Check if there are any images in the request
-//   //     if (req.files && req.files.length > 0) {
-//   //       // Process each image and upload it to S3
-//   //       const imagesPromises = req.files.map(async (file) => {
-//   //         const imageUrl = await singleFileUpload({ file, public: true });
-//   //         return SpotImage.create({
-//   //           spotId: newSpot.id,
-//   //           url: imageUrl,
-//   //           preview: false, // or set to true for a specific image if needed
-//   //         });
-//   //       });
-
-//   //       // Wait for all images to be uploaded and added to the database
-//   //       await Promise.all(imagesPromises);
-//   //     }
-
-//   //   let spot = newSpot.toJSON()
-//   //   const lat = parseFloat(spot.lat);
-//   //   const lng = parseFloat(spot.lng);
-//   //   const price = parseFloat(spot.price);
-//   //   return res.status(200).json({
-//   //     id: spot.id,
-//   //     ownerId: spot.ownerId,
-//   //     address: spot.address,
-//   //     city: spot.city,
-//   //     state: spot.state,
-//   //     country: spot.country,
-//   //     lat,
-//   //     lng,
-//   //     name: spot.name,
-//   //     description: spot.description,
-//   //     price,
-//   //     createdAt: spot.createdAt,
-//   //     updatedAt: spot.updatedAt,
-//   //   });
-//   // }
-
-//   // if (!newSpot) {
-//   //   const err = new Error("Spot couldn't be created");
-//   //   err.statusCode = 400;
-//   //   err.status = 400;
-//   //   return next(err);
-//   // }
-//   return res.json({hey:'hello'})
-
-// });Create
 
 // Add an Image to a Spot based on the Spot's id
 router.post(

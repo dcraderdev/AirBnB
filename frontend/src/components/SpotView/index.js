@@ -27,7 +27,6 @@ function SpotView() {
 
     useEffect(() => {
 
-      console.log(windowWidth);
       if(windowWidth > 1010){
         setIsMobileView(false)
       }else {
@@ -35,9 +34,6 @@ function SpotView() {
       }
 
     }, [windowWidth]);
-
-    console.log(isMobileView);
-
 
 
   useEffect(() => {
@@ -96,8 +92,6 @@ function SpotView() {
     alert('Feature coming soon');
   };
 
-
-  console.log(spotPreviewImage);
 
   return (
     <>

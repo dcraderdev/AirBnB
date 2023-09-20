@@ -240,14 +240,17 @@
 /*  mobile view */
 
 .spot-view-header.mobile{
-  width: 99vw;
-  left: 1vw;
+  width: 95vw;
+  margin-top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
   height: 70px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   font-size: 20px;
+
 
 
 }
@@ -258,7 +261,7 @@
 }
 
 .spot-view-header.mobile h4{
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .spot-view-container-mobile{
@@ -311,8 +314,7 @@
   margin-top: 5px;
   width: 98vw;
 
-  height: 20vh;
-
+  height: fit-content;
 
 }
 
@@ -353,7 +355,7 @@
 
 .spot-view-description-header-mobile {
 
-  margin-top: 50px;
+  margin-top: 20px;
 
 }
 
